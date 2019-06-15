@@ -1,3 +1,9 @@
+# Ignore Database password file
+config/password.js
+
+# Mac files
+.DS_Store
+
 # Logs
 logs
 *.log
