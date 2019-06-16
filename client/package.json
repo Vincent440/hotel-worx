@@ -1,12 +1,13 @@
 {
-  "name": "mern",
+  "name": "hotel_worx",
   "version": "0.1.0",
-  "description": "Mern Demo",
+  "description": "hotel_worx",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "^2.1.1"
   },
   "scripts": {
