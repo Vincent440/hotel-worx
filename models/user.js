@@ -22,16 +22,17 @@ const User = {
             cb(result);
         });
     },
-    insertOne: (table, cols, vals, cb) => {
-        var queryString = "INSERT INTO " + table + " (" + cols.toString() + ") VALUES (" + printQuestionMarks(vals.length) + ")";
-        connection.query(queryString, vals, (err, result) => {
+    insertOne: (vals, cb) => {
+        console.log(vals);
+        var queryString = "INSERT INTO users (username, password, access_id) VALUES (?,?,?)";
+        connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
-    updateOne: (table, setVal, condition, cb) => {
-        var queryString = "UPDATE " + table + " SET " + setVal + " WHERE " + condition + ";";
-        connection.query(queryString, (err, result) => {
+    updateOne: (id, vals, cb) => {
+        var queryString = "UPDATE users SET " + setVal + " WHERE " + condition + ";";
+        connection.execute(queryString, [id, vals], (err, result) => {
             if (err) throw err;
             cb(result);
         });
