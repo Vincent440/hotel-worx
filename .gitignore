@@ -1,5 +1,5 @@
 # Ignore Database password file
-config/password.js
+config/pwd.js
 
 # Mac files
 .DS_Store
