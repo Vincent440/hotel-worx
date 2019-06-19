@@ -6,7 +6,7 @@ router.route("/").get(usersController.getAllUsers);
 
 // Matches with "/api/users:id"
 router.route("/:id")
-.get(usersController.getUserById)
-.delete(usersController.deleteUserById);
+.get(usersController.getUserById)//get user data by id
+.delete(usersController.deleteUserById);//delete a user by id
 
 module.exports = router;

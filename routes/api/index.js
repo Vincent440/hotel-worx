@@ -9,7 +9,7 @@ router.use("/users", usersRoutes);
 router.use("/testing",testingRoutes);
 
 router.get("/test", (req, res) => {
-    res.send("sending this from the /api/test route");
+    res.status(200).send("sending this from the /api/test route");
 });
 
 module.exports = router;
