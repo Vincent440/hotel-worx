@@ -2,7 +2,7 @@
 Project 3 repository. Hotel Employee booking software.
 
 ---
-
+[HotelWorx Wiki](https://github.com/Vincent440/hotel-worx/wiki)
 ---
 ## Contributers
 
