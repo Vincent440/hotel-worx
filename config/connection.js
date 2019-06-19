@@ -1,5 +1,5 @@
-const mysql = require("mysql");
-const connection;
+const mysql = require("mysql2");
+let connection;
 
 if (process.env.JAWSDB_URL) {
     connection = mysql.createConnection(process.env.JAWSDB_URL);

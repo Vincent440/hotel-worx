@@ -1,4 +1,9 @@
+module.exports = {
+    User: require('./user')
+};
+
 // ,
+//     AccessLevel: require('./access_level'),
 //     Room: require('./room'),
 //     RoomType: require('./room_type'),
 //     RoomRate: require('./room_rate'),
@@ -7,8 +12,3 @@
 //     TaxRate: require('./tax_rate'),
 //     Hotel: require('./hotel'),
 //     Session: require('./session')
-
-module.exports = {
-    User: require('./user'),
-    AccessLevel: require('./access_level')
-};
