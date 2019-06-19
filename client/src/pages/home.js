@@ -21,7 +21,6 @@ const Home = () => {
     return (
         <div>
             <img src={logo}  ref={element => { logoElement = element }} className="App-logo" id="logo" alt="logo" />
-
         </div>);
 }
 
