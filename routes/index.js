@@ -1,16 +1,8 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
+const testRoutes = require("./mike_test_routes");
+const test2Routes = require("./mike_test_routes2");
 
-const db = require("../models/index.js");
-
-router.get("/api/users", (req, res) => {
-    db.User.selectAll((data) => {
-        res.json(data);
-    });
-});
-
-router.get("/api/test", (req, res) => {
-    res.send("sending this from the /api/test route");
-});
+router.use("/", testRoutes);
+router.use("/", test2Routes);
 
 module.exports = router;

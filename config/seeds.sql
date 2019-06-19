@@ -11,7 +11,8 @@ TRUNCATE TABLE users;
 INSERT INTO users (username, password, access_id) VALUES
 ('mike', '111111', 2),
 ('sibel', '111111', 1),
-('vince', '111111', 1);
+('vince', '111111', 1),
+('test', '111111', 1);
 
 -- --------------------------------------------------------
 
