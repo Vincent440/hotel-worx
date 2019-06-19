@@ -2,4 +2,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-}
+  background-image: linear-gradient(to bottom, #10293d, #00315c, #00377b, #003998, #2e35b0);
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
+#root div div:nth-child(1) canvas {
+  position : absolute; width:100%;
+  height:cover; z-index:-1;}
+
