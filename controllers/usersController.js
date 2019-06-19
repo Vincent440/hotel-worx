@@ -1,13 +1,18 @@
 const db = require("../models/index.js");
 
 module.exports = {
-    findAll: function(req, res) {
+    getAllUsers:(req, res)=> {
         db.User.selectAll((data) => {
             res.json(data);
         });
     },
-    findUserById: function(req, res) {
+    getUserById:(req, res)=> {
         db.User.selectOne(req.params.id, (data) => {
+            res.json(data);
+        });
+    },
+    deleteUserById:(req, res)=> {
+        db.User.deleteOne(req.params.id, (data) => {
             res.json(data);
         });
     }
