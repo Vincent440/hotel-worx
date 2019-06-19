@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import "./style.css";
 import { TweenMax, Linear } from "gsap";
 import logo from './solidcolor.png';
-import * as Animatable from 'react-native-animatable';
 
 const Home = () => {
     let logoElement = useRef(null);
@@ -21,10 +20,7 @@ const Home = () => {
   
     return (
         <div>
-                <Animatable.Text animation="zoomInUp">Zoom me up, Scotty</Animatable.Text>
-
             <img src={logo}  ref={element => { logoElement = element }} className="App-logo" id="logo" alt="logo" />
-
         </div>);
 }
 
