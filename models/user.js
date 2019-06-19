@@ -21,23 +21,21 @@ const User = {
             if (err) throw err;
             cb(result);
         });
+    },
+    insertOne: (table, cols, vals, cb) => {
+        var queryString = "INSERT INTO " + table + " (" + cols.toString() + ") VALUES (" + printQuestionMarks(vals.length) + ")";
+        connection.query(queryString, vals, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
+    },
+    updateOne: (table, setVal, condition, cb) => {
+        var queryString = "UPDATE " + table + " SET " + setVal + " WHERE " + condition + ";";
+        connection.query(queryString, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
     }
 }
 
 module.exports = User;
-
-// ,
-//     insertOne: (table, cols, vals, cb) => {
-//         var queryString = "INSERT INTO " + table + " (" + cols.toString() + ") VALUES (" + printQuestionMarks(vals.length) + ")";
-//         connection.query(queryString, vals, (err, result) => {
-//             if (err) throw err;
-//             cb(result);
-//         });
-//     },
-//     updateOne: (table, setVal, condition, cb) => {
-//         var queryString = "UPDATE " + table + " SET " + setVal + " WHERE " + condition + ";";
-//         connection.query(queryString, (err, result) => {
-//             if (err) throw err;
-//             cb(result);
-//         });
-//     }
