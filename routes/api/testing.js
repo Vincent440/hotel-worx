@@ -79,6 +79,23 @@ router.delete("/rooms/:id", (req, res) => {
     });
 });
 
+// this route will need to be sent data like this: { "vals": [] }
+router.post("/rooms", (req, res) => {
+    db.Room.insertOne(req.body.vals, (result) => {
+        res.json({ id: result.insertId });
+    });
+});
+
+router.put("/rooms/:id", (req, res) => {
+    db.Room.updateOne(req.body.vals, req.params.id, (result) => {
+        if (result.changedRows === 0) {
+            res.status(204).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
 router.get("/room_types", (req, res) => {
     db.RoomType.selectAll((data) => {
         res.json(data);

@@ -22,11 +22,20 @@ const Room = {
             cb(result);
         });
     },
-    insertOne: (cb) => {
-        
+    insertOne: (vals, cb) => {
+        const queryString = "INSERT INTO rooms (room_num, room_type_id, description, num_beds, clean, occupied, active) VALUES (?,?,?,?,?,?,?);";
+        connection.execute(queryString, vals, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
     },
-    updateOne: (cb) => {
-        
+    updateOne: (vals, id, cb) => {
+        vals.push(id);
+        const queryString = "UPDATE rooms SET room_num=?, room_type_id=?, description=?, num_beds=?, clean=?, occupied=?, active=? WHERE room_id=?;";
+        connection.execute(queryString, vals, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
     }
 }
 

@@ -23,7 +23,7 @@ const RoomType = {
         });
     },
     insertOne: (type, cb) => {
-        const queryString = "INSERT INTO room_types (type) VALUES (?)";
+        const queryString = "INSERT INTO room_types (type) VALUES (?);";
         connection.execute(queryString, [type], (err, result) => {
             if (err) throw err;
             cb(result);

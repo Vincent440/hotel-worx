@@ -28,7 +28,7 @@ CREATE TABLE access_levels (
 
 CREATE TABLE rooms (
     room_id int(6) NOT NULL AUTO_INCREMENT,
-    room_num int(6) NOT NULL UNIQUE,
+    room_num varchar(20) NOT NULL UNIQUE,
     room_type_id int(3) NOT NULL,
     FOREIGN KEY (room_type_id) REFERENCES room_types(room_type_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     description varchar(255),
