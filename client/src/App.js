@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import Home from './pages/home';
-import Login from "./components/login/login";
+
 import Particles from 'react-particles-js';
 
 const particleOpt = {
@@ -17,24 +17,28 @@ const particleOpt = {
 }
 
 class App extends Component {
+    state = {
+        loggedIn: false
+    }
 
     render() {
         return (
-            <div>
-                <Particles params={particleOpt} id="particul"/>
+            <Router>
+                <div>
+                    <Particles params={particleOpt} id="particul" />
 
-                <Router>
+                    <ul>
+                        <li><Link to='/test'>Test Protected Page</Link></li>
+                    </ul>
+
                     <div>
                         <Switch>
                             <Route exact path="/" component={Home} />
                         </Switch>
-                        <Login></Login>
 
                     </div>
-
-                </Router>
-
-            </div>
+                </div>
+            </Router>
         );
     }
 }
