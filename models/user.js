@@ -22,17 +22,17 @@ const User = {
             cb(result);
         });
     },
-    insertOne: (username, password, access_id, cb) => {
-        console.log(vals);
+    insertOne: (vals, cb) => {
         const queryString = "INSERT INTO users (username, password, access_id) VALUES (?,?,?)";
-        connection.execute(queryString, [username, password, access_id], (err, result) => {
+        connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
-    updateOne: (username, password, access_id, id, cb) => {
+    updateOne: (vals, id, cb) => {
+        vals.push(id);
         const queryString = "UPDATE users SET username=?, password=?, access_id=? WHERE user_id=?;";
-        connection.execute(queryString, [username, password, access_id, id], (err, result) => {
+        connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });
