@@ -33,7 +33,6 @@ CREATE TABLE rooms (
     FOREIGN KEY (room_type_id) REFERENCES room_types(room_type_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     description varchar(255),
     num_beds int(3) NOT NULL,
-    rate decimal(5,2) NOT NULL,
     clean boolean DEFAULT 0,
     occupied boolean DEFAULT 0,
     active boolean DEFAULT 1,
@@ -45,6 +44,7 @@ CREATE TABLE rooms (
 CREATE TABLE room_types (
     room_type_id int(3) NOT NULL AUTO_INCREMENT,
     type varchar(30) NOT NULL,
+    rate decimal(5,2) NOT NULL,
     PRIMARY KEY (room_type_id)
 );
 

@@ -2,14 +2,14 @@ const connection = require("../config/connection");
 
 const RoomType = {
     selectAll: (cb) => {
-        const queryString = "SELECT room_type_id, type FROM room_types ORDER BY room_type_id ASC;";
+        const queryString = "SELECT room_type_id, type, rate FROM room_types ORDER BY room_type_id ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);
         });
     },
     selectOne: (id, cb) => {
-        const queryString = "SELECT room_type_id, type FROM room_types WHERE room_type_id=? ORDER BY room_type_id ASC LIMIT 1;";
+        const queryString = "SELECT room_type_id, type, rate FROM room_types WHERE room_type_id=? ORDER BY room_type_id ASC LIMIT 1;";
         connection.execute(queryString, [id], (err, results, fields) => {
             if (err) throw err;
             cb(results);
@@ -22,16 +22,17 @@ const RoomType = {
             cb(result);
         });
     },
-    insertOne: (type, cb) => {
-        const queryString = "INSERT INTO room_types (type) VALUES (?);";
-        connection.execute(queryString, [type], (err, result) => {
+    insertOne: (vals, cb) => {
+        const queryString = "INSERT INTO room_types (type, rate) VALUES (?,?);";
+        connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
-    updateOne: (type, id, cb) => {
-        const queryString = "UPDATE room_types SET type=? WHERE room_type_id=?;";
-        connection.execute(queryString, [type, id], (err, result) => {
+    updateOne: (vals, id, cb) => {
+        vals.push(id);
+        const queryString = "UPDATE room_types SET type=?, rate=? WHERE room_type_id=?;";
+        connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });

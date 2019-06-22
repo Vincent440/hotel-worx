@@ -16,7 +16,7 @@ import Particles from 'react-particles-js';
 // import FormUpdate from './pages/allreservations/allreservations';
 // import Dashboard from './pages/dashboardMaster/dashMaster';
 // import Reservation from './pages/reservation/reservation';
-import FormUpdate from './pages/arrivals/arrivals';
+// import FormUpdate from './pages/arrivals/arrivals';
 // import FormUpdate from './pages/inhouse/inhouse';
 // import FormUpdate from './pages/departures/departures';
 
