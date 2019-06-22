@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 // import Form from './pages/newreservation/newreservation';
 import Form from './pages/updatereservation/updatereservation';
-// import Dashboard from './pages/dashboard/dashboard';
+import Dashboard from './pages/dashboard/dashboard';
 // import FormUpdate from './pages/allreservations/allreservations';
 // import Dashboard from './pages/dashboardMaster/dashMaster';
 // import Reservation from './pages/reservation/reservation';
@@ -84,19 +84,12 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <Particles params={particleOpt} id="particule" />
+            <Router>
+                <div>
+                    <Particles params={particleOpt} id="particul" />
 
                     <div>
                         <Switch>
-<<<<<<< HEAD
-                            <Route exact path="/" component={Form} />
-                        </Switch>
-                    </div>
-                </Router>
-
-            </div>
-=======
                             <Route exact path="/login" component={Login} />
                             <PrivateRoute exact path="/" component={Dashboard} />
                         </Switch>
@@ -104,7 +97,6 @@ class App extends Component {
                     </div>
                 </div>
             </Router>
->>>>>>> bd44e727acfb34c4ea8e4cadb97bf5c5591f791d
         );
     }
 }
