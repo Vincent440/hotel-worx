@@ -9,5 +9,4 @@ body {
 
 #root div div:nth-child(1) canvas {
   position : absolute; width:100%;
-  height:cover; z-index:-1;}
-
+  height:100%; z-index:-1;}
