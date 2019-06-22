@@ -16,23 +16,23 @@ const User = {
         });
     },
     deleteOne: (id, cb) => {
-        var queryString = "DELETE FROM users WHERE user_id=?;";
+        const queryString = "DELETE FROM users WHERE user_id=?;";
         connection.execute(queryString, [id], (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
     insertOne: (vals, cb) => {
-        console.log(vals);
-        var queryString = "INSERT INTO users (username, password, access_id) VALUES (?,?,?)";
+        const queryString = "INSERT INTO users (username, password, access_id) VALUES (?,?,?)";
         connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
-    updateOne: (id, vals, cb) => {
-        var queryString = "UPDATE users SET " + setVal + " WHERE " + condition + ";";
-        connection.execute(queryString, [id, vals], (err, result) => {
+    updateOne: (vals, id, cb) => {
+        vals.push(id);
+        const queryString = "UPDATE users SET username=?, password=?, access_id=? WHERE user_id=?;";
+        connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });

@@ -1,0 +1,62 @@
+body {
+  font-family: "Montserrat";
+}
+
+h1 {
+  font-size: 5em;
+  width: 25%;
+  color: red;
+  line-height: 1em;
+}
+#dashboardTable {
+  margin: 20px 60px 20px;
+  padding: 30px 50px;
+  height: 700px;
+}
+#infoPart {
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.425);
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+#logo {
+  width: 100%;
+  margin-bottom: 30px;
+}
+p {
+  font-size: 18px;
+  color: black;
+  padding: 1px;
+  margin-left: 10px;
+}
+#res {
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
+  border-radius: 5px;
+  }
+
+button{
+size: 30px;
+margin-top: 5px;
+margin-left: 10px;
+}
+#buttonDiv{
+padding-left: 35%;
+}
+h2{
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
+
+}
+#res table tr td{
+width:77%;
+}
+
+#res table tr{
+width: 100%;
+padding-left: 5px;
+}

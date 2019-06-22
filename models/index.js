@@ -1,14 +1,10 @@
 module.exports = {
-    User: require('./user')
+    User: require('./user'),
+    Customer: require('./customer'),
+    Room: require('./room'),
+    RoomType: require('./room_type'),
+    Reservation: require('./reservation')
 };
 
-// ,
-//     AccessLevel: require('./access_level'),
-//     Room: require('./room'),
-//     RoomType: require('./room_type'),
-//     RoomRate: require('./room_rate'),
-//     Customer: require('./customer'),
-//     Reservation: require('./reservation'),
-//     TaxRate: require('./tax_rate'),
-//     Hotel: require('./hotel'),
+//     TaxRate: require('./tax_rate')
 //     Session: require('./session')

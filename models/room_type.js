@@ -1,29 +1,29 @@
 const connection = require("../config/connection");
 
-const Customer = {
+const RoomType = {
     selectAll: (cb) => {
-        const queryString = "SELECT customer_id, first_name, last_name, address, city, state, zip, email, phone, credit_card_num, active FROM customers ORDER BY customer_id ASC;";
+        const queryString = "SELECT room_type_id, type, rate FROM room_types ORDER BY room_type_id ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);
         });
     },
     selectOne: (id, cb) => {
-        const queryString = "SELECT customer_id, first_name, last_name, address, city, state, zip, email, phone, credit_card_num, active FROM customers WHERE customer_id=? ORDER BY customer_id ASC;";
+        const queryString = "SELECT room_type_id, type, rate FROM room_types WHERE room_type_id=? ORDER BY room_type_id ASC LIMIT 1;";
         connection.execute(queryString, [id], (err, results, fields) => {
             if (err) throw err;
             cb(results);
         });
     },
     deleteOne: (id, cb) => {
-        const queryString = "DELETE FROM customers WHERE customer_id=?;";
+        const queryString = "DELETE FROM room_types WHERE room_type_id=?;";
         connection.execute(queryString, [id], (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
     insertOne: (vals, cb) => {
-        const queryString = "INSERT INTO customers (first_name, last_name, address, city, state, zip, email, phone, credit_card_num, active) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        const queryString = "INSERT INTO room_types (type, rate) VALUES (?,?);";
         connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
@@ -31,7 +31,7 @@ const Customer = {
     },
     updateOne: (vals, id, cb) => {
         vals.push(id);
-        const queryString = "UPDATE customers SET first_name=?, last_name=?, address=?, city=?, state=?, zip=?, email=?, phone=?, credit_card_num=?, active=? WHERE customer_id=?;";
+        const queryString = "UPDATE room_types SET type=?, rate=? WHERE room_type_id=?;";
         connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
@@ -39,4 +39,4 @@ const Customer = {
     }
 }
 
-module.exports = Customer;
+module.exports = RoomType;

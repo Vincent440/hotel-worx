@@ -1,0 +1,16 @@
+body {
+  font-family: "Montserrat";
+ }
+
+h1 {
+  font-size: 5em;
+  width: 25%;
+  color: red;
+  line-height: 1em;
+}
+
+#logo {
+  width: 30%;
+  margin-top: 5%;
+  margin-left: 35%;
+}
