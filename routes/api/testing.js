@@ -79,13 +79,14 @@ router.delete("/rooms/:id", (req, res) => {
     });
 });
 
-// this route will need to be sent data like this: { "vals": [] }
+// this route will need to be sent data like this: { "vals": ["208", 2, "microwave and courtyard view", 2, 119.99, 1, 0, 1] }
 router.post("/rooms", (req, res) => {
     db.Room.insertOne(req.body.vals, (result) => {
         res.json({ id: result.insertId });
     });
 });
 
+// this route will need to be sent data like this: { "vals": ["208", 2, "microwave and courtyard view", 2, 119.99, 1, 0, 1] }
 router.put("/rooms/:id", (req, res) => {
     db.Room.updateOne(req.body.vals, req.params.id, (result) => {
         if (result.changedRows === 0) {

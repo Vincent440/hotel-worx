@@ -48,17 +48,17 @@ INSERT INTO customers (customer_id, first_name,last_name, address, city, state, 
 
 TRUNCATE TABLE rooms;
 
-INSERT INTO rooms (room_num, room_type_id, description, num_beds, clean, occupied, active) VALUES
-('101', 1, 'microwave', 2, 1, 0, 1),
-('102', 2, 'new carpet, refrigerator', 2, 1, 0, 1),
-('103', 1, 'microwave', 2, 1, 0, 1),
-('104', 3, '60" TV', 2, 1, 0, 1),
-('105', 1, 'microwave, balcony', 2, 1, 0, 1),
-('201', 1, 'microwave, courtyard view', 2, 1, 0, 1),
-('202', 3, 'balcony, refrigerator', 2, 1, 0, 1),
-('203', 1, 'courtyard view', 2, 1, 0, 1),
-('204', 3, 'balcony', 2, 1, 0, 1),
-('205', 2, 'microwave, courtyard view', 2, 1, 0, 1);
+INSERT INTO rooms (room_num, room_type_id, description, num_beds, rate, clean, occupied, active) VALUES
+('101', 1, 'microwave', 2, 99.99, 1, 0, 1),
+('102', 2, 'new carpet, refrigerator', 2, 109.99, 1, 0, 1),
+('103', 1, 'microwave', 2, 99.99, 1, 0, 1),
+('104', 3, '60" TV', 2, 119.99, 1, 0, 1),
+('105', 1, 'microwave, balcony', 2, 99.99, 1, 0, 1),
+('201', 1, 'microwave, courtyard view', 2, 99.99, 1, 0, 1),
+('202', 3, 'balcony, refrigerator', 2, 119.99, 1, 0, 1),
+('203', 1, 'courtyard view', 2, 99.99, 1, 0, 1),
+('204', 3, 'balcony', 2, 119.99, 1, 0, 1),
+('205', 2, 'microwave, courtyard view', 2, 109.99, 1, 0, 1);
 
 -- --------------------------------------------------------
 
