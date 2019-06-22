@@ -21,32 +21,31 @@ function Dashboard() {
 
                 <div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <button ><h5>RESERVATION</h5></button>
-                        <button >New Reservation</button>
-                        <button >Update Reservation</button>
+                        <a><h5>RESERVATION</h5></a>
+                        <a className="btn" href="/reserve/new">New Reservation</a>
+                        <a className="btn" href="/reserve/update">Update Reservation</a>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <button><h5>FRONT DESK</h5></button>
-                        <button>Arrivals</button>
-                        <button>In-House Guests</button>
-                        <button>Departures</button>
+                        <a><h5>FRONT DESK</h5></a>
+                        <a className="btn" href="/frontdesk/arrivals">Arrivals</a>
+                        <a className="btn" href="/frontdesk/inhouse">In-House Guests</a>
+                        <a className="btn" href="/frontdesk/departures">Departures</a>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <button><h5>CASHIERING</h5></button>
-                        <button>Billing</button>
+                        <a><h5>CASHIERING</h5></a>
+                        <a className="btn" href="/cashiering/billing">Billing</a>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <button><h5>REPORTS</h5></button>
-                        <button>Housekeeping Report</button>
-                        <button>Detailed Availability</button>
-                        <button>House Status</button>
-                        <button>Manager Flash Report</button>
-
+                        <a><h5>REPORTS</h5></a>
+                        <a className="btn" href="/reports/housekeeping">Housekeeping Report</a>
+                        <a className="btn" href="/reports/detailavailability">Detailed Availability</a>
+                        <a className="btn" href="/reports/housestatus">House Status</a>
+                        <a className="btn" href="/reports/flashreport">Manager Flash Report</a>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <button><h5>CONFIGURATION</h5></button>
-                        <button>Create User</button>
-                        <button>Update User</button>
+                        <a><h5>CONFIGURATION</h5></a>
+                        <a className="btn" href="/config/createuser">Create User</a>
+                        <a className="btn" href="/reports/updateuser">Update User</a>
                     </div>
                     <div style={{ clear: "both" }}></div>
 

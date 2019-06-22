@@ -42,7 +42,7 @@ p {
 #header {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
-  padding-left: 30%;
+  padding-left: 2px;
 }
 
 #res {
@@ -58,16 +58,15 @@ p {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
-  padding-left: 20px;
   margin-bottom: 10px;
 }
 button {
   size: 30px;
-  margin-left: 45%;
+  margin-left: 48%;
 }
 
 h2 {
-  text-align: center;
+  text-align: right;
 }
 
 #smallWindow {

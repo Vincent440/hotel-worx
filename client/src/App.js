@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
-// import Form from './pages/newreservation/newreservation';
-import Form from './pages/updatereservation/updatereservation';
+import ReserveNew from './pages/newreservation/newreservation';
+import ReserveUpdate from './pages/updatereservation/updatereservation';
 import Dashboard from './pages/dashboard/dashboard';
 // import FormUpdate from './pages/allreservations/allreservations';
 // import Dashboard from './pages/dashboardMaster/dashMaster';
 // import Reservation from './pages/reservation/reservation';
-// import FormUpdate from './pages/arrivals/arrivals';
-// import FormUpdate from './pages/inhouse/inhouse';
-// import FormUpdate from './pages/departures/departures';
-
+import Arrivals from './pages/arrivals/arrivals';
+import Inhouse from './pages/inhouse/inhouse';
+import Departures from './pages/departures/departures';
 // import Login from './pages/login';
 import LoginForm from "./components/loginForm/loginForm";
 import Logo from "./components/logo/logo";
-
 import Particles from 'react-particles-js';
 
 const fakeAuth = {
@@ -91,7 +89,13 @@ class App extends Component {
                     <div>
                         <Switch>
                             <Route exact path="/login" component={Login} />
-                            <PrivateRoute exact path="/" component={Dashboard} />
+                            <Route exact path="/" component={Dashboard} />
+                            <Route exact path="/reserve/new" component={ReserveNew} />
+                            <Route exact path="/reserve/update" component={ReserveUpdate} />
+                            <Route exact path="/frontdesk/arrivals" component={Arrivals} />
+                            <Route exact path="/frontdesk/inhouse" component={Inhouse} />
+                            <Route exact path="/frontdesk/departures" component={Departures} />
+
                         </Switch>
 
                     </div>
