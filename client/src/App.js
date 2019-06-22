@@ -8,6 +8,18 @@ import Logo from "./components/logo/logo";
 
 import Particles from 'react-particles-js';
 
+// import Home from './pages/home';
+// import Form from './pages/newreservation/newreservation';
+// import Form from './pages/updatereservation/updatereservation';
+// import Login from "./components/login/login";
+// import Dashboard from './pages/dashboard/dashboard';
+// import FormUpdate from './pages/allreservations/allreservations';
+// import Dashboard from './pages/dashboardMaster/dashMaster';
+// import Reservation from './pages/reservation/reservation';
+import FormUpdate from './pages/arrivals/arrivals';
+// import FormUpdate from './pages/inhouse/inhouse';
+// import FormUpdate from './pages/departures/departures';
+
 const fakeAuth = {
     isAuthenticated: false,
     authenticate(cb) {
