@@ -79,14 +79,14 @@ router.delete("/rooms/:id", (req, res) => {
     });
 });
 
-// this route will need to be sent data like this: { "vals": ["208", 2, "microwave and courtyard view", 2, 119.99, 1, 0, 1] }
+// this route will need to be sent data like this: { "vals": ["208", 2, "microwave and courtyard view", 2, 1, 0, 1] }
 router.post("/rooms", (req, res) => {
     db.Room.insertOne(req.body.vals, (result) => {
         res.json({ id: result.insertId });
     });
 });
 
-// this route will need to be sent data like this: { "vals": ["208", 2, "microwave and courtyard view", 2, 119.99, 1, 0, 1] }
+// this route will need to be sent data like this: { "vals": ["208", 2, "microwave and courtyard view", 2, 1, 0, 1] }
 router.put("/rooms/:id", (req, res) => {
     db.Room.updateOne(req.body.vals, req.params.id, (result) => {
         if (result.changedRows === 0) {
@@ -115,14 +115,16 @@ router.delete("/room_types/:id", (req, res) => {
     });
 });
 
+// this route will need to be sent data like this: { "vals": ["2Double", 109.99] }
 router.post("/room_types", (req, res) => {
-    db.RoomType.insertOne(req.body.type, (result) => {
+    db.RoomType.insertOne(req.body.vals, (result) => {
         res.json({ id: result.insertId });
     });
 });
 
+// this route will need to be sent data like this: { "vals": ["2Double", 109.99] }
 router.put("/room_types/:id", (req, res) => {
-    db.RoomType.updateOne(req.body.type, req.params.id, (result) => {
+    db.RoomType.updateOne(req.body.vals, req.params.id, (result) => {
         if (result.changedRows === 0) {
             res.status(204).end();
         } else {
