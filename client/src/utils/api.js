@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import axios from "axios"
 
 export default {
@@ -17,3 +18,12 @@ export default {
       })
     
 }
+=======
+import axios from "axios";
+
+export default {
+    sendLogin: function (loginData) {
+        return axios.post("/login", loginData);
+    }
+};
+>>>>>>> bd44e727acfb34c4ea8e4cadb97bf5c5591f791d

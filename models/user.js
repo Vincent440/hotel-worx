@@ -16,8 +16,23 @@ const User = {
         });
     },
     deleteOne: (id, cb) => {
-        var queryString = "DELETE FROM users WHERE user_id=?;";
+        const queryString = "DELETE FROM users WHERE user_id=?;";
         connection.execute(queryString, [id], (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
+    },
+    insertOne: (vals, cb) => {
+        const queryString = "INSERT INTO users (username, password, access_id) VALUES (?,?,?)";
+        connection.execute(queryString, vals, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
+    },
+    updateOne: (vals, id, cb) => {
+        vals.push(id);
+        const queryString = "UPDATE users SET username=?, password=?, access_id=? WHERE user_id=?;";
+        connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
             cb(result);
         });
@@ -25,19 +40,3 @@ const User = {
 }
 
 module.exports = User;
-
-// ,
-//     insertOne: (table, cols, vals, cb) => {
-//         var queryString = "INSERT INTO " + table + " (" + cols.toString() + ") VALUES (" + printQuestionMarks(vals.length) + ")";
-//         connection.query(queryString, vals, (err, result) => {
-//             if (err) throw err;
-//             cb(result);
-//         });
-//     },
-//     updateOne: (table, setVal, condition, cb) => {
-//         var queryString = "UPDATE " + table + " SET " + setVal + " WHERE " + condition + ";";
-//         connection.query(queryString, (err, result) => {
-//             if (err) throw err;
-//             cb(result);
-//         });
-//     }
