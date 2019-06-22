@@ -1,9 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import "./style.css";
 import { TweenMax, Linear } from "gsap";
 import logo from './solidcolor.png';
 
-const Home = () => {
+const Logo = () => {
+    const styles = {
+        width: "30%",
+        marginTop: "5%",
+        marginLeft: "35%"
+    };
     let logoElement = useRef(null);
 
     useEffect(() => {
@@ -20,8 +24,8 @@ const Home = () => {
   
     return (
         <div>
-            <img src={logo}  ref={element => { logoElement = element }} className="App-logo" id="logo" alt="logo" />
+            <img src={logo}  ref={element => { logoElement = element }} style={styles} className="App-logo" id="logo" alt="logo" />
         </div>);
 }
 
-export default Home;
+export default Logo;

@@ -28,11 +28,12 @@ CREATE TABLE access_levels (
 
 CREATE TABLE rooms (
     room_id int(6) NOT NULL AUTO_INCREMENT,
-    room_num int(6) NOT NULL,
+    room_num varchar(20) NOT NULL UNIQUE,
     room_type_id int(3) NOT NULL,
     FOREIGN KEY (room_type_id) REFERENCES room_types(room_type_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     description varchar(255),
     num_beds int(3) NOT NULL,
+    rate decimal(5,2) NOT NULL,
     clean boolean DEFAULT 0,
     occupied boolean DEFAULT 0,
     active boolean DEFAULT 1,
@@ -81,9 +82,9 @@ CREATE TABLE reservations (
 
 CREATE TABLE tax_rates (
     tax_rate_id int(3) NOT NULL AUTO_INCREMENT,
-    sales_tax_rate DECIMAL(4,3) DEFAULT 0,
-    local_tax_rate DECIMAL(4,3) DEFAULT 0,
-    misc_tax_rate DECIMAL(4,3) DEFAULT 0,
+    sales_tax_rate decimal(4,3) DEFAULT 0,
+    local_tax_rate decimal(4,3) DEFAULT 0,
+    misc_tax_rate decimal(4,3) DEFAULT 0,
     PRIMARY KEY (tax_rate_id)
 );
 
