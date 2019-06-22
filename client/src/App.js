@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Home from './pages/home';
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 // import Form from './pages/newreservation/newreservation';
- import Form from './pages/updatereservation/updatereservation';
-// import Login from "./components/login/login";
+import Form from './pages/updatereservation/updatereservation';
 // import Dashboard from './pages/dashboard/dashboard';
 // import FormUpdate from './pages/allreservations/allreservations';
 // import Dashboard from './pages/dashboardMaster/dashMaster';
@@ -13,29 +10,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import FormUpdate from './pages/inhouse/inhouse';
 // import FormUpdate from './pages/departures/departures';
 
-
-=======
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
-import Dashboard from './pages/dashboard';
 // import Login from './pages/login';
-
 import LoginForm from "./components/loginForm/loginForm";
 import Logo from "./components/logo/logo";
->>>>>>> bd44e727acfb34c4ea8e4cadb97bf5c5591f791d
 
 import Particles from 'react-particles-js';
-
-// import Home from './pages/home';
-// import Form from './pages/newreservation/newreservation';
-// import Form from './pages/updatereservation/updatereservation';
-// import Login from "./components/login/login";
-// import Dashboard from './pages/dashboard/dashboard';
-// import FormUpdate from './pages/allreservations/allreservations';
-// import Dashboard from './pages/dashboardMaster/dashMaster';
-// import Reservation from './pages/reservation/reservation';
-// import FormUpdate from './pages/arrivals/arrivals';
-// import FormUpdate from './pages/inhouse/inhouse';
-// import FormUpdate from './pages/departures/departures';
 
 const fakeAuth = {
     isAuthenticated: false,
@@ -105,14 +84,8 @@ class App extends Component {
 
     render() {
         return (
-<<<<<<< HEAD
             <div>
                 <Particles params={particleOpt} id="particule" />
-=======
-            <Router>
-                <div>
-                    <Particles params={particleOpt} id="particul" />
->>>>>>> bd44e727acfb34c4ea8e4cadb97bf5c5591f791d
 
                     <div>
                         <Switch>
