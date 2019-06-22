@@ -1,8 +1,52 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
-import Home from './pages/home';
+import Dashboard from './pages/dashboard';
+// import Login from './pages/login';
+
+import LoginForm from "./components/loginForm/loginForm";
+import Logo from "./components/logo/logo";
 
 import Particles from 'react-particles-js';
+
+const fakeAuth = {
+    isAuthenticated: false,
+    authenticate(cb) {
+        this.isAuthenticated = true
+        setTimeout(cb, 100) // fake async
+    },
+    signout(cb) {
+        this.isAuthenticated = false
+        setTimeout(cb, 100) // fake async
+    }
+}
+
+class Login extends Component {
+    state = {
+        redirectToReferrer: false
+    }
+    login = () => {
+        fakeAuth.authenticate(() => {
+            this.setState(() => ({
+                redirectToReferrer: true
+            }))
+        })
+    }
+    render() {
+        const { redirectToReferrer } = this.state
+
+        if (redirectToReferrer === true) {
+            return <Redirect to='/' />
+        }
+
+        return (
+            <div>
+                <Logo />
+                {/* <LoginForm username={this.state.username} password={this.state.password} validateForm={this.validateForm} handleChange={this.handleChange} handleLoginButton={this.handleLoginButton} /> */}
+                <LoginForm login={this.login} />
+            </div>
+        )
+    }
+}
 
 const particleOpt = {
     particles: {
@@ -16,6 +60,15 @@ const particleOpt = {
     },
 }
 
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+        fakeAuth.isAuthenticated === true
+            ? <Component {...props} />
+            : <Redirect to='/login' />
+
+    )} />
+)
+
 class App extends Component {
     state = {
         loggedIn: false
@@ -27,13 +80,10 @@ class App extends Component {
                 <div>
                     <Particles params={particleOpt} id="particul" />
 
-                    <ul>
-                        <li><Link to='/test'>Test Protected Page</Link></li>
-                    </ul>
-
                     <div>
                         <Switch>
-                            <Route exact path="/" component={Home} />
+                            <Route exact path="/login" component={Login} />
+                            <PrivateRoute exact path="/" component={Dashboard} />
                         </Switch>
 
                     </div>
