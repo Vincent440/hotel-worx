@@ -3,7 +3,8 @@ module.exports = {
     Customer: require('./customer'),
     Room: require('./room'),
     RoomType: require('./room_type'),
-    Reservation: require('./reservation')
+    Reservation: require('./reservation'),
+    ResRoom: require('./res_room')
 };
 
 //     TaxRate: require('./tax_rate')

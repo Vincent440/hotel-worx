@@ -133,4 +133,74 @@ router.put("/room_types/:id", (req, res) => {
     });
 });
 
+// this route will need to be sent data like this: { "vals": [1, 1, 2] }
+router.post("/reservation", (req, res) => {
+    db.Customer.insertOne(req.body.vals, (result) => {
+        res.json({ id: result.insertId });
+    });
+    // result.insertId from the above query needs to be added to this query
+    db.Reservation.insertOne(req.body.vals, (result) => {
+        res.json({ id: result.insertId });
+    });
+    // result.insertId from the above query needs to be added to this query for each row of rooms in the reservation
+    db.ResRoom.insertOne(req.body.vals, (result) => {
+        res.json({ id: result.insertId });
+    });
+});
+
+router.get("/reservations", (req, res) => {
+    db.Reservation.selectAll((data) => {
+        res.json(data);
+    });
+});
+
+// to get info about a reservation, both of these 2 queries need to be returned
+// this route gets a reservation by id with customer info
+router.get("/reservations/:id", (req, res) => {
+    db.Reservation.selectOne(req.params.id, (result) => {
+        res.json({ result });
+    });
+});
+// this route gets all rooms associated with a reservation_id
+router.get("/res_rooms/:id", (req, res) => {
+    db.ResRoom.selectSome(req.params.id, (result) => {
+        res.json({ result });
+    });
+});
+
+router.get("/todayArrivals", (req, res) => {
+    const condition = "rr.check_in_date=CURDATE()"
+    db.ResRoom.selectTodayArrivalsDepartures(condition, (result) => {
+        res.json({ result });
+    });
+});
+
+router.get("/todayDepartures", (req, res) => {
+    const condition = "rr.check_out_date=CURDATE()"
+    db.ResRoom.selectTodayArrivalsDepartures(condition, (result) => {
+        res.json({ result });
+    });
+});
+
+// this route will need to be sent data like this: { "vals": [[3, 1, "2019-09-11", "2019-09-17", 2], [3, 1, "2019-09-11", "2019-09-14", 1]] }
+router.post("/res_rooms", (req, res) => {
+    db.ResRoom.insertSome(req.body.vals, (result) => {
+        res.json({ result });
+    });
+});
+
+// the following 2 queries need to be run to cancel a reservation
+// this one marks the reservation as not active for this reservation_id
+router.put("/cancelReservation/:id", (req, res) => {
+    db.Reservation.cancelOne((data) => {
+        res.json(data);
+    });
+});
+// this one deletes all rooms in res_rooms for this reservation_id
+router.delete("/res_rooms/:id", (req, res) => {
+    db.ResRoom.deleteSome(req.params.id, (data) => {
+        res.json(data);
+    });
+});
+
 module.exports = router;

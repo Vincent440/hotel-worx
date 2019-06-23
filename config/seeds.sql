@@ -75,4 +75,31 @@ INSERT INTO room_types (room_type_id, type, rate) VALUES
 
 -- --------------------------------------------------------
 
+--
+-- Seed data for reservations
+--
+
+TRUNCATE TABLE reservations;
+
+INSERT INTO reservations (customer_id, user_id) VALUES
+(1, 3),
+(2, 2),
+(3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Seed data for reservations
+--
+
+TRUNCATE TABLE res_rooms;
+
+INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_date, adults) VALUES
+(1, 3, '2019-08-23', '2019-08-26', 2),
+(2, 1, '2019-10-02', '2019-10-03', 1),
+(2, 1, '2019-10-02', '2019-10-05', 1),
+(3, 2, '2019-09-26', '2019-09-30', 3);
+
+-- --------------------------------------------------------
+
 set foreign_key_checks=1;
