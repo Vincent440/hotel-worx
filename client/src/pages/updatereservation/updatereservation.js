@@ -5,7 +5,7 @@ import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
 
-class Form extends Component {
+class ReserveUpdate extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
         name: "",
@@ -282,4 +282,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default ReserveUpdate;

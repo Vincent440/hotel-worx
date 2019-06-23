@@ -46,6 +46,7 @@ p {
   border-radius: 5px;
   margin-bottom: 10px;
   margin-top: 20px;
+  padding-left: 2px;
 }
 #header {
   background-color: rgba(255, 255, 255, 0.774);
@@ -61,11 +62,11 @@ p {
 }
 button {
   size: 30px;
-  margin-left: 30px;
+  margin-left: 40%;
 }
 
 h2 {
-  text-align: center;
+  text-align: right;
 }
 
 .th {
