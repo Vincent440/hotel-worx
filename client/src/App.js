@@ -13,6 +13,7 @@ import Departures from './pages/departures/departures';
 import LoginForm from "./components/loginForm/loginForm";
 import Logo from "./components/logo/logo";
 import Particles from 'react-particles-js';
+import ReservationTest from './pages/reservationTest';
 
 const fakeAuth = {
     isAuthenticated: false,
@@ -95,9 +96,8 @@ class App extends Component {
                             <Route exact path="/frontdesk/arrivals" component={Arrivals} />
                             <Route exact path="/frontdesk/inhouse" component={Inhouse} />
                             <Route exact path="/frontdesk/departures" component={Departures} />
-
+                            <Route exact path="/reservationTest" component={ReservationTest} />
                         </Switch>
-
                     </div>
                 </div>
             </Router>
