@@ -69,9 +69,9 @@ INSERT INTO rooms (room_num, room_type_id, description, num_beds, clean, occupie
 TRUNCATE TABLE room_types;
 
 INSERT INTO room_types (room_type_id, type, rate) VALUES
-(1, 'Double', 109.99),
-(2, 'Queen', 119.99),
-(3, 'King', 129.99);
+(1, 'Queen', 109.99),
+(2, 'King', 119.99),
+(3, 'Suite', 129.99);
 
 -- --------------------------------------------------------
 

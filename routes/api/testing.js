@@ -136,11 +136,11 @@ router.put("/room_types/:id", (req, res) => {
 // this route will need to be sent data like this: { "vals": [1, 1, 2] }
 router.post("/reservation", (req, res) => {
     db.Customer.insertOne(req.body.vals, (result) => {
-        res.json({ id: result.insertId });
+        console.log(`Customer id ${result.insertId} has been added.`);
     });
     // result.insertId from the above query needs to be added to this query
     db.Reservation.insertOne(req.body.vals, (result) => {
-        res.json({ id: result.insertId });
+        console.log(`Reservation id ${result.insertId} has been added.`);
     });
     // result.insertId from the above query needs to be added to this query for each row of rooms in the reservation
     db.ResRoom.insertOne(req.body.vals, (result) => {
@@ -192,7 +192,10 @@ router.post("/res_rooms", (req, res) => {
 // the following 2 queries need to be run to cancel a reservation
 // this one marks the reservation as not active for this reservation_id
 router.put("/cancelReservation/:id", (req, res) => {
-    db.Reservation.cancelOne((data) => {
+    db.Reservation.cancelOne(req.params.id, (result) => {
+        console.log(`Changed reservation_id ${result.affectedRows} to canceled.`);
+    });
+    db.ResRoom.deleteSome(req.params.id, (data) => {
         res.json(data);
     });
 });
