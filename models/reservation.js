@@ -15,7 +15,8 @@ const Reservation = {
             cb(result);
         });
     },
-    insertOne: (vals, cb) => {
+    insertOne: (id, vals, cb) => {
+        vals.unshift(id);
         const queryString = "INSERT INTO reservations (customer_id, user_id) VALUES (?,?);";
         connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;

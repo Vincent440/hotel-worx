@@ -1,12 +1,12 @@
 import axios from "axios";
 
 export default {
-    getReservation: function (id) {
+    getReservation: (id) => {
         return axios.all([
             axios.get('/api/testing/reservations/' + id),
             axios.get('/api/testing/res_rooms/' + id)
         ])
-            .then(axios.spread(function (resCust, resRooms) {
+            .then(axios.spread((resCust, resRooms) => {
                 return { resCust: resCust.data, resRooms: resRooms.data };
             }));
     }

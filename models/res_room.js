@@ -25,9 +25,10 @@ const ResRoom = {
             cb(result);
         });
     },
-    insertSome: (vals, cb) => {
+    insertSome: (id, vals, cb) => {
         const queryString = "INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_date, adults) VALUES (?,?,?,?,?);";
         vals.forEach(function (room) {
+            room.unshift(id);
             connection.execute(queryString, room, (err, result) => {
                 if (err) throw err;
                 console.log(result.insertId);
