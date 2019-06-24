@@ -2,9 +2,11 @@ const router = require("express").Router();
 const apiRoutes = require("./api");
 const loginRoute = require("./login");
 const path = require("path");
-// API Routes any route starting with / api
+
+// api Routes any route starting with / api
 router.use("/api", apiRoutes);
 
+// login route for user auth for employees or managers
 router.use("/login", loginRoute);
 
 // =========================================================================

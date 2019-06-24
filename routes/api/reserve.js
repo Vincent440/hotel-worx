@@ -1,21 +1,19 @@
 const router = require("express").Router();
+const reserveController = require("../../controllers/reserveController");
 
-// '/api/reserve'
-router.route("/") 
-.get((req, res) => {
-    // '/api/reserve' GET DATA FOR MAKING A NEW RESERVATION
-    res.status(200).send("<h3>Successful GET '/api/reserve' route</h3>");
-});
+// Matches with '/api/reserve'
+router.route("/")
+// GET '/api/reserve'
+.get(reserveController.getAllReservations);
 
-// '/api/reserve/:id'
+
+// Matches with '/api/reserve/:id'
 router.route("/:id")
-.get((req, res) => {
-    // '/api/reserve/:id' GET INFO FOR A RESERVATION ID
-    res.status(200).send("<h3>Successful GET '/api/reserve/:id' route</h3>");
-})
-.put((req, res) => {
-    // '/api/reserve/:id' PUT UPDATED INFO FOR A RESERVATION ID
-    res.status(200).send("<h3>Successful PUT '/api/reserve/:id' route</h3>");
-});
+// GET'/api/reserve/:id'
+.get(reserveController.getReservationById)
+// PUT'/api/reserve/:id'
+.put(reserveController.updateReservationById);
+
+
 
 module.exports = router;

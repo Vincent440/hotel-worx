@@ -1,13 +1,21 @@
 const router = require("express").Router();
 const usersRoutes = require("./users");
 const reserveRoutes = require("./reserve");
+const customersRoutes = require("./customers");
+const roomRoutes = require("./rooms");
 const testingRoutes = require("./testing");
 
 // '/api/users' for all routes involving Users
 router.use("/users", usersRoutes);
 
+// '/api/customers' for all routes involving Users
+router.use("/customers", customersRoutes);
+
 // '/api/reserve' for all routes involving Users
 router.use("/reserve", reserveRoutes);
+
+// '/api/rooms' for all routes involving Users
+router.use("/rooms", roomRoutes);
 
 // '/api/testing' for any ongoing testing route builds
 router.use("/testing",testingRoutes);
@@ -15,6 +23,10 @@ router.use("/testing",testingRoutes);
 // '/api/test' for any ongoing testing route builds
 router.get("/test", (req, res) => {
     res.status(200).send("sending this from the /api/test route");
+});
+// '/api' for any ongoing testing the root of /api route
+router.get("/", (req, res) => {
+    res.status(200).send("Succesful get to /api route");
 });
 
 module.exports = router;
