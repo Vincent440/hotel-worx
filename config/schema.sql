@@ -69,13 +69,31 @@ CREATE TABLE customers (
 
 CREATE TABLE reservations (
     reservation_id int(10) NOT NULL AUTO_INCREMENT,
-    customer_id int(6),
+    customer_id int(6) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    room_id int(6) NOT NULL,
-    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    user_id int(6) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    created_at datetime DEFAULT CURRENT_TIMESTAMP,
+    active boolean DEFAULT 1,
+    PRIMARY KEY (reservation_id)
+);
+
+-- --------------------------------------------------------
+
+CREATE TABLE res_rooms (
+    res_room_id int(10) NOT NULL AUTO_INCREMENT,
+    reservation_id int(10) NOT NULL,
+    FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    room_type_id int(6) NOT NULL,
+    FOREIGN KEY (room_type_id) REFERENCES room_types(room_type_id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    check_in_date date NOT NULL,
+    check_out_date date NOT NULL,
     checked_in boolean DEFAULT 0,
     checked_out boolean DEFAULT 0,
-    PRIMARY KEY (reservation_id)
+    adults int(3) NOT NULL,
+    room_id int(6),
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    PRIMARY KEY (res_room_id)
 );
 
 -- --------------------------------------------------------
