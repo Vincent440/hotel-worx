@@ -3,7 +3,7 @@ const router = require("express").Router();
 const db = require("../../models/index.js");
 
 // '/api/testing' route
-router.route("/").get( (req, res) => {
+router.route("/").get((req, res) => {
     res.status(200).send("sending this from the /api/testing route for any test routes");
 });
 
@@ -133,18 +133,18 @@ router.put("/room_types/:id", (req, res) => {
     });
 });
 
-// this route will need to be sent data like this: { "vals": [1, 1, 2] }
+// this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "n/a", 1], "reserve": [1], "rooms": [[2, "2019-08-12", "2019-08-15", 2], [2, "2019-08-12", "2019-08-19", 3], [2, "2019-08-12", "2019-08-17", 1]] }
 router.post("/reservation", (req, res) => {
-    db.Customer.insertOne(req.body.vals, (result) => {
+    db.Customer.insertOne(req.body.cust, (result) => {
         console.log(`Customer id ${result.insertId} has been added.`);
-    });
-    // result.insertId from the above query needs to be added to this query
-    db.Reservation.insertOne(req.body.vals, (result) => {
-        console.log(`Reservation id ${result.insertId} has been added.`);
-    });
-    // result.insertId from the above query needs to be added to this query for each row of rooms in the reservation
-    db.ResRoom.insertOne(req.body.vals, (result) => {
-        res.json({ id: result.insertId });
+        // result.insertId from the above query needs to be added to this query
+        db.Reservation.insertOne(result.insertId, req.body.reserve, (result) => {
+            console.log(`Reservation id ${result.insertId} has been added.`);
+            // result.insertId from the above query needs to be added to this query for each row of rooms in the reservation
+            db.ResRoom.insertSome(result.insertId, req.body.rooms, (result) => {
+                res.status(200).send("Customer, Reservation and Associated Rooms have been added!");
+            });
+        });
     });
 });
 
@@ -189,20 +189,12 @@ router.post("/res_rooms", (req, res) => {
     });
 });
 
-// the following 2 queries need to be run to cancel a reservation
-// this one marks the reservation as not active for this reservation_id
 router.put("/cancelReservation/:id", (req, res) => {
     db.Reservation.cancelOne(req.params.id, (result) => {
         console.log(`Changed reservation_id ${result.affectedRows} to canceled.`);
-    });
-    db.ResRoom.deleteSome(req.params.id, (data) => {
-        res.json(data);
-    });
-});
-// this one deletes all rooms in res_rooms for this reservation_id
-router.delete("/res_rooms/:id", (req, res) => {
-    db.ResRoom.deleteSome(req.params.id, (data) => {
-        res.json(data);
+        db.ResRoom.deleteSome(req.params.id, (data) => {
+            res.json(data);
+        });
     });
 });
 
