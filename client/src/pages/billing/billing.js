@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
-import "./style1.css";
+import "./style2.css";
 import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
 
-class Reservation extends Component {
+class Billing extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
         name: "",
@@ -73,10 +73,10 @@ class Reservation extends Component {
                 <Col sm={10}>
                     <row>
                         <form>
-                        <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>New Reservation</h2>
-                        </div>
+                            <div id="header">
+                                <button id="exit" onClick={this.handleFormSubmit}>x</button>
+                                <h2>Invoice</h2>
+                            </div>
                             <div id="res">
                                 <table>
                                     <tr>
@@ -86,27 +86,10 @@ class Reservation extends Component {
                                         <th></th>
                                     </tr>
                                     <tr>
-                                        <td><p>Arrival Date: {this.state.arrivaldate}</p></td>
                                         <td><p>Name:{this.state.guestname} </p></td>
-                                    </tr><tr>
-                                        <td><p>Departure Date: {this.state.departuredate}</p></td>
+                                    </tr>
+                                    <tr>
                                         <td><p>Last Name:{this.state.lastname}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Nights: {this.state.nights}</p></td>
-                                        <td><p>Phone Number:{this.state.guestphone}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>No of Rooms: {this.state.roomsnumber}</p></td>
-                                        <td><p>Phone Number:{this.state.guestphone}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Adults:{this.state.adultnumber} </p></td>
-                                        <td><p>Email Address:{this.state.emailaddress}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Room Type:{this.state.roomType} </p></td>
-                                        <td><p>Adress: {this.state.street}{this.state.state}{this.state.city}{this.state.zip}</p></td>
                                     </tr>
                                     <tr>
                                         <td><p>Room Number:{this.state.roomNumber}</p></td>
@@ -116,7 +99,7 @@ class Reservation extends Component {
                                         <td><p>Daily Room Rate:{this.state.roomRate}</p></td>
                                         <td><p>Expiration Date:{this.state.expdate}</p></td>
                                     </tr>
-                                 <tr>
+                                    <tr>
                                         <td><p></p></td>
                                     </tr>
                                     <tr>
@@ -142,4 +125,4 @@ class Reservation extends Component {
     }
 }
 
-export default Reservation;
+export default Billing;

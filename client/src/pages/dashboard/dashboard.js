@@ -24,6 +24,7 @@ function Dashboard() {
                         <a><h5>RESERVATION</h5></a>
                         <a className="btn" href="/reserve/new">New Reservation</a>
                         <a className="btn" href="/reserve/update">Update Reservation</a>
+                        <a className="btn" href="/reserve/testreservation">Test Reservation Confirm</a>
 
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
@@ -36,6 +37,8 @@ function Dashboard() {
                     <div className="btn-group" style={{ display: 'block' }}>
                         <a><h5>CASHIERING</h5></a>
                         <a className="btn" href="/cashiering/billing">Billing</a>
+                        <a className="btn" href="/cashiering/testinvoice">Test Invoice</a>
+
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
                         <a><h5>REPORTS</h5></a>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
-import "./style1.css";
+import "./style.css";
 import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
@@ -62,7 +62,7 @@ class Reservation extends Component {
 
         return (
 
-            <Row id="dashboardTable1">
+            <Row id="dashboardTable">
                 <Col sm={2} id="infoPart">
                     <img src={logo} className="App-logo" id="logo" alt="logo" />
                     <h5>User Name</h5><br></br>
@@ -73,10 +73,7 @@ class Reservation extends Component {
                 <Col sm={10}>
                     <row>
                         <form>
-                        <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>New Reservation</h2>
-                        </div>
+                            <h2>Reservation</h2>
                             <div id="res">
                                 <table>
                                     <tr>
@@ -128,10 +125,10 @@ class Reservation extends Component {
                                 </table>
                             </div>
                             <div id="buttonDiv">
-                                <button id="revNew1" onClick={this.handleFormSubmit}>Save</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Print</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Email</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Close</button>
+                                <button onClick={this.handleFormSubmit}>Save</button>
+                                <button onClick={this.handleFormSubmit}>Print</button>
+                                <button onClick={this.handleFormSubmit}>Email</button>
+                                <button onClick={this.handleFormSubmit}>Close</button>
 
                             </div>
                         </form>

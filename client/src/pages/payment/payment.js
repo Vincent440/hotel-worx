@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
-import "./style1.css";
+import "./style3.css";
 import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
 
-class Reservation extends Component {
+class Payment extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
         name: "",
@@ -75,10 +75,11 @@ class Reservation extends Component {
                         <form>
                         <div id="header">
                             <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>New Reservation</h2>
+                            <h2>Payment</h2>
                         </div>
                             <div id="res">
-                                <table>
+                                <table border="1">
+
                                     <tr>
                                         <th><p>Confirmation Number: {this.state.confirmation}</p></th>
                                     </tr>
@@ -97,7 +98,7 @@ class Reservation extends Component {
                                         <td><p>Phone Number:{this.state.guestphone}</p></td>
                                     </tr>
                                     <tr>
-                                        <td><p>No of Rooms: {this.state.roomsnumber}</p></td>
+                                        <td><p>No of Rooms: {this.state.roomsnumber} </p></td>
                                         <td><p>Phone Number:{this.state.guestphone}</p></td>
                                     </tr>
                                     <tr>
@@ -142,4 +143,4 @@ class Reservation extends Component {
     }
 }
 
-export default Reservation;
+export default Payment;

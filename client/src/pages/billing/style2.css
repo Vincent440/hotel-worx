@@ -8,12 +8,6 @@ h1 {
   color: red;
   line-height: 1em;
 }
-#exit {
-  float: right;
-  font-size: 24px;
-  width: 34px;
-  border: 1px solid black;
-}
 
 #dashboardTable {
   margin: 20px 60px 20px;
@@ -29,6 +23,12 @@ h1 {
   margin-left: 20px;
   margin-bottom: 20px;
 }
+#exit {
+  float: right;
+  font-size: 29px;
+  width: 38px;
+  border: 1px solid black;
+  }
 #logo {
   width: 100%;
   margin-bottom: 30px;
@@ -39,19 +39,15 @@ p {
   padding: 5px;
   margin-left: 10px;
 }
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  padding-left: 2px;
-}
 
 #res {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
-  padding-left: 20px;
   margin-bottom: 10px;
   margin-top: 20px;
+  padding-left: 2px;
+  padding-top: 5px;
 }
 
 #guestinfo {
@@ -59,18 +55,22 @@ p {
   border: 2px solid black;
   border-radius: 5px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
-button {
-  size: 30px;
-  margin-left: 48%;
-}
-#cancelButton{
-  margin-left: 20px;
-}
-h2 {
+button{
+size: 30px;
+margin-left: 30px;}
+
+h2{
   text-align: center;
+
+}
+#header {
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
 }
 
-#smallWindow {
-  width: 150px;
-}
+.th{
+border: 1px solid black;
+padding: 10px;
+width:5%;}

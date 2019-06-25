@@ -8,15 +8,8 @@ h1 {
   color: red;
   line-height: 1em;
 }
-#exit {
-  float: right;
-  font-size: 24px;
-  width: 34px;
-  border: 1px solid black;
-}
-
-#dashboardTable {
-  margin: 20px 60px 20px;
+#dashboardTable1 {
+  margin: 20px 60px 40px;
   padding: 30px 50px;
   height: 700px;
 }
@@ -29,48 +22,58 @@ h1 {
   margin-left: 20px;
   margin-bottom: 20px;
 }
+#exit {
+  float: right;
+  font-size: 29px;
+  width: 38px;
+  border: 1px solid black;
+}
 #logo {
   width: 100%;
   margin-bottom: 30px;
 }
 p {
-  font-size: 18px;
-  color: black;
-  padding: 5px;
+  font-size: 14px;
+  color: pink;
+  padding: 1px;
   margin-left: 10px;
 }
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  padding-left: 2px;
-}
-
 #res {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  margin-top: 20px;
 }
 
-#guestinfo {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
 button {
   size: 30px;
-  margin-left: 48%;
+  margin-left: 5px;
 }
-#cancelButton{
-  margin-left: 20px;
+
+#buttonDiv {
+  padding-left: 5px;
+}
+
+#header {
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
 }
 h2 {
   text-align: center;
 }
+#res table tr td {
+  width: 77%;
+}
 
-#smallWindow {
-  width: 150px;
+#res table tr {
+  width: 100%;
+  padding-left: 5px;
+}
+
+#revNew{
+  margin-left: 20px;
+
+}
+#revNew1{
+  margin-left: 35%;
+
 }

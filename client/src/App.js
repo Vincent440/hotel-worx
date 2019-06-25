@@ -2,17 +2,22 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import ReserveNew from './pages/newreservation/newreservation';
 import ReserveUpdate from './pages/updatereservation/updatereservation';
+import Reservation from './pages/reservation/reservation';
 import Dashboard from './pages/dashboard/dashboard';
 // import FormUpdate from './pages/allreservations/allreservations';
 // import Dashboard from './pages/dashboardMaster/dashMaster';
 // import Reservation from './pages/reservation/reservation';
 import Arrivals from './pages/arrivals/arrivals';
+import Billing from './pages/billing/billing';
+import Payment from './pages/payment/payment';
+
 import Inhouse from './pages/inhouse/inhouse';
 import Departures from './pages/departures/departures';
 // import Login from './pages/login';
 import LoginForm from "./components/loginForm/loginForm";
 import Logo from "./components/logo/logo";
 import Particles from 'react-particles-js';
+
 
 const fakeAuth = {
     isAuthenticated: false,
@@ -92,9 +97,13 @@ class App extends Component {
                             <Route exact path="/" component={Dashboard} />
                             <Route exact path="/reserve/new" component={ReserveNew} />
                             <Route exact path="/reserve/update" component={ReserveUpdate} />
+                            <Route exact path="/reserve/testreservation" component={Reservation} />
+
                             <Route exact path="/frontdesk/arrivals" component={Arrivals} />
                             <Route exact path="/frontdesk/inhouse" component={Inhouse} />
                             <Route exact path="/frontdesk/departures" component={Departures} />
+                            <Route exact path="/cashiering/billing" component={Billing} />
+                            <Route exact path="/cashiering/testinvoice" component={Payment} />
 
                         </Switch>
 
