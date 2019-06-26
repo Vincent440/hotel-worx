@@ -87,6 +87,13 @@ router.get("/rooms_inactive", (req, res) => {
     });
 });
 
+router.get("/rooms_occupied", (req, res) => {
+    const condition = "rm.occupied=1";
+    db.Room.selectSome(condition, (data) => {
+        res.json(data);
+    });
+});
+
 router.get("/rooms_vacant", (req, res) => {
     const condition = "rm.occupied=0";
     db.Room.selectSome(condition, (data) => {
