@@ -7,6 +7,12 @@ router.route("/").get((req, res) => {
     res.status(200).send("sending this from the /api/testing route for any test routes");
 });
 
+router.get("/users/:id", (req, res) => {
+    db.User.selectOneById(req.params.id, (data) => {
+        res.json(data);
+    });
+});
+
 // this route will need to be sent data like: { "vals": ["test_user", "111111", 1] }
 router.post("/users", (req, res) => {
     db.User.insertOne(req.body.vals, (result) => {
