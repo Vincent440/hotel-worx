@@ -8,8 +8,8 @@ h1 {
   color: red;
   line-height: 1em;
 }
-#dashboardTable {
-  margin: 20px 60px 20px;
+#dashboardTable1 {
+  margin: 20px 60px 40px;
   padding: 30px 50px;
   height: 700px;
 }
@@ -22,13 +22,19 @@ h1 {
   margin-left: 20px;
   margin-bottom: 20px;
 }
+#exit {
+  float: right;
+  font-size: 29px;
+  width: 38px;
+  border: 1px solid black;
+}
 #logo {
   width: 100%;
   margin-bottom: 30px;
 }
 p {
-  font-size: 18px;
-  color: black;
+  font-size: 14px;
+  color: pink;
   padding: 1px;
   margin-left: 10px;
 }
@@ -36,27 +42,38 @@ p {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
-  }
+}
 
-button{
-size: 30px;
-margin-top: 5px;
-margin-left: 10px;
+button {
+  size: 30px;
+  margin-left: 5px;
 }
-#buttonDiv{
-padding-left: 35%;
+
+#buttonDiv {
+  padding-left: 5px;
 }
-h2{
-  text-align: center;
+
+#header {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
+}
+h2 {
+  text-align: center;
+}
+#res table tr td {
+  width: 50%;
+}
+
+#res table tr {
+  width: 100%;
+  padding-left: 5px;
+}
+
+#revNew{
+  margin-left: 20px;
 
 }
-#res table tr td{
-width:77%;
-}
+#revNew1{
+  margin-left: 35%;
 
-#res table tr{
-width: 100%;
-padding-left: 5px;
 }

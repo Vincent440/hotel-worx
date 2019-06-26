@@ -268,7 +268,7 @@ class ReserveNew extends Component {
 
                             </tr>
                         </div>
-                        <button onClick={this.handleFormSubmit}>Submit</button>
+                        <button id="submitButton" onClick={this.handleFormSubmit}>Submit</button>
 
                     </form>
 

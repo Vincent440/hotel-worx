@@ -8,9 +8,8 @@ h1 {
   color: red;
   line-height: 1em;
 }
-
-#dashboardTable {
-  margin: 20px 60px 20px;
+#dashboardTable1 {
+  margin: 20px 60px 40px;
   padding: 30px 50px;
   height: 700px;
 }
@@ -23,57 +22,64 @@ h1 {
   margin-left: 20px;
   margin-bottom: 20px;
 }
-#logo {
-  width: 100%;
-  margin-bottom: 30px;
-}
-p {
-  font-size: 18px;
-  color: black;
-  padding: 5px;
-  margin-left: 10px;
-}
-
-#res {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  padding-left: 2px;
-}
-#guestinfo {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-#searchButton {
-  size: 30px;
-  margin-left: 38%;
-  color: red;
-}
-button {
-  size: 30px;
-  margin-left: 38%;
-}
-
-h2 {
-  text-align: right;
-}
 #exit {
   float: right;
   font-size: 29px;
   width: 38px;
   border: 1px solid black;
 }
-.th {
-  border: 1px solid black;
-  padding: 10px;
-  width: 5%;
+#logo {
+  width: 100%;
+  margin-bottom: 30px;
+}
+p {
+  font-size: 16px;
+  color: black;
+  padding: 1px;
+  margin-left: 10px;
+}
+#resHouse {
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+button {
+  size: 30px;
+  margin-left: 5px;
+}
+
+#buttonDiv {
+  padding-left: 5px;
+  margin-top: 10px;
+}
+
+#header {
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
+}
+h2 {
+  text-align: center;
+}
+#resHouse div table tr th {
+  width:41%;
+  margin-left: 20px;
+}
+#resHouse div table {
+ margin-bottom: 10px;
+}
+#resHouse div table tr {
+  width: 100%;
+  padding-left: 5px;
+  margin:10px;
+}
+
+#revNew{
+  margin-left: 20px;
+
+}
+#revNew1{
+  margin-left: 35%;
+  margin-top: 20px;
+
 }

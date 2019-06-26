@@ -38,7 +38,6 @@ p {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
-  padding-left: 2px;
   margin-bottom: 10px;
   margin-top: 20px;
 
@@ -53,6 +52,12 @@ p {
 button {
   size: 30px;
   margin-left: 40%;
+}
+
+#submitButton {
+  size: 30px;
+  margin-left: 40%;
+  color:red;
 }
 
 h2 {

@@ -10,8 +10,8 @@ h1 {
 }
 #exit {
   float: right;
-  font-size: 29px;
-  width: 38px;
+  font-size: 24px;
+  width: 34px;
   border: 1px solid black;
 }
 
@@ -60,13 +60,15 @@ p {
   border-radius: 5px;
   margin-bottom: 10px;
 }
-button {
+#saveButton {
   size: 30px;
-  margin-left: 48%;
+  margin-left: 40%;
 }
-
+#cancelButton{
+  margin-left: 20px;
+}
 h2 {
-  text-align: right;
+  text-align: center;
 }
 
 #smallWindow {

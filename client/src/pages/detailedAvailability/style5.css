@@ -46,6 +46,7 @@ p {
   border-radius: 5px;
   margin-bottom: 10px;
   margin-top: 20px;
+  padding-top: 5px;
 }
 
 #guestinfo {
@@ -58,12 +59,6 @@ p {
 button{
 size: 30px;
 margin-left: 30px;}
-
-#searchButton {
-  size: 30px;
-  margin-left: 40%;
-  color:red;
-}
 
 h2{
   text-align: center;
@@ -78,3 +73,45 @@ h2{
 border: 1px solid black;
 padding: 10px;
 width:5%;}
+
+.tableTD{
+  border: 1px solid black;
+  padding: 2px;
+  width:5%;
+}
+
+input[type="date"] {
+  position: relative;
+  padding: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+
+input[type="date"]:before {
+  color: transparent;
+  background: none;
+  display: block;
+  font-family: 'FontAwesome';
+  content: '\f073';
+  /* This is the calendar icon in FontAwesome */
+  width: 18px;
+  height: 20px;
+  position: absolute;
+  top: 12px;
+  right: 6px;
+  color: #999;
+}
+
+input[type="date"]::-webkit-clear-button
+{
+    display: none; /* Hide the button */
+    -webkit-appearance: none; /* turn off default browser styling */
+}
+input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}

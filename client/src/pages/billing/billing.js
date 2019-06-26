@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
-import "./style.css";
+import "./style2.css";
 import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
 
-class Departures extends Component {
+class Billing extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
         name: "",
@@ -22,20 +22,16 @@ class Departures extends Component {
         nights: "",
         adults: "",
         noOfRooms: "",
-        roomType: [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-        ],
+        roomType: "",
         creditCard: "",
         expirationDate: "",
-        selectedOption: ["101", "102", "103", "104", "105", "106", "107", "108", "109", "110"],
-
+        selectedOption: ["Two Quenns", "King Single", "Suite"],
     };
 
     handleChange = selectedOption => {
         this.setState({ selectedOption });
     }
+
 
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -56,25 +52,17 @@ class Departures extends Component {
     }
     render() {
 
-        const { roomNumber } = [
-            { value: "101", label: "101" },
-            { value: "102", label: "102" },
-            { value: "103", label: "103" },
-            { value: "104", label: "104" },
-            { value: "105", label: "105" },
-            { value: "106", label: "106" },
-            { value: "107", label: "107" },
-            { value: "108", label: "108" },
-            { value: "109", label: "109" },
-            { value: "110", label: "110" },
+        const { options } = [
+            { value: "Two Queens", label: "Two Queens" },
+            { value: "King", label: "King" },
+            { value: "Suite", label: "Suite" },
+
         ];
-
-
         const { selectedOption } = this.state;
 
         return (
 
-            <Row id="dashboardTable">
+            <Row id="dashboardTable1">
                 <Col sm={2} id="infoPart">
                     <img src={logo} className="App-logo" id="logo" alt="logo" />
                     <h5>User Name</h5><br></br>
@@ -83,38 +71,66 @@ class Departures extends Component {
                     <i className="fa fa-gear" style={{ fontSize: '28px' }} />
                 </Col>
                 <Col sm={10}>
-                    <form>
-                        <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>Departures</h2>
-                        </div>
-                        <div id="res">
-                            <tr>
+                    <row>
+                        <form>
+                            <div id="header">
+                                <button id="exit" onClick={this.handleFormSubmit}>x</button>
+                                <h2>Cashiering</h2>
+                            </div>
+                            <div id="res">
                                 <tr>
+                                    <td><p>Room Number</p></td>
+                                    <td><input
+                                        id="smallWindow"
+                                        onChange={this.handleChange}
+                                        options={selectedOption}
+                                        name="roomNumber"
+                                        placeholder="Room Number"
+                                        value={this.state.roomNumber}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                    <td><p>Name</p></td>
+                                    <td><input
+                                        type="text"
+                                        placeholder="Name"
+                                        name="guestname"
+                                        value={this.state.guestname}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                    <td><p>Last Name</p></td>
+                                    <td><input
+                                        type="text"
+                                        placeholder="Last Name"
+                                        name="guestlastname"
+                                        value={this.state.lastname}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+
+                                </tr>
+                                <tr>
+                                    <td><p>Stay Over</p></td>
+                                    <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+
                                     <td><p>Due Out</p></td>
                                     <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
 
                                     <td><p>Checked Out</p></td>
                                     <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                    <td>
+                                        <button id="searchButton"  onClick={this.handleFormSubmit}>Search</button>
+                                    </td>
                                 </tr>
-                                <td>
-                                    <button onClick={this.handleFormSubmit}>Submit</button>
-                                </td>
-                            </tr>
-
-
-                        </div>
-
+                            </div>
+                        </form>
                         <div id="guestinfo">
                             <table id="result">
                                 <thead>
                                     <tr>
                                         <th className="th" id="room number">Room Number</th>
-                                        <th className="th" id="room type">Room Type</th>
-                                        <th className="th" id="last name">Last Name</th>
-                                        <th className="th" id="first name">First Name</th>
+                                        <th className="th" >Name</th>
                                         <th className="th" id="arrival date">Arrival Date</th>
                                         <th className="th" id="departure date">Departure Date</th>
+                                        <th className="th" id="balance">Balance</th>
                                         <th className="th" id="status">Status</th>
 
                                     </tr>
@@ -124,17 +140,12 @@ class Departures extends Component {
                                 </tbody>
                             </table>
 
-
-
                         </div>
-
-                    </form>
-
-
-                </Col>
+                    </row>
+                </Col >
             </Row >
         )
     }
 }
 
-export default Departures;
+export default Billing;

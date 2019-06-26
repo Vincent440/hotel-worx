@@ -88,6 +88,7 @@ class ReserveUpdate extends Component {
                 <Col sm={10}>
                     <form>
                         <div id="header">
+                            
                             <button id="exit" onClick={this.handleFormSubmit}>x</button>
                             <h2>Update Reservation</h2>
                         </div>
@@ -271,7 +272,9 @@ class ReserveUpdate extends Component {
 
                             </tr>
                         </div>
-                        <button onClick={this.handleFormSubmit}>Save</button>
+                        <button id="saveButton" onClick={this.handleFormSubmit}>Save</button>
+                        <button id="cancelButton" onClick={this.handleFormSubmit}>Cancel Reservation</button>
+
 
                     </form>
 
