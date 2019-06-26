@@ -18,6 +18,21 @@ class ReservationTest extends Component {
             .catch(err => console.log(err))
     }
 
+    testNewReservation = () => {
+        const dataObj = {
+            "cust": ["Peter", "Pan2", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "n/a", 1],
+            "reserve": [1],
+            "rooms": [[2, "2019-08-12", "2019-08-15", 2], [2, "2019-08-12", "2019-08-19", 2], [2, "2019-08-12", "2019-08-17", 1]]
+        }
+        api.createReservation(dataObj)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+    }
+
+    formatCC() {
+        return this.state.ReservationInfo.credit_card_num ? this.state.ReservationInfo.credit_card_num.slice(-4) : null;
+    }
+
     render() {
         return (
             <div className="text-white">
@@ -36,6 +51,9 @@ class ReservationTest extends Component {
                     <li>Customer Zip: {this.state.ReservationInfo.zip}</li>
                     <li>Customer Email: {this.state.ReservationInfo.email}</li>
                     <li>Customer Phone: {this.state.ReservationInfo.phone}</li>
+                    <li>Customer Credit Card Last 4: {this.formatCC()}</li>
+                    <li>Customer Credit Card Exp Date: {this.state.ReservationInfo.cc_expiration}</li>
+                    {/* const lastFour = result.credit_card_num.slice(-4); */}
                 </ul>
                 {this.state.RoomInfo.map((room, i) => (
                     <div key={room.res_room_id}>
@@ -51,6 +69,7 @@ class ReservationTest extends Component {
                         </ul>
                     </div>
                 ))}
+                <button type="submit" className="btn btn-success" onClick={this.testNewReservation}>Submit</button>
             </div>
         );
     }

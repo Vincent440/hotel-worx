@@ -60,7 +60,8 @@ CREATE TABLE customers (
     zip varchar(20) NOT NULL,
     email varchar(50) NOT NULL,
     phone varchar(20) NOT NULL,
-    credit_card_num varchar(30),
+    credit_card_num varchar(30) NOT NULL,
+    cc_expiration varchar(10) NOT NULL,
     active boolean DEFAULT 1,
     PRIMARY KEY (customer_id)
 );
@@ -74,6 +75,7 @@ CREATE TABLE reservations (
     user_id int(6) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     created_at datetime DEFAULT CURRENT_TIMESTAMP,
+    confirmation_code varchar(20) NOT NULL,
     active boolean DEFAULT 1,
     PRIMARY KEY (reservation_id)
 );

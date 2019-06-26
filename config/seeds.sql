@@ -35,10 +35,10 @@ INSERT INTO access_levels (access_id, type) VALUES
 
 TRUNCATE TABLE customers;
 
-INSERT INTO customers (customer_id, first_name,last_name, address, city, state, zip, email, phone, active) VALUES
-(1, 'John', 'Doe', '123 Main St', 'Columbus', 'Ohio', '44000', 'some_email@test.com', '614-555-1212', 1),
-(2, 'Mary', 'Smith', '456 Lusard Rd', 'Euclid', 'Ohio', '44000', 'mary_i_am@test.com', '216-555-1212', 1),
-(3, 'Michelle', 'Williams', '21234 Nile Ave Apt 4', 'Cleveland', 'Ohio', '44000', 'michelle@test.com', '440-555-1212', 1);
+INSERT INTO customers (customer_id, first_name,last_name, address, city, state, zip, email, phone, credit_card_num, cc_expiration, active) VALUES
+(1, 'John', 'Doe', '123 Main St', 'Columbus', 'Ohio', '44000', 'some_email@test.com', '614-555-1212', "1234567890123456", "02-21", 1),
+(2, 'Mary', 'Smith', '456 Lusard Rd', 'Euclid', 'Ohio', '44000', 'mary_i_am@test.com', '216-555-1212', "1234567890123456", "10-23", 1),
+(3, 'Michelle', 'Williams', '21234 Nile Ave Apt 4', 'Cleveland', 'Ohio', '44000', 'michelle@test.com', '440-555-1212', "1234567890123456", "08-20", 1);
 
 -- --------------------------------------------------------
 
@@ -69,8 +69,8 @@ INSERT INTO rooms (room_num, room_type_id, description, num_beds, clean, occupie
 TRUNCATE TABLE room_types;
 
 INSERT INTO room_types (room_type_id, type, rate) VALUES
-(1, 'Queen', 109.99),
-(2, 'King', 119.99),
+(1, '2 Queens', 109.99),
+(2, 'King Single', 119.99),
 (3, 'Suite', 129.99);
 
 -- --------------------------------------------------------
@@ -81,10 +81,10 @@ INSERT INTO room_types (room_type_id, type, rate) VALUES
 
 TRUNCATE TABLE reservations;
 
-INSERT INTO reservations (customer_id, user_id) VALUES
-(1, 3),
-(2, 2),
-(3, 1);
+INSERT INTO reservations (customer_id, user_id, confirmation_code) VALUES
+(1, 3, '20190621HW000001'),
+(2, 2, '20190622HW000002'),
+(3, 1, '20190624HW000003');
 
 -- --------------------------------------------------------
 
