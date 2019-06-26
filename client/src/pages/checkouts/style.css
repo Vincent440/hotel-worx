@@ -32,31 +32,33 @@ p {
   padding: 1px;
   margin-left: 10px;
 }
+
 #res {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
-  }
+}
 
 button{
 size: 30px;
 margin-top: 5px;
 margin-left: 10px;
 }
+
 #buttonDiv{
 padding-left: 35%;
 }
+
 h2{
   text-align: center;
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
-
 }
+
 #res table tr td{
 width:77%;
 }
 
 #res table tr{
 width: 100%;
-padding-left: 5px;
 }

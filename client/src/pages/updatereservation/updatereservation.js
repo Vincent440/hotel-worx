@@ -272,7 +272,7 @@ class ReserveUpdate extends Component {
 
                             </tr>
                         </div>
-                        <button onClick={this.handleFormSubmit}>Save</button>
+                        <button id="saveButton" onClick={this.handleFormSubmit}>Save</button>
                         <button id="cancelButton" onClick={this.handleFormSubmit}>Cancel Reservation</button>
 
 

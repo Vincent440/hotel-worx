@@ -142,7 +142,7 @@ class Arrivals extends Component {
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td>
-                                    <button onClick={this.handleFormSubmit}>Submit</button>
+                                    <button id="searchButton" onClick={this.handleFormSubmit}>Search</button>
                                 </td>
                             </tr>
 

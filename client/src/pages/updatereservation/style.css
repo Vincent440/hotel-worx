@@ -60,9 +60,9 @@ p {
   border-radius: 5px;
   margin-bottom: 10px;
 }
-button {
+#saveButton {
   size: 30px;
-  margin-left: 48%;
+  margin-left: 40%;
 }
 #cancelButton{
   margin-left: 20px;

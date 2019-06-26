@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
 import "./style1.css";
 import logo from './solidcolor.png';
@@ -26,7 +27,15 @@ class Reservation extends Component {
         creditCard: "",
         expirationDate: "",
         selectedOption: ["Two Quenns", "King Single", "Suite"],
+        ReservationInfo: {},
+        RoomInfo: []
     };
+
+    componentDidMount() {
+        api.getReservation(1)
+            .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
+            .catch(err => console.log(err))
+    }
 
     handleChange = selectedOption => {
         this.setState({ selectedOption });
@@ -73,59 +82,65 @@ class Reservation extends Component {
                 <Col sm={10}>
                     <row>
                         <form>
-                        <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>New Reservation</h2>
-                        </div>
+                            <div id="header">
+                                <button id="exit" onClick={this.handleFormSubmit}>x</button>
+                                <h2>New Reservation</h2>
+                            </div>
                             <div id="res">
-                                <table>
-                                    <tr>
-                                        <th><p>Confirmation Number: {this.state.confirmation}</p></th>
-                                    </tr>
-                                    <tr>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Arrival Date: {this.state.arrivaldate}</p></td>
-                                        <td><p>Name:{this.state.guestname} </p></td>
-                                    </tr><tr>
-                                        <td><p>Departure Date: {this.state.departuredate}</p></td>
-                                        <td><p>Last Name:{this.state.lastname}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Nights: {this.state.nights}</p></td>
-                                        <td><p>Phone Number:{this.state.guestphone}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>No of Rooms: {this.state.roomsnumber}</p></td>
-                                        <td><p>Phone Number:{this.state.guestphone}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Adults:{this.state.adultnumber} </p></td>
-                                        <td><p>Email Address:{this.state.emailaddress}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Room Type:{this.state.roomType} </p></td>
-                                        <td><p>Adress: {this.state.street}{this.state.state}{this.state.city}{this.state.zip}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Room Number:{this.state.roomNumber}</p></td>
-                                        <td><p>Credit Card Number:{this.state.ccnumber}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Daily Room Rate:{this.state.roomRate}</p></td>
-                                        <td><p>Expiration Date:{this.state.expdate}</p></td>
-                                    </tr>
-                                 <tr>
-                                        <td><p></p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Created date:{this.state.createDate}</p></td>
-                                        <td><p>Created by:{this.state.username}</p></td>
+                                {this.state.RoomInfo.map((room, i) => (
+                                    <div key={room.res_room_id}>
+                                        <table>
+                                            <tr>
+                                                <th><p>Confirmation Number: {this.state.ReservationInfo.reservation_id}</p></th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                                <td><p>Arrival Date: {room.check_in_date}</p></td>
+                                                <td><p>Name: {this.state.ReservationInfo.first_name} </p></td>
+                                            </tr><tr>
+                                                <td><p>Departure Date: {room.check_out_date}</p></td>
+                                                <td><p>Last Name: {this.state.ReservationInfo.last_name}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p>Nights: {this.state.nights}</p></td>
+                                                <td><p>Phone Number: {this.state.ReservationInfo.phone}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p>No of Rooms: {this.state.roomsnumber}</p></td>
+                                                <td><p>Email Address: {this.state.ReservationInfo.email}</p></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td><p>Adults: {room.adults} </p></td>
+                                                <td><p>Adress: {this.state.ReservationInfo.address}{this.state.ReservationInfo.city}{this.state.ReservationInfo.state} {this.state.ReservationInfo.zip}</p></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td><p>Room Type: {room.type} </p></td>
+                                                <td><p>Credit Card Number: {this.state.ccnumber}</p></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td><p>Room Number: {room.room_num}</p></td>
+                                                <td><p>Expiration Date: {this.state.expdate}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p>Daily Room Rate: {room.rate}</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p></p></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p>Created date: {this.state.ReservationInfo.created_at}</p></td>
+                                                <td><p>Created by: {this.state.ReservationInfo.user_id}</p></td>
 
 
-                                    </tr>
-                                </table>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                ))}
                             </div>
                             <div id="buttonDiv">
                                 <button id="revNew1" onClick={this.handleFormSubmit}>Save</button>

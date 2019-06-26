@@ -33,12 +33,12 @@ h1 {
   margin-bottom: 30px;
 }
 p {
-  font-size: 14px;
-  color: pink;
+  font-size: 16px;
+  color: black;
   padding: 1px;
   margin-left: 10px;
 }
-#res {
+#resHouse {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
@@ -51,6 +51,7 @@ button {
 
 #buttonDiv {
   padding-left: 5px;
+  margin-top: 10px;
 }
 
 #header {
@@ -60,13 +61,17 @@ button {
 h2 {
   text-align: center;
 }
-#res table tr td {
-  width: 50%;
+#resHouse div table tr th {
+  width:41%;
+  margin-left: 20px;
 }
-
-#res table tr {
+#resHouse div table {
+ margin-bottom: 10px;
+}
+#resHouse div table tr {
   width: 100%;
   padding-left: 5px;
+  margin:10px;
 }
 
 #revNew{
@@ -75,5 +80,6 @@ h2 {
 }
 #revNew1{
   margin-left: 35%;
+  margin-top: 20px;
 
 }

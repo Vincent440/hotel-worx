@@ -5,7 +5,7 @@ import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
 
-class FormUpdate extends Component {
+class UpdateReservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
         name: "",
@@ -119,7 +119,7 @@ class FormUpdate extends Component {
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td>
-                                    <button onClick={this.handleFormSubmit}>Submit</button>
+                                    <button id="searchButton" onClick={this.handleFormSubmit}>Search</button>
                                 </td>
                             </tr>
 
@@ -157,4 +157,4 @@ class FormUpdate extends Component {
     }
 }
 
-export default FormUpdate;
+export default UpdateReservation;

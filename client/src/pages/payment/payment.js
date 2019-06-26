@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style3.css";
+import api from '../../utils/api';
 import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
@@ -26,7 +27,14 @@ class Payment extends Component {
         creditCard: "",
         expirationDate: "",
         selectedOption: ["Two Quenns", "King Single", "Suite"],
+        ReservationInfo: {},
+        RoomInfo: []
     };
+    componentDidMount() {
+        api.getReservation(1)
+            .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
+            .catch(err => console.log(err))
+    }
 
     handleChange = selectedOption => {
         this.setState({ selectedOption });
@@ -73,68 +81,62 @@ class Payment extends Component {
                 <Col sm={10}>
                     <row>
                         <form>
-                        <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>Payment</h2>
-                        </div>
-                            <div id="res">
-                                <table border="1">
+                            {this.state.RoomInfo.map((room, i) => (
+                                <div>
+                                    <div id="header">
+                                        <div key={room.res_room_id}>
+                                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
+                                            <h2>Billing - Room: {room.room_num}</h2>
+                                        </div>
+                                    </div>
+                                    <div id="resInvoice">
+                                        <table border="1">
+                                            <tr>
+                                                <td>Balance: {this.state.balance}</td>
+                                                <td>Arrival Date: {room.check_in_date}</td>
+                                                <td>Daily Room Rate:{this.state.roomRate}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status:</td>
+                                                <td>Departure Date: {room.check_out_date}</td>
+                                                <td>Room Type: {room.type}</td>
+                                            </tr>
 
-                                    <tr>
-                                        <th><p>Confirmation Number: {this.state.confirmation}</p></th>
-                                    </tr>
-                                    <tr>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Arrival Date: {this.state.arrivaldate}</p></td>
-                                        <td><p>Name:{this.state.guestname} </p></td>
-                                    </tr><tr>
-                                        <td><p>Departure Date: {this.state.departuredate}</p></td>
-                                        <td><p>Last Name:{this.state.lastname}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Nights: {this.state.nights}</p></td>
-                                        <td><p>Phone Number:{this.state.guestphone}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>No of Rooms: {this.state.roomsnumber} </p></td>
-                                        <td><p>Phone Number:{this.state.guestphone}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Adults:{this.state.adultnumber} </p></td>
-                                        <td><p>Email Address:{this.state.emailaddress}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Room Type:{this.state.roomType} </p></td>
-                                        <td><p>Adress: {this.state.street}{this.state.state}{this.state.city}{this.state.zip}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Room Number:{this.state.roomNumber}</p></td>
-                                        <td><p>Credit Card Number:{this.state.ccnumber}</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Daily Room Rate:{this.state.roomRate}</p></td>
-                                        <td><p>Expiration Date:{this.state.expdate}</p></td>
-                                    </tr>
-                                 <tr>
-                                        <td><p></p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><p>Created date:{this.state.createDate}</p></td>
-                                        <td><p>Created by:{this.state.username}</p></td>
+                                        </table>
+                                        <div>
+                                            <thead>
+                                                <tr>
+                                                    <th className="tableInfo">{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}</th>
+                                                    <th className="tableInfo">CC: <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                                        {this.state.ccnumber}</th>
+                                                    <th className="tableInfo">Cash:   <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                        </div>
+                                        <table id="result">
+                                            <thead>
+                                                <tr>
+                                                    <th className="th" id="date">Date</th>
+                                                    <th className="th" id="description">Description</th>
+                                                    <th className="th" id="amount">Amount</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
 
 
-                                    </tr>
-                                </table>
-                            </div>
-                            <div id="buttonDiv">
-                                <button id="revNew1" onClick={this.handleFormSubmit}>Save</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Print</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Email</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Close</button>
+                                    <div id="buttonDiv">
+                                        <button id="revNew1" onClick={this.handleFormSubmit}>Post</button>
+                                        <button id="revNew" onClick={this.handleFormSubmit}>Payment</button>
+                                        <button id="revNew" onClick={this.handleFormSubmit}>Check Out</button>
+                                        <button id="revNew" onClick={this.handleFormSubmit}>Close</button>
 
-                            </div>
+                                    </div>
+                                </div>
+
+                            ))}
+
                         </form>
                     </row>
                 </Col >

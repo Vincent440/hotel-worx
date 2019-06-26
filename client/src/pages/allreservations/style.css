@@ -53,6 +53,11 @@ p {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+#searchButton {
+  size: 30px;
+  margin-left: 38%;
+  color: red;
+}
 button {
   size: 30px;
   margin-left: 38%;
