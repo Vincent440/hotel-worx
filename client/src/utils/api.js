@@ -18,5 +18,32 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+    },
+    getRoomTypes: () => {
+        return axios.get('/api/testing/room_types')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getArrivals: () => {
+        return axios.get('/api/testing/todayArrivals')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getDepartures: () => {
+        return axios.get('/api/testing/todayDepartures')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 }

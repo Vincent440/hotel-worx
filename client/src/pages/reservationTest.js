@@ -9,13 +9,17 @@ class ReservationTest extends Component {
 
     state = {
         ReservationInfo: {},
-        RoomInfo: []
+        RoomInfo: [],
+        RoomTypes: []
     };
 
     componentDidMount() {
         api.getReservation(2)
             .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
+        api.getRoomTypes()
+            .then(res => this.setState({ RoomTypes: res }))
+            .catch(err => console.log(err));
     }
 
     testNewReservation = () => {
@@ -57,7 +61,7 @@ class ReservationTest extends Component {
                 </ul>
                 {this.state.RoomInfo.map((room, i) => (
                     <div key={room.res_room_id}>
-                        <p className="text-white">Room: {i+1}</p>
+                        <p className="text-white">Room: {i + 1}</p>
                         <ul>
                             <li>ResRoom ID: {room.res_room_id}</li>
                             <li>Adults: {room.adults}</li>
@@ -66,6 +70,16 @@ class ReservationTest extends Component {
                             <li>Rate: {room.rate}</li>
                             <li>Room Number: {room.room_num}</li>
                             <li>Room Type: {room.type}</li>
+                        </ul>
+                    </div>
+                ))}
+                {this.state.RoomTypes.map(type => (
+                    <div key={type.room_type_id}>
+                        <p className="text-white">Room Types:</p>
+                        <ul>
+                            <li>Room Type ID: {type.room_type_id}</li>
+                            <li>Room Type: {type.type}</li>
+                            <li>Room Rate: {type.rate}</li>
                         </ul>
                     </div>
                 ))}
