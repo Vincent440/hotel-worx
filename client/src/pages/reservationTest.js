@@ -9,13 +9,32 @@ class ReservationTest extends Component {
 
     state = {
         ReservationInfo: {},
-        RoomInfo: []
+        RoomInfo: [],
+        RoomTypes: []
     };
 
     componentDidMount() {
         api.getReservation(2)
             .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
+            .catch(err => console.log(err));
+        api.getRoomTypes()
+            .then(res => this.setState({ RoomTypes: res }))
+            .catch(err => console.log(err));
+    }
+
+    testNewReservation = () => {
+        const dataObj = {
+            "cust": ["Peter", "Pan2", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "n/a", 1],
+            "reserve": [1],
+            "rooms": [[2, "2019-08-12", "2019-08-15", 2], [2, "2019-08-12", "2019-08-19", 2], [2, "2019-08-12", "2019-08-17", 1]]
+        }
+        api.createReservation(dataObj)
+            .then(res => console.log(res))
             .catch(err => console.log(err))
+    }
+
+    formatCC() {
+        return this.state.ReservationInfo.credit_card_num ? this.state.ReservationInfo.credit_card_num.slice(-4) : null;
     }
 
     render() {
@@ -36,10 +55,13 @@ class ReservationTest extends Component {
                     <li>Customer Zip: {this.state.ReservationInfo.zip}</li>
                     <li>Customer Email: {this.state.ReservationInfo.email}</li>
                     <li>Customer Phone: {this.state.ReservationInfo.phone}</li>
+                    <li>Customer Credit Card Last 4: {this.formatCC()}</li>
+                    <li>Customer Credit Card Exp Date: {this.state.ReservationInfo.cc_expiration}</li>
+                    {/* const lastFour = result.credit_card_num.slice(-4); */}
                 </ul>
                 {this.state.RoomInfo.map((room, i) => (
                     <div key={room.res_room_id}>
-                        <p className="text-white">Room: {i+1}</p>
+                        <p className="text-white">Room: {i + 1}</p>
                         <ul>
                             <li>ResRoom ID: {room.res_room_id}</li>
                             <li>Adults: {room.adults}</li>
@@ -51,6 +73,17 @@ class ReservationTest extends Component {
                         </ul>
                     </div>
                 ))}
+                {this.state.RoomTypes.map(type => (
+                    <div key={type.room_type_id}>
+                        <p className="text-white">Room Types:</p>
+                        <ul>
+                            <li>Room Type ID: {type.room_type_id}</li>
+                            <li>Room Type: {type.type}</li>
+                            <li>Room Rate: {type.rate}</li>
+                        </ul>
+                    </div>
+                ))}
+                <button type="submit" className="btn btn-success" onClick={this.testNewReservation}>Submit</button>
             </div>
         );
     }

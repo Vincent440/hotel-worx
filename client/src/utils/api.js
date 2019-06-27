@@ -27,5 +27,68 @@ export default {
             .catch(function (error) {
                 console.log(error);
             });
+    },
+    getArrivals: () => {
+        return axios.get('/api/testing/todayArrivals')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getDepartures: () => {
+        return axios.get('/api/testing/todayDepartures')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getCleanRooms: () => {
+        return axios.get('/api/testing/rooms_clean')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getDirtyRooms: () => {
+        return axios.get('/api/testing/rooms_dirty')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getInactiveRooms: () => {
+        return axios.get('/api/testing/rooms_inactive')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getOccupiedRooms: () => {
+        return axios.get('/api/testing/rooms_occupied')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    getVacantRooms: () => {
+        return axios.get('/api/testing/rooms_vacant')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 }

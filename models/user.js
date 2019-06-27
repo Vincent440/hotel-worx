@@ -8,9 +8,16 @@ const User = {
             cb(results);
         });
     },
-    selectOne: (id, cb) => {
+    selectOneById: (id, cb) => {
         const queryString = "SELECT u.user_id, u.username, u.access_id, a.type FROM users AS u INNER JOIN access_levels AS a ON u.access_id=a.access_id WHERE user_id=? LIMIT 1;";
         connection.execute(queryString, [id], (err, results, fields) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
+    selectOneByUsername: (username, cb) => {
+        const queryString = "SELECT u.user_id, u.username, u.access_id, a.type FROM users AS u INNER JOIN access_levels AS a ON u.access_id=a.access_id WHERE username=? LIMIT 1;";
+        connection.execute(queryString, [username], (err, results, fields) => {
             if (err) throw err;
             cb(results);
         });
