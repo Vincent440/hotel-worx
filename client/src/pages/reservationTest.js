@@ -73,16 +73,12 @@ class ReservationTest extends Component {
                         </ul>
                     </div>
                 ))}
-                {this.state.RoomTypes.map(type => (
-                    <div key={type.room_type_id}>
-                        <p className="text-white">Room Types:</p>
-                        <ul>
-                            <li>Room Type ID: {type.room_type_id}</li>
-                            <li>Room Type: {type.type}</li>
-                            <li>Room Rate: {type.rate}</li>
-                        </ul>
-                    </div>
-                ))}
+                <p className="text-white">Room Types:</p>
+                <ul>
+                    {this.state.RoomTypes.map(type => (
+                        <li key="type.room_type_id">Room Type ID: {type.room_type_id}, Room Type: {type.type}, Room Rate: {type.rate}</li>
+                    ))}
+                </ul>
                 <button type="submit" className="btn btn-success" onClick={this.testNewReservation}>Submit</button>
             </div>
         );
