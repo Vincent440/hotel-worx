@@ -9,5 +9,23 @@ export default {
             .then(axios.spread((resCust, resRooms) => {
                 return { resCust: resCust.data, resRooms: resRooms.data };
             }));
+    },
+    createReservation: (data) => {
+        return axios.post('/api/testing/reservation', data)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    getRoomTypes: () => {
+        return axios.get('/api/testing/room_types')
+            .then(function (response) {
+                return response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 }

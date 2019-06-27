@@ -4,6 +4,8 @@ import "./style.css";
 import logo from './solidcolor.png';
 import MyComponent from "../../components/calendar"
 import Select from 'react-select';
+import api from '../../utils/api';
+
 
 class ReserveNew extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -22,10 +24,9 @@ class ReserveNew extends Component {
         nights: "",
         adults: "",
         noOfRooms: "",
-        roomType: "",
+        RoomTypes: [],
         creditCard: "",
         expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
     };
 
     handleChange = selectedOption => {
@@ -42,6 +43,11 @@ class ReserveNew extends Component {
         this.setState({
             [name]: value
         });
+    }
+    componentDidMount() {
+        api.getRoomTypes()
+            .then(res => this.setState({ RoomTypes: res }))
+            .catch(err => console.log(err));
     }
 
     // When the form is submitted, prevent the default event and alert the username and password
@@ -78,12 +84,14 @@ class ReserveNew extends Component {
         return (
 
             <Row id="dashboardTable">
-                <Col sm={2} id="infoPart">
+                <Col sm={2} >
                     <img src={logo} className="App-logo" id="logo" alt="logo" />
+                    <div id="infoPart">
                     <h5>User Name</h5><br></br>
                     <MyComponent></MyComponent><br></br>
                     <h5>Weather</h5><br></br>
                     <i className="fa fa-gear" style={{ fontSize: '28px' }} />
+                    </div>
                 </Col>
                 <Col sm={10}>
                     <form>
@@ -96,10 +104,11 @@ class ReserveNew extends Component {
                                 <td><p>Arrival Date</p></td>
                                 <td><input
                                     type="date"
-                                    name="arrivaldate"
+                                    name="departuredate"
                                     value={this.state.arrivaldate}
                                     onChange={this.handleInputChange}
                                 /></td>
+
                                 <td><p>Nights</p></td>
                                 <td><input
                                     id="smallWindow"
@@ -146,17 +155,15 @@ class ReserveNew extends Component {
                                     value={this.state.adultnumber}
                                     onChange={this.handleInputChange}
                                 /></td>
-                                <td ><p>Room Type</p></td>
-                                <td ><Select
-                                    id="smallWindow"
-                                    value={roomType}
-                                    onChange={this.handleChange}
-                                    options={selectedOption}
-                                    name="roomtype"
-                                    placeholder="Room Type"
-                                    value={this.state.roomType}
-                                    onChange={this.handleInputChange}
-                                /></td>
+                                <td ><p>Room Type: </p></td>
+                                <td >
+                                    <select>
+                                        {this.state.RoomTypes.map(type => (
+                                            <option key="type.room_type_id">{type.type}</option>
+                                        ))}
+                                    </select>
+
+                                </td>
                                 <td ><p>Room Number</p></td>
                                 <td><Select
                                     id="smallWindow"
@@ -265,6 +272,9 @@ class ReserveNew extends Component {
                                         value={this.state.edate}
                                         onChange={this.handleInputChange}
                                     /></td>
+
+                            </tr>
+                            <tr>
 
                             </tr>
                         </div>

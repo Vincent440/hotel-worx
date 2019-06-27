@@ -66,12 +66,7 @@ button {
 h2 {
   text-align: right;
 }
-#exit {
-  float: right;
-  font-size: 29px;
-  width: 38px;
-  border: 1px solid black;
-}
+
 .th {
   border: 1px solid black;
   padding: 10px;

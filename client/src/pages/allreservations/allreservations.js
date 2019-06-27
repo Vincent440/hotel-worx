@@ -73,7 +73,7 @@ class UpdateReservation extends Component {
                 <Col sm={10}>
                     <form>
                         <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
+                             <a id="exit" className="btn" href="/">x</a>
                             <h2>All Reservations</h2>
                         </div>
                         <div id="res">
