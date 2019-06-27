@@ -7,6 +7,12 @@ router.route("/").get((req, res) => {
     res.status(200).send("sending this from the /api/testing route for any test routes");
 });
 
+router.get("/users/:id", (req, res) => {
+    db.User.selectOneById(req.params.id, (data) => {
+        res.json(data);
+    });
+});
+
 // this route will need to be sent data like: { "vals": ["test_user", "111111", 1] }
 router.post("/users", (req, res) => {
     db.User.insertOne(req.body.vals, (result) => {
@@ -43,14 +49,14 @@ router.delete("/customers/:id", (req, res) => {
     });
 });
 
-// this route will need to be sent data like this: { "vals": ["Joe", "Blow", "222 E Market St", "Akron", "Ohio", "42116", "joeblow@gmail.com", "440-234-1234", "n/a", 1] }
+// this route will need to be sent data like this: { "vals": ["Joe", "Blow", "222 E Market St", "Akron", "Ohio", "42116", "joeblow@gmail.com", "440-234-1234", "1234567890123456", "11-21", 1] }
 router.post("/customers", (req, res) => {
     db.Customer.insertOne(req.body.vals, (result) => {
         res.json({ id: result.insertId });
     });
 });
 
-// this route will need to be sent data like this: { "vals": ["Joe", "Blow", "222 E Market St", "Akron", "Ohio", "42116", "joeblow@gmail.com", "440-234-1234", "n/a", 1] }
+// this route will need to be sent data like this: { "vals": ["Joe", "Blow", "222 E Market St", "Akron", "Ohio", "42116", "joeblow@gmail.com", "440-234-1234", "1234567890123456", "11-21", 1] }
 router.put("/customers/:id", (req, res) => {
     db.Customer.updateOne(req.body.vals, req.params.id, (result) => {
         if (result.changedRows === 0) {
@@ -69,6 +75,41 @@ router.get("/rooms", (req, res) => {
 
 router.get("/rooms/:id", (req, res) => {
     db.Room.selectOne(req.params.id, (data) => {
+        res.json(data);
+    });
+});
+
+router.get("/rooms_clean", (req, res) => {
+    const condition = "rm.clean=1";
+    db.Room.selectSome(condition, (data) => {
+        res.json(data);
+    });
+});
+
+router.get("/rooms_inactive", (req, res) => {
+    const condition = "rm.active=0";
+    db.Room.selectSome(condition, (data) => {
+        res.json(data);
+    });
+});
+
+router.get("/rooms_occupied", (req, res) => {
+    const condition = "rm.occupied=1";
+    db.Room.selectSome(condition, (data) => {
+        res.json(data);
+    });
+});
+
+router.get("/rooms_vacant", (req, res) => {
+    const condition = "rm.occupied=0";
+    db.Room.selectSome(condition, (data) => {
+        res.json(data);
+    });
+});
+
+router.get("/rooms_dirty", (req, res) => {
+    const condition = "rm.clean=0";
+    db.Room.selectSome(condition, (data) => {
         res.json(data);
     });
 });
@@ -133,7 +174,8 @@ router.put("/room_types/:id", (req, res) => {
     });
 });
 
-// this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "n/a", 1], "reserve": [1], "rooms": [[2, "2019-08-12", "2019-08-15", 2], [2, "2019-08-12", "2019-08-19", 3], [2, "2019-08-12", "2019-08-17", 1]] }
+// { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration", "active"], "reserve": ["user_id"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults"], ["room_type_id", "check_in_date", "check_out_date", "adults"], ["room_type_id", "check_in_date", "check_out_date", "adults"]] }
+// this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], "reserve": [1], "rooms": [[2, "2019-08-12", "2019-08-15", 2], [2, "2019-08-12", "2019-08-19", 3], [2, "2019-08-12", "2019-08-17", 1]] }
 router.post("/reservation", (req, res) => {
     db.Customer.insertOne(req.body.cust, (result) => {
         console.log(`Customer id ${result.insertId} has been added.`);
@@ -169,14 +211,14 @@ router.get("/res_rooms/:id", (req, res) => {
 });
 
 router.get("/todayArrivals", (req, res) => {
-    const condition = "rr.check_in_date=CURDATE()"
+    const condition = "rr.check_in_date=CURDATE()";
     db.ResRoom.selectTodayArrivalsDepartures(condition, (result) => {
         res.json({ result });
     });
 });
 
 router.get("/todayDepartures", (req, res) => {
-    const condition = "rr.check_out_date=CURDATE()"
+    const condition = "rr.check_out_date=CURDATE()";
     db.ResRoom.selectTodayArrivalsDepartures(condition, (result) => {
         res.json({ result });
     });
