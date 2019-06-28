@@ -14,15 +14,7 @@ h1 {
   padding: 30px 50px;
   height: 700px;
 }
-#infoPart {
-  border: 1px solid black;
-  border-radius: 5px;
-  text-align: center;
-  color: black;
-  background-color: rgba(255, 255, 255, 0.425);
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
+
 #exit {
   float: right;
   font-size: 29px;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
+import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
 import api from '../../utils/api';
+import Header from "../../components/Header"
 
 
 class ReserveNew extends Component {
@@ -84,21 +84,11 @@ class ReserveNew extends Component {
         return (
 
             <Row id="dashboardTable">
-                <Col sm={2} >
-                    <img src={logo} className="App-logo" id="logo" alt="logo" />
-                    <div id="infoPart">
-                    <h5>User Name</h5><br></br>
-                    <MyComponent></MyComponent><br></br>
-                    <h5>Weather</h5><br></br>
-                    <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-                    </div>
-                </Col>
+              <InfoPart />
                 <Col sm={10}>
                     <form>
-                        <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>New Reservation</h2>
-                        </div>
+                    <Header> NEW RESERVATION</Header>
+
                         <div id="res">
                             <tr>
                                 <td><p>Arrival Date</p></td>

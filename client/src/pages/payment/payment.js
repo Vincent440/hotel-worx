@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style3.css";
 import api from '../../utils/api';
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
-import Select from 'react-select';
+import InfoPart from "../../components/infoPart";
+import Header from "../../components/Header"
+
 
 class Payment extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -71,24 +71,14 @@ class Payment extends Component {
         return (
 
             <Row id="dashboardTable1">
-                <Col sm={2} id="infoPart">
-                    <img src={logo} className="App-logo" id="logo" alt="logo" />
-                    <h5>User Name</h5><br></br>
-                    <MyComponent></MyComponent><br></br>
-                    <h5>Weather</h5><br></br>
-                    <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-                </Col>
+               <InfoPart />
                 <Col sm={10}>
                     <row>
                         <form>
                             {this.state.RoomInfo.map((room, i) => (
                                 <div>
-                                    <div id="header">
-                                        <div key={room.res_room_id}>
-                                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                                            <h2>Billing - Room: {room.room_num}</h2>
-                                        </div>
-                                    </div>
+                                    <Header>BILLING - Room: {room.room_num}</Header>
+                                    
                                     <div id="resInvoice">
                                         <table border="1">
                                             <tr>

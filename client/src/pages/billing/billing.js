@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style2.css";
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
-import Select from 'react-select';
+import InfoPart from "../../components/infoPart"
+import Header from "../../components/Header";
 
 class Billing extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -44,12 +43,7 @@ class Billing extends Component {
         });
     }
 
-    // When the form is submitted, prevent the default event and alert the username and password
-    handleFormSubmit = event => {
-        event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
-    }
+   
     render() {
 
         const { options } = [
@@ -63,20 +57,11 @@ class Billing extends Component {
         return (
 
             <Row id="dashboardTable1">
-                <Col sm={2} id="infoPart">
-                    <img src={logo} className="App-logo" id="logo" alt="logo" />
-                    <h5>User Name</h5><br></br>
-                    <MyComponent></MyComponent><br></br>
-                    <h5>Weather</h5><br></br>
-                    <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-                </Col>
+               <InfoPart />
                 <Col sm={10}>
                     <row>
                         <form>
-                            <div id="header">
-                                <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                                <h2>Cashiering</h2>
-                            </div>
+                            <Header>FINANCE</Header>
                             <div id="res">
                                 <tr>
                                     <td><p>Room Number</p></td>

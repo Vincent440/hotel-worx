@@ -1,22 +1,14 @@
 import React from 'react';
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
-
+import InfoPart from "../../components/infoPart"
 
 
 function Dashboard() {
     return (
 
         <Row id="dashboardTable">
-            <Col sm={2} id="infoPart">
-                <img src={logo} className="App-logo" id="logo" alt="logo" />
-                <h5>User Name</h5><br></br>
-                <MyComponent></MyComponent><br></br>
-                <h5>Weather</h5><br></br>
-                <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-            </Col>
+          <InfoPart />
             <Col sm={10}>
 
                 <div>
