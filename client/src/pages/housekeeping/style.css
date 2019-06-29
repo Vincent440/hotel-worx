@@ -14,17 +14,6 @@ h1 {
   padding: 30px 50px;
   height: 700px;
 }
-
-#exit {
-  float: right;
-  font-size: 29px;
-  width: 38px;
-  border: 1px solid black;
-  }
-#logo {
-  width: 100%;
-  margin-bottom: 30px;
-}
 p {
   font-size: 18px;
   color: black;
@@ -32,14 +21,6 @@ p {
   margin-left: 10px;
 }
 
-#res {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  padding-top: 5px;
-}
 
 #guestinfo {
   background-color: rgba(255, 255, 255, 0.774);
@@ -55,10 +36,6 @@ margin-left: 30px;}
 h2{
   text-align: center;
 
-}
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
 }
 
 .th{

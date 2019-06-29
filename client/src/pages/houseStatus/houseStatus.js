@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
-import "./style6.css";
+import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
+import SearchSubmit from "../../components/searchButton";
 
 
 class HouseStatus extends Component {
@@ -74,7 +75,7 @@ class HouseStatus extends Component {
                 <InfoPart />
                 <Col sm={10}>
                     <row>
-                    <Header>HOUSE STATUS</Header>
+                        <Header>HOUSE STATUS</Header>
                         <form>
                             <div id="resHouse">
                                 {this.state.RoomInfo.map((room, i) => (
@@ -152,8 +153,9 @@ class HouseStatus extends Component {
                                 ))}
                             </div>
                             <div id="buttonDiv">
-                                <button id="searchButton" onClick={this.handleFormSubmit}>Search</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Close</button>
+                                <button type="button" class="btn btn-primary" style={{marginLeft:"450px"}}>Search</button>
+
+                                <button type="button" class="btn btn-primary" style={{marginLeft:"20px"}}>Close</button>
 
                             </div>
                         </form>

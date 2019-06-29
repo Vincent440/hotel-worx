@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
-import "./style5.css";
+import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
+import SearchSubmit from "../../components/searchButton";
 
 class Housekeeping extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -62,11 +63,11 @@ class Housekeeping extends Component {
         return (
 
             <Row id="dashboardTable1">
-               <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <row>
                         <form>
-                           <Header>HOUSEKEEPING</Header>
+                            <Header>HOUSEKEEPING</Header>
                             <div id="res">
                                 <tr>
                                     <td>
@@ -115,17 +116,17 @@ class Housekeeping extends Component {
                                     <td>
                                         <tr>
                                             <td>
-                                                <button onClick={this.handleFormSubmit} style={{ marginLeft: "150px", marginBottom:"10px",}}>Select All</button>
+                                                <button type="button" class="btn btn-success" style={{marginLeft:"40px" , marginBottom:"5px"}}>Select All</button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button onClick={this.handleFormSubmit} style={{ marginLeft: "150px", marginBottom:"25px",}}>Clear All</button>
+                                                <button type="button" class="btn btn-success" style={{marginLeft:"40px" , marginBottom:"5px"}}>Clear All</button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button id="searchButton" onClick={this.handleFormSubmit} style={{ marginLeft: "150px",marginBottom:"5px", }}>Search</button>
+                                                <SearchSubmit />
                                             </td>
                                         </tr>
                                     </td>

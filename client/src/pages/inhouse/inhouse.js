@@ -4,6 +4,7 @@ import "./style.css";
 import Select from 'react-select';
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
+import SearchSubmit from "../../components/searchButton";
 
 class Inhouse extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -133,7 +134,7 @@ class Inhouse extends Component {
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td>
-                                    <button id="searchButton" onClick={this.handleFormSubmit}>Search</button>
+<SearchSubmit />
                                 </td>
                             </tr>
 

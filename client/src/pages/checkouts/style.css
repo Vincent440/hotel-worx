@@ -14,10 +14,6 @@ h1 {
   height: 700px;
 }
 
-#logo {
-  width: 100%;
-  margin-bottom: 30px;
-}
 p {
   font-size: 18px;
   color: black;
@@ -25,11 +21,6 @@ p {
   margin-left: 10px;
 }
 
-#res {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  border-radius: 5px;
-}
 
 button{
 size: 30px;

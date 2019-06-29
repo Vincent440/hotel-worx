@@ -4,7 +4,8 @@ import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
 import api from '../../utils/api';
-import Header from "../../components/Header"
+import Header from "../../components/Header";
+import ButtonSubmit from "../../components/submitButton"
 
 
 class ReserveNew extends Component {
@@ -79,8 +80,6 @@ class ReserveNew extends Component {
             { value: "110", label: "110" },
         ];
         const { selectedOption } = this.state;
-
-
         return (
 
             <Row id="dashboardTable">
@@ -268,7 +267,7 @@ class ReserveNew extends Component {
 
                             </tr>
                         </div>
-                        <button id="submitButton" onClick={this.handleFormSubmit}>Submit</button>
+                        <ButtonSubmit />
 
                     </form>
 

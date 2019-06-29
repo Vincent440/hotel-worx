@@ -71,14 +71,14 @@ class Payment extends Component {
         return (
 
             <Row id="dashboardTable1">
-               <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <row>
                         <form>
                             {this.state.RoomInfo.map((room, i) => (
                                 <div>
                                     <Header>BILLING - Room: {room.room_num}</Header>
-                                    
+
                                     <div id="resInvoice">
                                         <table border="1">
                                             <tr>
@@ -117,10 +117,10 @@ class Payment extends Component {
 
 
                                     <div id="buttonDiv">
-                                        <button id="revNew1" onClick={this.handleFormSubmit}>Post</button>
-                                        <button id="revNew" onClick={this.handleFormSubmit}>Payment</button>
-                                        <button id="revNew" onClick={this.handleFormSubmit}>Check Out</button>
-                                        <button id="revNew" onClick={this.handleFormSubmit}>Close</button>
+                                        <button type="button" class="btn btn-primary" style={{marginLeft:"350px", marginTop:"10px"}}>Post</button>
+                                        <button type="button" class="btn btn-danger" style={{marginTop:"10px"}}>Payment</button>
+                                        <button type="button" class="btn btn-danger" style={{marginTop:"10px"}}>Check Out</button>
+                                        <button type="button" class="btn btn-primary" style={{marginTop:"10px", marginLeft:"5px"}}>Close</button>
 
                                     </div>
                                 </div>

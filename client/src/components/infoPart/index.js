@@ -4,6 +4,7 @@ import Calendar from "../calendar";
 import { Row, Col } from 'react-grid-system';
 import logo from "./solidcolor.png";
 import { Card, ListGroup } from 'react-bootstrap';
+import "./style.css";
 
 class InfoPart extends Component {
 

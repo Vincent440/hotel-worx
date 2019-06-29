@@ -21,7 +21,7 @@ function Dashboard() {
                             <Button variant="primary" size="lg" href="/reserve/new">New Reservation</Button>
                             <Button variant="primary" size="lg" href="/reserve/allreservations">Update Reservation</Button>
                             <Button variant="primary" size="lg" href="/reserve/testreservation">Test Reservation Confirm</Button>
-                            <Button variant="primary" size="lg" href="/reserve/testUpdatereservatio">Test Update Reservation</Button>
+                            <Button variant="primary" size="lg" href="/reserve/testUpdatereservation">Test Update Reservation</Button>
                         </div>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
@@ -36,7 +36,7 @@ function Dashboard() {
                             <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>FINANCE</Card.Body>
                         </Card>
                         <Button variant="primary" size="lg" href="/cashiering/billing">Billing</Button>
-                        <Button variant="primary" size="lg" href="/cashiering/oayment">Test Invoice</Button>
+                        <Button variant="primary" size="lg" href="/cashiering/payment">Test Invoice</Button>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
                         <Card style={{ marginBottom: "10px" }}>
@@ -44,7 +44,7 @@ function Dashboard() {
                         </Card>
                         <Button variant="primary" size="lg" href="/reports/housekeeping">Housekeeping Report</Button>
                         <Button variant="primary" size="lg" href="/reports/detailedAvailability">Detailed Availability</Button>
-                        <Button variant="primary" size="lg" href="/reports/houseStatu">House Status</Button>
+                        <Button variant="primary" size="lg" href="/reports/houseStatus">House Status</Button>
                     </div>
                     <div style={{ clear: "both" }}></div>
 

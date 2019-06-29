@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
-import "./style2.css";
+import "./style.css";
 import InfoPart from "../../components/infoPart"
 import Header from "../../components/Header";
+import SearchSubmit from "../../components/searchButton"
 
 class Billing extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -43,7 +44,7 @@ class Billing extends Component {
         });
     }
 
-   
+
     render() {
 
         const { options } = [
@@ -57,7 +58,7 @@ class Billing extends Component {
         return (
 
             <Row id="dashboardTable1">
-               <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <row>
                         <form>
@@ -102,7 +103,7 @@ class Billing extends Component {
                                     <td><p>Checked Out</p></td>
                                     <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
                                     <td>
-                                        <button id="searchButton"  onClick={this.handleFormSubmit}>Search</button>
+                                        <SearchSubmit />
                                     </td>
                                 </tr>
                             </div>

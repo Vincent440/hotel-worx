@@ -118,10 +118,10 @@ class Reservation extends Component {
                                 </table>
                             </div>
                             <div id="buttonDiv">
-                                <button onClick={this.handleFormSubmit}>Save</button>
-                                <button onClick={this.handleFormSubmit}>Print</button>
-                                <button onClick={this.handleFormSubmit}>Email</button>
-                                <button onClick={this.handleFormSubmit}>Close</button>
+                            <button type="button" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-primary">Print</button>
+                            <button type="button" class="btn btn-primary">Email</button>
+                            <button type="button" class="btn btn-primary">Close</button>
 
                             </div>
                         </form>

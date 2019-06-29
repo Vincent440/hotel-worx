@@ -3,6 +3,7 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart"
 import Header from "../../components/Header"
+import SearchSubmit from "../../components/searchButton"
 
 class UpdateReservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -111,7 +112,7 @@ class UpdateReservation extends Component {
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td>
-                                    <button id="searchButton" onClick={this.handleFormSubmit}>Search</button>
+<SearchSubmit />
                                 </td>
                             </tr>
 

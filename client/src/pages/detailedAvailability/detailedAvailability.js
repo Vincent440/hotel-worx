@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
-import "./style5.css";
+import "./style.css";
 import DeatiledSubmit from "../../components/detailedSubmit";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"

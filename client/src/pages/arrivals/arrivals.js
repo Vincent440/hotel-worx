@@ -4,6 +4,7 @@ import "./style.css";
 import Select from 'react-select';
 import InfoPart from "../../components/infoPart"
 import Header from "../../components/Header"
+import SearchSubmit from "../../components/searchButton"
 
 class Arrivals extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -134,7 +135,7 @@ class Arrivals extends Component {
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td>
-                                    <button id="searchButton" onClick={this.handleFormSubmit}>Search</button>
+                                    <SearchSubmit />
                                 </td>
                             </tr>
 

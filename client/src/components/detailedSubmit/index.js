@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import SearchSubmit from "../searchButton";
 
 const DeatiledSubmit = props => {
     return (
@@ -20,7 +21,7 @@ const DeatiledSubmit = props => {
                     <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
 
                     <td>
-                        <button id="searchButton" onClick={props.handleFormSubmit} style={{ marginLeft: "200px", marginBottom: "5px", }}>Search</button>
+                        <SearchSubmit/>
                     </td>
                 </tr>
             </div>
