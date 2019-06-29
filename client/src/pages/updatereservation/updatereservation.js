@@ -4,6 +4,7 @@ import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
 import Header from "../../components/Header";
+import DateRange from "../../components/dateRange/dateRange";
 
 class ReserveUpdate extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -26,6 +27,7 @@ class ReserveUpdate extends Component {
         creditCard: "",
         expirationDate: "",
         selectedOption: ["Two Quenns", "King Single", "Suite"],
+
     };
 
     handleChange = selectedOption => {
@@ -50,6 +52,19 @@ class ReserveUpdate extends Component {
         alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
         this.setState({ username: "", password: "" });
     }
+
+    handleCalenderClick() {
+        //const calendarNode = this.myRef.current;
+        //calendarNode.showDayPicker();
+        if (this.state.showCalendar) {
+            this.setState({ showCalendar: false });
+
+        }
+        else {
+            this.setState({ showCalendar: true });
+        }
+    }
+
     render() {
 
         const { roomType } = [
@@ -78,7 +93,7 @@ class ReserveUpdate extends Component {
         return (
 
             <Row id="dashboardTable">
-               <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <form>
                         <Header>UPDATE RESERVATION</Header>
@@ -87,13 +102,13 @@ class ReserveUpdate extends Component {
                                 <td><p>Confirmation Number:{this.state.confirmation}</p></td>
                             </tr>
                             <tr>
-                                <td><p>Arrival Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="arrivaldate"
-                                    value={this.state.arrivaldate}
-                                    onChange={this.handleInputChange}
-                                /></td>
+                                <td><p>Dates</p></td>
+                                <td>
+                                    <DateRange
+
+                                    />
+
+                                </td>
                                 <td><p>Nights</p></td>
                                 <td><input
                                     id="smallWindow"
@@ -123,13 +138,6 @@ class ReserveUpdate extends Component {
                                 /></td>
                             </tr>
                             <tr>
-                                <td><p>Departure Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="departuredate"
-                                    value={this.state.departuredate}
-                                    onChange={this.handleInputChange}
-                                /></td>
 
                                 <td ><p>Adults</p></td>
                                 <td><input
