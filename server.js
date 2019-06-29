@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
+require('./controllers/passportController')(passport); // pass passport for configuration
 
 app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({ extended: true }));
