@@ -8,7 +8,7 @@ set foreign_key_checks=0;
 
 CREATE TABLE users (
     user_id int(6) NOT NULL AUTO_INCREMENT,
-    username varchar(20) NOT NULL,
+    username varchar(20) NOT NULL UNIQUE,
     password varchar(255) NOT NULL,
     access_id int(3) NOT NULL,
     FOREIGN KEY (access_id) REFERENCES access_levels(access_id) ON DELETE RESTRICT ON UPDATE CASCADE,

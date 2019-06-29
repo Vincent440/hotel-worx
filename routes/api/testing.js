@@ -150,6 +150,12 @@ router.get("/room_types/:id", (req, res) => {
     });
 });
 
+router.get("/room_types_available", (req, res) => {
+    db.RoomType.selectAvailable((data) => {
+        res.json(data);
+    });
+});
+
 router.delete("/room_types/:id", (req, res) => {
     db.RoomType.deleteOne(req.params.id, (data) => {
         res.json(data);

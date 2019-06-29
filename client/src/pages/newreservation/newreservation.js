@@ -11,15 +11,14 @@ import ButtonSubmit from "../../components/submitButton"
 class ReserveNew extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
-        name: "",
+        firstname: "",
         lastname: "",
         phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
-        },
+        email: "",
+        address: "",
+        city: "",
+        state: "",
+        zipcode: "",
         arrivaldate: "",
         departuredate: "",
         nights: "",
@@ -27,13 +26,8 @@ class ReserveNew extends Component {
         noOfRooms: "",
         RoomTypes: [],
         creditCard: "",
-        expirationDate: "",
+        expirationDate: ""
     };
-
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
-    }
-
 
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -54,8 +48,7 @@ class ReserveNew extends Component {
     // When the form is submitted, prevent the default event and alert the username and password
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
+        alert(`Username: ${this.state.firstname}\nPassword: ${this.state.lastname}`);
     }
     render() {
 
@@ -65,7 +58,6 @@ class ReserveNew extends Component {
             { value: "Suite", label: "Suite" },
 
         ];
-
 
         const { roomNumber } = [
             { value: "101", label: "101" },
@@ -79,198 +71,193 @@ class ReserveNew extends Component {
             { value: "109", label: "109" },
             { value: "110", label: "110" },
         ];
-        const { selectedOption } = this.state;
         return (
 
             <Row id="dashboardTable">
-              <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <form>
-                    <Header> NEW RESERVATION</Header>
+                        <Header> NEW RESERVATION</Header>
 
                         <div id="res">
-                            <tr>
-                                <td><p>Arrival Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="departuredate"
-                                    value={this.state.arrivaldate}
-                                    onChange={this.handleInputChange}
-                                /></td>
+                            <table>
+                                <tr>
+                                    <td><p>Arrival Date</p></td>
+                                    <td><input
+                                        type="date"
+                                        name="departuredate"
+                                        value={this.state.arrivaldate}
+                                        onChange={this.handleInputChange}
+                                    /></td>
 
-                                <td><p>Nights</p></td>
-                                <td><input
-                                    id="smallWindow"
-                                    type="number"
-                                    placeholder="Number of Nights"
-                                    name="nights"
-                                    value={this.state.nights}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>No of Rooms</p></td>
-                                <td><input
-                                    id="smallWindow"
-                                    type="number"
-                                    placeholder="Number of Rooms"
-                                    name="roomsnumber"
-                                    value={this.state.roomsnumber}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Rate</p></td>
-                                <td><input
-                                    id="smallWindow"
-                                    type="tel"
-                                    placeholder="Rate"
-                                    name="roomrate"
-                                    value={this.state.roomrate}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><p>Departure Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="departuredate"
-                                    value={this.state.departuredate}
-                                    onChange={this.handleInputChange}
-                                /></td>
+                                    <td><p>Nights</p></td>
+                                    <td><input
+                                        id="smallWindow"
+                                        type="number"
+                                        placeholder="Number of Nights"
+                                        name="nights"
+                                        value={this.state.nights}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                    <td><p>No of Rooms</p></td>
+                                    <td><input
+                                        id="smallWindow"
+                                        type="number"
+                                        placeholder="Number of Rooms"
+                                        name="roomsnumber"
+                                        value={this.state.roomsnumber}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                    <td><p>Rate</p></td>
+                                    <td><input
+                                        id="smallWindow"
+                                        type="tel"
+                                        placeholder="Rate"
+                                        name="roomrate"
+                                        value={this.state.roomrate}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Departure Date</p></td>
+                                    <td><input
+                                        type="date"
+                                        name="departuredate"
+                                        value={this.state.departuredate}
+                                        onChange={this.handleInputChange}
+                                    /></td>
 
-                                <td ><p>Adults</p></td>
-                                <td><input
-                                    id="smallWindow"
-                                    type="number"
-                                    name="adultnumber"
-                                    placeholder="Adults"
-                                    value={this.state.adultnumber}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td ><p>Room Type: </p></td>
-                                <td >
-                                    <select>
-                                        {this.state.RoomTypes.map(type => (
-                                            <option key="type.room_type_id">{type.type}</option>
-                                        ))}
-                                    </select>
+                                    <td ><p>Adults</p></td>
+                                    <td><input
+                                        id="smallWindow"
+                                        type="number"
+                                        name="adultnumber"
+                                        placeholder="Adults"
+                                        value={this.state.adultnumber}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                    <td ><p>Room Type: </p></td>
+                                    <td >
+                                        <select>
+                                            {this.state.RoomTypes.map(type => (
+                                                <option key="type.room_type_id">{type.type}</option>
+                                            ))}
+                                        </select>
 
-                                </td>
-                                <td ><p>Room Number</p></td>
-                                <td><Select
-                                    id="smallWindow"
-                                    value={roomNumber}
-                                    onChange={this.handleChange}
-                                    options={selectedOption}
-                                    name="roomnumber"
-                                    placeholder="Room Number"
-                                    value={this.state.roomNumber}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                            </tr>
+                                    </td>
+                                    <td ><p>Room Number</p></td>
+                                    <td><Select
+                                        
+                                    /></td>
+                                </tr>
+                            </table>
                         </div>
                         <div id="guestinfo">
-                            <tr>
-                                <td><p>Name</p></td>
-                                <td><input
-                                    type="text"
-                                    placeholder="Name"
-                                    name="guestname"
-                                    value={this.state.guestname}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Last Name</p></td>
-                                <td><input
-                                    type="text"
-                                    placeholder="Last Name"
-                                    name="guestlastname"
-                                    value={this.state.lastname}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><p>Phone Number</p></td>
-                                <td><input
-                                    type="tel"
-                                    placeholder="Phone Number"
-                                    name="guestphone"
-                                    value={this.state.guestphone}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Email Address</p></td>
-                                <td><input
-                                    type="email"
-                                    placeholder="Email Address"
-                                    name="guestaddress"
-                                    value={this.state.guestaddress}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><p>Adress</p></td>
-                                <td>
-                                    <input
+                            <table>
+                                <tr>
+                                    <td><p>First Name</p></td>
+                                    <td><input
                                         type="text"
-                                        placeholder="Street"
-                                        name="street"
-                                        value={this.state.street}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        placeholder="State"
-                                        name="state"
-                                        value={this.state.state}
+                                        placeholder="First Name"
+                                        name="firstname"
+                                        value={this.state.firstname}
                                         onChange={this.handleInputChange}
                                     /></td>
-                                <td>
-                                    <input
+                                    <td><p>Last Name</p></td>
+                                    <td><input
                                         type="text"
-                                        placeholder="City"
-                                        name="city"
-                                        value={this.state.city}
+                                        placeholder="Last Name"
+                                        name="lastname"
+                                        value={this.state.lastname}
                                         onChange={this.handleInputChange}
                                     /></td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        placeholder="ZipCode"
-                                        name="zipcode"
-                                        value={this.state.zip}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-
-                            </tr>
-                            <tr>
-                                <td><p>Credit Card Number</p></td>
-                                <td>
-                                    <input
+                                </tr>
+                                <tr>
+                                    <td><p>Phone Number</p></td>
+                                    <td><input
                                         type="tel"
-                                        placeholder="CC Number"
-                                        name="ccnumber"
-                                        value={this.state.ccnumber}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </td>
-                                <td><p>Expiration Date</p></td>
-
-                                <td>
-                                    <input
-                                        type="tel"
-                                        placeholder="expiration date"
-                                        name="edate"
-                                        value={this.state.edate}
+                                        placeholder="Phone Number"
+                                        name="phonenumber"
+                                        value={this.state.phonenumber}
                                         onChange={this.handleInputChange}
                                     /></td>
+                                    <td><p>Email Address</p></td>
+                                    <td><input
+                                        type="email"
+                                        placeholder="Email Address"
+                                        name="email"
+                                        value={this.state.email}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Adress</p></td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            placeholder="Adress"
+                                            name="address"
+                                            value={this.state.address}
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            placeholder="City"
+                                            name="city"
+                                            value={this.state.city}
+                                            onChange={this.handleInputChange}
+                                        /></td>
+                                    <td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                placeholder="State"
+                                                name="state"
+                                                value={this.state.state}
+                                                onChange={this.handleInputChange}
+                                            /></td>
+                                        <input
+                                            type="text"
+                                            placeholder="ZipCode"
+                                            name="zipcode"
+                                            value={this.state.zip}
+                                            onChange={this.handleInputChange}
+                                        /></td>
 
-                            </tr>
-                            <tr>
+                                </tr>
+                                <tr>
+                                    <td><p>Credit Card Number</p></td>
+                                    <td>
+                                        <input
+                                            type="tel"
+                                            placeholder="CC Number"
+                                            name="ccnumber"
+                                            value={this.state.ccnumber}
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </td>
+                                    <td><p>Expiration Date</p></td>
 
-                            </tr>
+                                    <td>
+                                        <input
+                                            type="tel"
+                                            placeholder="expiration date"
+                                            name="edate"
+                                            value={this.state.edate}
+                                            onChange={this.handleInputChange}
+                                        /></td>
+
+                                </tr>
+                                <tr>
+
+                                </tr>
+                            </table>
                         </div>
-                        <ButtonSubmit />
+                        <ButtonSubmit handleSubmit={this.handleFormSubmit} />
 
                     </form>
-
 
                 </Col>
             </Row>
