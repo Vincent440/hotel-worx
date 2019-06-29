@@ -24,8 +24,7 @@ class ReserveNew extends Component {
         noOfRooms: "",
         roomType: "",
         creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
+        expirationDate: ""
     };
 
     handleChange = selectedOption => {
