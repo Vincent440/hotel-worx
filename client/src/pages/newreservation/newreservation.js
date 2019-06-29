@@ -5,7 +5,7 @@ import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
 import api from '../../utils/api';
 import Header from "../../components/Header";
-import ButtonSubmit from "../../components/submitButton"
+import ButtonSubmit from "../../components/submitButton";
 
 
 class ReserveNew extends Component {
@@ -83,20 +83,22 @@ class ReserveNew extends Component {
         return (
 
             <Row id="dashboardTable">
-              <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <form>
-                    <Header> NEW RESERVATION</Header>
+                        <Header> NEW RESERVATION</Header>
 
                         <div id="res">
                             <tr>
                                 <td><p>Arrival Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="departuredate"
-                                    value={this.state.arrivaldate}
-                                    onChange={this.handleInputChange}
-                                /></td>
+                                <td>
+                                    <input
+                                        type="date"
+                                        name="departuredate"
+                                        value={this.state.arrivaldate}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </td>
 
                                 <td><p>Nights</p></td>
                                 <td><input
