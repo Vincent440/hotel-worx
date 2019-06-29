@@ -1,46 +1,50 @@
 import React from 'react';
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
-
+import InfoPart from "../../components/infoPart"
+import { Card, Button } from 'react-bootstrap';
 
 
 function Dashboard() {
     return (
 
         <Row id="dashboardTable">
-            <Col sm={2} id="infoPart">
-                <img src={logo} className="App-logo" id="logo" alt="logo" />
-                <h5>User Name</h5><br></br>
-                <MyComponent></MyComponent><br></br>
-                <h5>Weather</h5><br></br>
-                <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-            </Col>
+            <InfoPart />
             <Col sm={10}>
                 <div>
-                    <div className="btn-group" style={{ display: 'block' }}>
-                        <a><h5>RESERVATION</h5></a>
-                        <a className="btn" href="/reserve/new">New Reservation</a>
-                        <a className="btn" href="/reserve/allreservations">Update Reservation</a>
-                        <a className="btn" href="/reserve/testreservation">Test Reservation Confirm</a>
-                        <a className="btn" href="/reserve/testUpdatereservation">Test Update Reservation</a>
+                    <div>
+
+                        <div className="btn-group" style={{ display: 'block' }}>
+                            <Card style={{ marginBottom: "10px" }}>
+                                <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>RESERVATION</Card.Body>
+                            </Card>
+                            <Button variant="primary" size="lg" href="/reserve/new">New Reservation</Button>
+                            <Button variant="primary" size="lg" href="/reserve/allreservations">Update Reservation</Button>
+                            <Button variant="primary" size="lg" href="/reserve/testreservation">Test Reservation Confirm</Button>
+                            <Button variant="primary" size="lg" href="/reserve/testUpdatereservation">Test Update Reservation</Button>
+                        </div>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <a><h5>FRONT DESK</h5></a>
-                        <a className="btn" href="/frontdesk/arrivals">Arrivals</a>
-                        <a className="btn" href="/frontdesk/inhouse">In-House Guests</a>
+                        <Card style={{ marginBottom: "10px" }}>
+                            <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>FRONT DESK</Card.Body>
+                        </Card>
+                        <Button variant="primary" size="lg" href="/frontdesk/arrivals">Arrivals</Button>
+                        <Button variant="primary" size="lg" href="/frontdesk/inhouse">In-House Guests</Button>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <a><h5>CASHIERING</h5></a>
-                        <a className="btn" href="/cashiering/billing">Billing</a>
-                        <a className="btn" href="/cashiering/payment">Test Invoice</a>
+                        <Card style={{ marginBottom: "10px" }}>
+                            <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>FINANCE</Card.Body>
+                        </Card>
+                        <Button variant="primary" size="lg" href="/cashiering/billing">Billing</Button>
+                        <Button variant="primary" size="lg" href="/cashiering/payment">Test Invoice</Button>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
-                        <a><h5>REPORTS</h5></a>
-                        <a className="btn" href="/reports/housekeeping">Housekeeping Report</a>
-                        <a className="btn" href="/reports/detailedAvailability">Detailed Availability</a>
-                        <a className="btn" href="/reports/houseStatus">House Status</a>
+                        <Card style={{ marginBottom: "10px" }}>
+                            <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>REPORTS</Card.Body>
+                        </Card>
+                        <Button variant="primary" size="lg" href="/reports/housekeeping">Housekeeping Report</Button>
+                        <Button variant="primary" size="lg" href="/reports/detailedAvailability">Detailed Availability</Button>
+                        <Button variant="primary" size="lg" href="/reports/houseStatus">House Status</Button>
                     </div>
                     <div style={{ clear: "both" }}></div>
 

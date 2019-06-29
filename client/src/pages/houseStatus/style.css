@@ -2,46 +2,25 @@ body {
   font-family: "Montserrat";
 }
 
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
 #dashboardTable1 {
   margin: 20px 60px 40px;
   padding: 30px 50px;
   height: 700px;
 }
-#infoPart {
-  border: 1px solid black;
-  border-radius: 5px;
-  text-align: center;
-  color: black;
-  background-color: rgba(255, 255, 255, 0.425);
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-#exit {
-  float: right;
-  font-size: 29px;
-  width: 38px;
-  border: 1px solid black;
-}
-#logo {
-  width: 100%;
-  margin-bottom: 30px;
-}
+
 p {
   font-size: 16px;
   color: black;
   padding: 1px;
   margin-left: 10px;
 }
+
 #resHouse {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
+  margin-top: 20px;
+
 }
 
 button {
@@ -54,13 +33,6 @@ button {
   margin-top: 10px;
 }
 
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-}
-h2 {
-  text-align: center;
-}
 #resHouse div table tr th {
   width:41%;
   margin-left: 20px;
@@ -74,12 +46,4 @@ h2 {
   margin:10px;
 }
 
-#revNew{
-  margin-left: 20px;
 
-}
-#revNew1{
-  margin-left: 35%;
-  margin-top: 20px;
-
-}
