@@ -1,14 +1,13 @@
 import React from 'react';
-import Moment from 'react-moment';
-import 'moment-timezone';
+import moment from "moment";
 
 
-export default class MyComponent extends React.Component {
-    render() {
-        return (
-            <Moment parse="YYYY-MM-DD HH:mm">
-                                1976-04-19 12:59
-
-        </Moment>);
-    }
+function Calendar() {
+    return(
+    <div>
+        <h5> {moment().format('MMMM Do, YYYY')}
+        </h5>
+    </div>
+    );
 }
+export default Calendar;

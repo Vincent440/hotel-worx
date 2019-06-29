@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
+import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
+import api from '../../utils/api';
+import Header from "../../components/Header";
+import ButtonSubmit from "../../components/submitButton"
+
 
 class ReserveNew extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -22,9 +25,9 @@ class ReserveNew extends Component {
         nights: "",
         adults: "",
         noOfRooms: "",
-        roomType: "",
+        RoomTypes: [],
         creditCard: "",
-        expirationDate: ""
+        expirationDate: "",
     };
 
     handleChange = selectedOption => {
@@ -41,6 +44,11 @@ class ReserveNew extends Component {
         this.setState({
             [name]: value
         });
+    }
+    componentDidMount() {
+        api.getRoomTypes()
+            .then(res => this.setState({ RoomTypes: res }))
+            .catch(err => console.log(err));
     }
 
     // When the form is submitted, prevent the default event and alert the username and password
@@ -72,33 +80,24 @@ class ReserveNew extends Component {
             { value: "110", label: "110" },
         ];
         const { selectedOption } = this.state;
-
-
         return (
 
             <Row id="dashboardTable">
-                <Col sm={2} id="infoPart">
-                    <img src={logo} className="App-logo" id="logo" alt="logo" />
-                    <h5>User Name</h5><br></br>
-                    <MyComponent></MyComponent><br></br>
-                    <h5>Weather</h5><br></br>
-                    <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-                </Col>
+              <InfoPart />
                 <Col sm={10}>
                     <form>
-                        <div id="header">
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>New Reservation</h2>
-                        </div>
+                    <Header> NEW RESERVATION</Header>
+
                         <div id="res">
                             <tr>
                                 <td><p>Arrival Date</p></td>
                                 <td><input
                                     type="date"
-                                    name="arrivaldate"
+                                    name="departuredate"
                                     value={this.state.arrivaldate}
                                     onChange={this.handleInputChange}
                                 /></td>
+
                                 <td><p>Nights</p></td>
                                 <td><input
                                     id="smallWindow"
@@ -145,17 +144,15 @@ class ReserveNew extends Component {
                                     value={this.state.adultnumber}
                                     onChange={this.handleInputChange}
                                 /></td>
-                                <td ><p>Room Type</p></td>
-                                <td ><Select
-                                    id="smallWindow"
-                                    value={roomType}
-                                    onChange={this.handleChange}
-                                    options={selectedOption}
-                                    name="roomtype"
-                                    placeholder="Room Type"
-                                    value={this.state.roomType}
-                                    onChange={this.handleInputChange}
-                                /></td>
+                                <td ><p>Room Type: </p></td>
+                                <td >
+                                    <select>
+                                        {this.state.RoomTypes.map(type => (
+                                            <option key="type.room_type_id">{type.type}</option>
+                                        ))}
+                                    </select>
+
+                                </td>
                                 <td ><p>Room Number</p></td>
                                 <td><Select
                                     id="smallWindow"
@@ -266,8 +263,11 @@ class ReserveNew extends Component {
                                     /></td>
 
                             </tr>
+                            <tr>
+
+                            </tr>
                         </div>
-                        <button id="submitButton" onClick={this.handleFormSubmit}>Submit</button>
+                        <ButtonSubmit />
 
                     </form>
 

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
-import "./style6.css";
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
-import Select from 'react-select';
+import "./style.css";
+import InfoPart from "../../components/infoPart";
+import Header from "../../components/Header"
+import SearchSubmit from "../../components/searchButton";
+
 
 class HouseStatus extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -41,7 +42,6 @@ class HouseStatus extends Component {
         this.setState({ selectedOption });
     }
 
-
     // handle any changes to the input fields
     handleInputChange = event => {
         // Pull the name and value properties off of the event.target (the element which triggered the event)
@@ -72,20 +72,11 @@ class HouseStatus extends Component {
         return (
 
             <Row id="dashboardTable1">
-                <Col sm={2} id="infoPart">
-                    <img src={logo} className="App-logo" id="logo" alt="logo" />
-                    <h5>User Name</h5><br></br>
-                    <MyComponent></MyComponent><br></br>
-                    <h5>Weather</h5><br></br>
-                    <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-                </Col>
+                <InfoPart />
                 <Col sm={10}>
                     <row>
+                        <Header>HOUSE STATUS</Header>
                         <form>
-                            <div id="header">
-                                <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                                <h2>House Status</h2>
-                            </div>
                             <div id="resHouse">
                                 {this.state.RoomInfo.map((room, i) => (
                                     <div key={room.res_room_id}>
@@ -162,8 +153,9 @@ class HouseStatus extends Component {
                                 ))}
                             </div>
                             <div id="buttonDiv">
-                                <button id="searchButton" onClick={this.handleFormSubmit}>Search</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Close</button>
+                                <button type="button" class="btn btn-primary" style={{marginLeft:"450px"}}>Search</button>
+
+                                <button type="button" class="btn btn-primary" style={{marginLeft:"20px"}}>Close</button>
 
                             </div>
                         </form>

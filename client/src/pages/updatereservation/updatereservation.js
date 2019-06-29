@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import logo from './solidcolor.png';
-import MyComponent from "../../components/calendar"
+import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
+import Header from "../../components/Header";
 
 class ReserveUpdate extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -78,20 +78,10 @@ class ReserveUpdate extends Component {
         return (
 
             <Row id="dashboardTable">
-                <Col sm={2} id="infoPart">
-                    <img src={logo} className="App-logo" id="logo" alt="logo" />
-                    <h5>User Name</h5><br></br>
-                    <MyComponent></MyComponent><br></br>
-                    <h5>Weather</h5><br></br>
-                    <i className="fa fa-gear" style={{ fontSize: '28px' }} />
-                </Col>
+               <InfoPart />
                 <Col sm={10}>
                     <form>
-                        <div id="header">
-                            
-                            <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                            <h2>Update Reservation</h2>
-                        </div>
+                        <Header>UPDATE RESERVATION</Header>
                         <div id="res">
                             <tr>
                                 <td><p>Confirmation Number:{this.state.confirmation}</p></td>

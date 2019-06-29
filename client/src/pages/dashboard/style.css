@@ -16,31 +16,12 @@ h5{
   padding: 30px 50px;
   height: 700px;
 }
-#infoPart {
-  border: 1px solid black;
-  border-radius: 5px;
-  text-align: center;
-  color:black;
-  background-color: rgba(255, 255, 255, 0.425);
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-#logo {
-  width: 100%;
-  margin-bottom: 30px;
-}
-
 
 .btn-group a {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black; /* Green border */
-  border-radius: 5px;
-  color: black; /* White text */
-  padding: 10px 24px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
   width: 250px;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   margin-left: 0px;
 }
 
@@ -49,12 +30,4 @@ h5{
   margin: 5px 5px;
 }
 
-.btn-group button:not(:last-child) {
-  border-bottom: none; /* Prevent double borders */
-}
 
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: rgba(0, 0, 255, 0.918); /* Green background */
-  ;
-}
