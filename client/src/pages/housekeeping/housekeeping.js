@@ -72,7 +72,7 @@ class Housekeeping extends Component {
                                 <tr>
                                     <td>
                                         <tr>
-                                            <p> Room Status: </p>
+                                            <h5 style={{textAlign:"left"}}>Room Status: </h5>
                                             <td><p>Clean</p></td>
                                             <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
 
@@ -84,7 +84,7 @@ class Housekeeping extends Component {
 
                                         </tr>
                                         <tr>
-                                            <p> Front Office Status: </p>
+                                            <h5> Front Office Status: </h5>
                                             <td><p>Vacant</p></td>
                                             <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
 
@@ -92,7 +92,7 @@ class Housekeeping extends Component {
                                             <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
                                         </tr>
                                         <tr>
-                                            <p> Reservation Status: </p>
+                                            <h5> Reservation Status: </h5>
                                             <td><p>Arrival</p></td>
                                             <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
 
@@ -116,12 +116,12 @@ class Housekeeping extends Component {
                                     <td>
                                         <tr>
                                             <td>
-                                                <button type="button" class="btn btn-success" style={{marginLeft:"40px" , marginBottom:"5px"}}>Select All</button>
+                                                <button type="button" class="btn btn-success" style={{ marginLeft: "40px", marginBottom: "5px" }}>Select All</button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button type="button" class="btn btn-success" style={{marginLeft:"40px" , marginBottom:"5px"}}>Clear All</button>
+                                                <button type="button" class="btn btn-success" style={{ marginLeft: "40px", marginBottom: "5px" }}>Clear All</button>
                                             </td>
                                         </tr>
                                         <tr>
