@@ -5,6 +5,10 @@ const customersRoutes = require("./customers");
 const roomRoutes = require("./rooms");
 const testingRoutes = require("./testing");
 const currentInfoRoutes = require("./current-info");
+const loginRoute = require("./login");
+
+// login route for user auth for employees or managers
+router.use("/login", loginRoute);
 
 // '/api/users' for all routes involving Users
 router.use("/users", usersRoutes);

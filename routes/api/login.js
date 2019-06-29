@@ -1,12 +1,15 @@
 const router = require("express").Router();
+const passport = require("passport");
 
-// '/login' route
+
+// '/api/login' route
 router.route("/")
-//post route for submitting login data and redirecting to either successful login dashboard or sending error message
+// POST route for submitting login data
 .post((req, res) => {
+    console.log(req.body);
     res.status(200).json({
         user: true,
-        body:req.body
+        body: req.body
     });
 });
 
