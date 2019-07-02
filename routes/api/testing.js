@@ -114,6 +114,32 @@ router.get("/rooms_dirty", (req, res) => {
     });
 });
 
+router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied", (req, res) => {
+    let criteria1 = [];
+    if (req.params.clean === "true") {
+        criteria1.push("rm.clean=1");
+    }
+    if (req.params.dirty === "true") {
+        criteria1.push("rm.clean=0");
+    }
+    if (req.params.oos === "true") {
+        criteria1 = "rm.active=0";
+    }
+    c1 = "(" + criteria1.join(" || ") + ")";
+    let criteria2 = [];
+    if (req.params.vacant === "true") {
+        criteria2.push("rm.occupied=0");
+    }
+    if (req.params.occupied === "true") {
+        criteria2.push("rm.occupied=1");
+    }
+    c2 = "(" + criteria2.join(" || ") + ")";
+    const conditions = [c1, c2];
+    db.Room.housekeepingStatus(conditions, (data) => {
+        res.json(data);
+    });
+});
+
 router.delete("/rooms/:id", (req, res) => {
     db.Room.deleteOne(req.params.id, (data) => {
         res.json(data);
@@ -150,6 +176,12 @@ router.get("/room_types/:id", (req, res) => {
     });
 });
 
+router.get("/room_types_available", (req, res) => {
+    db.RoomType.selectAvailable((data) => {
+        res.json(data);
+    });
+});
+
 router.delete("/room_types/:id", (req, res) => {
     db.RoomType.deleteOne(req.params.id, (data) => {
         res.json(data);
@@ -174,8 +206,8 @@ router.put("/room_types/:id", (req, res) => {
     });
 });
 
-// { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration", "active"], "reserve": ["user_id"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults"], ["room_type_id", "check_in_date", "check_out_date", "adults"], ["room_type_id", "check_in_date", "check_out_date", "adults"]] }
-// this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], "reserve": [1], "rooms": [[2, "2019-08-12", "2019-08-15", 2], [2, "2019-08-12", "2019-08-19", 3], [2, "2019-08-12", "2019-08-17", 1]] }
+// { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration", "active"], "reserve": ["user_id", "comments"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults", "confirmation_code", "comments"], ["room_type_id", "check_in_date", "check_out_date", "adults", "confirmation_code", "comments"], ["room_type_id", "check_in_date", "check_out_date", "adults", "confirmation_code", "comments"]] }
+// this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], "reserve": [1, ""], "rooms": [[2, "2019-08-12", "2019-08-15", 2, "20190621HW000001", "need a good view"]] }
 router.post("/reservation", (req, res) => {
     db.Customer.insertOne(req.body.cust, (result) => {
         console.log(`Customer id ${result.insertId} has been added.`);
@@ -224,7 +256,7 @@ router.get("/todayDepartures", (req, res) => {
     });
 });
 
-// this route will need to be sent data like this: { "vals": [[3, 1, "2019-09-11", "2019-09-17", 2], [3, 1, "2019-09-11", "2019-09-14", 1]] }
+// this route will need to be sent data like this: { "vals": [[2, "2019-08-12", "2019-08-15", 2, "20190621HW000001", "need a good view"]] }
 router.post("/res_rooms", (req, res) => {
     db.ResRoom.insertSome(req.body.vals, (result) => {
         res.json({ result });
