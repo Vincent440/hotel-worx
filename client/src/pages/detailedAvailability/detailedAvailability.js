@@ -3,7 +3,8 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import DeatiledSubmit from "../../components/detailedSubmit";
 import InfoPart from "../../components/infoPart";
-import Header from "../../components/Header"
+import Header from "../../components/Header";
+import moment from  "moment";
 
 class DetailedAvailability extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -14,7 +15,6 @@ class DetailedAvailability extends Component {
         roomType: "",
         availabilit: "",
         occupied: "",
-        getDay:["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     };
 
     handleStartDate = event => {
@@ -45,7 +45,7 @@ class DetailedAvailability extends Component {
                                         <th className="th" id="suite">Suite</th>
                                     </tr>
                                     <tr>
-                                        <td className="tableTD" >{this.state.days}</td>
+                                        <td className="tableTD" >{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
                                         <td className="tableTD" >{this.state.selectedDate} </td>
                                         <td className="tableTD" > 10</td>
                                         <td className="tableTD" > 4</td>

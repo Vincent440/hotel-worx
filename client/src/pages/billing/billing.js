@@ -10,22 +10,12 @@ class Billing extends Component {
     state = {
         name: "",
         lastname: "",
-        phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
-        },
         arrivaldate: "",
         departuredate: "",
         nights: "",
         adults: "",
         noOfRooms: "",
         roomType: "",
-        creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
     };
 
     handleChange = selectedOption => {
@@ -44,15 +34,9 @@ class Billing extends Component {
         });
     }
 
-
     render() {
 
-        const { options } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
+      
         const { selectedOption } = this.state;
 
         return (
