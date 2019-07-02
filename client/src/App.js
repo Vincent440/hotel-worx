@@ -19,7 +19,7 @@ import ReservationTest from './pages/reservationTest';
 import Housekeeping from './pages/housekeeping/housekeeping';
 import DetailedAvailability from './pages/detailedAvailability/detailedAvailability';
 import HouseStatus from "./pages/houseStatus/houseStatus";
-
+import api from "./utils/api";
 
 
 const fakeAuth = {
@@ -39,11 +39,10 @@ class Login extends Component {
         redirectToReferrer: false
     }
     login = () => {
-        fakeAuth.authenticate(() => {
-            this.setState(() => ({
-                redirectToReferrer: true
-            }))
-        })
+        api.postUserLogin({"username":"test","password":"111111"})
+        .then(res=>{
+            console.log(res);
+        }).catch(err=>console.log(err));
     }
     render() {
         const { redirectToReferrer } = this.state
@@ -96,8 +95,9 @@ class App extends Component {
 
                     <div>
                         <Switch>
+                            <Route exact path="/" component={Login} />
                             <Route exact path="/login" component={Login} />
-                            <Route exact path="/" component={Dashboard} />
+                            <Route exact path="/dash" component={Dashboard} />
                             <Route exact path="/reserve/new" component={ReserveNew} />
                             <Route exact path="/reserve/allreservations" component={UpdateReservation} />
                             <Route exact path="/reserve/testUpdatereservation" component={ReserveUpdate} />

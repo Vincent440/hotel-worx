@@ -1,6 +1,16 @@
 import axios from "axios";
 
 export default {
+    postUserLogin: (data) => {
+        return axios.post('/api/login', data)
+            .then((response) => {
+                console.log(response);
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getReservation: (id) => {
         return axios.all([
             axios.get('/api/testing/reservations/' + id),

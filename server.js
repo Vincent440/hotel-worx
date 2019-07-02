@@ -9,7 +9,14 @@ require('./controllers/passportController')(passport); // pass passport for conf
 app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(require('express-session')({ secret: 'keyboardingkittencat', resave: true, saveUninitialized: true }));
+app.use(require('express-session')(
+    {
+        secret: 'keyboardingkittencat',
+        resave: true,
+        saveUninitialized: true 
+    })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
