@@ -16,7 +16,7 @@ function Dashboard() {
 
                         <div className="btn-group" style={{ display: 'block' }}>
                             <Card style={{ marginBottom: "10px" }}>
-                                <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>RESERVATION</Card.Body>
+                                <Card.Body>RESERVATION</Card.Body>
                             </Card>
                             <Button variant="primary" size="lg" href="/reserve/new">New Reservation</Button>
                             <Button variant="primary" size="lg" href="/reserve/allreservations">Update Reservation</Button>
@@ -26,21 +26,21 @@ function Dashboard() {
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
                         <Card style={{ marginBottom: "10px" }}>
-                            <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>FRONT DESK</Card.Body>
+                            <Card.Body>FRONT DESK</Card.Body>
                         </Card>
                         <Button variant="primary" size="lg" href="/frontdesk/arrivals">Arrivals</Button>
                         <Button variant="primary" size="lg" href="/frontdesk/inhouse">In-House Guests</Button>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
                         <Card style={{ marginBottom: "10px" }}>
-                            <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>FINANCE</Card.Body>
+                            <Card.Body>FINANCE</Card.Body>
                         </Card>
                         <Button variant="primary" size="lg" href="/cashiering/billing">Billing</Button>
                         <Button variant="primary" size="lg" href="/cashiering/payment">Test Invoice</Button>
                     </div>
                     <div className="btn-group" style={{ display: 'block' }}>
                         <Card style={{ marginBottom: "10px" }}>
-                            <Card.Body style={{ textAlign: "center", fontSize: "24px" }}>REPORTS</Card.Body>
+                            <Card.Body>REPORTS</Card.Body>
                         </Card>
                         <Button variant="primary" size="lg" href="/reports/housekeeping">Housekeeping Report</Button>
                         <Button variant="primary" size="lg" href="/reports/detailedAvailability">Detailed Availability</Button>

@@ -53,8 +53,8 @@ export default class dateRange extends React.Component {
             onDayClick: () => this.to.getInput().focus(),
           }}
           onDayChange={this.handleFromChange}
-        />{' '}
-        —{' '}
+        /> {' '} -
+       {' '}
         <span className="InputFromTo-to">
           <DayPickerInput
             ref={el => (this.to = el)}
@@ -75,29 +75,7 @@ export default class dateRange extends React.Component {
           />
         </span>
         <Helmet>
-          <style>{`
-  .InputFromTo .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-    background-color: #f0f8ff !important;
-    color: #4a90e2;
-  }
-  .InputFromTo .DayPicker-Day {
-    border-radius: 0 !important;
-  }
-  .InputFromTo .DayPicker-Day--start {
-    border-top-left-radius: 50% !important;
-    border-bottom-left-radius: 50% !important;
-  }
-  .InputFromTo .DayPicker-Day--end {
-    border-top-right-radius: 50% !important;
-    border-bottom-right-radius: 50% !important;
-  }
-  .InputFromTo .DayPickerInput-Overlay {
-    width: 550px;
-  }
-  .InputFromTo-to .DayPickerInput-Overlay {
-    margin-left: -198px;
-  }
-`}</style>
+        
         </Helmet>
       </div>
     );

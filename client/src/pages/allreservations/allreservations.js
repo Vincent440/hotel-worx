@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart"
-import Header from "../../components/Header"
-import SearchSubmit from "../../components/searchButton"
+import InfoPart from "../../components/infoPart";
+import Header from "../../components/Header";
+import SearchSubmit from "../../components/searchButton";
+import DateRange from "../../components/dateRange/dateRange";
 
 class UpdateReservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -68,57 +69,51 @@ class UpdateReservation extends Component {
                 <Col sm={10}>
                     <form>
                         <Header>ALL RESERVATIONS</Header>
-                        
-                        <div id="res">
-                            <tr>
-                                <td><p>Arrival Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="arrivaldate"
-                                    value={this.state.arrivaldate}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Departure Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="departuredate"
-                                    value={this.state.departuredate}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><p>Name</p></td>
-                                <td><input
-                                    type="text"
-                                    placeholder="Name"
-                                    name="guestname"
-                                    value={this.state.guestname}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Last Name</p></td>
-                                <td><input
-                                    type="text"
-                                    placeholder="Last Name"
-                                    name="guestlastname"
-                                    value={this.state.lastname}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Confirmation Number</p></td>
-                                <td><input
-                                    type="tel"
-                                    placeholder="Confirmation Number"
-                                    name="confirmation"
-                                    value={this.state.confirmation}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td>
-<SearchSubmit />
-                                </td>
-                            </tr>
 
+                        <div id="res">
+                            <table>
+                                <tr>
+                                    <th>Date</th>
+                                    <td colspan="2">
+                                        <DateRange
+                                        />
+                                    </td>
+                                    <th>Confirmation Number</th>
+                                    <td><input
+                                        type="tel"
+                                        placeholder="Confirmation Number"
+                                        name="confirmation"
+                                        value={this.state.confirmation}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td><input
+                                        type="text"
+                                        placeholder="Name"
+                                        name="guestname"
+                                        value={this.state.guestname}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                    <td></td>
+                                    <th>Last Name</th>
+                                    <td><input
+                                        type="text"
+                                        placeholder="Last Name"
+                                        name="guestlastname"
+                                        value={this.state.lastname}
+                                        onChange={this.handleInputChange}
+                                    /></td>
+                                </tr>
+
+                            </table>
 
                         </div>
+                        <div>
+                            <SearchSubmit />
 
+                        </div>
                         <div id="guestinfo">
                             <table id="result">
                                 <thead>

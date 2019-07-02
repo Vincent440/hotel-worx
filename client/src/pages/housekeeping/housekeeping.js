@@ -4,62 +4,109 @@ import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import SearchSubmit from "../../components/searchButton";
+import api from '../../utils/api';
 
 class Housekeeping extends Component {
-    // Setting the initial values of this.state.username and this.state.password
-    state = {
-        name: "",
-        lastname: "",
-        phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
-        },
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        roomType: "",
-        creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
+
+    constructor(props) {
+        super(props);
+        console.log(props);
     };
 
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
+    state = {
+        checked: {
+            clean: false,
+            dirty: false,
+            outOfOrder: false,
+            vacant: false,
+            occuppied: false,
+            arrival: false,
+            arrived: false,
+            stayOver: false,
+            dueOut: false,
+            departed: false,
+            notReserved: false
+        }
+    };
+
+
+    handleCheckboxChange = event => {
+        let tempState = this.state.checked;
+        switch (event.target.id) {
+            case "clean":
+                tempState.clean = !this.state.checked.clean;
+                break;
+            case "dirty":
+                tempState.dirty = !this.state.checked.dirty;
+                break;
+            case "outOfOrder":
+                tempState.outOfOrder = !this.state.checked.outOfOrder;
+                break;
+            case "vacant":
+                tempState.vacant = !this.state.checked.vacant;
+                break;
+            case "occupied":
+                tempState.occupied = !this.state.checked.occupied;
+                break;
+            case "arrival":
+                tempState.arrival = !this.state.checked.arrival;
+                break;
+            case "arrived":
+                tempState.arrived = !this.state.checked.arrived;
+                break;
+            case "stayOver":
+                tempState.stayOver = !this.state.checked.stayOver;
+                break;
+            case "dueOut":
+                tempState.dueOut = !this.state.checked.dueOut;
+                break;
+            case "departed":
+                tempState.departed = !this.state.checked.departed;
+                break;
+            case "notReserved":
+                tempState.notReserved = !this.state.checked.notReserved;
+                break;
+            case "clearAll":
+                   tempState.clean = false;
+                    tempState.dirty = false;
+                    tempState.outOfOrder = false;
+                    tempState.vacant = false;
+                    tempState.occupied = false;
+                    tempState.arrival = false;
+                    tempState.arrived = false;
+                    tempState.stayOver = false;
+                    tempState.dueOut = false;
+                    tempState.departed = false;
+                    tempState.notReserved = false;
+
+                break;
+                case "selectAll":
+                tempState.clean = true;
+                tempState.dirty = true;
+                tempState.outOfOrder = true;
+                tempState.vacant = true;
+                tempState.occupied = true;
+                tempState.arrival = true;
+                tempState.arrived = true;
+                tempState.stayOver = true;
+                tempState.dueOut = true;
+                tempState.departed = true;
+                tempState.notReserved = true;
+                break;
+
+        }
+        // set all at once
+        this.setState({ checked: tempState });
     }
 
-
-    // handle any changes to the input fields
-    handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
-        const { name, value } = event.target;
-
-        // Set the state for the appropriate input field
-        this.setState({
-            [name]: value
-        });
+    handleSearch = () => {
+        console.log("handlesearch, state=" + this.state.checked);
+        api.getHouseKeepingStatus(this.state.checked)
+            .then(res => 'here you will map the packet of data that comes back')
+            .catch(err => console.log(err));
     }
 
-    // When the form is submitted, prevent the default event and alert the username and password
-    handleFormSubmit = event => {
-        event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
-    }
     render() {
-
-        const { options } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-        const { selectedOption } = this.state;
-
         return (
 
             <Row id="dashboardTable1">
@@ -72,56 +119,69 @@ class Housekeeping extends Component {
                                 <tr>
                                     <td>
                                         <tr>
-                                            <h5 style={{textAlign:"left"}}>Room Status: </h5>
-                                            <td><p>Clean</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <h5 style={{ textAlign: "left" }}>Room Status: </h5>
+                                            <td><p>Clean </p></td>
+                                            <input type="checkbox" id="clean" checked={this.state.checked.clean}
+                                                onChange={this.handleCheckboxChange} />
 
-                                            <td><p>Dirty</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <td><p>Dirty{this.state.rooms}</p></td>
+                                            <input type="checkbox" id="dirty" checked={this.state.checked.dirty}
+                                                onChange={this.handleCheckboxChange} />
 
-                                            <td><p>Out of Order</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <td><p>Out of Order{this.state.rooms}</p></td>
+                                            <input type="checkbox" id="outOfOrder" checked={this.state.checked.outOfOrder}
+                                                onChange={this.handleCheckboxChange} />
 
                                         </tr>
                                         <tr>
                                             <h5> Front Office Status: </h5>
-                                            <td><p>Vacant</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <td><p>Vacant {this.state.rooms}</p></td>
+                                            <input type="checkbox" id="vacant" checked={this.state.checked.vacant}
+                                                onChange={this.handleCheckboxChange} />
 
-                                            <td><p>Occupied</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <td><p>Occupied </p></td>
+                                            <input type="checkbox" id="occupied" checked={this.state.checked.occupied}
+                                                onChange={this.handleCheckboxChange} />
                                         </tr>
                                         <tr>
                                             <h5> Reservation Status: </h5>
                                             <td><p>Arrival</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <input type="checkbox" id="arrival" checked={this.state.checked.arrival}
+                                                onChange={this.handleCheckboxChange} />
 
                                             <td><p>Arrived</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <input type="checkbox" id="arrived" checked={this.state.checked.arrived}
+                                                onChange={this.handleCheckboxChange} />
 
                                             <td><p>Stay Over</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <input type="checkbox" id="stayOver" checked={this.state.checked.stayOver}
+                                                onChange={this.handleCheckboxChange} />
 
                                             <td><p>Due Out</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <input type="checkbox" id="dueOut" checked={this.state.checked.dueOut}
+                                                onChange={this.handleCheckboxChange} />
 
                                             <td><p>Departed</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <input type="checkbox" id="departed" checked={this.state.checked.departed}
+                                                onChange={this.handleCheckboxChange} />
 
                                             <td><p>Not Reserved</p></td>
-                                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                            <input type="checkbox" id="notReserved" checked={this.state.checked.notReserved}
+                                                onChange={this.handleCheckboxChange} />
 
                                         </tr>
                                     </td>
                                     <td>
                                         <tr>
                                             <td>
-                                                <button type="button" class="btn btn-success" style={{ marginLeft: "40px", marginBottom: "5px" }}>Select All</button>
+                                                <button type="button" class="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
+                                                    onClick={this.handleCheckboxChange}> Select All </button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button type="button" class="btn btn-success" style={{ marginLeft: "40px", marginBottom: "5px" }}>Clear All</button>
+                                                <button type="button" class="btn btn-success" id="clearAll" checked={this.state.checked.clearAll}
+                                                    onClick={this.handleCheckboxChange}>Clear All </button>
                                             </td>
                                         </tr>
                                         <tr>

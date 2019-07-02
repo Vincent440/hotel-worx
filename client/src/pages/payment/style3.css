@@ -1,6 +1,4 @@
-body {
-  font-family: "Montserrat";
-}
+
 
 h1 {
   font-size: 5em;
@@ -20,10 +18,7 @@ h1 {
   width: 38px;
   border: 1px solid black;
 }
-#logo {
-  width: 100%;
-  margin-bottom: 30px;
-}
+
 p {
   font-size: 14px;
   color: pink;

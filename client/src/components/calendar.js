@@ -4,10 +4,8 @@ import moment from "moment";
 
 function Calendar() {
     return(
-    <div>
-        <h5> {moment().format('MMMM Do, YYYY')}
-        </h5>
-    </div>
-    );
+        
+        <p> {moment().format('MMMM Do, YYYY')} </p>
+        );
 }
 export default Calendar;

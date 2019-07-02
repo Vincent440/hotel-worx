@@ -5,7 +5,7 @@ import api from '../../utils/api';
 import DeatiledSubmit from "../../components/detailedSubmit";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
-import moment from "moment";
+import moment from  "moment";
 
 class DetailedAvailability extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -16,8 +16,6 @@ class DetailedAvailability extends Component {
         roomType: "",
         availabilit: "",
         occupied: "",
-        getDay: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        availableRooms: []
     };
 
     componentDidMount() {
@@ -52,13 +50,13 @@ class DetailedAvailability extends Component {
                                             <th key="type.room_type_id" className="th">{type.type}</th>
                                         ))}
                                     </tr>
-                                    <tr className="bg-white">
-                                        <td className="tableTD">{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
-                                        <td className="tableTD">{this.state.selectedDate} </td>
-                                        <td className="tableTD">10</td>
-                                        {this.state.availableRooms.map(type => (
-                                            <td key="type.room_type_id" className="tableTD">{type.available}</td>
-                                        ))}
+                                    <tr>
+                                        <td className="tableTD" >{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
+                                        <td className="tableTD" >{this.state.selectedDate} </td>
+                                        <td className="tableTD" > 10</td>
+                                        <td className="tableTD" > 4</td>
+                                        <td className="tableTD" > 4</td>
+                                        <td className="tableTD" > 2</td>
                                     </tr>
                                 </thead>
                                 <tbody>
