@@ -5,6 +5,7 @@ body {
   background-image: linear-gradient(to bottom, #10293d, #00315c, #00377b, #003998, #2e35b0);
   background-repeat: no-repeat;
   background-size: cover;
+
   }
 
 #root div div:nth-child(1) canvas {

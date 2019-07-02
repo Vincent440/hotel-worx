@@ -1,3 +1,71 @@
-Card {
+#infoCard {
   position: fixed;
+  background-color: transparent;
+  height: 600px;
+  width: 200px;
+  margin-top: 0px;
+  border-right: 1px solid white;
+  border-top:none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 5px;
+  color: white;
 }
+.card-text {
+  margin-left: 0px;
+  height: 150px;
+  width: 200px;
+  font-size: 10px;
+}
+#infoCard p {
+  margin-top: 30px;
+  color: white;
+}
+
+#dashboardTable div div p div div.rw-main.type-today {
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin-left: 0;
+  color: black;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+.range {
+  display: none;
+}
+.info {
+  display: none;
+}
+.wicon {
+  display: none;
+}
+
+#infoCard .card-text .rw-main.type-today {
+  width: 80%;
+  margin: 0 auto;
+}
+#infoCard .card-text .rw-main.type-today .rw-box-left .date {
+  font-size: 16px;
+  color: black;
+}
+
+#infoCard .card-text .rw-main.type-today .rw-box-right {
+  display: none;
+}
+#infoCard .card-text .rw-main.type-today .rw-box-left {
+  padding: 0px;
+  width: 100%;
+  margin: 5px;
+}
+#infoCard .card-text .rw-main.type-today .rw-box-left .current {
+  font-size: 16px;
+}
+
+#infoCard .card-text .rw-main.type-today .rw-box-left .desc {
+  color: black;
+}
+

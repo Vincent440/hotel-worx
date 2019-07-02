@@ -15,6 +15,15 @@ const Room = {
             cb(results);
         });
     },
+    housekeepingStatus: (conditions, cb) => {
+        formattedConditions = conditions.join(" && ");
+        console.log(formattedConditions);
+        const queryString = "SELECT rm.room_num, rm.clean, rm.occupied, rm.active, rt.type FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE " + formattedConditions + " ORDER BY room_num ASC;";
+        connection.query(queryString, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
     selectSome: (condition, cb) => {
         const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE " + condition + " ORDER BY room_num ASC;";
         connection.query(queryString, (err, results) => {

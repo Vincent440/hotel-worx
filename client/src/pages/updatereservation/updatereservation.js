@@ -4,6 +4,7 @@ import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
 import Header from "../../components/Header";
+import DateRange from "../../components/dateRange/dateRange";
 
 class ReserveUpdate extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -26,6 +27,7 @@ class ReserveUpdate extends Component {
         creditCard: "",
         expirationDate: "",
         selectedOption: ["Two Quenns", "King Single", "Suite"],
+getDays:"",
     };
 
     handleChange = selectedOption => {
@@ -50,35 +52,27 @@ class ReserveUpdate extends Component {
         alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
         this.setState({ username: "", password: "" });
     }
+
+    handleCalenderClick() {
+        //const calendarNode = this.myRef.current;
+        //calendarNode.showDayPicker();
+        if (this.state.showCalendar) {
+            this.setState({ showCalendar: false });
+
+        }
+        else {
+            this.setState({ showCalendar: true });
+        }
+    }
+      
     render() {
-
-        const { roomType } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-
-
-        const { roomNumber } = [
-            { value: "101", label: "101" },
-            { value: "102", label: "102" },
-            { value: "103", label: "103" },
-            { value: "104", label: "104" },
-            { value: "105", label: "105" },
-            { value: "106", label: "106" },
-            { value: "107", label: "107" },
-            { value: "108", label: "108" },
-            { value: "109", label: "109" },
-            { value: "110", label: "110" },
-        ];
+      
         const { selectedOption } = this.state;
-
 
         return (
 
             <Row id="dashboardTable">
-               <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <form>
                         <Header>UPDATE RESERVATION</Header>
@@ -87,20 +81,21 @@ class ReserveUpdate extends Component {
                                 <td><p>Confirmation Number:{this.state.confirmation}</p></td>
                             </tr>
                             <tr>
-                                <td><p>Arrival Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="arrivaldate"
-                                    value={this.state.arrivaldate}
-                                    onChange={this.handleInputChange}
-                                /></td>
+                                <td><p>Dates</p></td>
+                                <td>
+                                    <DateRange
+
+                                    />
+
+                                </td>
                                 <td><p>Nights</p></td>
                                 <td><input
                                     id="smallWindow"
                                     type="number"
                                     placeholder="Number of Nights"
                                     name="nights"
-                                    value={this.state.nights}
+                                    value={ Math.round((this.state.from - this.state.to) / (1000 * 60 * 60 * 24))
+                                    }
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td><p>No of Rooms</p></td>
@@ -109,7 +104,7 @@ class ReserveUpdate extends Component {
                                     type="number"
                                     placeholder="Number of Rooms"
                                     name="roomsnumber"
-                                    value={this.state.roomsnumber}
+                                    // value={}
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td><p>Rate</p></td>
@@ -123,13 +118,6 @@ class ReserveUpdate extends Component {
                                 /></td>
                             </tr>
                             <tr>
-                                <td><p>Departure Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="departuredate"
-                                    value={this.state.departuredate}
-                                    onChange={this.handleInputChange}
-                                /></td>
 
                                 <td ><p>Adults</p></td>
                                 <td><input
@@ -143,18 +131,18 @@ class ReserveUpdate extends Component {
                                 <td ><p>Room Type</p></td>
                                 <td ><Select
                                     id="smallWindow"
-                                    value={roomType}
+                                    // value={roomType}
                                     onChange={this.handleChange}
                                     options={selectedOption}
                                     name="roomtype"
                                     placeholder="Room Type"
-                                    value={this.state.roomType}
+                                    // value={this.state.roomType}
                                     onChange={this.handleInputChange}
                                 /></td>
                                 <td ><p>Room Number</p></td>
                                 <td><Select
                                     id="smallWindow"
-                                    value={roomNumber}
+                                    // value={roomNumber}
                                     onChange={this.handleChange}
                                     options={selectedOption}
                                     name="roomnumber"
