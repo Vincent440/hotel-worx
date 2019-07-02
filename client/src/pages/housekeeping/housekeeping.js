@@ -8,27 +8,22 @@ import api from '../../utils/api';
 
 class Housekeeping extends Component {
 
-    constructor(props) {
-        super(props);
-        console.log(props);
-    };
-
     state = {
         checked: {
             clean: false,
             dirty: false,
             outOfOrder: false,
             vacant: false,
-            occuppied: false,
+            occupied: false,
             arrival: false,
             arrived: false,
             stayOver: false,
             dueOut: false,
             departed: false,
             notReserved: false
-        }
+        },
+        searchResults: []
     };
-
 
     handleCheckboxChange = event => {
         let tempState = this.state.checked;
@@ -67,20 +62,20 @@ class Housekeeping extends Component {
                 tempState.notReserved = !this.state.checked.notReserved;
                 break;
             case "clearAll":
-                   tempState.clean = false;
-                    tempState.dirty = false;
-                    tempState.outOfOrder = false;
-                    tempState.vacant = false;
-                    tempState.occupied = false;
-                    tempState.arrival = false;
-                    tempState.arrived = false;
-                    tempState.stayOver = false;
-                    tempState.dueOut = false;
-                    tempState.departed = false;
-                    tempState.notReserved = false;
+                tempState.clean = false;
+                tempState.dirty = false;
+                tempState.outOfOrder = false;
+                tempState.vacant = false;
+                tempState.occupied = false;
+                tempState.arrival = false;
+                tempState.arrived = false;
+                tempState.stayOver = false;
+                tempState.dueOut = false;
+                tempState.departed = false;
+                tempState.notReserved = false;
 
                 break;
-                case "selectAll":
+            case "selectAll":
                 tempState.clean = true;
                 tempState.dirty = true;
                 tempState.outOfOrder = true;
@@ -99,10 +94,11 @@ class Housekeeping extends Component {
         this.setState({ checked: tempState });
     }
 
-    handleSearch = () => {
-        console.log("handlesearch, state=" + this.state.checked);
+    handleSearch = (event) => {
+        event.preventDefault();
+        // console.log("handlesearch, state=", this.state.checked);
         api.getHouseKeepingStatus(this.state.checked)
-            .then(res => 'here you will map the packet of data that comes back')
+            .then(res => this.setState({ searchResults: res }))
             .catch(err => console.log(err));
     }
 
@@ -186,7 +182,8 @@ class Housekeeping extends Component {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <SearchSubmit />
+                                                {/* <SearchSubmit /> */}
+                                                <button type="button" class="btn btn-primary" style={{ marginLeft: "40%" }} onClick={this.handleSearch}>Search</button>
                                             </td>
                                         </tr>
                                     </td>
@@ -206,7 +203,21 @@ class Housekeeping extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* <!-- Results from DB here --> */}
+                                    {this.state.searchResults.map(room => (
+                                        <tr key="room.room_id">
+                                            <td>{room.room_num}</td>
+                                            <td>{room.type}</td>
+                                            <td>
+                                                {room.active === 1 ? "" : "Out of Service - "}
+                                                {room.clean === 1 ? "Clean" : "Dirty"}
+                                            </td>
+                                            <td>{room.occupied === 1 ? "Occupied" : "Empty"}</td>
+                                            <td>
+                                                {room.checked_in === 1 ? "Arrived" : ""}
+                                                {room.checked_out === 1 ? "Departed" : ""}
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
 

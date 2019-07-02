@@ -101,8 +101,7 @@ export default {
             });
     },
     getHouseKeepingStatus: (checked) => {
-        console.log(checked);
-        return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied)
+        return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
                 return response.data;
             })
