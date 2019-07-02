@@ -67,31 +67,32 @@ class Housekeeping extends Component {
                 tempState.notReserved = !this.state.checked.notReserved;
                 break;
             case "clearAll":
-                    tempState.clean = !this.state.checked.clean.false;
-                    tempState.dirty = !this.state.checked.dirty.false;
-                    tempState.outOfOrder = !this.state.checked.outOfOrder.false;
-                    tempState.vacant = !this.state.checked.vacant.false;
-                    tempState.occupied = !this.state.checked.occupied.false;
-                    tempState.arrival = !this.state.checked.arrival.false;
-                    tempState.arrived = !this.state.checked.arrived.false;
-                    tempState.stayOver = !this.state.checked.stayOver.false;
-                    tempState.dueOut = !this.state.checked.dueOut.false;
-                    tempState.departed = !this.state.checked.departed.false;
-                    tempState.notReserved = !this.state.checked.notReserved.false;
+                   tempState.clean = false;
+                    tempState.dirty = false;
+                    tempState.outOfOrder = false;
+                    tempState.vacant = false;
+                    tempState.occupied = false;
+                    tempState.arrival = false;
+                    tempState.arrived = false;
+                    tempState.stayOver = false;
+                    tempState.dueOut = false;
+                    tempState.departed = false;
+                    tempState.notReserved = false;
 
                 break;
                 case "selectAll":
-                tempState.clean = !this.state.checked.clean.true;
-                tempState.dirty = !this.state.checked.dirty.true;
-                tempState.outOfOrder = !this.state.checked.outOfOrder.true;
-                tempState.vacant = !this.state.checked.vacant.true;
-                tempState.occupied = !this.state.checked.occupied.true;
-                tempState.arrival = !this.state.checked.arrival.true;
-                tempState.arrived = !this.state.checked.arrived.true;
-                tempState.stayOver = !this.state.checked.stayOver.true;
-                tempState.dueOut = !this.state.checked.dueOut.true;
-                tempState.departed = !this.state.checked.departed.true;
-                tempState.notReserved = !this.state.checked.notReserved.true;
+                tempState.clean = true;
+                tempState.dirty = true;
+                tempState.outOfOrder = true;
+                tempState.vacant = true;
+                tempState.occupied = true;
+                tempState.arrival = true;
+                tempState.arrived = true;
+                tempState.stayOver = true;
+                tempState.dueOut = true;
+                tempState.departed = true;
+                tempState.notReserved = true;
+                break;
 
         }
         // set all at once
@@ -173,14 +174,14 @@ class Housekeeping extends Component {
                                     <td>
                                         <tr>
                                             <td>
-                                                <button type="button" class="btn btn-success" checked={this.state.checked.notReserved}
-                                                    onClicked={this.handleCheckboxChange}> Select All </button>
+                                                <button type="button" class="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
+                                                    onClick={this.handleCheckboxChange}> Select All </button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button type="button" class="btn btn-success" checked={this.state.checked.notReserved}
-                                                    onClicked={this.handleCheckboxChange}>Clear All </button>
+                                                <button type="button" class="btn btn-success" id="clearAll" checked={this.state.checked.clearAll}
+                                                    onClick={this.handleCheckboxChange}>Clear All </button>
                                             </td>
                                         </tr>
                                         <tr>

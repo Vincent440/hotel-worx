@@ -27,13 +27,13 @@ class InfoPart extends Component {
                     <Card.Img variant="top" src={logo} className="App-logo" id="logo" alt="logo" style={{ marginBottom: "180px" }} />
                     <h5 className="card-title">User Name: {this.state.ReservationInfo}</h5>
                     {/* <p className="card-text"> <Calendar /></p> */}
-                    <p className="card-text"> 
+                    <div className="card-text"> 
                     <ReactWeather 
                         forecast="today"
                         apikey="96ccd12f1a9d49be80961318190107"
                         type="city"
                         city="Cleveland"
-                        units='F'/></p>
+                        units='F'/></div>
                     <p style={{ textAlign: "center" }}><i className="fa fa-gear" style={{ fontSize: '28px' }} /></p>
                 </Card>
 
