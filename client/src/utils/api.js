@@ -92,13 +92,23 @@ export default {
             });
     },
     getAvailableRooms: () => {
-        return axios.get('/api/testing/rooms_vacant')
+        return axios.get('/api/testing/room_types_available')
             .then((response) => {
                 return response.data;
             })
             .catch((error) => {
                 console.log(error);
             });
+    },
+    getHouseKeepingStatus: (checked) => {
+        console.log(checked);
+        // return axios.get('/api/testing/housekeeping_status/')
+        //     .then((response) => {
+        //         return response.data;
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
     }
 }
 

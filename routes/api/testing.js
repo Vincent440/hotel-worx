@@ -114,6 +114,32 @@ router.get("/rooms_dirty", (req, res) => {
     });
 });
 
+router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied", (req, res) => {
+    let criteria1 = [];
+    if (req.params.clean === "true") {
+        criteria1.push("rm.clean=1");
+    }
+    if (req.params.dirty === "true") {
+        criteria1.push("rm.clean=0");
+    }
+    if (req.params.oos === "true") {
+        criteria1 = "rm.active=0";
+    }
+    c1 = "(" + criteria1.join(" || ") + ")";
+    let criteria2 = [];
+    if (req.params.vacant === "true") {
+        criteria2.push("rm.occupied=0");
+    }
+    if (req.params.occupied === "true") {
+        criteria2.push("rm.occupied=1");
+    }
+    c2 = "(" + criteria2.join(" || ") + ")";
+    const conditions = [c1, c2];
+    db.Room.housekeepingStatus(conditions, (data) => {
+        res.json(data);
+    });
+});
+
 router.delete("/rooms/:id", (req, res) => {
     db.Room.deleteOne(req.params.id, (data) => {
         res.json(data);

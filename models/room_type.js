@@ -16,7 +16,7 @@ const RoomType = {
         });
     },
     selectAvailable: (cb) => {
-        const queryString = "SELECT COUNT(rm.room_id) AS available, rt.type FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE rm.active=1 GROUP BY rt.type;";
+        const queryString = "SELECT rm.room_type_id, COUNT(rm.room_id) AS available, rt.type FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE rm.active=1 GROUP BY rt.type;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);

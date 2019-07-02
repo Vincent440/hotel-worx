@@ -5,20 +5,19 @@ import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
 import api from '../../utils/api';
 import Header from "../../components/Header";
-import ButtonSubmit from "../../components/submitButton"
+// import ButtonSubmit from "../../components/submitButton"
 
 
 class ReserveNew extends Component {
-    // Setting the initial values of this.state.username and this.state.password
     state = {
         firstname: "",
         lastname: "",
-        phonenumber: "",
+        phone: "",
         email: "",
         address: "",
         city: "",
         state: "",
-        zipcode: "",
+        zip: "",
         arrivaldate: "",
         departuredate: "",
         nights: "",
@@ -48,29 +47,10 @@ class ReserveNew extends Component {
     // When the form is submitted, prevent the default event and alert the username and password
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`Username: ${this.state.firstname}\nPassword: ${this.state.lastname}`);
+        alert(`Username: ${this.state.firstname}\nPassword: ${this.state.lastname}\nPhone: ${this.state.phone}\nEmail: ${this.state.email}\nAddress: ${this.state.address}\nCity: ${this.state.city}\nState: ${this.state.state}\nZip: ${this.state.zip}\nCredit Card #: ${this.state.creditCard}\nExpiration: ${this.state.expirationDate}`);
     }
     render() {
 
-        const { roomType } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-
-        const { roomNumber } = [
-            { value: "101", label: "101" },
-            { value: "102", label: "102" },
-            { value: "103", label: "103" },
-            { value: "104", label: "104" },
-            { value: "105", label: "105" },
-            { value: "106", label: "106" },
-            { value: "107", label: "107" },
-            { value: "108", label: "108" },
-            { value: "109", label: "109" },
-            { value: "110", label: "110" },
-        ];
         return (
 
             <Row id="dashboardTable">
@@ -177,8 +157,8 @@ class ReserveNew extends Component {
                                     <td><input
                                         type="tel"
                                         placeholder="Phone Number"
-                                        name="phonenumber"
-                                        value={this.state.phonenumber}
+                                        name="phone"
+                                        value={this.state.phone}
                                         onChange={this.handleInputChange}
                                     /></td>
                                     <td><p>Email Address</p></td>
@@ -221,7 +201,7 @@ class ReserveNew extends Component {
                                         <input
                                             type="text"
                                             placeholder="ZipCode"
-                                            name="zipcode"
+                                            name="zip"
                                             value={this.state.zip}
                                             onChange={this.handleInputChange}
                                         /></td>
@@ -233,8 +213,8 @@ class ReserveNew extends Component {
                                         <input
                                             type="tel"
                                             placeholder="CC Number"
-                                            name="ccnumber"
-                                            value={this.state.ccnumber}
+                                            name="creditCard"
+                                            value={this.state.creditCard}
                                             onChange={this.handleInputChange}
                                         />
                                     </td>
@@ -244,19 +224,16 @@ class ReserveNew extends Component {
                                         <input
                                             type="tel"
                                             placeholder="expiration date"
-                                            name="edate"
-                                            value={this.state.edate}
+                                            name="expirationDate"
+                                            value={this.state.expirationDate}
                                             onChange={this.handleInputChange}
                                         /></td>
 
                                 </tr>
-                                <tr>
-
-                                </tr>
                             </table>
                         </div>
-                        <ButtonSubmit handleSubmit={this.handleFormSubmit} />
-
+                        {/* <ButtonSubmit handleSubmit={this.handleFormSubmit} /> */}
+                        <button type="submit" class="btn btn-primary" style={{marginLeft:"480px"}} onClick={this.handleFormSubmit}>Submit</button>
                     </form>
 
                 </Col>

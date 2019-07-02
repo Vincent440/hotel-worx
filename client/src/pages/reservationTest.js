@@ -10,7 +10,20 @@ class ReservationTest extends Component {
     state = {
         ReservationInfo: {},
         RoomInfo: [],
-        RoomTypes: []
+        RoomTypes: [],
+        checked: {
+            clean: false,
+            dirty: false,
+            outOfOrder: false,
+            vacant: false,
+            occuppied: false,
+            arrival: false,
+            arrived: false,
+            stayOver: false,
+            dueOut: false,
+            departed: false,
+            notReserved: false
+        }
     };
 
     componentDidMount() {
