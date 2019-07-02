@@ -102,13 +102,13 @@ export default {
     },
     getHouseKeepingStatus: (checked) => {
         console.log(checked);
-        // return axios.get('/api/testing/housekeeping_status/')
-        //     .then((response) => {
-        //         return response.data;
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
+        return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
 
