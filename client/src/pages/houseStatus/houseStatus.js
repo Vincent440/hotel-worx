@@ -140,7 +140,7 @@ class HouseStatus extends Component {
                                             <tr style={{ marginTop: "20px;", }} >
                                                 <td style={{ textAlign: "right", marginLeft: "20px;", }}><p>Date</p></td>
                                                 <td><input
-                                                    id="smallWindow"
+                                                    id=""
                                                     type="date"
                                                     name="arrivaldate"
                                                     value={this.state.arrivaldate}
@@ -153,9 +153,9 @@ class HouseStatus extends Component {
                                 ))}
                             </div>
                             <div id="buttonDiv">
-                                <button type="button" class="btn btn-primary" style={{marginLeft:"450px"}}>Search</button>
+                                <button type="button" className="btn btn-primary" style={{marginLeft:"450px"}}>Search</button>
 
-                                <button type="button" class="btn btn-primary" style={{marginLeft:"20px"}}>Close</button>
+                                <button type="button" className="btn btn-primary" style={{marginLeft:"20px"}}>Close</button>
 
                             </div>
                         </form>

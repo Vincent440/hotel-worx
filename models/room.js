@@ -18,7 +18,7 @@ const Room = {
     housekeepingStatus: (conditions, cb) => {
         formattedConditions = conditions.join(" && ");
         console.log(formattedConditions);
-        const queryString = "SELECT rm.room_num, rm.clean, rm.occupied, rm.active, rt.type FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE " + formattedConditions + " ORDER BY room_num ASC;";
+        const queryString = "SELECT rm.room_id, rm.room_num, rm.clean, rm.occupied, rm.active, rt.type, rr.check_in_date, rr.check_out_date, rr.checked_in, rr.checked_out FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id LEFT JOIN res_rooms AS rr ON rm.room_id=rr.room_id WHERE " + formattedConditions + " ORDER BY room_num ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);

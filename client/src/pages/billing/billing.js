@@ -51,7 +51,7 @@ class Billing extends Component {
                                 <tr>
                                     <td><p>Room Number</p></td>
                                     <td><input
-                                        id="smallWindow"
+                                        id=""
                                         onChange={this.handleChange}
                                         options={selectedOption}
                                         name="roomNumber"

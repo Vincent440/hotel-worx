@@ -114,27 +114,39 @@ router.get("/rooms_dirty", (req, res) => {
     });
 });
 
-router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied", (req, res) => {
+router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:arrived/:stayOver/:dueOut/:departed/:notReserved", (req, res) => {
     let criteria1 = [];
-    if (req.params.clean === "true") {
-        criteria1.push("rm.clean=1");
+    req.params.clean === "true" ? criteria1.push("rm.clean=1") : criteria1.push("rm.clean=2");
+    req.params.dirty === "true" ? criteria1.push("rm.clean=0") : criteria1.push("rm.clean=2");
+    const c1 = "(" + criteria1.join(" || ") + ")";
+    let c2 = [];
+    req.params.oos === "true" ? c2.push("rm.active=0") : c2.push("rm.active=1");
+    let criteria3 = [];
+    req.params.vacant === "true" ? criteria3.push("rm.occupied=0") : criteria3.push("rm.occupied=2");
+    req.params.occupied === "true" ? criteria3.push("rm.occupied=1") : criteria3.push("rm.occupied=2");
+    const c3 = "(" + criteria3.join(" || ") + ")";
+    let criteria4 = [];
+    if (req.params.arrival === "true") {
+        criteria4.push("rr.check_in_date=CURDATE()");
     }
-    if (req.params.dirty === "true") {
-        criteria1.push("rm.clean=0");
+    if (req.params.arrived === "true") {
+        criteria4.push("rr.checked_in=1");
     }
-    if (req.params.oos === "true") {
-        criteria1 = "rm.active=0";
+    if (req.params.stayOver === "true") {
+        criteria4.push("(CURDATE()>rr.check_in_date && CURDATE()<rr.check_out_date)");
     }
-    c1 = "(" + criteria1.join(" || ") + ")";
-    let criteria2 = [];
-    if (req.params.vacant === "true") {
-        criteria2.push("rm.occupied=0");
+    if (req.params.dueOut === "true") {
+        criteria4.push("rr.check_out_date=CURDATE()");
     }
-    if (req.params.occupied === "true") {
-        criteria2.push("rm.occupied=1");
-    }
-    c2 = "(" + criteria2.join(" || ") + ")";
-    const conditions = [c1, c2];
+    req.params.departed === "true" ? criteria4.push("rr.checked_out=1") : criteria4.push("rr.checked_out=2");
+
+    // req.params.arrival === "true" ? criteria4.push("rr.check_in_date=CURDATE()") : criteria4.push("rr.check_in_date!=CURDATE()");
+    // req.params.arrived === "true" ? criteria4.push("rr.checked_in=1") : criteria4.push("rr.checked_in=2");
+    // req.params.stayOver === "true" ? criteria4.push("CURDATE() BETWEEN rr.check_in_date && DATE_ADD(rr.check_out_date, INTERVAL 1 DAY)") : criteria4.push("rr.check_in_date!=CURDATE()");
+    // req.params.dueOut === "true" ? criteria4.push("rr.check_out_date=CURDATE()") : criteria4.push("rr.check_out_date!=CURDATE()");
+
+    const c4 = "(" + criteria4.join(" || ") + ")";
+    const conditions = [c1, c2, c3, c4];
     db.Room.housekeepingStatus(conditions, (data) => {
         res.json(data);
     });
@@ -176,8 +188,8 @@ router.get("/room_types/:id", (req, res) => {
     });
 });
 
-router.get("/room_types_available", (req, res) => {
-    db.RoomType.selectAvailable((data) => {
+router.get("/room_types_available/:date", (req, res) => {
+    db.RoomType.selectAvailable([req.params.date, req.params.date], (data) => {
         res.json(data);
     });
 });
@@ -210,13 +222,14 @@ router.put("/room_types/:id", (req, res) => {
 // this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], "reserve": [1, ""], "rooms": [[2, "2019-08-12", "2019-08-15", 2, "20190621HW000001", "need a good view"]] }
 router.post("/reservation", (req, res) => {
     db.Customer.insertOne(req.body.cust, (result) => {
-        console.log(`Customer id ${result.insertId} has been added.`);
+        // console.log(`Customer id ${result.insertId} has been added.`);
         // result.insertId from the above query needs to be added to this query
         db.Reservation.insertOne(result.insertId, req.body.reserve, (result) => {
-            console.log(`Reservation id ${result.insertId} has been added.`);
+            const reservationId = result.insertId;
+            console.log(`Reservation id ${reservationId} has been added.`);
             // result.insertId from the above query needs to be added to this query for each row of rooms in the reservation
-            db.ResRoom.insertSome(result.insertId, req.body.rooms, (result) => {
-                res.status(200).send("Customer, Reservation and Associated Rooms have been added!");
+            db.ResRoom.insertSome(reservationId, req.body.rooms, (result) => {
+                res.status(200).send({ reservation_id: reservationId });
             });
         });
     });

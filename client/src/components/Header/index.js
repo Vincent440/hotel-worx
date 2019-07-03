@@ -10,7 +10,7 @@ const Header = props => {
                        
                     </a>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
+                <ul className="nav navbar-nav navbar-right">
                     <button className="btn btn-secondary navbar-right" type="submit">
            <a className="exitButton" href="/">X</a>
             </button>

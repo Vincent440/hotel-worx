@@ -5,11 +5,7 @@ h1 {
   color: red;
   line-height: 1em;
 }
-#dashboardTable1 {
-  margin: 20px 60px 40px;
-  padding: 30px 50px;
-  height: 700px;
-}
+
 
 #exit {
   float: right;
@@ -31,6 +27,8 @@ p {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
+  padding-top: 10px;
+
 }
 
 button {
