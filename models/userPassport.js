@@ -8,7 +8,7 @@ const UserPassport = {
             if (err) {
                 return done(err,user);
             }
-            return done(null,user);
+            return done(null,user[0]);
         });
     },
     getUserByUsernameWithPassword: (username, done) => {
