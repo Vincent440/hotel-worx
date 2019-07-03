@@ -1,31 +1,45 @@
 import React from "react";
 import "./style.css";
 import SearchSubmit from "../searchButton";
+import { Row, Col } from 'react-grid-system';
+
 
 const DeatiledSubmit = props => {
     return (
-
-        <form>
-            <div id="res">
-                <tr>
-                    <td><p>Start Date</p></td>
-                    <td><input
-                        type="date"
-                        name="arrivaldate"
-                        onChange={props.handleStartDate}
-                    /></td>
-                    <td><p style={{ marginLeft: "80px", }}>Availability  </p></td>
-                    <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
-
-                    <td><p style={{ marginLeft: "80px", }}>Occupancy</p></td>
-                    <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
-
-                    <td>
-                        <SearchSubmit/>
-                    </td>
-                </tr>
-            </div>
-        </form>
+        <Col xl={12}>
+            <Row>
+                <Col xl={10}>
+                    <Row>
+                        <Col xl={2}>
+                            <h2> Start Date</h2>
+                        </Col>
+                        <Col xl={3} ><input
+                            style={{ paddingTop: "0px", paddingBottom: "0px" }}
+                            type="date"
+                            name="arrivaldate"
+                            onChange={props.handleStartDate}
+                        />
+                        </Col>
+                        <Col xl={1}>
+                            Availability
+                        </Col>
+                        <Col xl={1}>
+                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                        </Col>
+                        <Col xl={1}>
+                            Occupancy
+                        </Col>
+                        <Col xl={1}>
+                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                        </Col>
+                    </Row>
+                </Col>
+                <Col xl={2}>
+                    <SearchSubmit
+                    />
+                </Col>
+            </Row>
+        </Col >
 
     )
 }

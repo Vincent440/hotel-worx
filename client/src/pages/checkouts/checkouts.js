@@ -118,10 +118,10 @@ class Reservation extends Component {
                                 </table>
                             </div>
                             <div id="buttonDiv">
-                            <button type="button" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-primary">Print</button>
-                            <button type="button" class="btn btn-primary">Email</button>
-                            <button type="button" class="btn btn-primary">Close</button>
+                            <button type="button" className="btn btn-primary">Save</button>
+                            <button type="button" className="btn btn-primary">Print</button>
+                            <button type="button" className="btn btn-primary">Email</button>
+                            <button type="button" className="btn btn-primary">Close</button>
 
                             </div>
                         </form>

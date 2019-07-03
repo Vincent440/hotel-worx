@@ -36,17 +36,6 @@ h2{
 
 }
 
-.th{
-border: 1px solid black;
-padding: 10px;
-width:5%;}
-
-.tableTD{
-  border: 1px solid black;
-  padding: 2px;
-  width:5%;
-}
-
 input[type="date"] {
   position: relative;
   padding: 10px;
@@ -81,4 +70,14 @@ input[type="date"]::-webkit-clear-button
 input[type=date]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
+}
+
+#res table tr td {
+  background-color: white;
+  
+}
+
+
+#res {
+  padding-right: 15px;
 }

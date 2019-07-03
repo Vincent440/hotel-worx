@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
-import "./style1.css";
+import "./style.css";
 import InfoPart from "../../components/infoPart";
 
 class Reservation extends Component {

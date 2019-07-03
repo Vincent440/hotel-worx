@@ -1,52 +1,5 @@
 
 
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
-
-#dashboardTable {
-  margin: 20px 60px 20px;
-  padding: 30px 50px;
-  height: 700px;
-}
-
-
-p {
-  font-size: 18px;
-  color: black;
-  padding: 5px;
-  margin-left: 10px;
-}
-
-#guestinfo {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-#searchButton {
-  size: 30px;
-  margin-left: 38%;
-  color: red;
-}
-button {
-  size: 30px;
-  margin-left: 38%;
-}
-
-h2 {
-  text-align: right;
-}
-
-.th {
-  border: 1px solid black;
-  padding: 10px;
-}
-
 #res table tr td {
   width: 210px;
 }
@@ -54,3 +7,6 @@ h2 {
   width: 200px;
 }
 
+#res{
+  padding-top: 10px;
+}

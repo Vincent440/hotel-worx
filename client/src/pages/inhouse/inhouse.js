@@ -5,6 +5,8 @@ import Select from 'react-select';
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import SearchSubmit from "../../components/searchButton";
+import DateRange from "../../components/dateRange/dateRange";
+import { Container, Table } from 'react-bootstrap';
 
 class Inhouse extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -75,98 +77,144 @@ class Inhouse extends Component {
 
         return (
 
-            <Row id="dashboardTable">
-               <InfoPart />
-                <Col sm={10}>
-                    <form>
-                       <Header>IN-HOUSE GUESTS</Header>
-                        <div id="res">
-                            <tr>
-                                <td><p>Arrival Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="arrivaldate"
-                                    value={this.state.arrivaldate}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Departure Date</p></td>
-                                <td><input
-                                    type="date"
-                                    name="departuredate"
-                                    value={this.state.departuredate}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Confirmation Number:{this.state.confirmation}</p></td>
-                                <td><input
-                                    type="tel"
-                                    placeholder="Confirmation Number"
-                                    name="guestlastname"
-                                    value={this.state.lastname}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td><p>Name</p></td>
-                                <td><input
-                                    type="text"
-                                    placeholder="Name"
-                                    name="guestname"
-                                    value={this.state.guestname}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td><p>Last Name</p></td>
-                                <td><input
-                                    type="text"
-                                    placeholder="Last Name"
-                                    name="guestlastname"
-                                    value={this.state.lastname}
-                                    onChange={this.handleInputChange}
-                                /></td>
-                                <td ><p>Room Number</p></td>
-                                <td><Select
-                                    id="smallWindow"
-                                    value={roomNumber}
+            
+            <Container>
+                <Row>
+                    <Col sm={2}>
+                        <InfoPart />
+                    </Col>
+                    <Col sm={10}>
+                        <Row>
+                            <Col xl={12}>
+                                <Header>IN-HOUSE GUESTS</Header>
+                            </Col>
+                        </Row>
+                        <div id="res" style={{ paddingBottom: "10px" }}>
+                            <Row>
+                                <Col xl={10}>
+                                <Row style={{ marginTop: "5px" }}>
+                                    <Col xl={1}>
+                                            Room No
+                                        </Col>
+                                        <Col xl={2} style={{ marginRight: "32px" }}>
+                                        <input
+                                    id=""
+                                    // value={roomNumber}
                                     onChange={this.handleChange}
                                     options={selectedOption}
                                     name="roomnumber"
                                     placeholder="Room Number"
                                     value={this.state.roomNumber}
                                     onChange={this.handleInputChange}
-                                /></td>
-                                <td>
-<SearchSubmit />
-                                </td>
-                            </tr>
+                                />
+                                        </Col>
+                                        <Col xl={1} style={{ marginRight: "22px" }}>
+                                            Name
+                                        </Col>
+                                        <Col xl={2} style={{ marginRight: "35px" }}>
+                                            <input
+                                                type="text"
+                                                placeholder="Name"
+                                                name="guestname"
+                                                value={this.state.guestname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                        <Col xl={2}>
+                                            Last Name:
+                                </Col>
+                                        <Col xl={2} style={{ marginleft: "80px" }}>
+                                            <input
+                                                type="text"
+                                                placeholder="Last Name"
+                                                name="guestlastname"
+                                                value={this.state.lastname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
 
+                                    </Row>
+                                    <Row>
+                                        <Col xl={1}>
+                                            Arrival
+                                        </Col>
+                                        <Col xl={6}>
+                                            <DateRange />
+                                        </Col>
+
+                                        <Col xl={2}>
+                                            Confirmation Number:
+                                    </Col>
+                                        <Col xl={1}>
+                                            <input
+                                                type="tel"
+                                                placeholder="Confirmation Number"
+                                                name="guestlastname"
+                                                value={this.state.lastname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+
+                                    </Row>
+                                    
+                                </Col>
+
+
+                                <Col xl={2} style={{ paddingTop: "25px", Left: "30px" }}>
+                                    <Col xl={12}>
+                                        <SearchSubmit />
+
+                                    </Col>
+                                </Col>
+                            </Row>
 
                         </div>
+                        <div id="res">
+                            <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                                <Col xl={12}>
+                                    <Table>
+                                        <tr>
+                                            <th>
+                                                Name
+                                             </th>
+                                            <th>
+                                                Arrival Date
+                                                    </th>
+                                            <th>
+                                                Departure Date
+                                                    </th>
+                                            <th>
+                                                Room Number
+                                                    </th>
+                                            <th>
+                                                Room Type
+                                                    </th>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                          
+                                        </tr>
 
-                        <div id="guestinfo">
-                            <table id="result">
-                                <thead>
-                                    <tr>
-                                        <th className="th" id="room number">Room Number</th>
-                                        <th className="th" id="room type">Room Type</th>
-                                        <th className="th" id="last name">Last Name</th>
-                                        <th className="th" id="first name">First Name</th>
-                                        <th className="th" id="arrival date">Arrival Date</th>
-                                        <th className="th" id="departure date">Departure Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {/* <!-- Results from DB here --> */}
-                                </tbody>
-                            </table>
-
-
-
+                                    </Table>
+                                </Col>
+                            </Row >
                         </div>
 
-                    </form>
+                    </Col>
 
-
-                </Col>
-            </Row >
+                </Row >
+            </Container >
         )
     }
 }

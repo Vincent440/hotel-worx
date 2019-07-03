@@ -3,9 +3,13 @@ import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
-import Select from 'react-select';
 import api from '../../utils/api';
 import Header from "../../components/Header";
+import DateRange from "../../components/dateRange/dateRange";
+import { Container, Table } from 'react-bootstrap';
+import CreditCardInput from 'react-credit-card-input';
+import { cardNumber, expiry, cvc } from 'react-credit-card-input';
+// import ButtonSubmit from "../../components/submitButton"
 import ButtonSubmit from "../../components/submitButton";
 
 // const test_reservation = { 
@@ -17,12 +21,6 @@ import ButtonSubmit from "../../components/submitButton";
 
 class ReserveNew extends Component {
     state = {
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        numrooms: "",
-        roomtype: "",
         firstname: "",
         lastname: "",
         phone: "",
@@ -31,9 +29,14 @@ class ReserveNew extends Component {
         city: "",
         state: "",
         zip: "",
+        arrivaldate: "",
+        departuredate: "",
+        nights: "",
+        adults: "",
+        noOfRooms: "",
+        RoomTypes: [],
         creditCard: "",
         expirationDate: "",
-        RoomTypes: [],
         reservationSuccess: false,
         newReservationId: ""
     };
@@ -75,189 +78,219 @@ class ReserveNew extends Component {
         }
 
         return (
-            <Row id="dashboardTable">
-                <InfoPart />
+            <Container>
+            <Row>
+                <Col sm={2}>
+                    <InfoPart />
+                </Col>
                 <Col sm={10}>
-                    <form>
-                        <Header> NEW RESERVATION</Header>
+                    <Row>
+                        <Col xl={12}>
+                            <Header>NEW RESERVATION</Header>
+                        </Col>
+                    </Row>
+                    <div id="res" style={{ paddingBottom: "10px" }}>
+                    <Row style={{ marginTop: "5px" }}>
+                                <Col xl={1}>
+                                    Arrival
+                                        </Col>
+                                <Col xl={6}>
+                                    <DateRange />
+                                </Col>
 
-                        <div id="res">
-                            <table>
-                                <tr>
-                                    <td><p>Arrival Date</p></td>
-                                    <td><input
-                                        type="date"
-                                        name="arrivaldate"
-                                        value={this.state.arrivaldate}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>Nights</p></td>
-                                    <td><input
-                                        id="smallWindow"
+                            </Row>
+                            <Row style={{ marginTop: "5px" }}>
+                                <Col xl={1}>
+                                    Nights
+                                        </Col>
+                                <Col xl={2}>
+                                    <input
+                                        id=""
                                         type="number"
                                         placeholder="Number of Nights"
                                         name="nights"
                                         value={this.state.nights}
                                         onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>No of Rooms</p></td>
-                                    <td><input
-                                        id="smallWindow"
+                                    />
+                                </Col>
+                                <Col xl={1}>
+                                    No of Rooms
+                                        </Col>
+                                <Col xl={2}>
+                                    <input
                                         type="number"
                                         placeholder="Number of Rooms"
-                                        name="numrooms"
-                                        value={this.state.numrooms}
+                                        name="roomsnumber"
+                                        value={this.state.roomsnumber}
                                         onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>Rate</p></td>
-                                    <td><input
-                                        id="smallWindow"
+                                    />
+                                </Col>
+
+
+                                <Col xl={2}>
+                                    Room Type:
+                                        </Col>
+                                <Col xl={2}>
+                                    <select name="roomtype" onChange={this.handleInputChange}>
+                                        {this.state.RoomTypes.map(type => (
+                                            <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
+                                        ))}
+                                    </select>
+
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xl={1}>
+                                    Adults
+                                        </Col>
+                                <Col xl={2}>
+                                    <input
+                                        id=""
+                                        type="number"
+                                        name="adultnumber"
+                                        placeholder="Adults"
+                                        value={this.state.adultnumber}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                                <Col xl={1}>
+                                    Rate
+                                        </Col>
+                                <Col xl={2}>
+                                    <input
                                         type="tel"
                                         placeholder="Rate"
                                         name="roomrate"
                                         value={this.state.roomrate}
                                         onChange={this.handleInputChange}
-                                    /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Departure Date</p></td>
-                                    <td><input
-                                        type="date"
-                                        name="departuredate"
-                                        value={this.state.departuredate}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-
-                                    <td><p>Adults</p></td>
-                                    <td><input
-                                        id="smallWindow"
-                                        type="number"
-                                        name="adults"
-                                        placeholder="Adults"
-                                        value={this.state.adults}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>Room Type: </p></td>
-                                    <td>
-                                        <select name="roomtype" onChange={this.handleInputChange}>
-                                            {this.state.RoomTypes.map(type => (
-                                                <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
-                                            ))}
-                                        </select>
-
-                                    </td>
-                                    <td><p>Room Number</p></td>
-                                    <td><Select
-
-                                    /></td>
-                                </tr>
-                            </table>
+                                    />
+                                </Col>
+                                <Col xl={2}>
+                                    Room Number:
+                                        </Col>
+                                <Col xl={2}>
+                                    <select />
+                                </Col>
+                            </Row>
                         </div>
+
                         <div id="guestinfo">
-                            <table>
-                                <tr>
-                                    <td><p>First Name</p></td>
-                                    <td><input
-                                        type="text"
-                                        placeholder="First Name"
-                                        name="firstname"
-                                        value={this.state.firstname}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>Last Name</p></td>
-                                    <td><input
-                                        type="text"
-                                        placeholder="Last Name"
-                                        name="lastname"
-                                        value={this.state.lastname}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Phone Number</p></td>
-                                    <td><input
-                                        type="tel"
-                                        placeholder="Phone Number"
-                                        name="phone"
-                                        value={this.state.phone}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>Email Address</p></td>
-                                    <td><input
-                                        type="email"
-                                        placeholder="Email Address"
-                                        name="email"
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                </tr>
-                                <tr>
-                                    <td><p>Adress</p></td>
-                                    <td>
-                                        <input
-                                            type="text"
-                                            placeholder="Adress"
-                                            name="address"
-                                            value={this.state.address}
-                                            onChange={this.handleInputChange}
-                                        />
-                                    </td>
-                                    <td>
-                                        <input
-                                            type="text"
-                                            placeholder="City"
-                                            name="city"
-                                            value={this.state.city}
-                                            onChange={this.handleInputChange}
-                                        /></td>
-                                    <td>
-                                        <td>
+                            <Row>
+                                <Col xl={10}>
+                                    <Row>
+                                        <Col xl={2}>
+                                            First Name
+                                        </Col>
+                                        <Col xl={3}>
+                                            <input
+                                                type="text"
+                                                placeholder="First Name"
+                                                name="firstname"
+                                                value={this.state.firstname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                        <Col xl={2}>
+                                            Last Name
+                                        </Col>
+                                        <Col xl={2}>
+                                            <input
+                                                type="text"
+                                                placeholder="Last Name"
+                                                name="lastname"
+                                                value={this.state.lastname}
+                                                onChange={this.handleInputChange}
+                                            /></Col>
+                                    </Row>
+                                    <Row style={{ marginTop: "5px" }}>
+                                        <Col xl={2}>
+                                            Phone Number
+                                        </Col>
+                                        <Col xl={3}>
+                                            <input
+                                                type="tel"
+                                                placeholder="Phone Number"
+                                                name="phone"
+                                                value={this.state.phone}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                        <Col xl={2}>
+                                            Email Address
+                                        </Col>
+                                        <Col xl={2}>
+                                            <input
+                                                type="email"
+                                                placeholder="Email Address"
+                                                name="email"
+                                                value={this.state.email}
+                                                onChange={this.handleInputChange}
+                                            /></Col>
+                                    </Row>
+                                    <Row style={{ marginTop: "5px" }}>
+                                        <Col xl={2}>
+                                            Address
+                                        </Col>
+                                        <Col xl={3}>
+                                            <input
+                                                type="text"
+                                                placeholder="Adress"
+                                                name="address"
+                                                value={this.state.address}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+
+                                        <Col xl={2}>
+                                            <input
+                                                type="text"
+                                                placeholder="City"
+                                                name="city"
+                                                value={this.state.city}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                        <Col xl={2}>
                                             <input
                                                 type="text"
                                                 placeholder="State"
                                                 name="state"
                                                 value={this.state.state}
                                                 onChange={this.handleInputChange}
-                                            /></td>
-                                        <input
-                                            type="text"
-                                            placeholder="ZipCode"
-                                            name="zip"
-                                            value={this.state.zip}
-                                            onChange={this.handleInputChange}
-                                        /></td>
+                                            /></Col>
+                                        <Col xl={1}>
+                                            <input
+                                                type="text"
+                                                placeholder="ZipCode"
+                                                name="zip"
+                                                value={this.state.zip}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginTop: "5px" }}>
+                                        <Col xl={2}>
+                                            Credir Card Number
+                                        </Col>
+                                        <Col xl={10}>
+                                            <CreditCardInput
+                                                cardNumberInputProps={{ value: this.state.creditCard, onChange: this.handleCardNumberChange }}
+                                                cardExpiryInputProps={{ value: this.state.expirationDate, onChange: this.handleCardExpiryChange }}
+                                                fieldClassName="input"
+                                            /></Col>
 
-                                </tr>
-                                <tr>
-                                    <td><p>Credit Card Number</p></td>
-                                    <td>
-                                        <input
-                                            type="tel"
-                                            placeholder="CC Number"
-                                            name="creditCard"
-                                            value={this.state.creditCard}
-                                            onChange={this.handleInputChange}
-                                        />
-                                    </td>
-                                    <td><p>Expiration Date</p></td>
-
-                                    <td>
-                                        <input
-                                            type="tel"
-                                            placeholder="expiration date"
-                                            name="expirationDate"
-                                            value={this.state.expirationDate}
-                                            onChange={this.handleInputChange}
-                                        /></td>
-
-                                </tr>
-                            </table>
+                                    </Row>
+                                </Col>
+                            </Row>
                         </div>
-                        <ButtonSubmit handleFormSubmit={this.handleFormSubmit} />
-                    </form>
 
-                </Col>
-            </Row>
+
+                        {/* <ButtonSubmit handleSubmit={this.handleFormSubmit} /> */}
+                        <button type="submit" class="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.handleFormSubmit}>Submit</button>
+                    </Col>
+                </Row>
+            </Container>
+
         )
     }
 }
