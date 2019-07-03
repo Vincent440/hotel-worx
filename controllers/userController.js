@@ -13,7 +13,7 @@ module.exports = {
         });
     },
     getUserById:(req, res)=> {
-        db.User.selectOne(req.params.id, (data) => {
+        db.User.selectOneById(req.params.id, (data) => {
             res.status(200).json(data);
         });
     },
