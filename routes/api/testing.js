@@ -115,16 +115,30 @@ router.get("/rooms_dirty", (req, res) => {
 });
 
 router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:arrived/:stayOver/:dueOut/:departed/:notReserved", (req, res) => {
-    let criteria1 = [];
-    req.params.clean === "true" ? criteria1.push("rm.clean=1") : criteria1.push("rm.clean=2");
-    req.params.dirty === "true" ? criteria1.push("rm.clean=0") : criteria1.push("rm.clean=2");
-    const c1 = "(" + criteria1.join(" || ") + ")";
-    let c2 = [];
-    req.params.oos === "true" ? c2.push("rm.active=0") : c2.push("rm.active=1");
-    let criteria3 = [];
-    req.params.vacant === "true" ? criteria3.push("rm.occupied=0") : criteria3.push("rm.occupied=2");
-    req.params.occupied === "true" ? criteria3.push("rm.occupied=1") : criteria3.push("rm.occupied=2");
-    const c3 = "(" + criteria3.join(" || ") + ")";
+    const conditions = [];
+    let c1;
+    if (req.params.clean === "true" && req.params.dirty === "false") {
+        c1 = "rm.clean=1";
+    } else if (req.params.clean === "false" && req.params.dirty === "true") {
+        c1 = "rm.clean=0";
+    } else {
+        c1 = "(rm.clean=1 || rm.clean=0)";
+    }
+    conditions.push(c1);
+
+    let c2;
+    req.params.oos === "true" ? c2 = "rm.active=0" : c2 = "(rm.active=1 || rm.active=0)";
+    conditions.push(c2);
+
+    let c3;
+    if (req.params.vacant === "true" && req.params.occupied === "false") {
+        c3 = "rm.occupied=0";
+    } else if (req.params.vacant === "false" && req.params.occupied === "true") {
+        c3 = "rm.occupied=1";
+    } else {
+        c3 = "(rm.occupied=1 || rm.occupied=0)";
+    }
+    conditions.push(c3);
     let criteria4 = [];
     if (req.params.arrival === "true") {
         criteria4.push("rr.check_in_date=CURDATE()");
@@ -138,15 +152,10 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
     if (req.params.dueOut === "true") {
         criteria4.push("rr.check_out_date=CURDATE()");
     }
-    req.params.departed === "true" ? criteria4.push("rr.checked_out=1") : criteria4.push("rr.checked_out=2");
-
-    // req.params.arrival === "true" ? criteria4.push("rr.check_in_date=CURDATE()") : criteria4.push("rr.check_in_date!=CURDATE()");
-    // req.params.arrived === "true" ? criteria4.push("rr.checked_in=1") : criteria4.push("rr.checked_in=2");
-    // req.params.stayOver === "true" ? criteria4.push("CURDATE() BETWEEN rr.check_in_date && DATE_ADD(rr.check_out_date, INTERVAL 1 DAY)") : criteria4.push("rr.check_in_date!=CURDATE()");
-    // req.params.dueOut === "true" ? criteria4.push("rr.check_out_date=CURDATE()") : criteria4.push("rr.check_out_date!=CURDATE()");
-
     const c4 = "(" + criteria4.join(" || ") + ")";
-    const conditions = [c1, c2, c3, c4];
+    if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.stayOver === "true" || req.params.dueOut === "true") {
+        conditions.push(c4);
+    }
     db.Room.housekeepingStatus(conditions, (data) => {
         res.json(data);
     });

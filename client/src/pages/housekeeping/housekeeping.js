@@ -26,6 +26,12 @@ class Housekeeping extends Component {
         searchResults: []
     };
 
+    componentDidMount() {
+        api.getHouseKeepingStatus(this.state.checked)
+            .then(res => this.setState({ searchResults: res }))
+            .catch(err => console.log(err));
+    }
+
     handleCheckboxChange = event => {
         let tempState = this.state.checked;
         switch (event.target.id) {
@@ -238,7 +244,8 @@ class Housekeeping extends Component {
                                             </Row>
                                         </Col>
                                         <Col xl={2} style={{ marginTop: "30px", textAlign: "center" }}>
-                                            <SearchSubmit />
+                                            {/* <SearchSubmit /> */}
+                                            <button type="button" class="btn btn-primary" style={{ marginLeft: "40%" }} onClick={this.handleSearch}>Search</button>
                                         </Col>
                                     </Row>
                                 </div>
