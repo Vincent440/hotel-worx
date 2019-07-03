@@ -8,7 +8,7 @@ set foreign_key_checks=0;
 
 CREATE TABLE users (
     user_id int(6) NOT NULL AUTO_INCREMENT,
-    username varchar(20) NOT NULL,
+    username varchar(20) NOT NULL UNIQUE,
     password varchar(255) NOT NULL,
     access_id int(3) NOT NULL,
     FOREIGN KEY (access_id) REFERENCES access_levels(access_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -75,7 +75,7 @@ CREATE TABLE reservations (
     user_id int(6) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     created_at datetime DEFAULT CURRENT_TIMESTAMP,
-    confirmation_code varchar(20) NOT NULL,
+    comments varchar(255),
     active boolean DEFAULT 1,
     PRIMARY KEY (reservation_id)
 );
@@ -94,6 +94,8 @@ CREATE TABLE res_rooms (
     checked_out boolean DEFAULT 0,
     adults int(3) NOT NULL,
     room_id int(6),
+    confirmation_code varchar(20) NOT NULL,
+    comments varchar(255),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     PRIMARY KEY (res_room_id)
 );

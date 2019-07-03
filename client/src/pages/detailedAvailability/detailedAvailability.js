@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
+import api from '../../utils/api';
 import DeatiledSubmit from "../../components/detailedSubmit";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
@@ -16,12 +17,20 @@ class DetailedAvailability extends Component {
         roomType: "",
         availabilit: "",
         occupied: "",
+        availableRooms: [],
+        searchDate: "2019-07-03"
     };
+
+    componentDidMount() {
+
+        api.getAvailableRooms(this.state.searchDate)
+            .then(res => this.setState({ availableRooms: res }))
+            .catch(err => console.log(err));
+    }
 
     handleStartDate = event => {
         this.setState({ selectedDate: event.target.value })
     }
-
 
     render() {
         return (
@@ -45,54 +54,38 @@ class DetailedAvailability extends Component {
                                         />
                                     </Row>
                                 </div>
-                            </Col>
-                        </Row>
+                                <div id="res">
 
-                        <div id="res">
-                            <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
-                                <Col xl={12}>
-                                    <Table>
-                                        <tr>
-                                            <th>
-                                                Date
-                                                    </th>
-                                            <th>
-                                                Total                                                    </th>
-                                            <th>
-                                                Two Queens                                                    </th>
-                                            <th>
-                                                King                                                    </th>
-                                            <th>
-                                                Suite
-                                                    </th>
-                                        </tr>
+                                    <Row style={{ paddingBottom: "20px" }}>
+                                        <Col xl={12}>
+                                            <Table>
+                                                <tr>
+                                                    <th className="th" id="date" colspan="2">Date</th>
 
-                                        <tr>
-                                            <td>{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
-                                            <td>{this.state.selectedDate}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                                    <th className="th" id="total" > Total</th>
+                                                    {this.state.availableRooms.map(type => (
+                                                        <th key="type.room_type_id" className="th">{type.type}</th>
+                                                    ))}
 
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="tableTD" >{this.state.searchDate && moment(this.state.searchDate).format("dddd")}</td>
+                                                    <td className="tableTD" >{this.state.searchDate} </td>
+                                                    <td className="tableTD" > 10</td>
+                                                    {this.state.availableRooms.map(type => (
+                                                        <td key="type.room_type_id" className="tableTD">{type.available}</td>
+                                                    ))}
+                                                </tr>
+                                            </Table>
+                                        </Col>
 
-                                        </tr>
-
-                                    </Table>
-                                </Col>
-
-
-                            </Row >
-                        </div>
+                                    </Row>
+                                </div>
+                            </Col >
+                        </Row >
                     </Col>
                 </Row>
-            </Container>
+            </Container >
 
         )
     }

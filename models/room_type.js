@@ -15,6 +15,21 @@ const RoomType = {
             cb(results);
         });
     },
+    selectAvailableOld: (cb) => {
+        const queryString = "SELECT rm.room_type_id, COUNT(rm.room_id) AS available, rt.type FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE rm.active=1 GROUP BY rt.type;";
+        connection.query(queryString, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
+    selectAvailable: (date, cb) => {
+        console.log(date);
+        const queryString = "SELECT rt.room_type_id, rt.type, IFNULL(rm1.available, 0) AS available FROM room_types AS rt LEFT JOIN (SELECT rm.room_type_id, COUNT(rm.room_id) AS available FROM rooms AS rm WHERE rm.active=1 && rm.room_id NOT IN (SELECT rr.room_id FROM res_rooms AS rr WHERE rr.check_in_date<=? && rr.check_out_date>?) GROUP BY rm.room_type_id) AS rm1 ON rt.room_type_id=rm1.room_type_id ORDER BY rt.room_type_id ASC;";
+        connection.query(queryString, date, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
     deleteOne: (id, cb) => {
         const queryString = "DELETE FROM room_types WHERE room_type_id=?;";
         connection.execute(queryString, [id], (err, result) => {

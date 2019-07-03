@@ -49,16 +49,16 @@ INSERT INTO customers (customer_id, first_name,last_name, address, city, state, 
 TRUNCATE TABLE rooms;
 
 INSERT INTO rooms (room_num, room_type_id, description, num_beds, clean, occupied, active) VALUES
-('101', 1, 'microwave', 2, 1, 0, 1),
-('102', 2, 'new carpet, refrigerator', 2, 1, 0, 1),
+('101', 1, 'microwave', 2, 1, 1, 1),
+('102', 2, 'new carpet, refrigerator', 2, 0, 0, 1),
 ('103', 1, 'microwave', 2, 1, 0, 1),
 ('104', 3, '60" TV', 2, 1, 0, 1),
-('105', 1, 'microwave, balcony', 2, 1, 0, 1),
+('105', 1, 'microwave, balcony', 2, 1, 0, 0),
 ('201', 1, 'microwave, courtyard view', 2, 1, 0, 1),
 ('202', 3, 'balcony, refrigerator', 2, 1, 0, 1),
-('203', 1, 'courtyard view', 2, 1, 0, 1),
+('203', 1, 'courtyard view', 2, 0, 0, 1),
 ('204', 3, 'balcony', 2, 1, 0, 1),
-('205', 2, 'microwave, courtyard view', 2, 1, 0, 1);
+('205', 2, 'microwave, courtyard view', 2, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ TRUNCATE TABLE room_types;
 
 INSERT INTO room_types (room_type_id, type, rate) VALUES
 (1, '2 Queens', 109.99),
-(2, 'King Single', 119.99),
+(2, 'King', 119.99),
 (3, 'Suite', 129.99);
 
 -- --------------------------------------------------------
@@ -81,24 +81,24 @@ INSERT INTO room_types (room_type_id, type, rate) VALUES
 
 TRUNCATE TABLE reservations;
 
-INSERT INTO reservations (customer_id, user_id, confirmation_code) VALUES
-(1, 3, '20190621HW000001'),
-(2, 2, '20190622HW000002'),
-(3, 1, '20190624HW000003');
+INSERT INTO reservations (customer_id, user_id, comments) VALUES
+(1, 3, 'wants a good view'),
+(2, 2, ''),
+(3, 1, 'needs a late checkout time');
 
 -- --------------------------------------------------------
 
 --
--- Seed data for reservations
+-- Seed data for res_rooms
 --
 
 TRUNCATE TABLE res_rooms;
 
-INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_date, adults) VALUES
-(1, 3, '2019-08-23', '2019-08-26', 2),
-(2, 1, '2019-10-02', '2019-10-03', 1),
-(2, 1, '2019-10-02', '2019-10-05', 1),
-(3, 2, '2019-09-26', '2019-09-30', 3);
+INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_date, adults, room_id, confirmation_code, comments) VALUES
+(1, 3, '2019-07-01', '2019-07-06', 2, 7, '20190621HW000001', 'wants a good view'),
+(2, 1, '2019-10-02', '2019-10-03', 1, 1, '20190622HW000002', 'needs a late checkout time'),
+(2, 1, '2019-10-02', '2019-10-05', 1, 3, '20190622HW000003', 'needs a late checkout time'),
+(3, 2, '2019-09-26', '2019-09-30', 3, 10, '20190624HW000004', '');
 
 -- --------------------------------------------------------
 

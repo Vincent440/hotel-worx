@@ -108,7 +108,7 @@ class ReserveNew extends Component {
                                     />
                                 </Col>
                                 <Col xl={1}>
-                                    No of Rooms 
+                                    No of Rooms
                                         </Col>
                                 <Col xl={2}>
                                     <input
@@ -125,11 +125,12 @@ class ReserveNew extends Component {
                                     Room Type:
                                         </Col>
                                 <Col xl={2}>
-                                    <select>
+                                    <select name="roomtype" onChange={this.handleInputChange}>
                                         {this.state.RoomTypes.map(type => (
-                                            <option key="type.room_type_id">{type.type}</option>
+                                            <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
                                         ))}
                                     </select>
+
                                 </Col>
                             </Row>
                             <Row>
@@ -267,9 +268,8 @@ class ReserveNew extends Component {
                                         </Col>
                                         <Col xl={10}>
                                             <CreditCardInput
-                                                cardNumberInputProps={{ value: cardNumber, onChange: this.handleCardNumberChange }}
-                                                cardExpiryInputProps={{ value: expiry, onChange: this.handleCardExpiryChange }}
-                                                cardCVCInputProps={{ value: cvc, onChange: this.handleCardCVCChange }}
+                                                cardNumberInputProps={{ value: this.state.creditCard, onChange: this.handleCardNumberChange }}
+                                                cardExpiryInputProps={{ value: this.state.expirationDate, onChange: this.handleCardExpiryChange }}
                                                 fieldClassName="input"
                                             /></Col>
 

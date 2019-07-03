@@ -7,14 +7,7 @@ import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import { Container, Table } from 'react-bootstrap';
 
-
-
 class Housekeeping extends Component {
-
-    constructor(props) {
-        super(props);
-        console.log(props);
-    };
 
     state = {
         checked: {
@@ -22,16 +15,16 @@ class Housekeeping extends Component {
             dirty: false,
             outOfOrder: false,
             vacant: false,
-            occuppied: false,
+            occupied: false,
             arrival: false,
             arrived: false,
             stayOver: false,
             dueOut: false,
             departed: false,
             notReserved: false
-        }
+        },
+        searchResults: []
     };
-
 
     handleCheckboxChange = event => {
         let tempState = this.state.checked;
@@ -102,10 +95,11 @@ class Housekeeping extends Component {
         this.setState({ checked: tempState });
     }
 
-    handleSearch = () => {
-        console.log("handlesearch, state=" + this.state.checked);
+    handleSearch = (event) => {
+        event.preventDefault();
+        // console.log("handlesearch, state=", this.state.checked);
         api.getHouseKeepingStatus(this.state.checked)
-            .then(res => 'here you will map the packet of data that comes back')
+            .then(res => this.setState({ searchResults: res }))
             .catch(err => console.log(err));
     }
 
@@ -139,14 +133,14 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Dirty</p>
+                                                    <p>Dirty {this.state.rooms}</p>
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="dirty" checked={this.state.checked.dirty}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                                 <Col xl={2}>
-                                                    <p>Out of Order</p>
+                                                    <p>Out of Order{this.state.rooms}</p>
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="outOfOrder" checked={this.state.checked.outOfOrder}
@@ -171,6 +165,7 @@ class Housekeeping extends Component {
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="vacant" checked={this.state.checked.vacant}
                                                         onChange={this.handleCheckboxChange} />
+
                                                 </Col>
                                                 <Col xl={1}>
                                                     <p>Occupied </p>
@@ -269,35 +264,34 @@ class Housekeeping extends Component {
 
                                                     </th>
                                                 </tr>
+                                                <tbody>
+                                                    {this.state.searchResults.map(room => (
+                                                        <tr key={room.room_id}>
+                                                            <td>{room.room_num}</td>
+                                                            <td>{room.type}</td>
+                                                            <td>
+                                                                {room.active === 1 ? "" : "Out of Service - "}
+                                                                {room.clean === 1 ? "Clean" : "Dirty"}
+                                                            </td>
+                                                            <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
+                                                            <td>
+                                                                {room.checked_in === 1 ? "Arrived" : ""}
+                                                                {room.checked_out === 1 ? "Departed" : ""}
+                                                            </td>
+                                                        </tr>
+                                                    ))}
 
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-
-                                                </tr>
-
+                                                </tbody>
                                             </Table>
                                         </Col>
-
-
-                                    </Row >
+                                    </Row>
                                 </div>
                             </Col>
-                        </Row >
-                    </Col >
-                </Row >
-            </Container >
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
+
         )
     }
 }

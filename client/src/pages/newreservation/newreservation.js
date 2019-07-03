@@ -1,17 +1,22 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
-import Select from 'react-select';
 import api from '../../utils/api';
 import Header from "../../components/Header";
 import DateRange from "../../components/dateRange/dateRange";
 import { Container, Table } from 'react-bootstrap';
 import CreditCardInput from 'react-credit-card-input';
 import { cardNumber, expiry, cvc } from 'react-credit-card-input';
-
-
 // import ButtonSubmit from "../../components/submitButton"
+import ButtonSubmit from "../../components/submitButton";
+
+// const test_reservation = { 
+//     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
+//     "reserve": ["0user_id", "1comments"],
+//     "rooms": [["0room_type_id", "1check_in_date", "2check_out_date", "2adults", "3confirmation_code", "4comments"]]
+// }
 
 
 class ReserveNew extends Component {
@@ -31,14 +36,16 @@ class ReserveNew extends Component {
         noOfRooms: "",
         RoomTypes: [],
         creditCard: "",
-        expirationDate: ""
+        expirationDate: "",
+        reservationSuccess: false,
+        newReservationId: ""
     };
 
     // handle any changes to the input fields
     handleInputChange = event => {
         // Pull the name and value properties off of the event.target (the element which triggered the event)
+        // console.log(event.target.value);
         const { name, value } = event.target;
-
         // Set the state for the appropriate input field
         this.setState({
             [name]: value
@@ -46,31 +53,44 @@ class ReserveNew extends Component {
     }
     componentDidMount() {
         api.getRoomTypes()
-            .then(res => this.setState({ RoomTypes: res }))
+            .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
             .catch(err => console.log(err));
     }
 
     // When the form is submitted, prevent the default event and alert the username and password
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`Username: ${this.state.firstname}\nPassword: ${this.state.lastname}\nPhone: ${this.state.phone}\nEmail: ${this.state.email}\nAddress: ${this.state.address}\nCity: ${this.state.city}\nState: ${this.state.state}\nZip: ${this.state.zip}\nCredit Card #: ${this.state.creditCard}\nExpiration: ${this.state.expirationDate}`);
+        // alert(`Arrival Date: ${this.state.arrivaldate}\nDeparture Date: ${this.state.departuredate}\nAdults: ${this.state.adults}\nRoom Type: ${this.state.roomtype}\nNum Rooms: ${this.state.numrooms}\nUsername: ${this.state.firstname}\nPassword: ${this.state.lastname}\nPhone: ${this.state.phone}\nEmail: ${this.state.email}\nAddress: ${this.state.address}\nCity: ${this.state.city}\nState: ${this.state.state}\nZip: ${this.state.zip}\nCredit Card #: ${this.state.creditCard}\nExpiration: ${this.state.expirationDate}`);
+        api.createReservation(this.state)
+            .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
+            .catch(err => console.log(err));
     }
-    render() {
-        return (
 
+    render() {
+
+        if (this.state.reservationSuccess) {
+            return (
+                <Redirect to={{
+                    pathname: '/ResConfirmation',
+                    state: { newReservationId: this.state.newReservationId }
+                }} />
+            )
+        }
+
+        return (
             <Container>
-                <Row>
-                    <Col sm={2}>
-                        <InfoPart />
-                    </Col>
-                    <Col sm={10}>
-                        <Row>
-                            <Col xl={12}>
-                                <Header>NEW RESERVATIONS</Header>
-                            </Col>
-                        </Row>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
-                            <Row>
+            <Row>
+                <Col sm={2}>
+                    <InfoPart />
+                </Col>
+                <Col sm={10}>
+                    <Row>
+                        <Col xl={12}>
+                            <Header>NEW RESERVATION</Header>
+                        </Col>
+                    </Row>
+                    <div id="res" style={{ paddingBottom: "10px" }}>
+                    <Row style={{ marginTop: "5px" }}>
                                 <Col xl={1}>
                                     Arrival
                                         </Col>
@@ -111,11 +131,12 @@ class ReserveNew extends Component {
                                     Room Type:
                                         </Col>
                                 <Col xl={2}>
-                                    <select>
+                                    <select name="roomtype" onChange={this.handleInputChange}>
                                         {this.state.RoomTypes.map(type => (
-                                            <option key="type.room_type_id">{type.type}</option>
+                                            <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
                                         ))}
                                     </select>
+
                                 </Col>
                             </Row>
                             <Row>
@@ -148,7 +169,7 @@ class ReserveNew extends Component {
                                     Room Number:
                                         </Col>
                                 <Col xl={2}>
-                                    <Select />
+                                    <select />
                                 </Col>
                             </Row>
                         </div>
@@ -253,9 +274,8 @@ class ReserveNew extends Component {
                                         </Col>
                                         <Col xl={10}>
                                             <CreditCardInput
-                                                cardNumberInputProps={{ value: cardNumber, onChange: this.handleCardNumberChange }}
-                                                cardExpiryInputProps={{ value: expiry, onChange: this.handleCardExpiryChange }}
-                                                cardCVCInputProps={{ value: cvc, onChange: this.handleCardCVCChange }}
+                                                cardNumberInputProps={{ value: this.state.creditCard, onChange: this.handleCardNumberChange }}
+                                                cardExpiryInputProps={{ value: this.state.expirationDate, onChange: this.handleCardExpiryChange }}
                                                 fieldClassName="input"
                                             /></Col>
 
