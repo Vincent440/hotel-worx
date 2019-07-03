@@ -4,7 +4,8 @@ import "./style.css";
 import DeatiledSubmit from "../../components/detailedSubmit";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
-import moment from  "moment";
+import moment from "moment";
+import { Container, Table } from 'react-bootstrap';
 
 class DetailedAvailability extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -18,53 +19,85 @@ class DetailedAvailability extends Component {
     };
 
     handleStartDate = event => {
-        this.setState({ selectedDate: event.target.value})
+        this.setState({ selectedDate: event.target.value })
     }
 
 
-   render() {
+    render() {
         return (
+            <Container>
+                <Row >
+                    <Col xl={2}>
+                        <InfoPart />
+                    </Col>
+                    <Col xl={10}>
+                        <Row>
+                            <Col xl={12}>
+                                <Header>DETAILED AVAILABILITY</Header>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xl={12}>
+                                <div id="res">
+                                    <Row>
+                                        <DeatiledSubmit
+                                            handleStartDate={this.handleStartDate}
+                                        />
+                                    </Row>
+                                </div>
+                            </Col>
+                        </Row>
 
-            <Row id="dashboardTable1">
-               
-               <InfoPart />
-                <Col sm={10}>
-                    <row>
-                        <Header>DETAILED AVAILABILITY</Header>
-                        <DeatiledSubmit
-                            handleStartDate={this.handleStartDate}
-                        />
-                        <div id="guestinfo">
-                            <table id="result">
-                                <thead>
-                                    <tr>
-                                        <th className="th" id="date" colspan="2">Date</th>
-                                        <th className="th" id="total" > Total</th>
-                                        <th className="th" id="twoQueens">Two Queens</th>
-                                        <th className="th" id="king">King</th>
-                                        <th className="th" id="suite">Suite</th>
-                                    </tr>
-                                    <tr>
-                                        <td className="tableTD" >{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
-                                        <td className="tableTD" >{this.state.selectedDate} </td>
-                                        <td className="tableTD" > 10</td>
-                                        <td className="tableTD" > 4</td>
-                                        <td className="tableTD" > 4</td>
-                                        <td className="tableTD" > 2</td>
-                                    </tr>
+                        <div id="res">
+                            <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                                <Col xl={12}>
+                                    <Table>
+                                        <tr>
+                                            <th>
+                                                Date
+                                                    </th>
+                                            <th>
+                                                Total                                                    </th>
+                                            <th>
+                                                Two Queens                                                    </th>
+                                            <th>
+                                                King                                                    </th>
+                                            <th>
+                                                Suite
+                                                    </th>
+                                        </tr>
 
-                                </thead>
-                                <tbody>
-                                    {/* <!-- Results from DB here --> */}
-                                </tbody>
-                            </table>
+                                        <tr>
+                                            <td>{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
+                                            <td>{this.state.selectedDate}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
 
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+                                    </Table>
+                                </Col>
+
+
+                            </Row >
                         </div>
-                    </row>
-                </Col >
-            </Row >
+                    </Col>
+                </Row>
+            </Container>
+
         )
     }
 }
+
+
 
 export default DetailedAvailability;

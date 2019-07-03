@@ -19,3 +19,9 @@
 .InputFromTo-to .DayPickerInput-Overlay {
   margin-left: -198px;
 }
+
+.InputFromTo-to .DayPickerInput{
+  margin-left: 32px;
+  width: 10px;
+
+}

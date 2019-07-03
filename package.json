@@ -36,6 +36,7 @@
     "react-moment": "^0.9.2",
     "react-open-weather": "^0.4.0",
     "react-particles-js": "^2.6.0",
-    "react-select": "^3.0.4"
+    "react-select": "^3.0.4",
+    "react-table": "^6.10.0"
   }
 }

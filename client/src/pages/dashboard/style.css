@@ -1,16 +1,8 @@
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
-h5{
-  text-align: center;
-}
-#dashboardTable {
-  margin: 20px 60px 20px;
-  padding: 30px 50px;
-  height: 700px;
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-left: 10px;
 }
 
 .btn-group a {
@@ -27,7 +19,6 @@ h5{
 }
 .card {
   background-color: rgba(255, 255, 255, 0.833);
-
 }
 .card-body {
   text-align: center;
@@ -42,10 +33,6 @@ h5{
   color: black;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: #faee03 !important;
-  
-
 }
-
-

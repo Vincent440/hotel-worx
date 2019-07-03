@@ -1,13 +1,14 @@
 import React from 'react';
 import moment from 'moment';
 import Helmet from 'react-helmet';
+import "./style.css";
 
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 
 import { formatDate, parseDate } from 'react-day-picker/moment';
 
-export default class dateRange extends React.Component {
+  export default class dateRange extends React.Component {
   constructor(props) {
     super(props);
     this.handleFromChange = this.handleFromChange.bind(this);
@@ -53,7 +54,7 @@ export default class dateRange extends React.Component {
             onDayClick: () => this.to.getInput().focus(),
           }}
           onDayChange={this.handleFromChange}
-        /> {' '} -
+        /> {' '} Departure  
        {' '}
         <span className="InputFromTo-to">
           <DayPickerInput

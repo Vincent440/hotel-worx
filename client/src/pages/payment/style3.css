@@ -6,11 +6,7 @@ h1 {
   color: red;
   line-height: 1em;
 }
-#dashboardTable1 {
-  margin: 20px 60px 40px;
-  padding: 30px 50px;
-  height: 700px;
-}
+
 
 #exit {
   float: right;
@@ -48,15 +44,6 @@ button {
 h2 {
   text-align: center;
 }
-
-#resInvoice table tr td {
-  width: 390px;
-  padding-left: 5px;
-  font-size: 16px;
-}
-#resInvoice table tr{
-  width: 100%;
-  }
 
 #revNew{
   margin-left: 20px;

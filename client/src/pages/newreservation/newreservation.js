@@ -66,25 +66,11 @@ class ReserveNew extends Component {
                     <Col sm={10}>
                         <Row>
                             <Col xl={12}>
-                                <Header>UPDATE RESERVATION</Header>
+                                <Header>NEW RESERVATIONS</Header>
                             </Col>
                         </Row>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
-                                <Col xl={2}>
-                                    Confirmation Number
-                                    </Col>
-                                <Col xl={1}>
-                                    <input
-                                        type="tel"
-                                        placeholder="Confirmation Number"
-                                        name="guestlastname"
-                                        value={this.state.lastname}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row style={{ marginTop: "5px" }}>
                                 <Col xl={1}>
                                     Arrival
                                         </Col>
@@ -108,7 +94,7 @@ class ReserveNew extends Component {
                                     />
                                 </Col>
                                 <Col xl={1}>
-                                    No of Rooms 
+                                    No of Rooms
                                         </Col>
                                 <Col xl={2}>
                                     <input
