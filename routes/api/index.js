@@ -6,9 +6,12 @@ const roomRoutes = require("./rooms");
 const testingRoutes = require("./testing");
 const currentInfoRoutes = require("./current-info");
 const loginRoute = require("./login");
-
-// login route for user auth for employees or managers
+const logoutRoute = require("./logout");
+// login route for employees or managers
 router.use("/login", loginRoute);
+
+// logout route for employees or managers
+router.use("/logout", logoutRoute);
 
 // '/api/users' for all routes involving Users
 router.use("/users", usersRoutes);

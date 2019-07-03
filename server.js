@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const app = express();
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 require('./controllers/passportController')(passport); // pass passport for configuration
@@ -9,11 +10,10 @@ require('./controllers/passportController')(passport); // pass passport for conf
 app.use(require('cookie-parser')());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(require('express-session')(
-    {
+app.use(session({
         secret: 'keyboardingkittencat',
-        resave: true,
-        saveUninitialized: true 
+        resave: false,
+        saveUninitialized: false
     })
 );
 
