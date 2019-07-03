@@ -11,7 +11,11 @@ export default {
             }));
     },
     createReservation: (data) => {
-        return axios.post('/api/testing/reservation', data)
+        return axios.post('/api/testing/reservation', {
+            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, data.creditCard, data.expirationDate, 1],
+            reserve: [1, ""],
+            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, "test_code", ""]]
+        })
             .then((response) => {
                 return response;
             })
@@ -91,8 +95,8 @@ export default {
                 console.log(error);
             });
     },
-    getAvailableRooms: () => {
-        return axios.get('/api/testing/room_types_available')
+    getAvailableRooms: (date) => {
+        return axios.get('/api/testing/room_types_available/' + date)
             .then((response) => {
                 return response.data;
             })
@@ -101,8 +105,7 @@ export default {
             });
     },
     getHouseKeepingStatus: (checked) => {
-        console.log(checked);
-        return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied)
+        return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
                 return response.data;
             })
