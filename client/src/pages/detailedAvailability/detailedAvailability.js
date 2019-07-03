@@ -16,10 +16,13 @@ class DetailedAvailability extends Component {
         roomType: "",
         availabilit: "",
         occupied: "",
+        availableRooms: [],
+        searchDate: "2019-07-03"
     };
 
     componentDidMount() {
-        api.getAvailableRooms()
+
+        api.getAvailableRooms(this.state.searchDate)
             .then(res => this.setState({ availableRooms: res }))
             .catch(err => console.log(err));
     }
@@ -51,12 +54,12 @@ class DetailedAvailability extends Component {
                                         ))}
                                     </tr>
                                     <tr>
-                                        <td className="tableTD" >{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
+                                        <td className="tableTD" >{this.state.searchDate && moment(this.state.searchDate).format("dddd")}</td>
                                         <td className="tableTD" >{this.state.selectedDate} </td>
                                         <td className="tableTD" > 10</td>
-                                        <td className="tableTD" > 4</td>
-                                        <td className="tableTD" > 4</td>
-                                        <td className="tableTD" > 2</td>
+                                        {this.state.availableRooms.map(type => (
+                                            <td key="type.room_type_id" className="tableTD">{type.available}</td>
+                                        ))}
                                     </tr>
                                 </thead>
                                 <tbody>

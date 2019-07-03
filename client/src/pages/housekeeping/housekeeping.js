@@ -204,14 +204,14 @@ class Housekeeping extends Component {
                                 </thead>
                                 <tbody>
                                     {this.state.searchResults.map(room => (
-                                        <tr key="room.room_id">
+                                        <tr key={room.room_id}>
                                             <td>{room.room_num}</td>
                                             <td>{room.type}</td>
                                             <td>
                                                 {room.active === 1 ? "" : "Out of Service - "}
                                                 {room.clean === 1 ? "Clean" : "Dirty"}
                                             </td>
-                                            <td>{room.occupied === 1 ? "Occupied" : "Empty"}</td>
+                                            <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
                                             <td>
                                                 {room.checked_in === 1 ? "Arrived" : ""}
                                                 {room.checked_out === 1 ? "Departed" : ""}

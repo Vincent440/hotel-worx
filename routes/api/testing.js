@@ -188,8 +188,8 @@ router.get("/room_types/:id", (req, res) => {
     });
 });
 
-router.get("/room_types_available", (req, res) => {
-    db.RoomType.selectAvailable((data) => {
+router.get("/room_types_available/:date", (req, res) => {
+    db.RoomType.selectAvailable([req.params.date, req.params.date], (data) => {
         res.json(data);
     });
 });
@@ -222,13 +222,14 @@ router.put("/room_types/:id", (req, res) => {
 // this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], "reserve": [1, ""], "rooms": [[2, "2019-08-12", "2019-08-15", 2, "20190621HW000001", "need a good view"]] }
 router.post("/reservation", (req, res) => {
     db.Customer.insertOne(req.body.cust, (result) => {
-        console.log(`Customer id ${result.insertId} has been added.`);
+        // console.log(`Customer id ${result.insertId} has been added.`);
         // result.insertId from the above query needs to be added to this query
         db.Reservation.insertOne(result.insertId, req.body.reserve, (result) => {
-            console.log(`Reservation id ${result.insertId} has been added.`);
+            const reservationId = result.insertId;
+            console.log(`Reservation id ${reservationId} has been added.`);
             // result.insertId from the above query needs to be added to this query for each row of rooms in the reservation
-            db.ResRoom.insertSome(result.insertId, req.body.rooms, (result) => {
-                res.status(200).send("Customer, Reservation and Associated Rooms have been added!");
+            db.ResRoom.insertSome(reservationId, req.body.rooms, (result) => {
+                res.status(200).send({ reservation_id: reservationId });
             });
         });
     });

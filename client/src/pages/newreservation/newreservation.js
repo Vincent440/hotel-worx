@@ -1,15 +1,28 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Select from 'react-select';
 import api from '../../utils/api';
 import Header from "../../components/Header";
-// import ButtonSubmit from "../../components/submitButton"
+import ButtonSubmit from "../../components/submitButton";
+
+// const test_reservation = { 
+//     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
+//     "reserve": ["0user_id", "1comments"],
+//     "rooms": [["0room_type_id", "1check_in_date", "2check_out_date", "2adults", "3confirmation_code", "4comments"]]
+// }
 
 
 class ReserveNew extends Component {
     state = {
+        arrivaldate: "",
+        departuredate: "",
+        nights: "",
+        adults: "",
+        numrooms: "",
+        roomtype: "",
         firstname: "",
         lastname: "",
         phone: "",
@@ -18,21 +31,18 @@ class ReserveNew extends Component {
         city: "",
         state: "",
         zip: "",
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        RoomTypes: [],
         creditCard: "",
-        expirationDate: ""
+        expirationDate: "",
+        RoomTypes: [],
+        reservationSuccess: false,
+        newReservationId: ""
     };
 
     // handle any changes to the input fields
     handleInputChange = event => {
         // Pull the name and value properties off of the event.target (the element which triggered the event)
+        // console.log(event.target.value);
         const { name, value } = event.target;
-
         // Set the state for the appropriate input field
         this.setState({
             [name]: value
@@ -40,19 +50,31 @@ class ReserveNew extends Component {
     }
     componentDidMount() {
         api.getRoomTypes()
-            .then(res => this.setState({ RoomTypes: res }))
+            .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
             .catch(err => console.log(err));
     }
 
     // When the form is submitted, prevent the default event and alert the username and password
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`Username: ${this.state.firstname}\nPassword: ${this.state.lastname}\nPhone: ${this.state.phone}\nEmail: ${this.state.email}\nAddress: ${this.state.address}\nCity: ${this.state.city}\nState: ${this.state.state}\nZip: ${this.state.zip}\nCredit Card #: ${this.state.creditCard}\nExpiration: ${this.state.expirationDate}`);
+        // alert(`Arrival Date: ${this.state.arrivaldate}\nDeparture Date: ${this.state.departuredate}\nAdults: ${this.state.adults}\nRoom Type: ${this.state.roomtype}\nNum Rooms: ${this.state.numrooms}\nUsername: ${this.state.firstname}\nPassword: ${this.state.lastname}\nPhone: ${this.state.phone}\nEmail: ${this.state.email}\nAddress: ${this.state.address}\nCity: ${this.state.city}\nState: ${this.state.state}\nZip: ${this.state.zip}\nCredit Card #: ${this.state.creditCard}\nExpiration: ${this.state.expirationDate}`);
+        api.createReservation(this.state)
+            .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
+            .catch(err => console.log(err));
     }
+
     render() {
 
-        return (
+        if (this.state.reservationSuccess) {
+            return (
+                <Redirect to={{
+                    pathname: '/ResConfirmation',
+                    state: { newReservationId: this.state.newReservationId }
+                }} />
+            )
+        }
 
+        return (
             <Row id="dashboardTable">
                 <InfoPart />
                 <Col sm={10}>
@@ -65,11 +87,10 @@ class ReserveNew extends Component {
                                     <td><p>Arrival Date</p></td>
                                     <td><input
                                         type="date"
-                                        name="departuredate"
+                                        name="arrivaldate"
                                         value={this.state.arrivaldate}
                                         onChange={this.handleInputChange}
                                     /></td>
-
                                     <td><p>Nights</p></td>
                                     <td><input
                                         id="smallWindow"
@@ -84,8 +105,8 @@ class ReserveNew extends Component {
                                         id="smallWindow"
                                         type="number"
                                         placeholder="Number of Rooms"
-                                        name="roomsnumber"
-                                        value={this.state.roomsnumber}
+                                        name="numrooms"
+                                        value={this.state.numrooms}
                                         onChange={this.handleInputChange}
                                     /></td>
                                     <td><p>Rate</p></td>
@@ -107,27 +128,27 @@ class ReserveNew extends Component {
                                         onChange={this.handleInputChange}
                                     /></td>
 
-                                    <td ><p>Adults</p></td>
+                                    <td><p>Adults</p></td>
                                     <td><input
                                         id="smallWindow"
                                         type="number"
-                                        name="adultnumber"
+                                        name="adults"
                                         placeholder="Adults"
-                                        value={this.state.adultnumber}
+                                        value={this.state.adults}
                                         onChange={this.handleInputChange}
                                     /></td>
-                                    <td ><p>Room Type: </p></td>
-                                    <td >
-                                        <select>
+                                    <td><p>Room Type: </p></td>
+                                    <td>
+                                        <select name="roomtype" onChange={this.handleInputChange}>
                                             {this.state.RoomTypes.map(type => (
-                                                <option key="type.room_type_id">{type.type}</option>
+                                                <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
                                             ))}
                                         </select>
 
                                     </td>
-                                    <td ><p>Room Number</p></td>
+                                    <td><p>Room Number</p></td>
                                     <td><Select
-                                        
+
                                     /></td>
                                 </tr>
                             </table>
@@ -232,8 +253,7 @@ class ReserveNew extends Component {
                                 </tr>
                             </table>
                         </div>
-                        {/* <ButtonSubmit handleSubmit={this.handleFormSubmit} /> */}
-                        <button type="submit" class="btn btn-primary" style={{marginLeft:"480px"}} onClick={this.handleFormSubmit}>Submit</button>
+                        <ButtonSubmit handleFormSubmit={this.handleFormSubmit} />
                     </form>
 
                 </Col>
