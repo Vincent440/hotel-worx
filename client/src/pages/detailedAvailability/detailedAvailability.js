@@ -8,6 +8,8 @@ import Header from "../../components/Header";
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 
+const todayDate = new Date().toISOString().slice(0,10);
+
 class DetailedAvailability extends Component {
     state = {
         selectedDate: "",
@@ -18,7 +20,7 @@ class DetailedAvailability extends Component {
         occupied: "",
         availableRooms: [],
         roomTypes: [],
-        searchDate: "2019-07-01"
+        searchDate: todayDate
     };
 
     componentDidMount() {

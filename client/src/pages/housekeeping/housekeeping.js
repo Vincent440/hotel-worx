@@ -101,7 +101,7 @@ class Housekeeping extends Component {
         this.setState({ checked: tempState });
     }
 
-    handleSearch = (event) => {
+    handleFormSubmit = (event) => {
         event.preventDefault();
         // console.log("handlesearch, state=", this.state.checked);
         api.getHouseKeepingStatus(this.state.checked)
@@ -273,7 +273,7 @@ class Housekeeping extends Component {
                                                 </tr>
                                                 <tbody>
                                                     {this.state.searchResults.map(room => (
-                                                        <tr key={room.room_id}>
+                                                        <tr key={room.room_num}>
                                                             <td>{room.room_num}</td>
                                                             <td>{room.type}</td>
                                                             <td>
@@ -282,8 +282,11 @@ class Housekeeping extends Component {
                                                             </td>
                                                             <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
                                                             <td>
-                                                                {room.checked_in === 1 ? "Arrived" : ""}
-                                                                {room.checked_out === 1 ? "Departed" : ""}
+                                                                {room.checked_in === 1 ? "Arrived, " : ""}
+                                                                {room.checked_out === 1 ? "Departed, " : ""}
+                                                                {room.arrival ? room.arrival : ""}
+                                                                {room.departure ? room.departure : ""}
+                                                                {room.stayover ? room.stayover : ""}
                                                             </td>
                                                         </tr>
                                                     ))}

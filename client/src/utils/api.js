@@ -46,15 +46,6 @@ export default {
                 console.log(error);
             });
     },
-    getReservation1: (id) => {
-        return axios.all([
-            axios.get('/api/testing/reservations/' + id),
-            axios.get('/api/testing/res_rooms/' + id)
-        ])
-            .then(axios.spread((resCust, resRooms) => {
-                return { resCust: resCust.data, resRooms: resRooms.data };
-            }));
-    },
     getDepartures: () => {
         return axios.get('/api/testing/departures')
             .then((response) => {
@@ -117,19 +108,11 @@ export default {
             .then(axios.spread((roomTypes, typeData) => {
                 return { roomTypes: roomTypes.data, typeData: typeData.data[1] };
             }));
-},
-getReservation1: (id) => {
-    return axios.all([
-        axios.get('/api/testing/reservations/' + id),
-        axios.get('/api/testing/res_rooms/' + id)
-    ])
-        .then(axios.spread((resCust, resRooms) => {
-            return { resCust: resCust.data, resRooms: resRooms.data };
-        }));
-},
+    },
     getHouseKeepingStatus: (checked) => {
         return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
+                console.log(response.data);
                 return response.data;
             })
             .catch((error) => {
