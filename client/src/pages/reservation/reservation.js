@@ -30,7 +30,7 @@ class Reservation extends Component {
     };
 
     componentDidMount() {
-        api.getReservation(1)
+        api.getReservation(3)
             .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
             .catch(err => console.log(err))
     }

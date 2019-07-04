@@ -80,7 +80,7 @@ class UpdateReservation extends Component {
                                 <Col xl={10}>
                                     <Row>
                                         <Col xl={1}>
-                                            Date
+                                            Arrival
                                         </Col>
                                         <Col xl={6}>
                                             <DateRange />

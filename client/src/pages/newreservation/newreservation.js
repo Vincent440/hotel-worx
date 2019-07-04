@@ -8,7 +8,8 @@ import Header from "../../components/Header";
 import DateRange from "../../components/dateRange/dateRange";
 import { Container, Table } from 'react-bootstrap';
 import CreditCardInput from 'react-credit-card-input';
-import { cardNumber, expiry, cvc } from 'react-credit-card-input';
+import { cvc } from 'react-credit-card-input';
+
 // import ButtonSubmit from "../../components/submitButton"
 import ButtonSubmit from "../../components/submitButton";
 
@@ -38,8 +39,15 @@ class ReserveNew extends Component {
         creditCard: "",
         expirationDate: "",
         reservationSuccess: false,
-        newReservationId: ""
+        newReservationId: "",
     };
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(e) {
+        this.props.onDayChange(e.target.value);
+    }
 
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -68,6 +76,8 @@ class ReserveNew extends Component {
 
     render() {
 
+        const { from, to } = this.props;
+
         if (this.state.reservationSuccess) {
             return (
                 <Redirect to={{
@@ -79,23 +89,30 @@ class ReserveNew extends Component {
 
         return (
             <Container>
-            <Row>
-                <Col sm={2}>
-                    <InfoPart />
-                </Col>
-                <Col sm={10}>
-                    <Row>
-                        <Col xl={12}>
-                            <Header>NEW RESERVATION</Header>
-                        </Col>
-                    </Row>
-                    <div id="res" style={{ paddingBottom: "10px" }}>
-                    <Row style={{ marginTop: "5px" }}>
+                <Row>
+                    <Col sm={2}>
+                        <InfoPart />
+                    </Col>
+                    <Col sm={10}>
+                        <Row>
+                            <Col xl={12}>
+                                <Header>NEW RESERVATION</Header>
+                            </Col>
+                        </Row>
+                        <div id="res" style={{ paddingBottom: "10px" }}>
+                            <Row style={{ marginTop: "5px" }}>
                                 <Col xl={1}>
                                     Arrival
                                         </Col>
                                 <Col xl={6}>
-                                    <DateRange />
+                                    <div>
+                                    <DateRange
+                                        value={from, to}
+                                        onChange={this.handleChange}
+                                    />
+                                     
+
+                                    </div>
                                 </Col>
 
                             </Row>
@@ -270,14 +287,16 @@ class ReserveNew extends Component {
                                     </Row>
                                     <Row style={{ marginTop: "5px" }}>
                                         <Col xl={2}>
-                                            Credir Card Number
+                                            Credit Card Number
                                         </Col>
                                         <Col xl={10}>
                                             <CreditCardInput
                                                 cardNumberInputProps={{ value: this.state.creditCard, onChange: this.handleCardNumberChange }}
                                                 cardExpiryInputProps={{ value: this.state.expirationDate, onChange: this.handleCardExpiryChange }}
+                                                cardCVCInputProps={{ value:this.state.cvc, onChange: this.handleCardCVCChange }}
                                                 fieldClassName="input"
-                                            /></Col>
+                                            />
+                                            </Col>
 
                                     </Row>
                                 </Col>

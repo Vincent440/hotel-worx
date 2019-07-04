@@ -27,7 +27,7 @@ class ReservationTest extends Component {
     };
 
     componentDidMount() {
-        api.getReservation(2)
+        api.getReservation(4)
             .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.result }))
             .catch(err => console.log(err));
         api.getRoomTypes()

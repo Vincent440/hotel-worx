@@ -69,8 +69,8 @@ class DetailedAvailability extends Component {
 
                                                 </tr>
                                                 <tr>
-                                                    <td className="tableTD" >{this.state.searchDate && moment(this.state.searchDate).format("dddd")}</td>
-                                                    <td className="tableTD" >{this.state.searchDate} </td>
+                                                    <td className="tableTD" >{this.state.selectedDate && moment(this.state.selectedDate).format("dddd")}</td>
+                                                    <td className="tableTD" >{this.state.selectedDate} </td>
                                                     <td className="tableTD" > 10</td>
                                                     {this.state.availableRooms.map(type => (
                                                         <td key="type.room_type_id" className="tableTD">{type.available}</td>

@@ -8,7 +8,7 @@ import 'react-day-picker/lib/style.css';
 
 import { formatDate, parseDate } from 'react-day-picker/moment';
 
-  export default class dateRange extends React.Component {
+export default class DateRange extends React.Component {
   constructor(props) {
     super(props);
     this.handleFromChange = this.handleFromChange.bind(this);
@@ -54,7 +54,7 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
             onDayClick: () => this.to.getInput().focus(),
           }}
           onDayChange={this.handleFromChange}
-        /> {' '} Departure  
+        /> {' '} Departure
        {' '}
         <span className="InputFromTo-to">
           <DayPickerInput
@@ -76,7 +76,7 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
           />
         </span>
         <Helmet>
-        
+
         </Helmet>
       </div>
     );
