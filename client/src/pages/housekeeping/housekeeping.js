@@ -244,8 +244,8 @@ class Housekeeping extends Component {
                                             </Row>
                                         </Col>
                                         <Col xl={2} style={{ marginTop: "30px", textAlign: "center" }}>
-                                            {/* <SearchSubmit /> */}
-                                            <button type="button" class="btn btn-primary" style={{ marginLeft: "40%" }} onClick={this.handleSearch}>Search</button>
+                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                                            {/* <button type="button" class="btn btn-primary" style={{ marginLeft: "40%" }} onClick={this.handleSearch}>Search</button> */}
                                         </Col>
                                     </Row>
                                 </div>

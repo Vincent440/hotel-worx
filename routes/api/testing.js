@@ -115,7 +115,7 @@ router.get("/rooms_dirty", (req, res) => {
 });
 
 router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:arrived/:stayOver/:dueOut/:departed/:notReserved", (req, res) => {
-    const conditions = [];
+    let conditions = [];
     let c1;
     if (req.params.clean === "true" && req.params.dirty === "false") {
         c1 = "rm.clean=1";
@@ -125,11 +125,9 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
         c1 = "(rm.clean=1 || rm.clean=0)";
     }
     conditions.push(c1);
-
     let c2;
     req.params.oos === "true" ? c2 = "rm.active=0" : c2 = "(rm.active=1 || rm.active=0)";
     conditions.push(c2);
-
     let c3;
     if (req.params.vacant === "true" && req.params.occupied === "false") {
         c3 = "rm.occupied=0";
@@ -198,7 +196,7 @@ router.get("/room_types/:id", (req, res) => {
 });
 
 router.get("/room_types_available/:date", (req, res) => {
-    db.RoomType.selectAvailable([req.params.date, req.params.date], (data) => {
+    db.RoomType.selectAvailable(req.params.date, (data) => {
         res.json(data);
     });
 });
@@ -254,34 +252,52 @@ router.get("/reservations", (req, res) => {
 // this route gets a reservation by id with customer info
 router.get("/reservations/:id", (req, res) => {
     db.Reservation.selectOne(req.params.id, (result) => {
-        res.json({ result });
+        res.json(result);
     });
 });
 // this route gets all rooms associated with a reservation_id
 router.get("/res_rooms/:id", (req, res) => {
     db.ResRoom.selectSome(req.params.id, (result) => {
-        res.json({ result });
+        res.json(result);
     });
 });
 
-router.get("/todayArrivals", (req, res) => {
-    const condition = "rr.check_in_date=CURDATE()";
-    db.ResRoom.selectTodayArrivalsDepartures(condition, (result) => {
-        res.json({ result });
+router.get("/arrivals/:sdate/:edate/:fname/:lname/:cnum", (req, res) => {
+    console.log(req.params);
+    const todayDate = new Date().toISOString().slice(0,10);
+    let conditions = [];
+    let c1;
+    if (req.params.sdate !== "undefined" && req.params.edate !== "undefined") {
+        c1 = "(rr.check_in_date>='" + req.params.sdate + "' && rr.check_in_date<='" + req.params.edate + "')";
+        conditions.push(c1);
+    }
+    if (req.params.fname !== "undefined") {
+        conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
+    }
+    if (req.params.lname !== "undefined") {
+        conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
+    }
+    if (req.params.cnum !== "undefined") {
+        conditions.push("rr.confirmation_code LIKE '%" + req.params.cnum + "%'");
+    }
+    conditions.length===0 ? conditions.push("(rr.check_in_date='" + todayDate + "')") : conditions;
+    // const condition = "(rr.check_in_date>='" + req.params.sdate + "' && rr.check_in_date<='" + req.params.edate + "')";
+    db.ResRoom.selectArrivals(conditions, (result) => {
+        res.json(result);
     });
 });
 
-router.get("/todayDepartures", (req, res) => {
+router.get("/departures", (req, res) => {
     const condition = "rr.check_out_date=CURDATE()";
-    db.ResRoom.selectTodayArrivalsDepartures(condition, (result) => {
-        res.json({ result });
+    db.ResRoom.selectDepartures(condition, (result) => {
+        res.json(result);
     });
 });
 
 // this route will need to be sent data like this: { "vals": [[2, "2019-08-12", "2019-08-15", 2, "20190621HW000001", "need a good view"]] }
 router.post("/res_rooms", (req, res) => {
     db.ResRoom.insertSome(req.body.vals, (result) => {
-        res.json({ result });
+        res.json({result});
     });
 });
 
