@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "debugger": "concurrently \"node --inspect-brk server.js --ignore 'client/*'\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -25,9 +26,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "dist": "^0.1.2",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "mysql2": "^1.6.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",

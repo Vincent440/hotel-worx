@@ -26,6 +26,12 @@ class Housekeeping extends Component {
         searchResults: []
     };
 
+    componentDidMount() {
+        api.getHouseKeepingStatus(this.state.checked)
+            .then(res => this.setState({ searchResults: res }))
+            .catch(err => console.log(err));
+    }
+
     handleCheckboxChange = event => {
         let tempState = this.state.checked;
         switch (event.target.id) {
@@ -95,7 +101,7 @@ class Housekeeping extends Component {
         this.setState({ checked: tempState });
     }
 
-    handleSearch = (event) => {
+    handleFormSubmit = (event) => {
         event.preventDefault();
         // console.log("handlesearch, state=", this.state.checked);
         api.getHouseKeepingStatus(this.state.checked)
@@ -149,7 +155,7 @@ class Housekeeping extends Component {
                                             </Row>
                                         </Col>
                                         <Col xl={2} style={{ textAlign: "center" }}>
-                                            <button type="button" class="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
+                                            <button type="button" className="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
                                                 onClick={this.handleCheckboxChange}> Select All </button>
                                         </Col>
                                     </Row>
@@ -238,7 +244,8 @@ class Housekeeping extends Component {
                                             </Row>
                                         </Col>
                                         <Col xl={2} style={{ marginTop: "30px", textAlign: "center" }}>
-                                            <SearchSubmit />
+                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                                            {/* <button type="button" class="btn btn-primary" style={{ marginLeft: "40%" }} onClick={this.handleSearch}>Search</button> */}
                                         </Col>
                                     </Row>
                                 </div>
@@ -266,7 +273,7 @@ class Housekeeping extends Component {
                                                 </tr>
                                                 <tbody>
                                                     {this.state.searchResults.map(room => (
-                                                        <tr key={room.room_id}>
+                                                        <tr key={room.room_num}>
                                                             <td>{room.room_num}</td>
                                                             <td>{room.type}</td>
                                                             <td>
@@ -275,8 +282,11 @@ class Housekeeping extends Component {
                                                             </td>
                                                             <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
                                                             <td>
-                                                                {room.checked_in === 1 ? "Arrived" : ""}
-                                                                {room.checked_out === 1 ? "Departed" : ""}
+                                                                {room.checked_in === 1 ? "Arrived, " : ""}
+                                                                {room.checked_out === 1 ? "Departed, " : ""}
+                                                                {room.arrival ? room.arrival : ""}
+                                                                {room.departure ? room.departure : ""}
+                                                                {room.stayover ? room.stayover : ""}
                                                             </td>
                                                         </tr>
                                                     ))}
