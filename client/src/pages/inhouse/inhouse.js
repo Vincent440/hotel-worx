@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import Select from 'react-select';
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import SearchSubmit from "../../components/searchButton";
@@ -59,25 +58,11 @@ class Inhouse extends Component {
     }
     render() {
 
-        const { roomNumber } = [
-            { value: "101", label: "101" },
-            { value: "102", label: "102" },
-            { value: "103", label: "103" },
-            { value: "104", label: "104" },
-            { value: "105", label: "105" },
-            { value: "106", label: "106" },
-            { value: "107", label: "107" },
-            { value: "108", label: "108" },
-            { value: "109", label: "109" },
-            { value: "110", label: "110" },
-        ];
-
-
         const { selectedOption } = this.state;
 
         return (
 
-            
+
             <Container>
                 <Row>
                     <Col sm={2}>
@@ -92,21 +77,21 @@ class Inhouse extends Component {
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={10}>
-                                <Row style={{ marginTop: "5px" }}>
-                                    <Col xl={1}>
+                                    <Row style={{ marginTop: "5px" }}>
+                                        <Col xl={1}>
                                             Room No
                                         </Col>
                                         <Col xl={2} style={{ marginRight: "32px" }}>
-                                        <input
-                                    id=""
-                                    // value={roomNumber}
-                                    onChange={this.handleChange}
-                                    options={selectedOption}
-                                    name="roomnumber"
-                                    placeholder="Room Number"
-                                    value={this.state.roomNumber}
-                                    onChange={this.handleInputChange}
-                                />
+                                            <input
+                                                id=""
+                                                // value={roomNumber}
+                                                onChange={this.handleChange}
+                                                options={selectedOption}
+                                                name="roomnumber"
+                                                placeholder="Room Number"
+                                                value={this.state.roomNumber}
+                                                onChange={this.handleInputChange}
+                                            />
                                         </Col>
                                         <Col xl={1} style={{ marginRight: "22px" }}>
                                             Name
@@ -156,7 +141,7 @@ class Inhouse extends Component {
                                         </Col>
 
                                     </Row>
-                                    
+
                                 </Col>
 
 
@@ -173,39 +158,40 @@ class Inhouse extends Component {
                             <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                 <Col xl={12}>
                                     <Table>
-                                        <tr>
-                                            <th>
-                                                Name
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    Name
                                              </th>
-                                            <th>
-                                                Arrival Date
+                                                <th>
+                                                    Arrival Date
                                                     </th>
-                                            <th>
-                                                Departure Date
+                                                <th>
+                                                    Departure Date
                                                     </th>
-                                            <th>
-                                                Room Number
+                                                <th>
+                                                    Room Number
                                                     </th>
-                                            <th>
-                                                Room Type
+                                                <th>
+                                                    Room Type
                                                     </th>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                          
-                                        </tr>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
 
+                                            </tr>
+                                        </tbody>
                                     </Table>
                                 </Col>
                             </Row >

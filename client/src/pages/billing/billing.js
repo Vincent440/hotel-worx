@@ -4,6 +4,7 @@ import "./style.css";
 import InfoPart from "../../components/infoPart"
 import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton"
+import { Container, Table } from 'react-bootstrap';
 
 class Billing extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -36,84 +37,134 @@ class Billing extends Component {
 
     render() {
 
-      
+
         const { selectedOption } = this.state;
 
         return (
 
-            <Row id="dashboardTable1">
-                <InfoPart />
-                <Col sm={10}>
-                    <row>
-                        <form>
-                            <Header>FINANCE</Header>
-                            <div id="res">
-                                <tr>
-                                    <td><p>Room Number</p></td>
-                                    <td><input
-                                        id=""
-                                        onChange={this.handleChange}
-                                        options={selectedOption}
-                                        name="roomNumber"
-                                        placeholder="Room Number"
-                                        value={this.state.roomNumber}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>Name</p></td>
-                                    <td><input
-                                        type="text"
-                                        placeholder="Name"
-                                        name="guestname"
-                                        value={this.state.guestname}
-                                        onChange={this.handleInputChange}
-                                    /></td>
-                                    <td><p>Last Name</p></td>
-                                    <td><input
-                                        type="text"
-                                        placeholder="Last Name"
-                                        name="guestlastname"
-                                        value={this.state.lastname}
-                                        onChange={this.handleInputChange}
-                                    /></td>
+            <Container>
+                <Row>
+                    <Col sm={2}>
+                        <InfoPart />
+                    </Col>
+                    <Col sm={10}>
+                        <Row>
+                            <Col xl={12}>
+                                <Header>FINANCE</Header>
+                            </Col>
+                        </Row>
+                        <div id="res" style={{ paddingBottom: "10px" }}>
+                            <Row>
+                                <Col xl={12}>
 
-                                </tr>
-                                <tr>
-                                    <td><p>Stay Over</p></td>
-                                    <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                    <Row style={{paddingBottom:"15px"}}>
+                                        <Col xl={2}>
+                                            Room Number
+                                        </Col>
+                                        <Col xl={2}>
+                                            <input
+                                                id=""
+                                                onChange={this.handleChange}
+                                                options={selectedOption}
+                                                name="roomNumber"
+                                                placeholder="Room Number"
+                                                value={this.state.roomNumber}
+                                                onChange={this.handleInputChange}
+                                            /></Col>
+                                        <Col xl={1}>
+                                            Name
+                                        </Col>
+                                        <Col xl={2}>
+                                            <input
+                                                type="text"
+                                                placeholder="Name"
+                                                name="guestname"
+                                                value={this.state.guestname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                        <Col xl={2}>
+                                            Last Name
+                                    </Col>
+                                        <Col xl={2}>
+                                            <input
+                                                type="text"
+                                                placeholder="Last Name"
+                                                name="guestlastname"
+                                                value={this.state.lastname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
 
-                                    <td><p>Due Out</p></td>
-                                    <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                                    </Row>
 
-                                    <td><p>Checked Out</p></td>
-                                    <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
-                                    <td>
-                                        <SearchSubmit />
-                                    </td>
-                                </tr>
-                            </div>
-                        </form>
-                        <div id="guestinfo">
-                            <table id="result">
-                                <thead>
-                                    <tr>
-                                        <th className="th" id="room number">Room Number</th>
-                                        <th className="th" >Name</th>
-                                        <th className="th" id="arrival date">Arrival Date</th>
-                                        <th className="th" id="departure date">Departure Date</th>
-                                        <th className="th" id="balance">Balance</th>
-                                        <th className="th" id="status">Status</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {/* <!-- Results from DB here --> */}
-                                </tbody>
-                            </table>
+                                    <Row style={{backgroundColor: "#DCDCDC", paddingBottom:"5px", paddingTop:"5px", marginRight:"0px", marginLeft:"0px"}}>
+                                        <Col xi={12}>
+                                            <Row>
+                                                <Col xl={2}>
+                                                    Stay Over
+</Col>
+                                                <Col xl={2}>
+                                                    <input type="checkbox" id="myCheck" />
+                                                </Col>
+                                                <Col xl={2}>
+                                                    Due Out
+</Col>
+                                                <Col xl={1}>
+                                                    <input type="checkbox" id="myCheck" />
+                                                </Col>
+                                                <Col xl={2}>
+                                                    Checked Out
+</Col>
+                                                <Col xl={1}>
+                                                    <input type="checkbox" id="myCheck" />
+                                                </Col>
+                                            </Row>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{paddingTop:"15px", textAlign:"center"}}>
+                                        <Col xl={12}>
+                                            <SearchSubmit />
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
 
                         </div>
-                    </row>
-                </Col >
-            </Row >
+                        <div id="res">
+
+                            <Row style={{ paddingBottom: "20px" }}>
+                                <Col xl={12}>
+                                    <Table>
+                                        <tbody>
+                                            <tr>
+
+                                                <th className="th" id="room number">Room Number</th>
+                                                <th className="th" >Name</th>
+                                                <th className="th" id="arrival date">Arrival Date</th>
+                                                <th className="th" id="departure date">Departure Date</th>
+                                                <th className="th" id="balance">Balance</th>
+                                                <th className="th" id="status">Status</th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </Row>
+                        </div>
+                    </Col>
+                </Row>
+            </Container >
+
         )
     }
 }

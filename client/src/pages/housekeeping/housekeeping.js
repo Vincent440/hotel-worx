@@ -253,6 +253,7 @@ class Housekeeping extends Component {
                                     <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                         <Col xl={12}>
                                             <Table>
+                                                <tbody>
                                                 <tr>
                                                     <th>
                                                         Room
@@ -271,7 +272,6 @@ class Housekeeping extends Component {
 
                                                     </th>
                                                 </tr>
-                                                <tbody>
                                                     {this.state.searchResults.map(room => (
                                                         <tr key={room.room_num}>
                                                             <td>{room.room_num}</td>

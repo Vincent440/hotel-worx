@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import api from '../../utils/api';
-import Calendar from "../calendar";
-import { Row, Col } from 'react-grid-system';
+
 import logo from "./solidcolor.png";
-import { Card, ListGroup } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import "./style.css";
 import ReactWeather from 'react-open-weather';
 //Optional include of the default css styles 
@@ -32,7 +31,8 @@ class InfoPart extends Component {
                         apikey="96ccd12f1a9d49be80961318190107"
                         type="city"
                         city="Cleveland"
-                        units='F' /></div>
+                        units='F' />
+                        </div>
                 <p style={{ textAlign: "center" }}><i className="fa fa-gear" style={{ fontSize: '28px' }} /></p>
             </Card>
         )

@@ -113,22 +113,25 @@ class Arrivals extends Component {
                             <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                 <Col xl={12}>
                                     <Table>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Arrival Date</th>
-                                            <th>Departure Date</th>
-                                            <th>Room Number</th>
-                                            <th>Room Type</th>
-                                        </tr>
-                                        {this.state.arrivalsArray.map(arrival => (
-                                            <tr key={arrival.room_id}>
-                                                <td>{arrival.name}</td>
-                                                <td>{arrival.check_in_date}</td>
-                                                <td>{arrival.check_out_date}</td>
-                                                <td>{arrival.room_num}</td>
-                                                <td>{arrival.type}</td>
+                                        <tbody>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Arrival Date</th>
+                                                <th>Departure Date</th>
+                                                <th>Room Number</th>
+                                                <th>Room Type</th>
                                             </tr>
-                                        ))}
+                                            {this.state.arrivalsArray.map(arrival => (
+                                                <tr key={arrival.room_id}>
+                                                    <td>{arrival.name}</td>
+                                                    <td>{arrival.check_in_date}</td>
+                                                    <td>{arrival.check_out_date}</td>
+                                                    <td>{arrival.room_num}</td>
+                                                    <td>{arrival.type}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+
                                     </Table>
                                 </Col>
                             </Row >

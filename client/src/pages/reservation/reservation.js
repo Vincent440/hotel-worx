@@ -59,14 +59,6 @@ class Reservation extends Component {
     }
     render() {
 
-        const { options } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-        const { selectedOption } = this.state;
-
         return (
 
             <Row id="dashboardTable1">

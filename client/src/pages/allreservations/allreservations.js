@@ -55,13 +55,6 @@ class UpdateReservation extends Component {
     }
     render() {
 
-        const { options } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-        const { selectedOption } = this.state;
 
         return (
             <Container>
@@ -75,7 +68,7 @@ class UpdateReservation extends Component {
                                 <Header>ALL RESERVATIONS</Header>
                             </Col>
                         </Row>
-                        <div id="res" style={{paddingBottom:"10px"}}>
+                        <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={10}>
                                     <Row>
@@ -98,8 +91,8 @@ class UpdateReservation extends Component {
                                             />
                                         </Col>
                                     </Row>
-                                  
-                                    <Row style={{marginTop:"5px"}}>
+
+                                    <Row style={{ marginTop: "5px" }}>
                                         <Col xl={1}>
                                             Name
                                         </Col>
@@ -140,47 +133,48 @@ class UpdateReservation extends Component {
                         </div>
                         <div id="res">
 
-                            <Row style={{paddingBottom: "20px" }}>
+                            <Row style={{ paddingBottom: "20px" }}>
                                 <Col xl={12}>
                                     <Table>
-                                        <tr>
-                                            <th>
-                                                Last Name
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    Last Name
                                                     </th>
-                                            <th>
-                                                First Name
+                                                <th>
+                                                    First Name
                                                     </th>
-                                            <th>
-                                                Arrival Date
+                                                <th>
+                                                    Arrival Date
                                              </th>
-                                            <th>
-                                                Departure Date
+                                                <th>
+                                                    Departure Date
                                              </th>
-                                            <th>
-                                                Room Type
+                                                <th>
+                                                    Room Type
                                                     </th>
-                                            <th>
-                                                Status
+                                                <th>
+                                                    Status
                                               </th>
-                                        </tr>
+                                            </tr>
 
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
                                     </Table>
                                 </Col>
                             </Row>

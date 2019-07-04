@@ -4,7 +4,6 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
-import SearchSubmit from "../../components/searchButton";
 
 
 class HouseStatus extends Component {
@@ -60,15 +59,6 @@ class HouseStatus extends Component {
         this.setState({ username: "", password: "" });
     }
     render() {
-
-        const { options } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-        const { selectedOption } = this.state;
-
         return (
 
             <Row id="dashboardTable1">
