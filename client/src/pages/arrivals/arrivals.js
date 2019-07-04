@@ -13,7 +13,7 @@ const todayDate = new Date().toISOString().slice(0, 10);
 class Arrivals extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
-        startDateRange: undefined,
+        startDateRange: todayDate,
         endDateRange: undefined,
         firstname: undefined,
         lastname: undefined,

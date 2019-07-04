@@ -155,7 +155,7 @@ class Housekeeping extends Component {
                                             </Row>
                                         </Col>
                                         <Col xl={2} style={{ textAlign: "center" }}>
-                                            <button type="button" class="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
+                                            <button type="button" className="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
                                                 onClick={this.handleCheckboxChange}> Select All </button>
                                         </Col>
                                     </Row>
