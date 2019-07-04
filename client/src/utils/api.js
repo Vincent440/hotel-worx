@@ -32,8 +32,13 @@ export default {
                 console.log(error);
             });
     },
-    getArrivals: () => {
-        return axios.get('/api/testing/todayArrivals')
+    getArrivals: (criteria) => {
+        const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
+        const edate = criteria.endDateRange === "" ? "undefined" : criteria.endDateRange;
+        const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
+        const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
+        const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
+        return axios.get('/api/testing/arrivals/' + sdate + "/" + edate + "/" + fname + "/" + lname + "/" + cnum)
             .then((response) => {
                 return response.data;
             })
@@ -42,7 +47,7 @@ export default {
             });
     },
     getDepartures: () => {
-        return axios.get('/api/testing/todayDepartures')
+        return axios.get('/api/testing/departures')
             .then((response) => {
                 return response.data;
             })
@@ -96,17 +101,18 @@ export default {
             });
     },
     getAvailableRooms: (date) => {
-        return axios.get('/api/testing/room_types_available/' + date)
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        return axios.all([
+            axios.get('/api/testing/room_types'),
+            axios.get('/api/testing/room_types_available/' + date)
+        ])
+            .then(axios.spread((roomTypes, typeData) => {
+                return { roomTypes: roomTypes.data, typeData: typeData.data[1] };
+            }));
     },
     getHouseKeepingStatus: (checked) => {
         return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
+                console.log(response.data);
                 return response.data;
             })
             .catch((error) => {
