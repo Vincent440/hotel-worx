@@ -3,11 +3,12 @@ const passport = require("passport");
 const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 require('./controllers/passportController')(passport); // pass passport for configuration
 
-app.use(require('cookie-parser')());
+app.use(cookieParser('keyboardingkittencat'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({
