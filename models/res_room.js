@@ -6,7 +6,6 @@ const ResRoom = {
     },
     selectArrivals: (conditions, cb) => {
         formattedConditions = conditions.join(" && ");
-        console.log(formattedConditions);
         const queryString = "SELECT r.reservation_id, CONCAT(c.first_name, ' ', c.last_name) AS name, rr.res_room_id, DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, IFNULL(rm.room_num, 'N/A') AS room_num, rt.type FROM reservations AS r INNER JOIN customers AS c ON r.customer_id=c.customer_id INNER JOIN res_rooms AS rr ON r.reservation_id=rr.reservation_id INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id LEFT JOIN rooms AS rm ON rr.room_id=rm.room_id WHERE " + formattedConditions + " ORDER BY check_in_date ASC;";
         connection.query(queryString, (err, result) => {
             if (err) throw err;

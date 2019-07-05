@@ -26,10 +26,14 @@ class Housekeeping extends Component {
         searchResults: []
     };
 
-    componentDidMount() {
+    makeAxiosCall = () => {
         api.getHouseKeepingStatus(this.state.checked)
             .then(res => this.setState({ searchResults: res }))
             .catch(err => console.log(err));
+    }
+
+    componentDidMount() {
+        this.makeAxiosCall();
     }
 
     handleCheckboxChange = event => {
@@ -103,10 +107,7 @@ class Housekeeping extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-        // console.log("handlesearch, state=", this.state.checked);
-        api.getHouseKeepingStatus(this.state.checked)
-            .then(res => this.setState({ searchResults: res }))
-            .catch(err => console.log(err));
+        this.makeAxiosCall();
     }
 
     render() {
@@ -245,7 +246,6 @@ class Housekeeping extends Component {
                                         </Col>
                                         <Col xl={2} style={{ marginTop: "30px", textAlign: "center" }}>
                                             <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                            {/* <button type="button" class="btn btn-primary" style={{ marginLeft: "40%" }} onClick={this.handleSearch}>Search</button> */}
                                         </Col>
                                     </Row>
                                 </div>
@@ -277,16 +277,11 @@ class Housekeeping extends Component {
                                                             <td>{room.room_num}</td>
                                                             <td>{room.type}</td>
                                                             <td>
-                                                                {room.active === 1 ? "" : "Out of Service - "}
-                                                                {room.clean === 1 ? "Clean" : "Dirty"}
+                                                                {room.active === 0 ? room.inactive : (room.clean === 1 ? "Clean" : "Dirty")}
                                                             </td>
                                                             <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
                                                             <td>
-                                                                {room.checked_in === 1 ? "Arrived, " : ""}
-                                                                {room.checked_out === 1 ? "Departed, " : ""}
-                                                                {room.arrival ? room.arrival : ""}
-                                                                {room.departure ? room.departure : ""}
-                                                                {room.stayover ? room.stayover : ""}
+                                                                {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : (room.arrival ? room.arrival : "Not Reserved"))))))}
                                                             </td>
                                                         </tr>
                                                     ))}

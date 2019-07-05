@@ -21,6 +21,23 @@ class Arrivals extends Component {
         arrivalsArray: []
     };
 
+    makeAxiosCall = () => {
+        const criteria = {
+            startDateRange: this.state.startDateRange,
+            endDateRange: this.state.endDateRange,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            confirmationNumber: this.state.confirmationNumber
+        };
+        api.getArrivals(criteria)
+            .then(res => this.setState({ arrivalsArray: res }))
+            .catch(err => console.log(err));
+    }
+
+    componentDidMount() {
+        this.makeAxiosCall();
+    }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -29,17 +46,8 @@ class Arrivals extends Component {
     }
 
     handleFormSubmit = event => {
-        const criteria = {
-            startDateRange: this.state.startDateRange,
-            endDateRange: this.state.endDateRange,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            confirmationNumber: this.state.confirmationNumber
-        };
         event.preventDefault();
-        api.getArrivals(criteria)
-            .then(res => this.setState({ arrivalsArray: res }))
-            .catch(err => console.log(err));
+        this.makeAxiosCall();
     }
 
     render() {

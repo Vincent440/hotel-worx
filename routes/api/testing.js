@@ -125,9 +125,6 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
         c1 = "(rm.clean=1 || rm.clean=0)";
     }
     conditions.push(c1);
-    let c2;
-    req.params.oos === "true" ? c2 = "rm.active=0" : c2 = "(rm.active=1 || rm.active=0)";
-    conditions.push(c2);
     let c3;
     if (req.params.vacant === "true" && req.params.occupied === "false") {
         c3 = "rm.occupied=0";
@@ -139,20 +136,31 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
     conditions.push(c3);
     let criteria4 = [];
     if (req.params.arrival === "true") {
-        criteria4.push("rr.check_in_date=CURDATE()");
+        criteria4.push("(rr.check_in_date=CURDATE() && rr.checked_in=0)");
     }
     if (req.params.arrived === "true") {
-        criteria4.push("rr.checked_in=1");
+        criteria4.push("(rr.checked_in=1 && rr.check_in_date=CURDATE() && rr.checked_out=0)");
+    }
+    if (req.params.departed === "true") {
+        criteria4.push("rr.checked_out=1");
     }
     if (req.params.stayOver === "true") {
         criteria4.push("(CURDATE()>rr.check_in_date && CURDATE()<rr.check_out_date)");
     }
     if (req.params.dueOut === "true") {
-        criteria4.push("rr.check_out_date=CURDATE()");
+        criteria4.push("(rr.check_out_date=CURDATE() && rr.checked_out=0)");
+    }
+    if (req.params.notReserved === "true") {
+        criteria4.push("((rr.check_in_date IS NULL || (CURDATE() NOT BETWEEN rr.check_in_date AND rr.check_out_date)) && rm.active=1)");
     }
     const c4 = "(" + criteria4.join(" || ") + ")";
-    if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.stayOver === "true" || req.params.dueOut === "true") {
+    if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true") {
         conditions.push(c4);
+    }
+    if (req.params.oos === "true") {
+        conditions = ["rm.active=0"]
+    } else {
+        conditions.push("(rm.active=1 || rm.active=0)");
     }
     db.Room.housekeepingStatus(conditions, (data) => {
         res.json(data);
@@ -263,7 +271,6 @@ router.get("/res_rooms/:id", (req, res) => {
 });
 
 router.get("/arrivals/:sdate/:edate/:fname/:lname/:cnum", (req, res) => {
-    console.log(req.params);
     const todayDate = new Date().toISOString().slice(0,10);
     let conditions = [];
     let c1;

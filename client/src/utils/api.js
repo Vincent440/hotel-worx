@@ -33,6 +33,7 @@ export default {
             });
     },
     getArrivals: (criteria) => {
+        console.log(criteria);
         const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
         const edate = criteria.endDateRange === "" ? "undefined" : criteria.endDateRange;
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
