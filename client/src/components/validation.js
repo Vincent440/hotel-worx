@@ -5,11 +5,6 @@ import { Row, Col } from 'react-grid-system';
 
 class RegisterForm extends React.Component {
 
-    componentDidMount = () => {
-        setTimeout(() => {
-            console.log(this.state)
-        }, 5000 )
-    }
     render() {
         return (
             <div>

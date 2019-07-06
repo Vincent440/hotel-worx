@@ -86,7 +86,6 @@ class DetailedAvailability extends Component {
                                                     ))}
                                                    
                                                 </tbody>
-    
                                             </Table>
                                         </Col>
 
@@ -101,7 +100,5 @@ class DetailedAvailability extends Component {
                 )
             }
         }
-        
-        
-        
+
         export default DetailedAvailability;
