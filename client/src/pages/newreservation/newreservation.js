@@ -6,10 +6,10 @@ import InfoPart from "../../components/infoPart";
 import api from '../../utils/api';
 import Header from "../../components/Header";
 import DateRange from "../../components/dateRange/dateRange";
-import { Container, Table } from 'react-bootstrap';
-import ButtonSubmit from "../../components/submitButton";
+import { Container } from 'react-bootstrap';
 import RegisterForm from "../../components/validation";
 import moment from 'moment';
+import { throws } from "assert";
 
 // const test_reservation = { 
 //     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
@@ -20,10 +20,10 @@ import moment from 'moment';
 class ReserveNew extends Component {
     constructor(props) {
         super(props);
-        this.handleFromChange=this.handleFromChange.bind(this);
-        this.handleToChange=this.handleToChange.bind(this);
-        this.handleChange=this.handleChange.bind(this);
-        this.handleFormSubmit=this.handleFormSubmit.bind(this);
+        this.handleFromChange = this.handleFromChange.bind(this);
+        this.handleToChange = this.handleToChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
     state = {
@@ -42,6 +42,7 @@ class ReserveNew extends Component {
         noOfRooms: "",
         roomtype: "",
         RoomTypes: [],
+        roomtype: "",
         creditCard: "",
         expirationDate: "",
         reservationSuccess: false,
@@ -68,14 +69,14 @@ class ReserveNew extends Component {
     }
 
     handleChange(e) {
-       
+
         this.setState({
-            [e.target.name] : e.target.value,
+            [e.target.name]: e.target.value,
         });
 
     }
 
-      validateForm() {
+    validateForm() {
 
         let fields = this.state.fields;
         let errors = {};
@@ -92,19 +93,19 @@ class ReserveNew extends Component {
                 errors["firstname"] = "*Please enter alphabet characters only.";
             }
         }
-        if (!this.state.lastname ) {
+        if (!this.state.lastname) {
             formIsValid = false;
             errors["lastname"] = "*Please enter your lastname.";
         }
 
         if (typeof this.state.lastname !== "undefined") {
-            if (!this.state.lastname .match(/^[a-zA-Z ]*$/)) {
+            if (!this.state.lastname.match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
                 errors["lastname"] = "*Please enter alphabet characters only.";
             }
         }
 
-        if (!this.state.email ) {
+        if (!this.state.email) {
             formIsValid = false;
             errors["email"] = "*Please enter your email-ID.";
         }
@@ -169,13 +170,27 @@ class ReserveNew extends Component {
         }
     }
     makeAxiosCall = () => {
-        api.createReservation(this.state)
+
+        const data = {
+            firstname: this.state.firstname,
+            lastname:this.state.lastname,
+            address:this.state.address,
+            city:this.state.city,
+            state:this.state.state,
+            zip:this.state.zip,
+            email:this.state.email,
+            phone:this.state.phone,
+            creditCard:this.state.creditCard,
+            expirationDate:this.state.expirationDate,
+            departuredate: moment(this.state.departuredate).format('YYYY-MM-DD'),
+            arrivaldate: moment(this.state.arrivaldate).format('YYYY-MM-DD'),
+            adults:this.state.adults,
+            roomtype:this.state.roomtype
+        }
+        api.createReservation(data)
             .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
             .catch(err => console.log(err));
     }
-    
-  
-
 
 
     render() {
@@ -280,157 +295,24 @@ class ReserveNew extends Component {
                                 </div>
 
                                 <RegisterForm
-                                handleFormSubmit={this.handleFormSubmit}
-                                handleChange={this.handleChange}
-                                firstname={this.state.firstname}
-                                lastname={this.state.lastname}
-                                phone={this.state.phone}
-                                email={this.state.email}
-                                address={this.state.address}
-                                city={this.state.city}
-                                state={this.state.state}
-                                zip={this.state.zip}
-                                creditCard={this.state.creditCard}
-                                expirationDate={this.state.expirationDate}
-                                cvc={this.state.cvc}
-                                errors={this.state.errors}
+                                    handleFormSubmit={this.handleFormSubmit}
+                                    handleChange={this.handleChange}
+                                    firstname={this.state.firstname}
+                                    lastname={this.state.lastname}
+                                    phone={this.state.phone}
+                                    email={this.state.email}
+                                    address={this.state.address}
+                                    city={this.state.city}
+                                    state={this.state.state}
+                                    zip={this.state.zip}
+                                    creditCard={this.state.creditCard}
+                                    expirationDate={this.state.expirationDate}
+                                    cvc={this.state.cvc}
+                                    errors={this.state.errors}
                                 />
 
                             </Col>
                         </Row>
-
-                        {/* 
-                         <div id="guestinfo">
-                            <Row>
-                                <Col xl={10}>
-                                    <Row>
-                                        <Col xl={2}>
-                                            First Name
-                                        </Col>
-                                        <Col xl={3}>
-                                            <input
-                                                type="text"
-                                                placeholder="First Name"
-                                                name="firstname"
-                                                value={this.state.firstname}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={2}>
-                                            Last Name
-                                        </Col>
-                                        <Col xl={2}>
-                                            <input
-                                                type="text"
-                                                placeholder="Last Name"
-                                                name="lastname"
-                                                value={this.state.lastname}
-                                                onChange={this.handleInputChange}
-                                            /></Col>
-                                    </Row>
-                                    <Row style={{ marginTop: "5px" }}>
-                                        <Col xl={2}>
-                                            Phone Number
-                                        </Col>
-                                        <Col xl={3}>
-                                            <input
-                                                type="tel"
-                                                placeholder="Phone Number"
-                                                name="phone"
-                                                value={this.state.phone}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={2}>
-                                            Email Address
-                                        </Col>
-                                        <Col xl={2}>
-                                            <input
-                                                type="email"
-                                                placeholder="Email Address"
-                                                name="email"
-                                                value={this.state.email}
-                                                onChange={this.handleInputChange}
-                                            /></Col>
-                                    </Row>
-                                    <Row style={{ marginTop: "5px" }}>
-                                        <Col xl={2}>
-                                            Address
-                                        </Col>
-                                        <Col xl={3}>
-                                            <input
-                                                type="text"
-                                                placeholder="Adress"
-                                                name="address"
-                                                value={this.state.address}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-
-                                        <Col xl={2}>
-                                            <input
-                                                type="text"
-                                                placeholder="City"
-                                                name="city"
-                                                value={this.state.city}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={2}>
-                                            <input
-                                                type="text"
-                                                placeholder="State"
-                                                name="state"
-                                                value={this.state.state}
-                                                onChange={this.handleInputChange}
-                                            /></Col>
-                                        <Col xl={1}>
-                                            <input
-                                                type="text"
-                                                placeholder="ZipCode"
-                                                name="zip"
-                                                value={this.state.zip}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row style={{ marginTop: "5px" }}>
-                                        <Col xl={3}  style={{marginRight:"-85px", marginBottom:"10px"}}>
-                                            Credit Card Number
-                                        </Col>
-                                        <Col xl={9}>
-                                            <CreditCardInput   
-                                                cardNumberInputProps={{ value: this.state.creditCard, onChange: this.handleCardNumberChange }}
-                                                cardExpiryInputProps={{ value: this.state.expirationDate, onChange: this.handleCardExpiryChange }}
-                                                cardCVCInputProps={{ value: this.state.cvc, onChange: this.handleCardCVCChange }}
-                                                fieldClassName="input"
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col xl={2}>
-                                            Comments
-                                        </Col>
-                                        <Col xl={10}>
-                                        <input
-                                                type="text"
-                                                placeholder="Comment"
-                                                name="comment"
-                                                value={this.state.comment}
-                                                onChange={this.handleInputChange}
-                                                style={{backgroundColor:"#F0EAD6"}}
-                                            />
-                                            </Col>
-
-
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </div> */}
-
-
-                        {/* <ButtonSubmit handleSubmit={this.handleFormSubmit} /> */}
-                        {/* <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.handleFormSubmit}>Submit</button> */}
                     </Col>
                 </Row>
             </Container>
