@@ -285,7 +285,6 @@ class Housekeeping extends Component {
                                                             </td>
                                                         </tr>
                                                     ))}
-
                                                 </tbody>
                                             </Table>
                                         </Col>

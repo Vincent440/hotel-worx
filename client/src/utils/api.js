@@ -23,8 +23,8 @@ export default {
                 console.log(error);
             });
     },
-    getRoomTypes: () => {
-        return axios.get('/api/testing/room_types')
+    getReservations: () => {
+        return axios.get('/api/testing/reservations')
             .then((response) => {
                 return response.data;
             })
@@ -121,9 +121,3 @@ export default {
             });
     }
 }
-
-// const test_reservation = { 
-//     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
-//     "reserve": ["0user_id", "1comments"],
-//     "rooms": [["0room_type_id", "1check_in_date", "2check_out_date", "2adults", "3confirmation_code", "4comments"]]
-// }
