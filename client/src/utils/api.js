@@ -32,6 +32,15 @@ export default {
                 console.log(error);
             });
     },
+    getRoomTypes: () => {
+        return axios.get('/api/testing/room_types')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getArrivals: (criteria) => {
         console.log(criteria);
         const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
