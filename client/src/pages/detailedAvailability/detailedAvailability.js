@@ -8,7 +8,11 @@ import Header from "../../components/Header";
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 
+<<<<<<< HEAD
+const todayDate = new Date().toISOString().slice(0, 10);
+=======
 const today = moment().format("YYYY-MM-DD");
+>>>>>>> c67563503235f59d021b1eb9ceec1c76017a24fc
 
 class DetailedAvailability extends Component {
     state = {
@@ -66,23 +70,27 @@ class DetailedAvailability extends Component {
                                     <Row style={{ paddingBottom: "20px" }}>
                                         <Col xl={12}>
                                             <Table>
-                                                <tr>
-                                                    <th className="th" id="date">Date</th>
-                                                    {this.state.roomTypes.map(type => (
-                                                        <th key={type.room_type_id} className="th">{type.type}</th>
-                                                    ))}
-                                                    <th className="th" id="total" >Total Rooms</th>
-                                                </tr>
-                                                {this.state.availableRooms.map(tot => (
-                                                    <tr key={tot.date}>
-                                                        <td className="tableTD">{tot.date} ({moment(tot.date).format("dddd")})</td>
-                                                        {/* <td className="tableTD">{tot.date}</td> */}
-                                                        <td className="tableTD">{tot.RoomType1}</td>
-                                                        <td className="tableTD">{tot.RoomType2}</td>
-                                                        <td className="tableTD">{tot.RoomType3}</td>
-                                                        <td className="tableTD">{tot.TotalRooms}</td>
+                                                <tbody>
+                                                    <tr>
+                                                        <th className="th" id="date">Date</th>
+                                                        {this.state.roomTypes.map(type => (
+                                                            <th key={type.room_type_id} className="th">{type.type}</th>
+                                                        ))}
+                                                        <th className="th" id="total" >Total Rooms</th>
                                                     </tr>
-                                                ))}
+                                                    {this.state.availableRooms.map(tot => (
+                                                        <tr key={tot.date}>
+                                                            <td className="tableTD">{tot.date} ({moment(tot.date).format("dddd")})</td>
+                                                            {/* <td className="tableTD">{tot.date}</td> */}
+                                                            <td className="tableTD">{tot.RoomType1}</td>
+                                                            <td className="tableTD">{tot.RoomType2}</td>
+                                                            <td className="tableTD">{tot.RoomType3}</td>
+                                                            <td className="tableTD">{tot.TotalRooms}</td>
+                                                    </tr>
+                                                    ))}
+                                                   
+                                                </tbody>
+    
                                             </Table>
                                         </Col>
 
@@ -94,10 +102,10 @@ class DetailedAvailability extends Component {
                 </Row>
             </Container >
 
-        )
-    }
-}
-
-
-
-export default DetailedAvailability;
+                )
+            }
+        }
+        
+        
+        
+        export default DetailedAvailability;

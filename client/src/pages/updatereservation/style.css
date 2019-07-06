@@ -46,6 +46,8 @@ p {
   border: 2px solid black;
   border-radius: 5px;
   margin-bottom: 10px;
+  max-width: 100%;
+
 }
 #saveButton {
   size: 30px;
