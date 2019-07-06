@@ -12,6 +12,7 @@ body {
   );
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 150px;
 }
 
 #root div div:nth-child(1) canvas {
