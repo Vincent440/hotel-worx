@@ -57,7 +57,7 @@ class Billing extends Component {
                             <Row>
                                 <Col xl={12}>
 
-                                    <Row style={{paddingBottom:"15px"}}>
+                                    <Row style={{ paddingBottom: "15px" }}>
                                         <Col xl={2}>
                                             Room Number
                                         </Col>
@@ -98,21 +98,23 @@ class Billing extends Component {
 
                                     </Row>
 
-                                    <Row style={{backgroundColor: "#DCDCDC", paddingBottom:"5px", paddingTop:"5px", marginRight:"0px", marginLeft:"0px"}}>
-                                        <Col xi={12}>
+                                    <Row style={{ paddingBottom: "5px", paddingTop: "5px", marginRight: "0px", marginLeft: "0px" }}>
+                                        <Col xl={10}>
                                             <Row>
                                                 <Col xl={2}>
                                                     Stay Over
 </Col>
-                                                <Col xl={2}>
+                                                <Col xl={1}>
                                                     <input type="checkbox" id="myCheck" />
                                                 </Col>
+
                                                 <Col xl={2}>
                                                     Due Out
 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="myCheck" />
                                                 </Col>
+
                                                 <Col xl={2}>
                                                     Checked Out
 </Col>
@@ -121,14 +123,14 @@ class Billing extends Component {
                                                 </Col>
                                             </Row>
                                         </Col>
-                                    </Row>
-                                    <Row style={{paddingTop:"15px", textAlign:"center"}}>
-                                        <Col xl={12}>
+                                        <Col xl={2}>
                                             <SearchSubmit />
                                         </Col>
+
                                     </Row>
                                 </Col>
                             </Row>
+
 
                         </div>
                         <div id="res">
@@ -162,7 +164,7 @@ class Billing extends Component {
                             </Row>
                         </div>
                     </Col>
-                </Row>
+                </Row >
             </Container >
 
         )

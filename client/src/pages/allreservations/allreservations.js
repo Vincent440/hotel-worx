@@ -69,59 +69,52 @@ class UpdateReservation extends Component {
                             </Col>
                         </Row>
                         <div id="res" style={{ paddingBottom: "10px" }}>
-                            <Row>
+                        <Row>
                                 <Col xl={10}>
                                     <Row>
-                                        <Col xl={1}>
-                                            Arrival
-                                        </Col>
-                                        <Col xl={6}>
+                                        <Col xl={1}>Arrival</Col>
+                                        <Col xl={8}>
                                             <DateRange />
                                         </Col>
-                                        <Col xl={2}>
-                                            Confirmation Nmb
-                                        </Col>
-                                        <Col xl={2}>
-                                            <input
-                                                type="tel"
-                                                placeholder="Confirmation Number"
-                                                name="confirmation"
-                                                value={this.state.confirmation}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
                                     </Row>
-
+                                
                                     <Row style={{ marginTop: "5px" }}>
-                                        <Col xl={1}>
-                                            Name
-                                        </Col>
-                                        <Col xl={2}>
+                                        <Col xl={1}>Name:</Col>
+                                        <Col xl={3}>
                                             <input
                                                 type="text"
-                                                placeholder="Name"
-                                                name="guestname"
-                                                value={this.state.guestname}
+                                                placeholder="First Name"
+                                                name="firstname"
+                                                value={this.state.firstname}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col xl={4}>
-                                        </Col>
-                                        <Col xl={2}>
-                                            Last Name
-                                            </Col>
-
+                                        <Col xl={3} style={{paddingLeft:"67px"}}>Last Name:</Col>
                                         <Col xl={2}>
                                             <input
                                                 type="text"
                                                 placeholder="Last Name"
-                                                name="guestlastname"
+                                                name="lastname"
                                                 value={this.state.lastname}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
                                     </Row>
+                                    <Row style={{ marginTop: "5px" }}>
+                                        <Col xl={3}>Confirmation Number:</Col>
+                                        <Col xl={1}>
+                                            <input
+                                                type="tel"
+                                                placeholder="Confirmation Number"
+                                                name="confirmationNumber"
+                                                value={this.state.confirmationNumber}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+
+                                    </Row>
                                 </Col>
+
 
                                 <Col xl={2} style={{ paddingTop: "25px", Left: "30px" }}>
                                     <Col xl={12}>

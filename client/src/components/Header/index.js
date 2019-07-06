@@ -11,7 +11,7 @@ const Header = props => {
                     </p>
                 </div>
                 <ul className="nav navbar-nav navbar-right">
-                    <Button className="btn navbar-right" href="/" type="submit"> X
+                    <Button className="btn navbar-right"  href="/" type="submit"> X
             </Button>
                 </ul>
             </div>

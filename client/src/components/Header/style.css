@@ -3,8 +3,14 @@
   border: 2px solid black;
   padding-left: 2px;
   color: black;
+  position: relative;
 }
 
 .navbar-brand {
   font-size: 22px;
-  margin-left: 20px;  }
+  position: absolute;
+  left: 45%;
+  margin-left: -50px !important; /* 50% of your logo width */
+  display: block;
+  top: 8px;
+}

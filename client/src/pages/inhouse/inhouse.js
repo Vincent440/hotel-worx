@@ -79,9 +79,9 @@ class Inhouse extends Component {
                                 <Col xl={10}>
                                     <Row style={{ marginTop: "5px" }}>
                                         <Col xl={1}>
-                                            Room No
+                                            Room:
                                         </Col>
-                                        <Col xl={2} style={{ marginRight: "32px" }}>
+                                        <Col xl={3} style={{ marginRight: "32px" }}>
                                             <input
                                                 id=""
                                                 // value={roomNumber}
@@ -93,44 +93,10 @@ class Inhouse extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col xl={1} style={{ marginRight: "22px" }}>
-                                            Name
-                                        </Col>
-                                        <Col xl={2} style={{ marginRight: "35px" }}>
-                                            <input
-                                                type="text"
-                                                placeholder="Name"
-                                                name="guestname"
-                                                value={this.state.guestname}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={2}>
-                                            Last Name:
-                                </Col>
-                                        <Col xl={2} style={{ marginleft: "80px" }}>
-                                            <input
-                                                type="text"
-                                                placeholder="Last Name"
-                                                name="guestlastname"
-                                                value={this.state.lastname}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-
-                                    </Row>
-                                    <Row>
-                                        <Col xl={1}>
-                                            Arrival
-                                        </Col>
-                                        <Col xl={6}>
-                                            <DateRange />
-                                        </Col>
-
-                                        <Col xl={2}>
+                                        <Col xl={3} style={{paddingLeft:"23px",  marginRight:"-17px"}}>
                                             Confirmation Number:
                                     </Col>
-                                        <Col xl={1}>
+                                        <Col xl={1} style={{paddingLeft:"-25px"}}>
                                             <input
                                                 type="tel"
                                                 placeholder="Confirmation Number"
@@ -139,7 +105,42 @@ class Inhouse extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-
+                                
+                                    </Row>
+                                    <Row style={{paddingTop:"3px"}}>
+                                        <Col xl={1}>
+                                            Arrival:
+                                        </Col>
+                                        <Col xl={8}>
+                                            <DateRange />
+                                        </Col>
+                                    </Row>
+                                    <Row style={{paddingTop:"3px"}}>
+                                    <Col xl={1}>
+                                            Name:
+                                        </Col>
+                                        <Col xl={3} style={{ marginRight: "35px" }}>
+                                            <input
+                                                type="text"
+                                                placeholder="Name"
+                                                name="guestname"
+                                                value={this.state.guestname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                        <Col xl={3}style={{paddingLeft:"31px", marginRight:"-20px"}}>
+                                            Last Name:
+                                </Col>
+                                        <Col xl={2} style={{paddingLeft:"-25px"}}>
+                                            <input
+                                                type="text"
+                                                placeholder="Last Name"
+                                                name="guestlastname"
+                                                value={this.state.lastname}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+                                        
                                     </Row>
 
                                 </Col>

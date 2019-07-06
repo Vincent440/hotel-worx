@@ -62,25 +62,14 @@ class Arrivals extends Component {
                                 <Col xl={10}>
                                     <Row>
                                         <Col xl={1}>Arrival</Col>
-                                        <Col xl={6}>
+                                        <Col xl={8}>
                                             <DateRange />
                                         </Col>
-
-                                        <Col xl={2}>Confirmation Number:</Col>
-                                        <Col xl={1}>
-                                            <input
-                                                type="tel"
-                                                placeholder="Confirmation Number"
-                                                name="confirmationNumber"
-                                                value={this.state.confirmationNumber}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-
                                     </Row>
+
                                     <Row style={{ marginTop: "5px" }}>
                                         <Col xl={1}>Name:</Col>
-                                        <Col xl={2} style={{ marginRight: "28px" }}>
+                                        <Col xl={3}>
                                             <input
                                                 type="text"
                                                 placeholder="First Name"
@@ -89,8 +78,8 @@ class Arrivals extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col xl={2} style={{ marginRight: "-62px" }}>Last Name:</Col>
-                                        <Col xl={2} style={{ marginRight: "38px" }}>
+                                        <Col xl={3} style={{ paddingLeft: "67px" }}>Last Name:</Col>
+                                        <Col xl={2}>
                                             <input
                                                 type="text"
                                                 placeholder="Last Name"
