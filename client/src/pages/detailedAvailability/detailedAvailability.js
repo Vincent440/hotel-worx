@@ -82,7 +82,6 @@ class DetailedAvailability extends Component {
                                                         <td className="tableTD">{tot.RoomType3}</td>
                                                         <td className="tableTD">{tot.TotalRooms}</td>
                                                     </tr>
-
                                                 ))}
                                             </Table>
                                         </Col>
