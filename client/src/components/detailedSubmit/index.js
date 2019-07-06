@@ -35,8 +35,7 @@ const DeatiledSubmit = props => {
                     </Row>
                 </Col>
                 <Col xl={2}>
-                    <SearchSubmit
-                    />
+                    <SearchSubmit handleFormSubmit={props.handleFormSubmit} />
                 </Col>
             </Row>
         </Col >

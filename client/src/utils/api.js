@@ -14,7 +14,7 @@ export default {
         return axios.post('/api/testing/reservation', {
             cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, data.creditCard, data.expirationDate, 1],
             reserve: [1, ""],
-            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, "test_code", ""]]
+            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, ""]]
         })
             .then((response) => {
                 return response;
@@ -23,8 +23,8 @@ export default {
                 console.log(error);
             });
     },
-    getRoomTypes: () => {
-        return axios.get('/api/testing/room_types')
+    getReservations: () => {
+        return axios.get('/api/testing/reservations')
             .then((response) => {
                 return response.data;
             })
@@ -33,6 +33,7 @@ export default {
             });
     },
     getArrivals: (criteria) => {
+        console.log(criteria);
         const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
         const edate = criteria.endDateRange === "" ? "undefined" : criteria.endDateRange;
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
@@ -120,9 +121,3 @@ export default {
             });
     }
 }
-
-// const test_reservation = { 
-//     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
-//     "reserve": ["0user_id", "1comments"],
-//     "rooms": [["0room_type_id", "1check_in_date", "2check_out_date", "2adults", "3confirmation_code", "4comments"]]
-// }
