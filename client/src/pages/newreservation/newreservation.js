@@ -38,7 +38,7 @@ class ReserveNew extends Component {
         arrivaldate: "",
         departuredate: "",
         nights: "",
-        adults: "",
+        adults: 1,
         noOfRooms: "",
         roomtype: "",
         RoomTypes: [],
