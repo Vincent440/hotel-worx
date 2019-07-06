@@ -14,7 +14,7 @@ export default {
         return axios.post('/api/testing/reservation', {
             cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, data.creditCard, data.expirationDate, 1],
             reserve: [1, ""],
-            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, "test_code", ""]]
+            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, ""]]
         })
             .then((response) => {
                 return response;

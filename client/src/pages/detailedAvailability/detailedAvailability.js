@@ -8,19 +8,18 @@ import Header from "../../components/Header";
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 
-const todayDate = new Date().toISOString().slice(0, 10);
+const today = moment().format("YYYY-MM-DD");
 
 class DetailedAvailability extends Component {
     state = {
-        selectedDate: todayDate,
+        selectedDate: today,
         nights: "",
         noOfRooms: "",
         roomType: "",
         availabilit: "",
         occupied: "",
         availableRooms: [],
-        roomTypes: [],
-        searchDate: todayDate
+        roomTypes: []
     };
 
     componentDidMount() {
@@ -28,7 +27,7 @@ class DetailedAvailability extends Component {
     }
 
     makeAxiosCall = () => {
-        api.getAvailableRooms(this.state.searchDate)
+        api.getAvailableRooms(this.state.selectedDate)
             .then(res => this.setState({ roomTypes: res.roomTypes, availableRooms: res.typeData }))
             .catch(err => console.log(err));
     }

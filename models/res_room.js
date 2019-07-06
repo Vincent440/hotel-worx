@@ -27,14 +27,28 @@ const ResRoom = {
         });
     },
     insertSome: (id, vals, cb) => {
-        const queryString = "INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_date, adults, confirmation_code, comments) VALUES (?,?,?,?,?,?,?);";
-        vals.forEach(function (room) {
+        const resIdLastThree = id.toString().slice(-3);
+        let rrNum;
+        let endOfCode;
+        const queryString = "INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_date, adults, confirmation_code, comments) VALUES (?,?,?,?,?,(CONCAT(DATE_FORMAT(CURDATE(), '%y%m%d'), ?)),?);";
+        vals.forEach(function (room, i) {
+            rrNum = ('00' + (i + 1)).slice(-3);
+            endOfCode = resIdLastThree + rrNum;
             room.unshift(id);
+            room.splice(5, 0, endOfCode);
             connection.execute(queryString, room, (err, result) => {
                 if (err) throw err;
             });
         });
         cb("finished inserting rooms");
+    },
+    updateConfirmationNumber: (vals, cb) => {
+        vals.push(id);
+        const queryString = "UPDATE res_rooms SET confirmation_code=CONCAT(CUDATE() + 'HW' + ?) WHERE res_room_id=?;";
+        connection.execute(queryString, [vals], (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
     }
 }
 

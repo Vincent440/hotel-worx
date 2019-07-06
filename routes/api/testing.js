@@ -233,17 +233,18 @@ router.put("/room_types/:id", (req, res) => {
     });
 });
 
-// { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration", "active"], "reserve": ["user_id", "comments"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults", "confirmation_code", "comments"], ["room_type_id", "check_in_date", "check_out_date", "adults", "confirmation_code", "comments"], ["room_type_id", "check_in_date", "check_out_date", "adults", "confirmation_code", "comments"]] }
-// this route will need to be sent data like this: { "cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], "reserve": [1, ""], "rooms": [[2, "2019-08-12", "2019-08-15", 2, "20190621HW000001", "need a good view"]] }
+// { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration", "active"], "reserve": ["user_id", "comments"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults", "comments"]] }
+// this route will need to be sent data like this:
+// { 
+// 	"cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], 
+// 	"reserve": [1, ""], 
+// 	"rooms": [[2, "2019-08-12", "2019-08-15", 2, "need a good view"], [1, "2019-08-12", "2019-08-17", 2, "want a late checkout"]] 
+// }
 router.post("/reservation", (req, res) => {
     db.Customer.insertOne(req.body.cust, (result) => {
-        // console.log(`Customer id ${result.insertId} has been added.`);
-        // result.insertId from the above query needs to be added to this query
         db.Reservation.insertOne(result.insertId, req.body.reserve, (result) => {
             const reservationId = result.insertId;
-            console.log(`Reservation id ${reservationId} has been added.`);
-            // result.insertId from the above query needs to be added to this query for each row of rooms in the reservation
-            db.ResRoom.insertSome(reservationId, req.body.rooms, (result) => {
+            db.ResRoom.insertSome(result.insertId, req.body.rooms, (result) => {
                 res.status(200).send({ reservation_id: reservationId });
             });
         });
