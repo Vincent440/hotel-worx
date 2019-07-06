@@ -8,29 +8,37 @@ import Header from "../../components/Header";
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 
-const todayDate = new Date().toISOString().slice(0,10);
+const today = moment().format("YYYY-MM-DD");
 
 class DetailedAvailability extends Component {
     state = {
-        selectedDate: "",
+        selectedDate: today,
         nights: "",
         noOfRooms: "",
         roomType: "",
         availabilit: "",
         occupied: "",
         availableRooms: [],
-        roomTypes: [],
-        searchDate: todayDate
+        roomTypes: []
     };
 
     componentDidMount() {
-        api.getAvailableRooms(this.state.searchDate)
+        this.makeAxiosCall();
+    }
+
+    makeAxiosCall = () => {
+        api.getAvailableRooms(this.state.selectedDate)
             .then(res => this.setState({ roomTypes: res.roomTypes, availableRooms: res.typeData }))
             .catch(err => console.log(err));
     }
 
     handleStartDate = event => {
         this.setState({ selectedDate: event.target.value })
+    }
+
+    handleFormSubmit = (event) => {
+        event.preventDefault();
+        this.makeAxiosCall();
     }
 
     render() {
@@ -50,9 +58,7 @@ class DetailedAvailability extends Component {
                             <Col xl={12}>
                                 <div id="res">
                                     <Row>
-                                        <DeatiledSubmit
-                                            handleStartDate={this.handleStartDate}
-                                        />
+                                        <DeatiledSubmit handleFormSubmit={this.handleFormSubmit} handleStartDate={this.handleStartDate} />
                                     </Row>
                                 </div>
                                 <div id="res">
@@ -63,14 +69,14 @@ class DetailedAvailability extends Component {
                                                 <tr>
                                                     <th className="th" id="date">Date</th>
                                                     {this.state.roomTypes.map(type => (
-                                                        <th key="type.room_type_id" className="th">{type.type}</th>
+                                                        <th key={type.room_type_id} className="th">{type.type}</th>
                                                     ))}
                                                     <th className="th" id="total" >Total Rooms</th>
                                                 </tr>
-                                                {/* <td className="tableTD" >{this.state.searchDate && moment(this.state.searchDate).format("dddd")}</td> */}
                                                 {this.state.availableRooms.map(tot => (
-                                                    <tr key="type.date">
-                                                        <td className="tableTD">{tot.date}</td>
+                                                    <tr key={tot.date}>
+                                                        <td className="tableTD">{tot.date} ({moment(tot.date).format("dddd")})</td>
+                                                        {/* <td className="tableTD">{tot.date}</td> */}
                                                         <td className="tableTD">{tot.RoomType1}</td>
                                                         <td className="tableTD">{tot.RoomType2}</td>
                                                         <td className="tableTD">{tot.RoomType3}</td>

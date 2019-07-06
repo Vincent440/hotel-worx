@@ -6,48 +6,45 @@ import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import DateRange from "../../components/dateRange/dateRange";
 import { Container, Table } from 'react-bootstrap';
-
+import api from '../../utils/api';
 
 class UpdateReservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
-        name: "",
-        lastname: "",
-        phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
+        criteria: {
+            firstname: "",
+            lastname: "",
+            sdate: "",
+            edate: "",
+            confirmationNumber: ""
         },
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        roomType: "",
-        creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
+        resRooms: []
     };
 
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
+    componentDidMount() {
+        this.makeAxiosCall();
     }
 
+    makeAxiosCall = () => {
+        api.getReservations(this.state.criteria)
+            .then(res => this.setState({ resRooms: res }))
+            .catch(err => console.log(err));
+    }
 
-    // handle any changes to the input fields
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.makeAxiosCall();
+
+    }
+
     handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
         const { name, value } = event.target;
 
-        // Set the state for the appropriate input field
         this.setState({
             [name]: value
         });
     }
 
-    // When the form is submitted, prevent the default event and alert the username and password
     handleFormSubmit = event => {
         event.preventDefault();
         alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
@@ -75,7 +72,7 @@ class UpdateReservation extends Component {
                                 <Header>ALL RESERVATIONS</Header>
                             </Col>
                         </Row>
-                        <div id="res" style={{paddingBottom:"10px"}}>
+                        <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={10}>
                                     <Row>
@@ -98,8 +95,8 @@ class UpdateReservation extends Component {
                                             />
                                         </Col>
                                     </Row>
-                                  
-                                    <Row style={{marginTop:"5px"}}>
+
+                                    <Row style={{ marginTop: "5px" }}>
                                         <Col xl={1}>
                                             Name
                                         </Col>
@@ -140,7 +137,7 @@ class UpdateReservation extends Component {
                         </div>
                         <div id="res">
 
-                            <Row style={{paddingBottom: "20px" }}>
+                            <Row style={{ paddingBottom: "20px" }}>
                                 <Col xl={12}>
                                     <Table>
                                         <tr>
@@ -164,22 +161,18 @@ class UpdateReservation extends Component {
                                               </th>
                                         </tr>
 
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        {this.state.resRooms.map(res => (
+                                            <tr key={res.res_room_id}>
+                                                <td>{res.last_name}</td>
+                                                <td>{res.first_name}</td>
+                                                <td>{res.check_in_date}</td>
+                                                <td>{res.check_out_date}</td>
+                                                <td>{res.type}</td>
+                                                <td>
+                                                    {res.active === 1 ? "Active" : "Cancelled"}
+                                                </td>
+                                            </tr>
+                                        ))}
 
                                     </Table>
                                 </Col>

@@ -6,20 +6,38 @@ import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import DateRange from "../../components/dateRange/dateRange";
 import api from '../../utils/api';
+import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 
-const todayDate = new Date().toISOString().slice(0, 10);
+const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
-        startDateRange: todayDate,
+        startDateRange: today,
         endDateRange: undefined,
         firstname: undefined,
         lastname: undefined,
         confirmationNumber: undefined,
         arrivalsArray: []
     };
+
+    makeAxiosCall = () => {
+        const criteria = {
+            startDateRange: this.state.startDateRange,
+            endDateRange: this.state.endDateRange,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            confirmationNumber: this.state.confirmationNumber
+        };
+        api.getArrivals(criteria)
+            .then(res => this.setState({ arrivalsArray: res }))
+            .catch(err => console.log(err));
+    }
+
+    componentDidMount() {
+        this.makeAxiosCall();
+    }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -29,17 +47,8 @@ class Arrivals extends Component {
     }
 
     handleFormSubmit = event => {
-        const criteria = {
-            startDateRange: this.state.startDateRange,
-            endDateRange: this.state.endDateRange,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            confirmationNumber: this.state.confirmationNumber
-        };
         event.preventDefault();
-        api.getArrivals(criteria)
-            .then(res => this.setState({ arrivalsArray: res }))
-            .catch(err => console.log(err));
+        this.makeAxiosCall();
     }
 
     render() {
