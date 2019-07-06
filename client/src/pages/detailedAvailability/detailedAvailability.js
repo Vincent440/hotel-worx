@@ -8,11 +8,7 @@ import Header from "../../components/Header";
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 
-<<<<<<< HEAD
-const todayDate = new Date().toISOString().slice(0, 10);
-=======
 const today = moment().format("YYYY-MM-DD");
->>>>>>> c67563503235f59d021b1eb9ceec1c76017a24fc
 
 class DetailedAvailability extends Component {
     state = {
@@ -90,7 +86,6 @@ class DetailedAvailability extends Component {
                                                     ))}
                                                    
                                                 </tbody>
-    
                                             </Table>
                                         </Col>
 
@@ -105,7 +100,5 @@ class DetailedAvailability extends Component {
                 )
             }
         }
-        
-        
-        
+
         export default DetailedAvailability;
