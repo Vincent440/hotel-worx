@@ -280,7 +280,7 @@ class ReserveNew extends Component {
 
 
                         {/* <ButtonSubmit handleSubmit={this.handleFormSubmit} /> */}
-                        <button type="submit" class="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.handleFormSubmit}>Submit</button>
+                        <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.handleFormSubmit}>Submit</button>
                     </Col>
                 </Row>
             </Container>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
-import Header from "../../components/Header"
+import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import { Container, Table } from 'react-bootstrap';
@@ -128,7 +128,7 @@ class Housekeeping extends Component {
                                 <div id="res">
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "#DCDCDC", paddingTop: "5px" }}>
+                                            <Row style={{ backgroundColor: "white", paddingTop: "5px" }}>
                                                 <Col xl={3}>
                                                     <h6 style={{ textAlign: "left" }}>Room Status: </h6>
                                                 </Col>
@@ -190,7 +190,7 @@ class Housekeeping extends Component {
                                     </Row>
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "#DCDCDC", paddingTop: "8px" }}>
+                                            <Row style={{ backgroundColor: "white", paddingTop: "8px" }}>
                                                 <Col xl={3}>
                                                     <h6> Reservation Status: </h6>
                                                 </Col>
@@ -217,7 +217,7 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{ backgroundColor: "#DCDCDC", paddingTop: "8px" }}>
+                                            <Row style={{paddingTop: "8px" }}>
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>
@@ -253,6 +253,7 @@ class Housekeeping extends Component {
                                     <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                         <Col xl={12}>
                                             <Table>
+                                                <tbody>
                                                 <tr>
                                                     <th>
                                                         Room
@@ -271,7 +272,6 @@ class Housekeeping extends Component {
 
                                                     </th>
                                                 </tr>
-                                                <tbody>
                                                     {this.state.searchResults.map(room => (
                                                         <tr key={room.room_num}>
                                                             <td>{room.room_num}</td>

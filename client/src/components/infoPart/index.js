@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import api from '../../utils/api';
-import Calendar from "../calendar";
-import { Row, Col } from 'react-grid-system';
 import logo from "./solidcolor.png";
-import { Card, ListGroup } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import "./style.css";
 import ReactWeather from 'react-open-weather';
 //Optional include of the default css styles 
 import 'react-open-weather/lib/css/ReactWeather.css';
 
 class InfoPart extends Component {
-
     state = {
         ReservationInfo: "",
-
     };
     componentDidMount() {
         api.getReservation()
@@ -32,13 +28,13 @@ class InfoPart extends Component {
                         apikey="96ccd12f1a9d49be80961318190107"
                         type="city"
                         city="Cleveland"
-                        units='F' /></div>
-                <p style={{ textAlign: "center" }}><i className="fa fa-gear" style={{ fontSize: '28px' }} /></p>
+                        units='F' />
+                        </div>
+                <i className="fa fa-gear" style={{ fontSize: '28px', textAlign:"center", paddingTop:"55px" }} />
             </Card>
         )
     }
 };
-
 
 
 export default InfoPart;

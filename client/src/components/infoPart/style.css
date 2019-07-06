@@ -21,6 +21,9 @@
   color: white;
 }
 
+#infoCard h5{
+  text-align: center;
+}
 #dashboardTable div div p div div.rw-main.type-today {
   text-align: center;
   border: 2px solid white;
@@ -46,6 +49,8 @@ h2 {
 #infoCard .card-text .rw-main.type-today {
   width: 80%;
   margin: 0 auto;
+  text-align: center;
+
 }
 #infoCard .card-text .rw-main.type-today .rw-box-left .date {
   font-size: 16px;
@@ -67,4 +72,5 @@ h2 {
 #infoCard .card-text .rw-main.type-today .rw-box-left .desc {
   color: black;
 }
+
 
