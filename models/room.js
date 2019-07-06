@@ -17,8 +17,7 @@ const Room = {
     },
     housekeepingStatus: (conditions, cb) => {
         formattedConditions = conditions.join(" && ");
-        console.log(formattedConditions);
-        const queryString = "SELECT rm.room_num, rm.clean, rm.occupied, rm.active, rt.type, rr.checked_in, rr.checked_out, rr.room_id, CASE WHEN rr.check_in_date=CURDATE() THEN ('Arrival') END AS arrival, CASE WHEN rr.check_out_date=CURDATE() THEN ('Due Out') END AS departure, CASE WHEN rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE() THEN ('Stay Over') END AS stayover, CASE WHEN rm.active=0 THEN ('Out of Service') END AS inactive FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id LEFT JOIN (SELECT * FROM res_rooms WHERE check_in_date<=CURDATE() && check_out_date>=CURDATE()) AS rr ON rm.room_id=rr.room_id WHERE " + formattedConditions + " ORDER BY room_num ASC;";
+        const queryString = "SELECT rm.room_num, rm.clean, rm.occupied, rm.active, rt.type, rr.checked_in, rr.checked_out, rr.room_id, CASE WHEN rr.check_in_date=CURDATE() THEN ('Arrival') END AS arrival, CASE WHEN rr.check_out_date=CURDATE() THEN ('Due Out') END AS departure, CASE WHEN rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE() THEN ('Stay Over') END AS stayover, CASE WHEN rm.active=0 THEN ('Out of Service') END AS inactive FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id LEFT JOIN (SELECT check_in_date, check_out_date, checked_in, checked_out, room_id FROM res_rooms WHERE check_in_date<=CURDATE() && check_out_date>=CURDATE()) AS rr ON rm.room_id=rr.room_id WHERE " + formattedConditions + " ORDER BY room_num ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);
