@@ -27,7 +27,6 @@ const ResRoom = {
         });
     },
     insertSome: (id, vals, cb) => {
-        console.log(vals);
         const resIdLastThree = id.toString().slice(-3);
         let rrNum;
         let endOfCode;
