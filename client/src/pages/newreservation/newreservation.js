@@ -39,11 +39,13 @@ class ReserveNew extends Component {
         nights: "",
         adults: 1,
         noOfRooms: "",
-        roomtype: "",
         RoomTypes: [],
-        roomtype: "",
+        roomtype: undefined,
+        rate: undefined,
         creditCard: "",
         expirationDate: "",
+        res_comments: "",
+        room_comments: "",
         reservationSuccess: false,
         newReservationId: "",
         errors: {}
@@ -58,11 +60,13 @@ class ReserveNew extends Component {
             this.to.getDayPicker().showMonth(from);
         }
     }
+
     handleFromChange(arrivaldate) {
         // Change the from date and focus the "to" input field
         this.setState({ arrivaldate });
 
     }
+
     handleToChange(departuredate) {
         this.setState({ departuredate }, this.showFromMonth);
     }
@@ -71,12 +75,10 @@ class ReserveNew extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-
     }
 
     validateForm() {
 
-        let fields = this.state.fields;
         let errors = {};
         let formIsValid = true;
 
@@ -128,31 +130,33 @@ class ReserveNew extends Component {
                 errors["phone"] = "*Please enter valid mobile no.";
             }
         }
+
         this.setState({
             errors: errors
         });
         return formIsValid;
 
     }
-    // handle any changes to the input fields
+
     handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
-        // console.log(event.target.value);
+        if (event.target.name === "roomtype") {
+            const roomKey = parseInt(event.target.value) - 1;
+            this.setState({ rate: this.state.RoomTypes[roomKey].rate });
+        }
         const { name, value } = event.target;
         // Set the state for the appropriate input field
         this.setState({
             [name]: value
         });
     }
+
     componentDidMount() {
         api.getRoomTypes()
-            .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
+            .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id, rate: res[0].rate }))
             .catch(err => console.log(err));
     }
 
-
     handleFormSubmit(e) {
-        console.log(this);
         e.preventDefault();
         if (this.validateForm()) {
             this.makeAxiosCall();
@@ -160,7 +164,6 @@ class ReserveNew extends Component {
         }
     }
     makeAxiosCall = () => {
-
         const data = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
@@ -175,25 +178,26 @@ class ReserveNew extends Component {
             departuredate: moment(this.state.departuredate).format('YYYY-MM-DD'),
             arrivaldate: moment(this.state.arrivaldate).format('YYYY-MM-DD'),
             adults: this.state.adults,
-            roomtype: this.state.roomtype
+            roomtype: this.state.roomtype,
+            rate: this.state.rate,
+            comments: this.state.room_comments
         }
         api.createReservation(data)
             .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
             .catch(err => console.log(err));
     }
 
-
     render() {
 
-
         if (this.state.reservationSuccess) {
+            localStorage.setItem('reservation_id', this.state.newReservationId);
             return (
                 <Redirect to={{
-                    pathname: '/ResConfirmation',
-                    state: { newReservationId: this.state.newReservationId }
+                    pathname: '/reserve/testreservation'
                 }} />
             )
         }
+        localStorage.setItem('reservation_id', this.state.newReservationId);
 
         return (
             <Container>
@@ -237,9 +241,9 @@ class ReserveNew extends Component {
                                                 type="number"
                                                 placeholder="Number of Nights"
                                                 name="nights"
-                                                value={this.state.departuredate &&Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))} 
-                                        
-                                            onChange={this.handleInputChange}
+                                                value={this.state.departuredate && Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))}
+
+                                                onChange={this.handleInputChange}
                                             />
                                         </Col>
                                         <Col xl={2}>
@@ -298,6 +302,7 @@ class ReserveNew extends Component {
                                     zip={this.state.zip}
                                     creditCard={this.state.creditCard}
                                     expirationDate={this.state.expirationDate}
+                                    comments={this.state.room_comments}
                                     cvc={this.state.cvc}
                                     errors={this.state.errors}
                                 />
@@ -311,6 +316,5 @@ class ReserveNew extends Component {
         )
     }
 }
-
 
 export default ReserveNew;

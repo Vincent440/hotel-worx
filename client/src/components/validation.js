@@ -108,8 +108,8 @@ class RegisterForm extends React.Component {
                                         <input
                                             type="text"
                                             placeholder="Comment"
-                                            name="comment"
-                                            value={this.props.comment}
+                                            name="room_comments"
+                                            value={this.props.comments}
                                             onChange={this.props.handleChange}
                                             style={{ backgroundColor: "#F0EAD6" }}
                                         />

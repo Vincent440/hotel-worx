@@ -16,7 +16,7 @@ const Reservation = {
         });
     },
     selectOne: (id, cb) => {
-        const queryString = "SELECT r.reservation_id, r.customer_id, r.user_id, DATE_FORMAT(r.created_at, '%b %d, %Y (%h:%i %p)') AS created_at, r.comments, r.active, c.first_name, c.last_name, c.address, c.city, c.state, c.zip, c.email, c.phone, c.credit_card_num, c.cc_expiration FROM reservations AS r INNER JOIN customers AS c ON r.customer_id=c.customer_id WHERE r.reservation_id=? LIMIT 1;";
+        const queryString = "SELECT r.reservation_id, r.customer_id, r.user_id, DATE_FORMAT(r.created_at, '%b %d, %Y (%h:%i %p)') AS created_at, r.comments, r.active, c.first_name, c.last_name, c.address, c.city, c.state, c.zip, c.email, c.phone, SUBSTRING(c.credit_card_num, -4) AS ccLastFour, c.cc_expiration FROM reservations AS r INNER JOIN customers AS c ON r.customer_id=c.customer_id WHERE r.reservation_id=? LIMIT 1;";
         connection.execute(queryString, [id], (err, result) => {
             if (err) throw err;
             cb(result);
