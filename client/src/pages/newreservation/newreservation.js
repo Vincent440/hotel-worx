@@ -9,7 +9,6 @@ import DateRange from "../../components/dateRange/dateRange";
 import { Container } from 'react-bootstrap';
 import RegisterForm from "../../components/validation";
 import moment from 'moment';
-import { throws } from "assert";
 
 // const test_reservation = { 
 //     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
@@ -69,7 +68,6 @@ class ReserveNew extends Component {
     }
 
     handleChange(e) {
-
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -130,7 +128,6 @@ class ReserveNew extends Component {
                 errors["phone"] = "*Please enter valid mobile no.";
             }
         }
-
         this.setState({
             errors: errors
         });
@@ -153,18 +150,11 @@ class ReserveNew extends Component {
             .catch(err => console.log(err));
     }
 
+
     handleFormSubmit(e) {
         console.log(this);
         e.preventDefault();
         if (this.validateForm()) {
-            // let fields = {};
-            // fields["firstname"] = "";
-            // fields["lastname"] = "";
-            // fields["email"] = "";
-            // fields["phone"] = "";
-            // fields["password"] = "";
-            // this.setState({ fields: fields });
-            // alert("Form submitted");
             this.makeAxiosCall();
 
         }
@@ -173,19 +163,19 @@ class ReserveNew extends Component {
 
         const data = {
             firstname: this.state.firstname,
-            lastname:this.state.lastname,
-            address:this.state.address,
-            city:this.state.city,
-            state:this.state.state,
-            zip:this.state.zip,
-            email:this.state.email,
-            phone:this.state.phone,
-            creditCard:this.state.creditCard,
-            expirationDate:this.state.expirationDate,
+            lastname: this.state.lastname,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            email: this.state.email,
+            phone: this.state.phone,
+            creditCard: this.state.creditCard,
+            expirationDate: this.state.expirationDate,
             departuredate: moment(this.state.departuredate).format('YYYY-MM-DD'),
             arrivaldate: moment(this.state.arrivaldate).format('YYYY-MM-DD'),
-            adults:this.state.adults,
-            roomtype:this.state.roomtype
+            adults: this.state.adults,
+            roomtype: this.state.roomtype
         }
         api.createReservation(data)
             .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
@@ -247,8 +237,9 @@ class ReserveNew extends Component {
                                                 type="number"
                                                 placeholder="Number of Nights"
                                                 name="nights"
-                                                value={this.state.nights}
-                                                onChange={this.handleInputChange}
+                                                value={this.state.departuredate &&Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))} 
+                                        
+                                            onChange={this.handleInputChange}
                                             />
                                         </Col>
                                         <Col xl={2}>

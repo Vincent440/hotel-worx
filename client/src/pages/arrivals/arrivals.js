@@ -12,24 +12,53 @@ import { Container, Table } from 'react-bootstrap';
 const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
+    constructor(props) {
+        super(props);
+        this.handleFromChange = this.handleFromChange.bind(this);
+        this.handleToChange = this.handleToChange.bind(this);
+
+    }
+
     // Setting the initial values of this.state.username and this.state.password
     state = {
-        startDateRange: today,
-        endDateRange: undefined,
+        startDateRange: "",
+        endDateRange: "",
         firstname: undefined,
         lastname: undefined,
         confirmationNumber: undefined,
         arrivalsArray: []
     };
+    showFromMonth() {
+        const { from, to } = this.state;
+        if (!from) {
+            return;
+        }
+        if (moment(to).diff(moment(from), 'months') < 2) {
+            this.to.getDayPicker().showMonth(from);
+        }
+    }
+    handleFromChange(startDateRange) {
+        // Change the from date and focus the "to" input field
+        this.setState({ startDateRange });
 
+    }
+    handleToChange(endDateRange) {
+        this.setState({ endDateRange }, this.showFromMonth);
+    }
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+    }
     makeAxiosCall = () => {
         const criteria = {
-            startDateRange: this.state.startDateRange,
-            endDateRange: this.state.endDateRange,
+            startDateRange: moment(this.state.startDateRange).format('YYYY-MM-DD'),
+            endDateRange: moment(this.state.endDateRange).format('YYYY-MM-DD'),
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             confirmationNumber: this.state.confirmationNumber
-        };
+        };       
+
         api.getArrivals(criteria)
             .then(res => this.setState({ arrivalsArray: res }))
             .catch(err => console.log(err));
@@ -52,9 +81,7 @@ class Arrivals extends Component {
     }
 
     render() {
-
         return (
-
             <Container>
                 <Row>
                     <Col sm={2}>
@@ -72,7 +99,12 @@ class Arrivals extends Component {
                                     <Row>
                                         <Col xl={1}>Arrival</Col>
                                         <Col xl={8}>
-                                            <DateRange />
+                                            <DateRange
+                                                handleFromChange={this.handleFromChange}
+                                                handleToChange={this.handleToChange}
+                                                from={this.state.startDateRange}
+                                                to={this.state.endDateRange}
+                                            />
                                         </Col>
                                     </Row>
 

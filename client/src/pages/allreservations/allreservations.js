@@ -7,26 +7,64 @@ import SearchSubmit from "../../components/searchButton";
 import DateRange from "../../components/dateRange/dateRange";
 import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
+import moment from 'moment';
+
 
 class UpdateReservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
+    constructor(props) {
+        super(props);
+        this.handleFromChange = this.handleFromChange.bind(this);
+        this.handleToChange = this.handleToChange.bind(this);
+
+    }
+
     state = {
-        criteria: {
-            firstname: "",
-            lastname: "",
-            sdate: "",
-            edate: "",
-            confirmationNumber: ""
-        },
+        firstname: "",
+        lastname: "",
+        sdate:undefined,
+        edate: undefined,
+        confirmationNumber: undefined,
         resRooms: []
     };
+    showFromMonth() {
+        const { from, to } = this.state;
+        if (!from) {
+            return;
+        }
+        if (moment(to).diff(moment(from), 'months') < 2) {
+            this.to.getDayPicker().showMonth(from);
+        }
+    }
+    handleFromChange(sdate) {
+        // Change the from date and focus the "to" input field
+        this.setState({ sdate });
+
+    }
+    handleToChange(edate) {
+        this.setState({ edate }, this.showFromMonth);
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+
+    }
 
     componentDidMount() {
         this.makeAxiosCall();
     }
 
     makeAxiosCall = () => {
-        api.getReservations(this.state.criteria)
+        const criteria = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            edate: moment(this.state.edate).format('YYYY-MM-DD'),
+            sdate: moment(this.state.sdate).format('YYYY-MM-DD'),
+            confirmationNumber: this.state.confirmationNumber
+        }
+        api.getReservations(criteria)
             .then(res => this.setState({ resRooms: res }))
             .catch(err => console.log(err));
     }
@@ -36,23 +74,15 @@ class UpdateReservation extends Component {
         this.makeAxiosCall();
 
     }
-
+ 
     handleInputChange = event => {
         const { name, value } = event.target;
-
         this.setState({
             [name]: value
         });
     }
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
-    }
     render() {
-
-
         return (
             <Container>
                 <Row>
@@ -71,7 +101,12 @@ class UpdateReservation extends Component {
                                     <Row>
                                         <Col xl={1}>Arrival</Col>
                                         <Col xl={8}>
-                                            <DateRange />
+                                            <DateRange
+                                                handleFromChange={this.handleFromChange}
+                                                handleToChange={this.handleToChange}
+                                                sdate={this.state.sdate}
+                                                edate={this.state.edate}
+                                            />
                                         </Col>
                                     </Row>
 
@@ -115,7 +150,7 @@ class UpdateReservation extends Component {
 
                                 <Col xl={2} style={{ paddingTop: "25px", Left: "30px" }}>
                                     <Col xl={12}>
-                                        <SearchSubmit />
+                                        <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
 
                                     </Col>
                                 </Col>
