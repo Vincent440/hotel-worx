@@ -2,8 +2,9 @@ import axios from "axios";
 
 export default {
     getReservation: (id) => {
+        console.log(id);
         return axios.all([
-            axios.get('/api/testing/reservations/' + id),
+            axios.get('/api/testing/reservation/' + id),
             axios.get('/api/testing/res_rooms/' + id)
         ])
             .then(axios.spread((resCust, resRooms) => {
@@ -11,10 +12,11 @@ export default {
             }));
     },
     createReservation: (data) => {
+        const fccNum = data.creditCard.replace(/ /g, "")
         return axios.post('/api/testing/reservation', {
-            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, data.creditCard, data.expirationDate, 1],
+            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate, 1],
             reserve: [1, ""],
-            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, ""]]
+            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments]]
         })
             .then((response) => {
                 return response;

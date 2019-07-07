@@ -157,10 +157,11 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
     if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true") {
         conditions.push(c4);
     }
+    if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true" || req.params.clean === "true" || req.params.dirty === "true" || req.params.vacant === "true" || req.params.occupied === "true") {
+        conditions.push("rm.active=1");
+    }
     if (req.params.oos === "true") {
         conditions = ["rm.active=0"]
-    } else {
-        conditions.push("(rm.active=1 || rm.active=0)");
     }
     db.Room.housekeepingStatus(conditions, (data) => {
         res.json(data);
@@ -259,7 +260,7 @@ router.get("/reservations", (req, res) => {
 
 // to get info about a reservation, both of these 2 queries need to be returned
 // this route gets a reservation by id with customer info
-router.get("/reservations/:id", (req, res) => {
+router.get("/reservation/:id", (req, res) => {
     db.Reservation.selectOne(req.params.id, (result) => {
         res.json(result);
     });
