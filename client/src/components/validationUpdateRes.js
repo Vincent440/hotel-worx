@@ -34,7 +34,8 @@ class RegisterForm extends React.Component {
                                         Phone Number
                                 </Col>
                                     <Col xl={3}>
-                                        <input type="text" name="phone" value={this.props.phone} onChange={this.props.handleChange} />
+                                        <input type="tel" name="phone"  placeholder="888 888 8888" pattern='[0-9]{3} [0-9]{3} [0-9]{4}' value={this.props.phone} onChange={this.props.handleChange} required/>
+
                                         <div className="errorMsg">{this.props.errors.phone}</div>
                                     </Col>
                                     <Col xl={2}>
@@ -122,7 +123,9 @@ class RegisterForm extends React.Component {
                     </Row>
 
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.props.handleFormSubmit}>Submit</button>
+                <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.props.handleFormSubmit}>Cancel Reservation</button>
+
+                <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Submit</button>
             </div>
 
         );
