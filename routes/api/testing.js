@@ -273,7 +273,7 @@ router.get("/res_rooms/:id", (req, res) => {
 });
 
 router.get("/arrivals/:sdate/:edate/:fname/:lname/:cnum", (req, res) => {
-    const todayDate = new Date().toISOString().slice(0,10);
+    const todayDate = new Date().toISOString().slice(0, 10);
     let conditions = [];
     let c1;
     if (req.params.sdate !== "undefined" && req.params.edate !== "undefined") {
@@ -289,9 +289,14 @@ router.get("/arrivals/:sdate/:edate/:fname/:lname/:cnum", (req, res) => {
     if (req.params.cnum !== "undefined") {
         conditions.push("rr.confirmation_code LIKE '%" + req.params.cnum + "%'");
     }
-    conditions.length===0 ? conditions.push("(rr.check_in_date='" + todayDate + "')") : conditions;
-    // const condition = "(rr.check_in_date>='" + req.params.sdate + "' && rr.check_in_date<='" + req.params.edate + "')";
+    conditions.length === 0 ? conditions.push("(rr.check_in_date='" + todayDate + "')") : conditions;
     db.ResRoom.selectArrivals(conditions, (result) => {
+        res.json(result);
+    });
+});
+
+router.get("/rooms_arrivals", (req, res) => {
+    db.Room.selectAllShort((result) => {
         res.json(result);
     });
 });
@@ -306,16 +311,23 @@ router.get("/departures", (req, res) => {
 // this route will need to be sent data like this: { "vals": [[2, "2019-08-12", "2019-08-15", 2, "20190621HW000001", "need a good view"]] }
 router.post("/res_rooms", (req, res) => {
     db.ResRoom.insertSome(req.body.vals, (result) => {
-        res.json({result});
+        res.json({ result });
     });
 });
 
 router.put("/cancelReservation/:id", (req, res) => {
     db.Reservation.cancelOne(req.params.id, (result) => {
         console.log(`Changed reservation_id ${result.affectedRows} to canceled.`);
-        db.ResRoom.deleteSome(req.params.id, (data) => {
+        db.ResRoom.cancelSome(req.params.id, (data) => {
             res.json(data);
         });
+    });
+});
+
+router.put("/checkinRoom/:id/:room_id", (req, res) => {
+    const vals = [req.params.room_id, req.params.id];
+    db.ResRoom.updateCheckIn(vals, (result) => {
+        res.json(result);
     });
 });
 

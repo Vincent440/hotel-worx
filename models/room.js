@@ -8,6 +8,13 @@ const Room = {
             cb(results);
         });
     },
+    selectAllShort: (cb) => {
+        const queryString = "SELECT rm.room_id, rm.room_num, rm.room_type_id  FROM rooms AS rm WHERE rm.active=1 ORDER BY room_num ASC;";
+        connection.query(queryString, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
     selectOne: (id, cb) => {
         const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE rm.room_id=? ORDER BY room_num ASC LIMIT 1;";
         connection.execute(queryString, [id], (err, results, fields) => {
