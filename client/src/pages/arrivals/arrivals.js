@@ -150,6 +150,7 @@ class Arrivals extends Component {
                                                 <th>Departure Date</th>
                                                 <th>Room Number</th>
                                                 <th>Room Type</th>
+                                                <th></th>
                                             </tr>
                                             {this.state.arrivalsArray.map(arrival => (
                                                 <tr key={arrival.room_id}>
@@ -158,6 +159,7 @@ class Arrivals extends Component {
                                                     <td>{arrival.check_out_date}</td>
                                                     <td>{arrival.room_num}</td>
                                                     <td>{arrival.type}</td>
+                                                    <td><button>Check In</button></td>
                                                 </tr>
                                             ))}
                                         </tbody>

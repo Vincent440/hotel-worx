@@ -222,11 +222,11 @@ class ReserveUpdate extends Component {
                         <Row>
                             <Col xl={12}>
                                 <div id="res" style={{ paddingBottom: "10px" }}>
-                                <Row style={{ paddingBottom: "5px" }}>
-                                        <Col xl={2}>
+                                    <Row style={{ paddingBottom: "5px" }}>
+                                        <Col xl={1}>
                                             Confirmation Number
                                     </Col>
-                                        <Col xl={1}>
+                                        <Col xl={3}>
                                             <input
                                                 type="tel"
                                                 placeholder="Confirmation Number"
@@ -235,6 +235,20 @@ class ReserveUpdate extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
+                                        <Col xl={2}>
+                                            Room Number
+                                    </Col>
+                                        <Col xl={2}>
+
+                                            <input
+                                                type="tel"
+                                                placeholder="Room Number"
+                                                name="roomnumber"
+                                                value={this.state.roomnumber}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={1}>
@@ -261,7 +275,7 @@ class ReserveUpdate extends Component {
                                                 type="number"
                                                 placeholder="Number of Nights"
                                                 name="nights"
-                                                value={this.state.departuredate &&Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))} 
+                                                value={this.state.departuredate && Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
@@ -295,7 +309,7 @@ class ReserveUpdate extends Component {
                                         </Col>
 
                                         <Col xl={2}>
-                                            Room Type:
+                                            Room Type
                                         </Col>
                                         <Col xl={2}>
                                             <select name="roomtype" onChange={this.handleInputChange}>
