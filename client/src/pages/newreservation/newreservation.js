@@ -202,10 +202,10 @@ class ReserveNew extends Component {
         return (
             <Container>
                 <Row>
-                    <Col sm={2}>
+                    <Col xl={2}>
                         <InfoPart />
                     </Col>
-                    <Col sm={10}>
+                    <Col xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>NEW RESERVATION</Header>

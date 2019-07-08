@@ -44,6 +44,7 @@ h1 {
     margin-bottom: 5px;
     margin-top: 5px;
     padding-top: 10px;
+    margin-left: -15px;
   }
   
   #guestinfo {
@@ -52,6 +53,7 @@ h1 {
     border-radius: 5px;
     margin-bottom: 10px;
     margin-top: 10px;
+    margin-left: -15px;
   }
   button{
   size: 30px;

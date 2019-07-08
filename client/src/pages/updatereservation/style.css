@@ -38,7 +38,7 @@ p {
   margin-bottom: 5px;
   margin-top: 5px;
   padding-top: 10px;
-
+  margin-left: -15px;
 }
 
 #guestinfo {
@@ -47,7 +47,7 @@ p {
   border-radius: 5px;
   margin-bottom: 10px;
   max-width: 100%;
-
+  margin-left: -15px;
 }
 #saveButton {
   size: 30px;
