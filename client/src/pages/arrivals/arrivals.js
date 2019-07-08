@@ -61,6 +61,10 @@ class Arrivals extends Component {
         api.getArrivals(criteria)
             .then(res => this.setState({ arrivalsArray: res }))
             .catch(err => console.log(err));
+
+        api.getRoomsArrivals(moment(this.state.startDateRange).format('YYYY-MM-DD'))
+            .then(res => this.setState({ roomsArray: res }))
+            .catch(err => console.log(err));
     }
 
     handleCheckIn = (id, room_id) => {
@@ -70,9 +74,6 @@ class Arrivals extends Component {
     }
 
     componentDidMount() {
-        api.getRoomsArrivals(moment(this.state.startDateRange).format('YYYY-MM-DD'))
-            .then(res => this.setState({ roomsArray: res }))
-            .catch(err => console.log(err));
         this.makeAxiosCall();
     }
 

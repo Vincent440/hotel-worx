@@ -56,7 +56,6 @@ export default {
             });
     },
     getRoomsArrivals: (date) => {
-        console.log("\nin api.js: " + date + "\n");
         return axios.get('/api/testing/rooms_arrivals/' + date)
             .then((response) => {
                 return response.data;

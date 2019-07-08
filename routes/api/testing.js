@@ -276,7 +276,6 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
     const todayDate = new Date().toISOString().slice(0, 10);
     let conditions = [];
     if (req.params.sdate !== "undefined") {
-        console.log("\nsdate: " + req.params.sdate);
         conditions.push("(rr.check_in_date='" + req.params.sdate + "')");
     }
     if (req.params.fname !== "undefined") {
@@ -295,7 +294,6 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
 });
 
 router.get("/rooms_arrivals/:date", (req, res) => {
-    console.log("\nin testing file: " + req.params.date + "\n");
     db.Room.selectAllShort(req.params.date, (result) => {
         res.json(result);
     });
