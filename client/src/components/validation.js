@@ -8,7 +8,7 @@ class RegisterForm extends React.Component {
     render() {
         return (
             <div>
-                <div id="guestinfo">
+                <div id="res">
                     <Row>
                         <Col xl={10}>
 
@@ -100,8 +100,8 @@ class RegisterForm extends React.Component {
                                         />
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col xl={2}>
+                                <Row style={{marginBottom:"20px"}}>
+                                    <Col xl={2} >
                                         Comments
                                         </Col>
                                     <Col xl={10}>
