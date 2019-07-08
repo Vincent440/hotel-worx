@@ -96,10 +96,11 @@ CREATE TABLE res_rooms (
     checked_out boolean DEFAULT 0,
     adults int(3) NOT NULL,
     room_id int(6),
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     rate decimal(5,2) NOT NULL,
     confirmation_code varchar(20) NULL,
     comments varchar(255),
-    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    active boolean DEFAULT 1,
     PRIMARY KEY (res_room_id)
 );
 
