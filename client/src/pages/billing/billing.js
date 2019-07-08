@@ -58,11 +58,11 @@ class Billing extends Component {
                                 <Col xl={12}>
 
                                     <Row style={{ paddingBottom: "15px" }}>
-                                        <Col xl={2}>
+                                        <Col xl={2} >
                                             Room Number
                                         </Col>
                                         <Col xl={2}>
-                                            <input
+                                            <input style={{width:"150px"}}
                                                 id=""
                                                 onChange={this.handleChange}
                                                 options={selectedOption}
@@ -83,10 +83,10 @@ class Billing extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col xl={2}>
+                                        <Col xl={2} style={{paddingRight:"30px"}}>
                                             Last Name
                                     </Col>
-                                        <Col xl={2}>
+                                        <Col xl={1}>
                                             <input
                                                 type="text"
                                                 placeholder="Last Name"
