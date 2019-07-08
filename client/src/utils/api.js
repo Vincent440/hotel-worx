@@ -44,11 +44,10 @@ export default {
     },
     getArrivals: (criteria) => {
         const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
-        const edate = criteria.endDateRange === "" ? "undefined" : criteria.endDateRange;
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
         const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
         const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
-        return axios.get('/api/testing/arrivals/' + sdate + "/" + edate + "/" + fname + "/" + lname + "/" + cnum)
+        return axios.get('/api/testing/arrivals/' + sdate + "/" + fname + "/" + lname + "/" + cnum)
             .then((response) => {
                 return response.data;
             })
@@ -56,8 +55,9 @@ export default {
                 console.log(error);
             });
     },
-    getRoomsArrivals: () => {
-        return axios.get('/api/testing/rooms_arrivals')
+    getRoomsArrivals: (date) => {
+        console.log("\nin api.js: " + date + "\n");
+        return axios.get('/api/testing/rooms_arrivals/' + date)
             .then((response) => {
                 return response.data;
             })

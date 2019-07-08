@@ -21,7 +21,7 @@ class Arrivals extends Component {
 
     // Setting the initial values of this.state.username and this.state.password
     state = {
-        startDateRange: "",
+        startDateRange: "2019-07-07",
         endDateRange: "",
         firstname: undefined,
         lastname: undefined,
@@ -39,7 +39,6 @@ class Arrivals extends Component {
         }
     }
     handleFromChange(startDateRange) {
-        // Change the from date and focus the "to" input field
         this.setState({ startDateRange });
 
     }
@@ -54,7 +53,6 @@ class Arrivals extends Component {
     makeAxiosCall = () => {
         const criteria = {
             startDateRange: moment(this.state.startDateRange).format('YYYY-MM-DD'),
-            endDateRange: moment(this.state.endDateRange).format('YYYY-MM-DD'),
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             confirmationNumber: this.state.confirmationNumber
@@ -66,22 +64,16 @@ class Arrivals extends Component {
     }
 
     handleCheckIn = (id, room_id) => {
-        // updateRoomCheckin
         api.updateRoomCheckin(id, room_id)
             .then(res => this.makeAxiosCall())
             .catch(err => console.log(err));
     }
 
     componentDidMount() {
-        api.getRoomsArrivals()
+        api.getRoomsArrivals(moment(this.state.startDateRange).format('YYYY-MM-DD'))
             .then(res => this.setState({ roomsArray: res }))
             .catch(err => console.log(err));
         this.makeAxiosCall();
-        // api.getRoomsArrivals()
-        //     .then(res => this.setState({ rooms: res }, () => {
-        //         this.makeAxiosCall();
-        //     }))
-        //     .catch(err => console.log(err));
     }
 
     handleInputChange = event => {

@@ -272,13 +272,12 @@ router.get("/res_rooms/:id", (req, res) => {
     });
 });
 
-router.get("/arrivals/:sdate/:edate/:fname/:lname/:cnum", (req, res) => {
+router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
     const todayDate = new Date().toISOString().slice(0, 10);
     let conditions = [];
-    let c1;
-    if (req.params.sdate !== "undefined" && req.params.edate !== "undefined") {
-        c1 = "(rr.check_in_date>='" + req.params.sdate + "' && rr.check_in_date<='" + req.params.edate + "')";
-        conditions.push(c1);
+    if (req.params.sdate !== "undefined") {
+        console.log("\nsdate: " + req.params.sdate);
+        conditions.push("(rr.check_in_date='" + req.params.sdate + "')");
     }
     if (req.params.fname !== "undefined") {
         conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
@@ -295,8 +294,9 @@ router.get("/arrivals/:sdate/:edate/:fname/:lname/:cnum", (req, res) => {
     });
 });
 
-router.get("/rooms_arrivals", (req, res) => {
-    db.Room.selectAllShort((result) => {
+router.get("/rooms_arrivals/:date", (req, res) => {
+    console.log("\nin testing file: " + req.params.date + "\n");
+    db.Room.selectAllShort(req.params.date, (result) => {
         res.json(result);
     });
 });

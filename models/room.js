@@ -8,11 +8,12 @@ const Room = {
             cb(results);
         });
     },
-    selectAllShort: (cb) => {
-        const queryString = "SELECT rm.room_id, rm.room_num, rm.room_type_id  FROM rooms AS rm WHERE rm.active=1 ORDER BY room_num ASC;";
-        connection.query(queryString, (err, results) => {
+    selectAllShort: (date, cb) => {
+        const preQueryString = "SET @input_date=?;";
+        const queryString = "SELECT rm.room_id, rm.room_num, rm.room_type_id, IFNULL(ae.avail, 'n/a') AS availability_end FROM rooms AS rm LEFT JOIN (SELECT room_id, MIN(check_in_date) AS avail FROM res_rooms WHERE check_in_date>@input_date && room_id IS NOT NULL GROUP BY room_id) AS ae ON rm.room_id=ae.room_id WHERE rm.active=1 && rm.room_id NOT IN (SELECT room_id FROM res_rooms WHERE room_id IS NOT NULL && check_in_date<=@input_date && check_out_date>@input_date);";
+        connection.query(preQueryString + queryString, [date], (err, results) => {
             if (err) throw err;
-            cb(results);
+            cb(results[1]);
         });
     },
     selectOne: (id, cb) => {
