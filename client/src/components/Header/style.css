@@ -10,7 +10,7 @@
 .navbar-brand {
   font-size: 22px;
   position: absolute;
-  left: 45%;
+  left: 40%;
   margin-left: -40px !important; /* 50% of your logo width */
   display: block;
   top: 8px;
