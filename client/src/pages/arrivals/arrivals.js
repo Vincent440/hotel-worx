@@ -21,7 +21,7 @@ class Arrivals extends Component {
 
     // Setting the initial values of this.state.username and this.state.password
     state = {
-        startDateRange: "2019-07-07",
+        startDateRange: today,
         endDateRange: "",
         firstname: undefined,
         lastname: undefined,
