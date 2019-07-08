@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
-import Header from "../../components/Header"
+import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import { Container, Table } from 'react-bootstrap';
@@ -26,10 +26,14 @@ class Housekeeping extends Component {
         searchResults: []
     };
 
-    componentDidMount() {
+    makeAxiosCall = () => {
         api.getHouseKeepingStatus(this.state.checked)
             .then(res => this.setState({ searchResults: res }))
             .catch(err => console.log(err));
+    }
+
+    componentDidMount() {
+        this.makeAxiosCall();
     }
 
     handleCheckboxChange = event => {
@@ -103,10 +107,7 @@ class Housekeeping extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-        // console.log("handlesearch, state=", this.state.checked);
-        api.getHouseKeepingStatus(this.state.checked)
-            .then(res => this.setState({ searchResults: res }))
-            .catch(err => console.log(err));
+        this.makeAxiosCall();
     }
 
     render() {
@@ -127,7 +128,7 @@ class Housekeeping extends Component {
                                 <div id="res">
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "#DCDCDC", paddingTop: "5px" }}>
+                                            <Row style={{ backgroundColor: "white", paddingTop: "5px" }}>
                                                 <Col xl={3}>
                                                     <h6 style={{ textAlign: "left" }}>Room Status: </h6>
                                                 </Col>
@@ -189,7 +190,7 @@ class Housekeeping extends Component {
                                     </Row>
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "#DCDCDC", paddingTop: "8px" }}>
+                                            <Row style={{ backgroundColor: "white", paddingTop: "8px" }}>
                                                 <Col xl={3}>
                                                     <h6> Reservation Status: </h6>
                                                 </Col>
@@ -216,7 +217,7 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{ backgroundColor: "#DCDCDC", paddingTop: "8px" }}>
+                                            <Row style={{paddingTop: "8px" }}>
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>
@@ -245,7 +246,6 @@ class Housekeeping extends Component {
                                         </Col>
                                         <Col xl={2} style={{ marginTop: "30px", textAlign: "center" }}>
                                             <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                            {/* <button type="button" class="btn btn-primary" style={{ marginLeft: "40%" }} onClick={this.handleSearch}>Search</button> */}
                                         </Col>
                                     </Row>
                                 </div>
@@ -253,6 +253,7 @@ class Housekeeping extends Component {
                                     <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
                                         <Col xl={12}>
                                             <Table>
+                                                <tbody>
                                                 <tr>
                                                     <th>
                                                         Room
@@ -271,26 +272,19 @@ class Housekeeping extends Component {
 
                                                     </th>
                                                 </tr>
-                                                <tbody>
                                                     {this.state.searchResults.map(room => (
                                                         <tr key={room.room_num}>
                                                             <td>{room.room_num}</td>
                                                             <td>{room.type}</td>
                                                             <td>
-                                                                {room.active === 1 ? "" : "Out of Service - "}
-                                                                {room.clean === 1 ? "Clean" : "Dirty"}
+                                                                {room.active === 0 ? room.inactive : (room.clean === 1 ? "Clean" : "Dirty")}
                                                             </td>
                                                             <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
                                                             <td>
-                                                                {room.checked_in === 1 ? "Arrived, " : ""}
-                                                                {room.checked_out === 1 ? "Departed, " : ""}
-                                                                {room.arrival ? room.arrival : ""}
-                                                                {room.departure ? room.departure : ""}
-                                                                {room.stayover ? room.stayover : ""}
+                                                                {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : (room.arrival ? room.arrival : "Not Reserved"))))))}
                                                             </td>
                                                         </tr>
                                                     ))}
-
                                                 </tbody>
                                             </Table>
                                         </Col>

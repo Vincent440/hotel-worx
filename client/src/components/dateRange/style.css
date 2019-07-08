@@ -21,7 +21,10 @@
 }
 
 .InputFromTo-to .DayPickerInput{
-  margin-left: 32px;
+  margin-left: 129px;
   width: 10px;
 
 }
+
+.InputFromTo .DayPickerInput{
+margin-right: 110px;}

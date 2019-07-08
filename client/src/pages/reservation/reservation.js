@@ -3,145 +3,83 @@ import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
+import Header from "../../components/Header";
 
 class Reservation extends Component {
-    // Setting the initial values of this.state.username and this.state.password
     state = {
-        name: "",
-        lastname: "",
-        phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
-        },
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        roomType: "",
-        creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
         ReservationInfo: {},
-        RoomInfo: []
+        RoomInfo: [],
+        reservation_id: ""
     };
 
     componentDidMount() {
-        api.getReservation(1)
-            .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
+        let reservation_id = "";
+        if (localStorage && localStorage.getItem('reservation_id')) {
+            reservation_id = JSON.parse(localStorage.getItem('reservation_id'));
+        }
+        this.setState({ reservation_id: reservation_id }, () => {
+            api.getReservation(this.state.reservation_id)
+            .then(res => this.setState({ ReservationInfo: res.resCust[0], RoomInfo: res.resRooms }))
             .catch(err => console.log(err))
-    }
-
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
-    }
-
-
-    // handle any changes to the input fields
-    handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
-        const { name, value } = event.target;
-
-        // Set the state for the appropriate input field
-        this.setState({
-            [name]: value
         });
     }
 
-    // When the form is submitted, prevent the default event and alert the username and password
-    handleFormSubmit = event => {
-        event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
-    }
     render() {
-
-        const { options } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-        const { selectedOption } = this.state;
 
         return (
 
             <Row id="dashboardTable1">
-              <InfoPart />
+                <InfoPart />
                 <Col sm={10}>
                     <row>
-                        <form>
-                            <div id="header">
-                                <button id="exit" onClick={this.handleFormSubmit}>x</button>
-                                <h2>New Reservation</h2>
-                            </div>
-                            <div id="res">
-                                {this.state.RoomInfo.map((room, i) => (
-                                    <div key={room.res_room_id}>
-                                        <table>
-                                            <tr>
-                                                <th><p>Confirmation Number: {this.state.ReservationInfo.reservation_id}</p></th>
-                                            </tr>
-                                            <tr>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td><p>Arrival Date: {room.check_in_date}</p></td>
-                                                <td><p>Name: {this.state.ReservationInfo.first_name} </p></td>
-                                            </tr><tr>
-                                                <td><p>Departure Date: {room.check_out_date}</p></td>
-                                                <td><p>Last Name: {this.state.ReservationInfo.last_name}</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p>Nights: {this.state.nights}</p></td>
-                                                <td><p>Phone Number: {this.state.ReservationInfo.phone}</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p>No of Rooms: {this.state.roomsnumber}</p></td>
-                                                <td><p>Email Address: {this.state.ReservationInfo.email}</p></td>
+                        <div id="header">
+                            <Header>RESERVATION CONFIRMATION</Header>
+                        </div>
+                        <div id="res">
+                            <table>
+                                <tr>
+                                    <th>Reservation ID</th>
+                                    <th>Created On</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>CC Last 4</th>
+                                    <th>User ID</th>
+                                </tr>
+                                <tr>
+                                    <td>{this.state.ReservationInfo.reservation_id}</td>
+                                    <td>{this.state.ReservationInfo.created_at}</td>
+                                    <td>{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}</td>
+                                    <td>{this.state.ReservationInfo.email}</td>
+                                    <td>{this.state.ReservationInfo.phone}</td>
+                                    <td>{this.state.ReservationInfo.ccLastFour}</td>
+                                    <td>{this.state.ReservationInfo.user_id}</td>
+                                </tr>
+                            </table>
 
-                                            </tr>
-                                            <tr>
-                                                <td><p>Adults: {room.adults} </p></td>
-                                                <td><p>Adress: {this.state.ReservationInfo.address}{this.state.ReservationInfo.city}{this.state.ReservationInfo.state} {this.state.ReservationInfo.zip}</p></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td><p>Room Type: {room.type} </p></td>
-                                                <td><p>Credit Card Number: {this.state.ccnumber}</p></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td><p>Room Number: {room.room_num}</p></td>
-                                                <td><p>Expiration Date: {this.state.expdate}</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p>Daily Room Rate: {room.rate}</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p></p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p>Created date: {this.state.ReservationInfo.created_at}</p></td>
-                                                <td><p>Created by: {this.state.ReservationInfo.user_id}</p></td>
-
-
-                                            </tr>
-                                        </table>
-                                    </div>
+                            <table>
+                                <tr>
+                                    <th>Confirmation Number</th>
+                                    <th>Arrival Date</th>
+                                    <th>Departure Date</th>
+                                    <th>Room Type</th>
+                                    <th>Room Rate</th>
+                                    <th>Adults</th>
+                                    <th>Comments</th>
+                                </tr>
+                                {this.state.RoomInfo.map(room => (
+                                    <tr key={room.res_room_id}>
+                                        <td>{room.confirmation_code}</td>
+                                        <td>{room.check_in_date}</td>
+                                        <td>{room.check_out_date}</td>
+                                        <td>{room.type}</td>
+                                        <td>{room.rate}</td>
+                                        <td>{room.adults}</td>
+                                        <td>{room.comments}</td>
+                                    </tr>
                                 ))}
-                            </div>
-                            <div id="buttonDiv">
-                                <button id="revNew1" onClick={this.handleFormSubmit}>Save</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Print</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Email</button>
-                                <button id="revNew" onClick={this.handleFormSubmit}>Close</button>
-
-                            </div>
-                        </form>
+                            </table>
+                        </div>
                     </row>
                 </Col >
             </Row >

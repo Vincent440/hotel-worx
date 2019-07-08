@@ -6,63 +6,83 @@ import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import DateRange from "../../components/dateRange/dateRange";
 import { Container, Table } from 'react-bootstrap';
+import api from '../../utils/api';
+import moment from 'moment';
 
 
 class UpdateReservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
-    state = {
-        name: "",
-        lastname: "",
-        phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
-        },
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        roomType: "",
-        creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
-    };
+    constructor(props) {
+        super(props);
+        this.handleFromChange = this.handleFromChange.bind(this);
+        this.handleToChange = this.handleToChange.bind(this);
 
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
     }
 
+    state = {
+        firstname: "",
+        lastname: "",
+        sdate:undefined,
+        edate: undefined,
+        confirmationNumber: undefined,
+        resRooms: []
+    };
+    showFromMonth() {
+        const { from, to } = this.state;
+        if (!from) {
+            return;
+        }
+        if (moment(to).diff(moment(from), 'months') < 2) {
+            this.to.getDayPicker().showMonth(from);
+        }
+    }
+    handleFromChange(sdate) {
+        // Change the from date and focus the "to" input field
+        this.setState({ sdate });
 
-    // handle any changes to the input fields
+    }
+    handleToChange(edate) {
+        this.setState({ edate }, this.showFromMonth);
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+
+    }
+
+    componentDidMount() {
+        this.makeAxiosCall();
+    }
+
+    makeAxiosCall = () => {
+        const criteria = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            edate: moment(this.state.edate).format('YYYY-MM-DD'),
+            sdate: moment(this.state.sdate).format('YYYY-MM-DD'),
+            confirmationNumber: this.state.confirmationNumber
+        }
+        api.getReservations(criteria)
+            .then(res => this.setState({ resRooms: res }))
+            .catch(err => console.log(err));
+    }
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.makeAxiosCall();
+
+    }
+ 
     handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
         const { name, value } = event.target;
-
-        // Set the state for the appropriate input field
         this.setState({
             [name]: value
         });
     }
 
-    // When the form is submitted, prevent the default event and alert the username and password
-    handleFormSubmit = event => {
-        event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
-    }
     render() {
-
-        const { options } = [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-
-        ];
-        const { selectedOption } = this.state;
-
         return (
             <Container>
                 <Row>
@@ -75,64 +95,62 @@ class UpdateReservation extends Component {
                                 <Header>ALL RESERVATIONS</Header>
                             </Col>
                         </Row>
-                        <div id="res" style={{paddingBottom:"10px"}}>
+                        <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={10}>
                                     <Row>
-                                        <Col xl={1}>
-                                            Date
-                                        </Col>
-                                        <Col xl={6}>
-                                            <DateRange />
-                                        </Col>
-                                        <Col xl={2}>
-                                            Confirmation Nmb
-                                        </Col>
-                                        <Col xl={2}>
-                                            <input
-                                                type="tel"
-                                                placeholder="Confirmation Number"
-                                                name="confirmation"
-                                                value={this.state.confirmation}
-                                                onChange={this.handleInputChange}
+                                        <Col xl={1}>Arrival</Col>
+                                        <Col xl={8}>
+                                            <DateRange
+                                                handleFromChange={this.handleFromChange}
+                                                handleToChange={this.handleToChange}
+                                                sdate={this.state.sdate}
+                                                edate={this.state.edate}
                                             />
                                         </Col>
                                     </Row>
-                                  
-                                    <Row style={{marginTop:"5px"}}>
-                                        <Col xl={1}>
-                                            Name
-                                        </Col>
-                                        <Col xl={2}>
+
+                                    <Row style={{ marginTop: "5px" }}>
+                                        <Col xl={1}>Name:</Col>
+                                        <Col xl={3}>
                                             <input
                                                 type="text"
-                                                placeholder="Name"
-                                                name="guestname"
-                                                value={this.state.guestname}
+                                                placeholder="First Name"
+                                                name="firstname"
+                                                value={this.state.firstname}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col xl={4}>
-                                        </Col>
-                                        <Col xl={2}>
-                                            Last Name
-                                            </Col>
-
+                                        <Col xl={3} style={{ paddingLeft: "67px" }}>Last Name:</Col>
                                         <Col xl={2}>
                                             <input
                                                 type="text"
                                                 placeholder="Last Name"
-                                                name="guestlastname"
+                                                name="lastname"
                                                 value={this.state.lastname}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
                                     </Row>
+                                    <Row style={{ marginTop: "5px" }}>
+                                        <Col xl={3}>Confirmation Number:</Col>
+                                        <Col xl={1}>
+                                            <input
+                                                type="tel"
+                                                placeholder="Confirmation Number"
+                                                name="confirmationNumber"
+                                                value={this.state.confirmationNumber}
+                                                onChange={this.handleInputChange}
+                                            />
+                                        </Col>
+
+                                    </Row>
                                 </Col>
+
 
                                 <Col xl={2} style={{ paddingTop: "25px", Left: "30px" }}>
                                     <Col xl={12}>
-                                        <SearchSubmit />
+                                        <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
 
                                     </Col>
                                 </Col>
@@ -140,47 +158,44 @@ class UpdateReservation extends Component {
                         </div>
                         <div id="res">
 
-                            <Row style={{paddingBottom: "20px" }}>
+                            <Row style={{ paddingBottom: "20px" }}>
                                 <Col xl={12}>
                                     <Table>
-                                        <tr>
-                                            <th>
-                                                Last Name
+                                        <tbody>
+                                            <tr>
+                                                <th>
+                                                    Last Name
                                                     </th>
-                                            <th>
-                                                First Name
+                                                <th>
+                                                    First Name
                                                     </th>
-                                            <th>
-                                                Arrival Date
+                                                <th>
+                                                    Arrival Date
                                              </th>
-                                            <th>
-                                                Departure Date
+                                                <th>
+                                                    Departure Date
                                              </th>
-                                            <th>
-                                                Room Type
+                                                <th>
+                                                    Room Type
                                                     </th>
-                                            <th>
-                                                Status
+                                                <th>
+                                                    Status
                                               </th>
-                                        </tr>
+                                            </tr>
 
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-
+                                            {this.state.resRooms.map(res => (
+                                                <tr key={res.res_room_id}>
+                                                    <td>{res.last_name}</td>
+                                                    <td>{res.first_name}</td>
+                                                    <td>{res.check_in_date}</td>
+                                                    <td>{res.check_out_date}</td>
+                                                    <td>{res.type}</td>
+                                                    <td>
+                                                        {res.active === 1 ? "Active" : "Cancelled"}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
                                     </Table>
                                 </Col>
                             </Row>

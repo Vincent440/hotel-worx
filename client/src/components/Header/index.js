@@ -1,22 +1,21 @@
 import React from "react";
 import "./style.css"
+import { Nav, Button } from 'react-bootstrap';
 
 const Header = props => {
     return (
-        <nav className="navbar navbar-default">
+        <Nav className="navbar navbar-default">
             <div className="container-fluid">
                 <div className="navbar-header">
-                    <a className="navbar-brand">{props.children}
-                       
-                    </a>
+                    <p className="navbar-brand">{props.children}
+                    </p>
                 </div>
                 <ul className="nav navbar-nav navbar-right">
-                    <button className="btn btn-secondary navbar-right" type="submit">
-           <a className="exitButton" href="/">X</a>
-            </button>
+                    <Button className="btn navbar-right"  href="/" type="submit"> X
+            </Button>
                 </ul>
             </div>
-        </nav>
+        </Nav>
 
     )
 }

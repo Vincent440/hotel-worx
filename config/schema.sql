@@ -80,6 +80,8 @@ CREATE TABLE reservations (
     PRIMARY KEY (reservation_id)
 );
 
+ALTER TABLE reservations AUTO_INCREMENT = 1001;
+
 -- --------------------------------------------------------
 
 CREATE TABLE res_rooms (
@@ -94,11 +96,14 @@ CREATE TABLE res_rooms (
     checked_out boolean DEFAULT 0,
     adults int(3) NOT NULL,
     room_id int(6),
-    confirmation_code varchar(20) NOT NULL,
+    rate decimal(5,2) NOT NULL,
+    confirmation_code varchar(20) NULL,
     comments varchar(255),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     PRIMARY KEY (res_room_id)
 );
+
+ALTER TABLE res_rooms AUTO_INCREMENT = 1001;
 
 -- --------------------------------------------------------
 

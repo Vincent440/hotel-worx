@@ -24,19 +24,18 @@ const DeatiledSubmit = props => {
                             Availability
                         </Col>
                         <Col xl={1}>
-                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                            <input type="checkbox" id="myCheck" />
                         </Col>
                         <Col xl={1}>
                             Occupancy
                         </Col>
                         <Col xl={1}>
-                            <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
+                            <input type="checkbox" id="myCheck"  />
                         </Col>
                     </Row>
                 </Col>
                 <Col xl={2}>
-                    <SearchSubmit
-                    />
+                    <SearchSubmit handleFormSubmit={props.handleFormSubmit} />
                 </Col>
             </Row>
         </Col >
