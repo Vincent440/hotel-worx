@@ -20,7 +20,6 @@ function Dashboard() {
                             </Card>
                             <Button variant="primary" size="lg" href="/reserve/new">New Reservation</Button>
                             <Button variant="primary" size="lg" href="/reserve/allreservations">Update Reservation</Button>
-                            <Button variant="primary" size="lg" href="/reserve/testreservation">Test Reservation Confirm</Button>
                             <Button variant="primary" size="lg" href="/reserve/testUpdatereservation">Test Update Reservation</Button>
                         </div>
                         <div className="btn-group" style={{ display: 'block' }}>

@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default {
     getReservation: (id) => {
-        console.log(id);
         return axios.all([
             axios.get('/api/testing/reservation/' + id),
             axios.get('/api/testing/res_rooms/' + id)
@@ -44,15 +43,31 @@ export default {
             });
     },
     getArrivals: (criteria) => {
-        console.log(criteria);
         const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
-        const edate = criteria.endDateRange === "" ? "undefined" : criteria.endDateRange;
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
         const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
         const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
-        return axios.get('/api/testing/arrivals/' + sdate + "/" + edate + "/" + fname + "/" + lname + "/" + cnum)
+        return axios.get('/api/testing/arrivals/' + sdate + "/" + fname + "/" + lname + "/" + cnum)
             .then((response) => {
                 return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    getRoomsArrivals: (date) => {
+        return axios.get('/api/testing/rooms_arrivals/' + date)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    updateRoomCheckin: (id, room_id) => {
+        return axios.put('/api/testing/checkinRoom/' + id + '/' + room_id)
+            .then((response) => {
+                return response;
             })
             .catch((error) => {
                 console.log(error);
@@ -124,7 +139,6 @@ export default {
     getHouseKeepingStatus: (checked) => {
         return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
-                console.log(response.data);
                 return response.data;
             })
             .catch((error) => {

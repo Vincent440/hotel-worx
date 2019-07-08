@@ -55,13 +55,15 @@ class Billing extends Component {
                         </Row>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
-                                <Col xl={12}>
+                                <Col sm={4}>
 
-                                    <Row style={{ paddingBottom: "15px" }}>
-                                        <Col xl={2}>
+                                    <Row style={{ paddingBottom: "5px" }}>
+
+                                        <Col sm={6} >
                                             Room Number
                                         </Col>
-                                        <Col xl={2}>
+
+                                        <Col sm={6}>
                                             <input
                                                 id=""
                                                 onChange={this.handleChange}
@@ -71,10 +73,12 @@ class Billing extends Component {
                                                 value={this.state.roomNumber}
                                                 onChange={this.handleInputChange}
                                             /></Col>
-                                        <Col xl={1}>
+                                    </Row>
+                                    <Row style={{ paddingBottom: "5px" }}>
+                                        <Col sm={6}>
                                             Name
                                         </Col>
-                                        <Col xl={2}>
+                                        <Col sm={6}>
                                             <input
                                                 type="text"
                                                 placeholder="Name"
@@ -83,10 +87,12 @@ class Billing extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col xl={2}>
+                                    </Row>
+                                    <Row>
+                                        <Col sm={6} style={{ paddingRight: "30px" }}>
                                             Last Name
                                     </Col>
-                                        <Col xl={2}>
+                                        <Col sm={6}>
                                             <input
                                                 type="text"
                                                 placeholder="Last Name"
@@ -95,44 +101,44 @@ class Billing extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-
-                                    </Row>
-
-                                    <Row style={{ paddingBottom: "5px", paddingTop: "5px", marginRight: "0px", marginLeft: "0px" }}>
-                                        <Col xl={10}>
-                                            <Row>
-                                                <Col xl={2}>
-                                                    Stay Over
-</Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="myCheck" />
-                                                </Col>
-
-                                                <Col xl={2}>
-                                                    Due Out
-</Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="myCheck" />
-                                                </Col>
-
-                                                <Col xl={2}>
-                                                    Checked Out
-</Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="myCheck" />
-                                                </Col>
-                                            </Row>
-                                        </Col>
-                                        <Col xl={2}>
-                                            <SearchSubmit />
-                                        </Col>
-
                                     </Row>
                                 </Col>
+                                <Col xl={4} style={{ paddingLeft: "30px" }}>
+                                    <Row style={{ paddingBottom: "12px" }}>
+                                        <Col xl={6}>
+                                            Stay Over
+                                        </Col>
+                                        <Col xl={6}>
+                                            <input type="checkbox" id="myCheck" />
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ paddingBottom: "12px" }}>
+                                        <Col xl={6}>
+                                            Due Out
+                                            </Col>
+                                        <Col xl={6}>
+                                            <input type="checkbox" id="myCheck" />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xl={6}>
+                                            Checked Out
+                                                </Col>
+                                        <Col xl={6}>
+                                            <input type="checkbox" id="myCheck" />
+                                        </Col>
+                                    </Row>
+                                </Col>
+                                <Col>
+                                </Col>
+                                <Col xl={2} style={{marginTop:"30px"}}>
+                                    <SearchSubmit />
+                                </Col>
+
                             </Row>
-
-
                         </div>
+
+
                         <div id="res">
 
                             <Row style={{ paddingBottom: "20px" }}>
@@ -141,12 +147,12 @@ class Billing extends Component {
                                         <tbody>
                                             <tr>
 
-                                                <th className="th" id="room number">Room Number</th>
-                                                <th className="th" >Name</th>
-                                                <th className="th" id="arrival date">Arrival Date</th>
-                                                <th className="th" id="departure date">Departure Date</th>
-                                                <th className="th" id="balance">Balance</th>
-                                                <th className="th" id="status">Status</th>
+                                                <th>Room Number</th>
+                                                <th>Name</th>
+                                                <th>Arrival Date</th>
+                                                <th>Departure Date</th>
+                                                <th>Balance</th>
+                                                <th>Status</th>
 
                                             </tr>
 
@@ -157,6 +163,7 @@ class Billing extends Component {
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td><button>Check Out</button></td>
                                             </tr>
                                         </tbody>
                                     </Table>
