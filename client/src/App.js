@@ -4,11 +4,8 @@ import Particles from "react-particles-js";
 import loginAPI from "./utils/LoginAPI";
 import ReserveNew from "./pages/newreservation/newreservation";
 import ReserveUpdate from "./pages/updatereservation/updatereservation";
-// import Reservation from "./pages/reservation/reservation";
 import Dashboard from "./pages/dashboard/dashboard";
 import UpdateReservation from "./pages/allreservations/allreservations";
-// import Dashboard from './pages/dashboardMaster/dashMaster';
-// import Reservation from './pages/reservation/reservation';
 import Arrivals from "./pages/arrivals/arrivals";
 import Billing from "./pages/billing/billing";
 import Payment from "./pages/payment/payment";
@@ -19,13 +16,16 @@ import ReservationTest from "./pages/newreservation/reservationTest";
 import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
 import HouseStatus from "./pages/houseStatus/houseStatus";
+// import PrivateRoute from "./components/PrivateRoute";
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
-
+// import Dashboard from './pages/dashboardMaster/dashMaster';
+// import Reservation from './pages/reservation/reservation';
+// import Reservation from "./pages/reservation/reservation";
 class PrivateRoute extends Component {
   render() {
     const { component: Component, loggedIn, ...rest } = this.props;
     const renderRoute = props => {
-      if (loggedIn) {
+      if (loggedIn === true) {
         return <Component {...props} />;
       }
       return <Redirect to="/login" />;
@@ -59,7 +59,7 @@ class App extends Component {
       console.log(userData);
       loginAPI.postUserLogin(userData, (err, res) => {
         if (err === true) {
-          return console.log("failed to log in");
+          return console.log("err failed to log in");
         } else {
           console.log(res);
           this.setState({ user: res.user, loggedIn: res.loggedIn });
@@ -83,27 +83,24 @@ class App extends Component {
           <Particles params={particleOpt} id="particul" />
           <div>
             <Switch>
-              <Route
-                path="/login"
-                exact
-                strict
+              <Route path="/login" exact strict
                 render={props => (!loggedIn ? <Login {...props} user={user} checkIfLoggedIn={this.checkIfAppIsLoggedIn} loggedIn={loggedIn} postLogin={this.postLogin} /> : <Redirect to="/" />)}
               />
               <Route path="/logout" exact strict render={props => (loggedIn ? <Logout setAppLogout={this.setAppLogout} user={user} /> : <Redirect to="/login" />)} />
               <Route exact path="/login" component={Login} />
               {/* <Route exact path="/" component={Dashboard} user={user} loggedIn={loggedIn} /> */}
               <PrivateRoute path="/" exact strict component={Dashboard} loggedIn={loggedIn} user={user} />
-              <Route exact path="/reserve/new" component={ReserveNew} />
-              <Route exact path="/reserve/allreservations" component={UpdateReservation} />
-              <Route exact path="/reserve/testUpdatereservation" component={ReserveUpdate} />
-              <Route exact path="/reserve/testreservation" component={ReservationTest} />
-              <Route exact path="/frontdesk/arrivals" component={Arrivals} />
-              <Route exact path="/frontdesk/inhouse" component={Inhouse} />
-              <Route exact path="/cashiering/billing" component={Billing} />
-              <Route exact path="/cashiering/payment" component={Payment} />
-              <Route exact path="/reports/housekeeping" component={Housekeeping} />
-              <Route exact path="/reports/detailedAvailability" component={DetailedAvailability} />
-              <Route exact path="/reports/houseStatus" component={HouseStatus} />
+              <PrivateRoute exact path="/reserve/new" component={ReserveNew} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reserve/allreservations" component={UpdateReservation} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reserve/testUpdatereservation" component={ReserveUpdate} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reserve/testreservation" component={ReservationTest} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/frontdesk/arrivals" component={Arrivals} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/frontdesk/inhouse" component={Inhouse} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/cashiering/billing" component={Billing} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/cashiering/payment" component={Payment} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reports/housekeeping" component={Housekeeping} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reports/detailedAvailability" component={DetailedAvailability} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reports/houseStatus" component={HouseStatus} loggedIn={loggedIn} user={user} />
             </Switch>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart"
 import { Card, Button, Container } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
     return (
@@ -18,31 +18,31 @@ function Dashboard() {
                             <Card style={{ marginBottom: "10px" }}>
                                 <Card.Body>RESERVATION</Card.Body>
                             </Card>
-                            <Button variant="primary" size="lg" href="/reserve/new">New Reservation</Button>
-                            <Button variant="primary" size="lg" href="/reserve/allreservations">Update Reservation</Button>
-                            <Button variant="primary" size="lg" href="/reserve/testUpdatereservation">Test Update Reservation</Button>
+                            <Link className="btn btn-primary btn-lg" to="/reserve/new">New Reservation</Link>
+                            <Link className="btn btn-primary btn-lg" to="/reserve/allreservations">Update Reservation</Link>
+                            <Link className="btn btn-primary btn-lg" to="/reserve/testUpdatereservation">Test Update Reservation</Link>
                         </div>
                         <div className="btn-group" style={{ display: 'block' }}>
                             <Card style={{ marginBottom: "10px" }}>
                                 <Card.Body>FRONT DESK</Card.Body>
                             </Card>
-                            <Button variant="primary" size="lg" href="/frontdesk/arrivals">Arrivals</Button>
-                            <Button variant="primary" size="lg" href="/frontdesk/inhouse">In-House Guests</Button>
+                            <Link className="btn btn-primary btn-lg" to="/frontdesk/arrivals">Arrivals</Link>
+                            <Link className="btn btn-primary btn-lg" to="/frontdesk/inhouse">In-House Guests</Link>
                         </div>
                         <div className="btn-group" style={{ display: 'block' }}>
                             <Card style={{ marginBottom: "10px" }}>
                                 <Card.Body>FINANCE</Card.Body>
                             </Card>
-                            <Button variant="primary" size="lg" href="/cashiering/billing">Billing</Button>
-                            <Button variant="primary" size="lg" href="/cashiering/payment">Test Invoice</Button>
+                            <Link className="btn btn-primary btn-lg" to="/cashiering/billing">Billing</Link>
+                            <Link className="btn btn-primary btn-lg" to="/cashiering/payment">Test Invoice</Link>
                         </div>
                         <div className="btn-group" style={{ display: 'block' }}>
                             <Card style={{ marginBottom: "10px" }}>
                                 <Card.Body>REPORTS</Card.Body>
                             </Card>
-                            <Button variant="primary" size="lg" href="/reports/housekeeping">Housekeeping Report</Button>
-                            <Button variant="primary" size="lg" href="/reports/detailedAvailability">Detailed Availability</Button>
-                            <Button variant="primary" size="lg" href="/reports/houseStatus">House Status</Button>
+                            <Link className="btn btn-primary btn-lg" to="/reports/housekeeping">Housekeeping Report</Link>
+                            <Link className="btn btn-primary btn-lg" to="/reports/detailedAvailability">Detailed Availability</Link>
+                            <Link className="btn btn-primary btn-lg" to="/reports/houseStatus">House Status</Link>
                         </div>
                         <div style={{ clear: "both" }}></div>
 

@@ -28,18 +28,22 @@ module.exports = passport => {
             return done(err); // if err return err
           } else if (!user) {
             console.log(`No user found Returning from local-strategy login failed to login ${username}`);
-            return done(null, false);
+            return done(null, false,{ message:`No username found that matches ${username}`});
           } else {
             console.log(`In local Strategy & Found ${username} from database comparing password..`);
             //if user found, compare password against db password and return true or false if it matches
             console.log(user);
             bcrypt.compare(password, user.password, (err, result) => {
-              if (result) {
+              if(err) {
+                done(err);
+              }
+              else if (result) {
                 console.log(`Successful login for User: ${user.username} ID: ${user.user_id} Type:${user.type} type-ID:${user.access_id} removing pw from userObj and attaching to future requests`);
                 delete user.password;
                 done(null, user);
-              } else {
-                done(err, false);
+              }
+              else {
+                done(null, false, { message:'incorrect password'});
               }
             });
           }
@@ -47,7 +51,7 @@ module.exports = passport => {
       } else if (req.user) {
         done(null, req.user);
       } else {
-        return done(null, false);
+        return done(null, false,{ message:'Username and password must match input requirements'});
       }
     })
   );
