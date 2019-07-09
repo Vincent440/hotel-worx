@@ -103,7 +103,7 @@ class Billing extends Component {
                                         </Col>
                                     </Row>
                                 </Col>
-                                <Col xl={4} style={{ paddingLeft: "30px" }}>
+                                <Col xl={4} style={{ paddingLeft: "60px" }}>
                                     <Row style={{ paddingBottom: "12px" }}>
                                         <Col xl={6}>
                                             Stay Over
