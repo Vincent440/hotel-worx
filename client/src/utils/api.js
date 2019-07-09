@@ -56,7 +56,6 @@ export default {
             });
     },
     getDepartures: (criteria) => {
-        console.log(criteria);
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
         const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
         const rnum = criteria.roomNumber === "" ? "undefined" : criteria.roomNumber;
