@@ -59,6 +59,13 @@ const Room = {
             if (err) throw err;
             cb(result);
         });
+    },
+    updateOccupied: (vals, cb) => {
+        const queryString = "UPDATE rooms SET occupied=? WHERE room_id=?;";
+        connection.execute(queryString, vals, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
     }
 }
 
