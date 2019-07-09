@@ -3,8 +3,8 @@ import axios from "axios";
 export default {
     getReservation: (id) => {
         return axios.all([
-            axios.get('/api/testing/reservation/' + id),
-            axios.get('/api/testing/res_rooms/' + id)
+            axios.get('/api/hw/reservation/' + id),
+            axios.get('/api/hw/res_rooms/' + id)
         ])
             .then(axios.spread((resCust, resRooms) => {
                 return { resCust: resCust.data, resRooms: resRooms.data };
@@ -12,7 +12,7 @@ export default {
     },
     createReservation: (data) => {
         const fccNum = data.creditCard.replace(/ /g, "")
-        return axios.post('/api/testing/reservation', {
+        return axios.post('/api/hw/reservation', {
             cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate, 1],
             reserve: [1, ""],
             rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments]]
@@ -25,7 +25,7 @@ export default {
             });
     },
     getReservations: () => {
-        return axios.get('/api/testing/reservations')
+        return axios.get('/api/hw/reservations')
             .then((response) => {
                 return response.data;
             })
@@ -34,7 +34,7 @@ export default {
             });
     },
     getRoomTypes: () => {
-        return axios.get('/api/testing/room_types')
+        return axios.get('/api/hw/room_types')
             .then((response) => {
                 return response.data;
             })
@@ -47,7 +47,20 @@ export default {
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
         const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
         const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
-        return axios.get('/api/testing/arrivals/' + sdate + "/" + fname + "/" + lname + "/" + cnum)
+        return axios.get('/api/hw/arrivals/' + sdate + "/" + fname + "/" + lname + "/" + cnum)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    getGuests: (criteria) => {
+        const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
+        const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
+        const rnum = criteria.roomNumber === "" ? "undefined" : criteria.roomNumber;
+        const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
+        return axios.get('/api/hw/guests/' + fname + "/" + lname + "/" + rnum + "/" + cnum)
             .then((response) => {
                 return response.data;
             })
@@ -56,7 +69,7 @@ export default {
             });
     },
     getRoomsArrivals: (date) => {
-        return axios.get('/api/testing/rooms_arrivals/' + date)
+        return axios.get('/api/hw/rooms_arrivals/' + date)
             .then((response) => {
                 return response.data;
             })
@@ -65,7 +78,7 @@ export default {
             });
     },
     updateRoomCheckin: (id, room_id) => {
-        return axios.put('/api/testing/checkinRoom/' + id + '/' + room_id)
+        return axios.put('/api/hw/checkinRoom/' + id + '/' + room_id)
             .then((response) => {
                 return response;
             })
@@ -74,7 +87,7 @@ export default {
             });
     },
     updateRoomCheckout: (id, room_id) => {
-        return axios.put('/api/testing/checkoutRoom/' + id + '/' + room_id)
+        return axios.put('/api/hw/checkoutRoom/' + id + '/' + room_id)
             .then((response) => {
                 return response;
             })
@@ -83,52 +96,7 @@ export default {
             });
     },
     getDepartures: () => {
-        return axios.get('/api/testing/departures')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getCleanRooms: () => {
-        return axios.get('/api/testing/rooms_clean')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getDirtyRooms: () => {
-        return axios.get('/api/testing/rooms_dirty')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getInactiveRooms: () => {
-        return axios.get('/api/testing/rooms_inactive')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getOccupiedRooms: () => {
-        return axios.get('/api/testing/rooms_occupied')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getVacantRooms: () => {
-        return axios.get('/api/testing/rooms_vacant')
+        return axios.get('/api/hw/departures')
             .then((response) => {
                 return response.data;
             })
@@ -138,15 +106,15 @@ export default {
     },
     getAvailableRooms: (date) => {
         return axios.all([
-            axios.get('/api/testing/room_types'),
-            axios.get('/api/testing/room_types_available/' + date)
+            axios.get('/api/hw/room_types'),
+            axios.get('/api/hw/room_types_available/' + date)
         ])
             .then(axios.spread((roomTypes, typeData) => {
                 return { roomTypes: roomTypes.data, typeData: typeData.data[1] };
             }));
     },
     getHouseKeepingStatus: (checked) => {
-        return axios.get("/api/testing/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
+        return axios.get("/api/hw/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
                 return response.data;
             })

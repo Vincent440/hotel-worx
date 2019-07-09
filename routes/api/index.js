@@ -3,7 +3,7 @@ const usersRoutes = require("./users");
 const reservationRoutes = require("./reservations");
 const customersRoutes = require("./customers");
 const roomRoutes = require("./rooms");
-const testingRoutes = require("./testing");
+const hwRoutes = require("./hw");
 const currentInfoRoutes = require("./current-info");
 const loginRoute = require("./login");
 const logoutRoute = require("./logout");
@@ -29,7 +29,7 @@ router.use("/reservations", reservationRoutes);
 router.use("/rooms", roomRoutes);
 
 // '/api/testing' for any ongoing testing route builds
-router.use("/testing", testingRoutes);
+router.use("/hw",hwRoutes);
 
 // '/api' for any ongoing testing the root of /api route
 router.get("/", (req, res) => {
