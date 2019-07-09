@@ -2,9 +2,9 @@ const router = require("express").Router();
 
 const db = require("../../models/index.js");
 
-// '/api/testing' route
+// '/api/hw' route
 router.route("/").get((req, res) => {
-    res.status(200).send("sending this from the /api/testing route for any test routes");
+    res.status(200).send("sending this from the /api/hw route root");
 });
 
 router.get("/users/:id", (req, res) => {
