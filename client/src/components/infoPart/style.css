@@ -1,6 +1,6 @@
 #infoCard {
   background-color: transparent;
-  height: 600px;
+  height: 650px;
   width: 200px;
   margin-top: 0px;
   border-right: 1px solid white;
@@ -44,6 +44,10 @@ h2 {
 }
 .wicon {
   display: none;
+}
+
+.fa fa-sign-out{
+  color: purple;
 }
 
 #infoCard .card-text .rw-main.type-today {

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style3.css";
-import api from '../../utils/api';
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import { Container, Table } from 'react-bootstrap';

@@ -18,7 +18,6 @@ class ReserveUpdate extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
-
     state = {
         firstname: "",
         lastname: "",
@@ -41,7 +40,6 @@ class ReserveUpdate extends Component {
         newReservationId: "",
         errors: {}
     };
-
     showFromMonth() {
         const { from, to } = this.state;
         if (!from) {
@@ -59,18 +57,13 @@ class ReserveUpdate extends Component {
     handleToChange(departuredate) {
         this.setState({ departuredate }, this.showFromMonth);
     }
-
     handleChange(e) {
 
         this.setState({
             [e.target.name]: e.target.value,
         });
-
     }
-
     validateForm() {
-
-        let fields = this.state.fields;
         let errors = {};
         let formIsValid = true;
 
@@ -110,7 +103,6 @@ class ReserveUpdate extends Component {
                 errors["email"] = "*Please enter valid email-ID.";
             }
         }
-
         if (!this.state.phone) {
             formIsValid = false;
             errors["phone"] = "*Please enter your mobile no.";
@@ -122,12 +114,10 @@ class ReserveUpdate extends Component {
                 errors["phone"] = "*Please enter valid mobile no.";
             }
         }
-
         this.setState({
             errors: errors
         });
         return formIsValid;
-
     }
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -144,24 +134,13 @@ class ReserveUpdate extends Component {
             .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
             .catch(err => console.log(err));
     }
-
     handleFormSubmit(e) {
         console.log(this);
         e.preventDefault();
         if (this.validateForm()) {
-            // let fields = {};
-            // fields["firstname"] = "";
-            // fields["lastname"] = "";
-            // fields["email"] = "";
-            // fields["phone"] = "";
-            // fields["password"] = "";
-            // this.setState({ fields: fields });
-            // alert("Form submitted");
-            this.makeAxiosCall();
-
+           this.makeAxiosCall();
         }
     }
-
     makeAxiosCall = () => {
         const data = {
             firstname: this.state.firstname,
@@ -194,9 +173,7 @@ class ReserveUpdate extends Component {
                 }} />
             )
         }
-
         return (
-
             <Container>
                 <Row>
                     <Col sm={2}>

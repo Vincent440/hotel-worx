@@ -10,6 +10,7 @@ import api from '../../utils/api';
 
 const today = moment().format("YYYY-MM-DD");
 
+
 class Billing extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
@@ -88,7 +89,6 @@ class Billing extends Component {
                                                 name="roomNumber"
                                                 placeholder="Room Number"
                                                 value={this.state.roomNumber}
-                                                onChange={this.handleInputChange}
                                             /></Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>

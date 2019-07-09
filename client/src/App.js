@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import ReserveNew from './pages/newreservation/newreservation';
 import ReserveUpdate from './pages/updatereservation/updatereservation';
-import Reservation from './pages/reservation/reservation';
 import Dashboard from './pages/dashboard/dashboard';
 import UpdateReservation from './pages/allreservations/allreservations';
 // import Dashboard from './pages/dashboardMaster/dashMaster';
