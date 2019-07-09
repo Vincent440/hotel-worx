@@ -9,13 +9,6 @@ import DateRange from "../../components/dateRange/dateRange";
 import { Container } from 'react-bootstrap';
 import RegisterForm from "../../components/validationUpdateRes";
 import moment from 'moment';
-import { throws } from "assert";
-
-// const test_reservation = { 
-//     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
-//     "reserve": ["0user_id", "1comments"],
-//     "rooms": [["0room_type_id", "1check_in_date", "2check_out_date", "2adults", "3confirmation_code", "4comments"]]
-// }
 
 class ReserveUpdate extends Component {
     constructor(props) {
@@ -42,7 +35,6 @@ class ReserveUpdate extends Component {
         noOfRooms: "",
         roomtype: "",
         RoomTypes: [],
-        roomtype: "",
         creditCard: "",
         expirationDate: "",
         reservationSuccess: false,
@@ -153,7 +145,6 @@ class ReserveUpdate extends Component {
             .catch(err => console.log(err));
     }
 
-
     handleFormSubmit(e) {
         console.log(this);
         e.preventDefault();
@@ -170,8 +161,8 @@ class ReserveUpdate extends Component {
 
         }
     }
-    makeAxiosCall = () => {
 
+    makeAxiosCall = () => {
         const data = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
@@ -193,9 +184,7 @@ class ReserveUpdate extends Component {
             .catch(err => console.log(err));
     }
 
-
     render() {
-
 
         if (this.state.reservationSuccess) {
             return (
@@ -291,7 +280,6 @@ class ReserveUpdate extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-
                                     </Row>
                                     <Row>
                                         <Col xl={1}>
@@ -307,7 +295,6 @@ class ReserveUpdate extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-
                                         <Col xl={2}>
                                             Room Type
                                         </Col>
@@ -345,7 +332,6 @@ class ReserveUpdate extends Component {
 
                 </Row>
             </Container>
-
         )
     }
 }
