@@ -2,7 +2,6 @@
 const express = require("express");
 const passport = require("passport");
 require('./controllers/passportController')(passport);// pass passport for configuration
-const flash = require('connect-flash');
 const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -17,7 +16,6 @@ app.use(cookieParser('hotelworxmernapplication'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({ secret: 'hotelworxmernapplication', resave: false, saveUninitialized: false}));
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);

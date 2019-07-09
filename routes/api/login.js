@@ -4,8 +4,7 @@ require("../../controllers/passportController")(passport);
 
 // '/api/login' route Using local strategy to redirect back to the signin page if there is an error
 
-router.route("/").post( passport.authenticate("local"),
-  (req, res) => {
+router.route("/").post( passport.authenticate("local"),(req, res) => {
     console.log("req.session: " + req.session);
     console.log("req.sessionID: " + req.sessionID);
     res.status(200).json({ user: req.user, loggedIn: req.isAuthenticated() });
