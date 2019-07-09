@@ -4,7 +4,6 @@ import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
-import DateRange from "../../components/dateRange/dateRange";
 import api from '../../utils/api';
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
@@ -14,7 +13,6 @@ const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
   
-    // Setting the initial values of this.state.username and this.state.password
     state = {
         startDateRange: today,
         firstname: undefined,

@@ -4,11 +4,9 @@ import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import SearchSubmit from "../../components/searchButton";
-import DateRange from "../../components/dateRange/dateRange";
 import { Container, Table } from 'react-bootstrap';
 
 class Inhouse extends Component {
-    // Setting the initial values of this.state.username and this.state.password
     state = {
         name: "",
         lastname: "",
@@ -31,7 +29,6 @@ class Inhouse extends Component {
         ],
         creditCard: "",
         expirationDate: "",
-        selectedOption: ["101", "102", "103", "104", "105", "106", "107", "108", "109", "110"],
 
     };
 
@@ -79,14 +76,13 @@ class Inhouse extends Component {
                                 <Col xl={10}>
                                     <Row style={{ marginTop: "5px" }}>
                                         <Col xl={1}>
-                                            Room:
+                                            Room
                                         </Col>
                                         <Col xl={3} style={{ marginRight: "32px" }}>
                                             <input
                                                 id=""
                                                 // value={roomNumber}
                                                 onChange={this.handleChange}
-                                                options={selectedOption}
                                                 name="roomnumber"
                                                 placeholder="Room Number"
                                                 value={this.state.roomNumber}
@@ -94,7 +90,7 @@ class Inhouse extends Component {
                                             />
                                         </Col>
                                         <Col xl={3} style={{paddingLeft:"23px",  marginRight:"-17px"}}>
-                                            Confirmation Number:
+                                            Confirmation Number
                                     </Col>
                                         <Col xl={1} style={{paddingLeft:"-25px"}}>
                                             <input
@@ -107,17 +103,10 @@ class Inhouse extends Component {
                                         </Col>
                                 
                                     </Row>
-                                    <Row style={{paddingTop:"3px"}}>
-                                        <Col xl={1}>
-                                            Arrival:
-                                        </Col>
-                                        <Col xl={8}>
-                                            <DateRange />
-                                        </Col>
-                                    </Row>
-                                    <Row style={{paddingTop:"3px"}}>
+                              
+                                    <Row style={{paddingTop:"5px"}}>
                                     <Col xl={1}>
-                                            Name:
+                                            Name
                                         </Col>
                                         <Col xl={3} style={{ marginRight: "35px" }}>
                                             <input
@@ -129,7 +118,7 @@ class Inhouse extends Component {
                                             />
                                         </Col>
                                         <Col xl={3}style={{paddingLeft:"31px", marginRight:"-20px"}}>
-                                            Last Name:
+                                            Last Name
                                 </Col>
                                         <Col xl={2} style={{paddingLeft:"-25px"}}>
                                             <input
