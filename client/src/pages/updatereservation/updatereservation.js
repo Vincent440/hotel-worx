@@ -9,13 +9,6 @@ import DateRange from "../../components/dateRange/dateRange";
 import { Container } from 'react-bootstrap';
 import RegisterForm from "../../components/validationUpdateRes";
 import moment from 'moment';
-import { throws } from "assert";
-
-// const test_reservation = { 
-//     "cust": ["0first_name", "1last_name", "2address", "3city", "4state", "5zip", "6email", "7phone", "8credit_card_num", "9cc_expiration", "10active"],
-//     "reserve": ["0user_id", "1comments"],
-//     "rooms": [["0room_type_id", "1check_in_date", "2check_out_date", "2adults", "3confirmation_code", "4comments"]]
-// }
 
 class ReserveUpdate extends Component {
     constructor(props) {
@@ -25,7 +18,6 @@ class ReserveUpdate extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
-
     state = {
         firstname: "",
         lastname: "",
@@ -42,14 +34,12 @@ class ReserveUpdate extends Component {
         noOfRooms: "",
         roomtype: "",
         RoomTypes: [],
-        roomtype: "",
         creditCard: "",
         expirationDate: "",
         reservationSuccess: false,
         newReservationId: "",
         errors: {}
     };
-
     showFromMonth() {
         const { from, to } = this.state;
         if (!from) {
@@ -67,18 +57,13 @@ class ReserveUpdate extends Component {
     handleToChange(departuredate) {
         this.setState({ departuredate }, this.showFromMonth);
     }
-
     handleChange(e) {
 
         this.setState({
             [e.target.name]: e.target.value,
         });
-
     }
-
     validateForm() {
-
-        let fields = this.state.fields;
         let errors = {};
         let formIsValid = true;
 
@@ -118,7 +103,6 @@ class ReserveUpdate extends Component {
                 errors["email"] = "*Please enter valid email-ID.";
             }
         }
-
         if (!this.state.phone) {
             formIsValid = false;
             errors["phone"] = "*Please enter your mobile no.";
@@ -130,12 +114,10 @@ class ReserveUpdate extends Component {
                 errors["phone"] = "*Please enter valid mobile no.";
             }
         }
-
         this.setState({
             errors: errors
         });
         return formIsValid;
-
     }
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -152,26 +134,14 @@ class ReserveUpdate extends Component {
             .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
             .catch(err => console.log(err));
     }
-
-
     handleFormSubmit(e) {
         console.log(this);
         e.preventDefault();
         if (this.validateForm()) {
-            // let fields = {};
-            // fields["firstname"] = "";
-            // fields["lastname"] = "";
-            // fields["email"] = "";
-            // fields["phone"] = "";
-            // fields["password"] = "";
-            // this.setState({ fields: fields });
-            // alert("Form submitted");
-            this.makeAxiosCall();
-
+           this.makeAxiosCall();
         }
     }
     makeAxiosCall = () => {
-
         const data = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
@@ -192,11 +162,7 @@ class ReserveUpdate extends Component {
             .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
             .catch(err => console.log(err));
     }
-
-
     render() {
-
-
         if (this.state.reservationSuccess) {
             return (
                 <Redirect to={{
@@ -205,9 +171,7 @@ class ReserveUpdate extends Component {
                 }} />
             )
         }
-
         return (
-
             <Container>
                 <Row>
                     <Col sm={2}>

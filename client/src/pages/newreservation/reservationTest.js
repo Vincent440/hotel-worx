@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
 import api from '../../utils/api';
 import Header from "../../components/Header";
-import DateRange from "../../components/dateRange/dateRange";
 import { Container } from 'react-bootstrap';
-import RegisterForm from "../../components/validation";
-import moment from 'moment';
 
 class ReservationTest extends Component {
     state = {
@@ -55,7 +51,7 @@ class ReservationTest extends Component {
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
-                                        <Col xl={2}>
+                                        <Col xl={5}>
                                         <strong> Name:  </strong>{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}
                                         </Col>
                                     </Row>

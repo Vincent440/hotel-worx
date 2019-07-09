@@ -99,7 +99,8 @@ class Housekeeping extends Component {
                 tempState.departed = true;
                 tempState.notReserved = true;
                 break;
-
+                default:
+                    
         }
         // set all at once
         this.setState({ checked: tempState });

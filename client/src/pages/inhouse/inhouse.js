@@ -5,7 +5,6 @@ import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import SearchSubmit from "../../components/searchButton";
 import { Container, Table } from 'react-bootstrap';
-import moment from 'moment';
 import api from '../../utils/api';
 
 class Inhouse extends Component {
@@ -66,7 +65,6 @@ class Inhouse extends Component {
                                         <Col xl={3} style={{ marginRight: "32px" }}>
                                             <input
                                                 id=""
-                                                onChange={this.handleChange}
                                                 name="roomNumber"
                                                 placeholder="Room Number"
                                                 value={this.state.roomNumber}

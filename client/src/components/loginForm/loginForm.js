@@ -20,14 +20,3 @@ export default function LoginForm(props) {
     );
 }
 
-{/* <form>
-    <FormGroup controlId="username">
-        <FormLabel><h5>Username</h5></FormLabel>
-        <FormControl value={props.username} onChange={props.handleChange} />
-    </FormGroup>
-    <FormGroup controlId="password">
-        <FormLabel><h5>Password</h5></FormLabel>
-        <FormControl value={props.password} onChange={props.handleChange} type="password" />
-    </FormGroup>
-    <Button onClick={props.handleLoginButton}>Login</Button>
-</form> */}
