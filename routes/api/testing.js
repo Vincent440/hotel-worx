@@ -324,8 +324,20 @@ router.put("/cancelReservation/:id", (req, res) => {
 
 router.put("/checkinRoom/:id/:room_id", (req, res) => {
     const vals = [req.params.room_id, req.params.id];
+    const cond = [1, req.params.room_id];
     db.ResRoom.updateCheckIn(vals, (result) => {
-        res.json(result);
+        db.Room.updateOccupied(cond, (result) => {
+            res.json(result);
+        });
+    });
+});
+
+router.put("/checkoutRoom/:id/:room_id", (req, res) => {
+    const cond = [0, req.params.room_id];
+    db.ResRoom.updateCheckOut(req.params.id, (result) => {
+        db.Room.updateOccupied(cond, (result) => {
+            res.json(result);
+        });
     });
 });
 

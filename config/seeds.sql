@@ -64,10 +64,10 @@ INSERT INTO rooms (room_num, room_type_id, description, num_beds, clean, occupie
 ('103', 1, 'microwave', 2, 1, 0, 1),
 ('104', 3, '60-inch TV', 2, 1, 0, 1),
 ('105', 1, 'microwave, balcony', 2, 1, 0, 0),
-('201', 1, 'microwave, courtyard view', 2, 1, 0, 1),
-('202', 3, 'balcony, refrigerator', 2, 1, 0, 1),
+('201', 1, 'microwave, courtyard view', 2, 1, 1, 1),
+('202', 3, 'balcony, refrigerator', 2, 1, 1, 1),
 ('203', 1, 'courtyard view', 2, 0, 0, 1),
-('204', 3, 'balcony', 2, 1, 0, 1),
+('204', 3, 'balcony', 2, 1, 1, 1),
 ('205', 2, 'microwave, courtyard view', 2, 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -130,7 +130,7 @@ INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_da
 (1011, 2, '2019-07-10', '2019-07-12', 0, 0, 2, null, 119.99, '190705011001', ''),
 (1012, 3, '2019-07-10', '2019-07-14', 0, 0, 2, null, 129.99, '190705012001', 'wants a good view'),
 (1013, 2, '2019-07-07', '2019-07-11', 0, 0, 2, null, 119.99, '190705013001', ''),
-(1013, 1, '2019-07-08', '2019-07-10', 1, 0, 1, 3, 109.99, '190705013002', 'needs a late checkout time'),
+(1013, 1, '2019-07-08', '2019-07-10', 0, 0, 1, null, 109.99, '190705013002', 'needs a late checkout time'),
 (1014, 2, '2019-07-13', '2019-07-17', 0, 0, 3, null, 119.99, '190706014001', '');
 
 -- --------------------------------------------------------
