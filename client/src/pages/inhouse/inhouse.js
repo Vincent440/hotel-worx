@@ -9,32 +9,14 @@ import moment from 'moment';
 import api from '../../utils/api';
 
 class Inhouse extends Component {
-<<<<<<< HEAD
-=======
-
->>>>>>> 0c02abb6eff245aed96ca6ad75547586f0804e4b
     state = {
         arrivaldate: "",
         departuredate: "",
-<<<<<<< HEAD
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        roomType: [
-            { value: "Two Queens", label: "Two Queens" },
-            { value: "King", label: "King" },
-            { value: "Suite", label: "Suite" },
-        ],
-        creditCard: "",
-        expirationDate: "",
-
-=======
         firstname: undefined,
         lastname: undefined,
         roomNumber: undefined,
         confirmationNumber: undefined,
         guestsArray: []
->>>>>>> 0c02abb6eff245aed96ca6ad75547586f0804e4b
     };
 
     makeAxiosCall = () => {
