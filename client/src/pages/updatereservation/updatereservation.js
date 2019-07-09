@@ -162,7 +162,9 @@ class ReserveUpdate extends Component {
             .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
             .catch(err => console.log(err));
     }
+
     render() {
+
         if (this.state.reservationSuccess) {
             return (
                 <Redirect to={{
@@ -255,7 +257,6 @@ class ReserveUpdate extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-
                                     </Row>
                                     <Row>
                                         <Col xl={1}>
@@ -271,7 +272,6 @@ class ReserveUpdate extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-
                                         <Col xl={2}>
                                             Room Type
                                         </Col>
@@ -309,7 +309,6 @@ class ReserveUpdate extends Component {
 
                 </Row>
             </Container>
-
         )
     }
 }

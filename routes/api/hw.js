@@ -258,6 +258,24 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
     });
 });
 
+router.get("/departures/:fname/:lname/:rnum", (req, res) => {
+    const todayDate = new Date().toISOString().slice(0, 10);
+    let conditions = [];
+    if (req.params.fname !== "undefined") {
+        conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
+    }
+    if (req.params.lname !== "undefined") {
+        conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
+    }
+    if (req.params.rnum !== "undefined") {
+        conditions.push("(rm.room_num='" + req.params.rnum + "')");
+    }
+    conditions.length === 0 ? conditions.push("(rr.check_out_date='" + todayDate + "')") : conditions;
+    db.ResRoom.selectDepartures(conditions, (result) => {
+        res.json(result);
+    });
+});
+
 router.get("/rooms_arrivals/:date", (req, res) => {
     db.Room.selectAllShort(req.params.date, (result) => {
         res.json(result);
@@ -280,13 +298,6 @@ router.get("/guests/:fname/:lname/:rnum/:cnum", (req, res) => {
     }
     conditions.length === 0 ? conditions.push("(rm.occupied=1)") : conditions;
     db.ResRoom.getGuests(conditions, (result) => {
-        res.json(result);
-    });
-});
-
-router.get("/departures", (req, res) => {
-    const condition = "rr.check_out_date=CURDATE()";
-    db.ResRoom.selectDepartures(condition, (result) => {
         res.json(result);
     });
 });
@@ -323,6 +334,19 @@ router.put("/checkoutRoom/:id/:room_id", (req, res) => {
         db.Room.updateOccupied(cond, (result) => {
             res.json(result);
         });
+    });
+});
+
+router.put("/updateCleanStatus/:status/:room_id", (req, res) => {
+    const cond = [req.params.status, req.params.room_id];
+    db.Room.updateClean(cond, (result) => {
+        res.json(result);
+    });
+});
+
+router.get("/tax_rates", (req, res) => {
+    db.TaxRate.selectRates((data) => {
+        res.json(data);
     });
 });
 
