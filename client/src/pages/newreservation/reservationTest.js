@@ -45,34 +45,34 @@ class ReservationTest extends Component {
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={2}>
-                                            <strong>Name: </strong>{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}
+                                        <strong>Name: </strong>{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={9}>
-                                            <strong>Address: </strong>{this.state.ReservationInfo.address},  {this.state.ReservationInfo.city},  {this.state.ReservationInfo.state},{this.state.ReservationInfo.zip}
+                                        <strong>Address: </strong>{this.state.ReservationInfo.address},  {this.state.ReservationInfo.city}, {this.state.ReservationInfo.state}, {this.state.ReservationInfo.zip}
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={3}>
-                                            <strong>Email: </strong> {this.state.ReservationInfo.email}
+                                        <strong>Email: </strong> {this.state.ReservationInfo.email}
                                         </Col>
                                         <Col xl={4}>
-                                            <strong>Phone: </strong> {this.state.ReservationInfo.phone}
+                                        <strong>Phone: </strong> {this.state.ReservationInfo.phone}
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={3}>
-                                            <strong>Credit Card Number: </strong>****{this.state.ReservationInfo.ccLastFour}
+                                        <strong>Credit Card Number: </strong>****{this.state.ReservationInfo.ccLastFour}
                                         </Col>
                                         <Col xl={3}>
-                                            <strong>Exp Date: </strong>{this.state.ReservationInfo.cc_expiration}
+                                        <strong>Exp Date: </strong>{this.state.ReservationInfo.cc_expiration}
                                         </Col>
                                     </Row>
                                     <hr />
