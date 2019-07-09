@@ -110,9 +110,9 @@ ALTER TABLE res_rooms AUTO_INCREMENT = 1001;
 
 CREATE TABLE tax_rates (
     tax_rate_id int(3) NOT NULL AUTO_INCREMENT,
-    sales_tax_rate decimal(4,3) DEFAULT 0,
-    local_tax_rate decimal(4,3) DEFAULT 0,
-    misc_tax_rate decimal(4,3) DEFAULT 0,
+    county_tax_rate decimal(4,3) DEFAULT 0,
+    city_tax_rate decimal(4,3) DEFAULT 0,
+    state_tax_rate decimal(4,3) DEFAULT 0,
     PRIMARY KEY (tax_rate_id)
 );
 

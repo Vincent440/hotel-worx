@@ -18,9 +18,6 @@ import DetailedAvailability from "./pages/detailedAvailability/detailedAvailabil
 import HouseStatus from "./pages/houseStatus/houseStatus";
 // import PrivateRoute from "./components/PrivateRoute";
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
-// import Dashboard from './pages/dashboardMaster/dashMaster';
-// import Reservation from './pages/reservation/reservation';
-// import Reservation from "./pages/reservation/reservation";
 class PrivateRoute extends Component {
   render() {
     const { component: Component, loggedIn, ...rest } = this.props;
@@ -33,7 +30,6 @@ class PrivateRoute extends Component {
     return <Route {...rest} render={renderRoute} />;
   }
 }
-
 class App extends Component {
   constructor(props) {
     super(props);

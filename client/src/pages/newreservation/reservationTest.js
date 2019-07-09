@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
 import api from '../../utils/api';
 import Header from "../../components/Header";
-import DateRange from "../../components/dateRange/dateRange";
 import { Container } from 'react-bootstrap';
-import RegisterForm from "../../components/validation";
-import moment from 'moment';
 
 class ReservationTest extends Component {
     state = {
@@ -45,13 +41,6 @@ class ReservationTest extends Component {
                         <Row>
                             <Col xl={12}>
                                 <div id="res" style={{ paddingBottom: "10px" }}>
-                                    <Row style={{ paddingBottom: "5px" }}>
-                                        <Col xl={3}>
-                                        </Col>
-                                        <Col xl={6}>
-                                            <strong>Reservation ID: </strong>{this.state.ReservationInfo.reservation_id}
-                                        </Col>
-                                    </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
@@ -92,26 +81,24 @@ class ReservationTest extends Component {
                                         </Col>
                                         {this.state.RoomInfo.map((room) => (
                                             <div key={room.res_room_id}>
-                                                <ul style={{marginLeft:"-25px"}}>
-                                                    <li><strong>ResRoom ID: </strong>{room.res_room_id}</li>
+                                                <ul style={{ marginLeft: "-25px" }}>
+                                                    <li><strong>Confirmation Number: </strong>{room.confirmation_code}</li>
                                                     <li><strong>Arrival Date: </strong>{room.check_in_date}</li>
                                                     <li><strong>Departure Date: </strong>{room.check_out_date}</li>
                                                     <li><strong>Adults: </strong>{room.adults}</li>
-                                                    <li><strong>Rate: </strong> {room.rate}</li>
+                                                    <li><strong>Rate: </strong>{room.rate}</li>
                                                     <li><strong>Room Type: </strong>{room.type}</li>
                                                     <li><strong>Comments: </strong>{room.comments}</li>
-
                                                 </ul>
                                             </div>
                                         ))}
-
                                     </Row>
 
                                     <Row>
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={2}>
-                                            Made by: {this.state.ReservationInfo.user_id}
+                                            Made by User ID: {this.state.ReservationInfo.user_id}
                                         </Col>
                                         <Col xl={3}>
                                             Created On: {this.state.ReservationInfo.created_at}
@@ -121,18 +108,14 @@ class ReservationTest extends Component {
                             </Col>
                         </Row>
                         <div>
-                        <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.props.handleFormSubmit}>Change</button>
+                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.props.handleFormSubmit}>Change</button>
                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Print</button>
                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Email</button>
                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Save</button>
 
                         </div>
-
-
                     </Col>
-
                 </Row>
-
             </Container >
         )
     }

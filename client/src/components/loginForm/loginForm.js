@@ -26,13 +26,3 @@ export default function LoginForm(props) {
     </div>
   );
 }
-
-// <FormGroup controlId="username">
-//     <FormLabel><h5>Username</h5></FormLabel>
-//     <FormControl />
-// </FormGroup>
-// <FormGroup>
-//     <FormLabel><h5>Password</h5></FormLabel>
-//     <FormControl />
-// </FormGroup>
-// <Button onClick={props.login}>Login</Button>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import api from '../../utils/api';
 import logo from "./solidcolor.png";
 import { Card } from 'react-bootstrap';
 import "./style.css";
@@ -11,11 +10,6 @@ class InfoPart extends Component {
     state = {
         ReservationInfo: "",
     };
-    componentDidMount() {
-        api.getReservation()
-            .then(res => this.setState({ ReservationInfo: res.resCust.result[0] }))
-            .catch(err => console.log(err));
-    }
     render() {
         return (
             <Card id="infoCard">
@@ -29,8 +23,9 @@ class InfoPart extends Component {
                         type="city"
                         city="Cleveland"
                         units='F' />
-                        </div>
-                <i className="fa fa-gear" style={{ fontSize: '28px', textAlign:"center", paddingTop:"55px" }} />
+                </div>
+                <button className="btn btn-block btn-default" style={{width:"50px",paddingLeft:"7px", paddingTop:"5px", marginTop:"30px", marginLeft:"70px"}}><i class="fa fa-gear" style={{fontSize:"28px", color:"white" }}></i></button>
+                <button className="btn btn-block btn-default" style={{width:"50px", textAlign:"center", paddingLeft:"7px", paddingTop:"5px" , marginTop:"5px", marginLeft:"70px"}}><i class="fa fa-sign-out-alt" style={{fontSize:"28px", color:"white" }}></i></button>
             </Card>
         )
     }

@@ -9,10 +9,15 @@ set foreign_key_checks=0;
 DELETE FROM users;
 
 INSERT INTO users (username, password, access_id) VALUES
-('admin', '$2b$10$Qf/0VNBQiYr.pHN8IN9Yl.SrYQCpG4b2mrsX6dx85DkE7/fwsNWvy', 3), -- pw admin
-('manager', '$2b$10$2ataQ4kjDbZaR9TDSUqXI.Mt.Gq/bDn1Te3MN939s3fJAtTrKJa9i', 2), --pw 123456
-('vince', '$2b$10$HEj.issBvH6pxDEiBxtCr.c8fU7Cl4TC34K4/MGtTMdXqztLyqt8K', 3), --pw 654321
-('user', '$2b$10$rnUz2cFk61G27KdixeR5G.rf78zaKzDZlebrs9ZK5tnnVGFWrnUPm', 1); -- pw 123123
+('admin', '$2b$10$Qf/0VNBQiYr.pHN8IN9Yl.SrYQCpG4b2mrsX6dx85DkE7/fwsNWvy', 3),
+('manager', '$2b$10$2ataQ4kjDbZaR9TDSUqXI.Mt.Gq/bDn1Te3MN939s3fJAtTrKJa9i', 2),
+('vince', '$2b$10$HEj.issBvH6pxDEiBxtCr.c8fU7Cl4TC34K4/MGtTMdXqztLyqt8K', 3),
+('user', '$2b$10$rnUz2cFk61G27KdixeR5G.rf78zaKzDZlebrs9ZK5tnnVGFWrnUPm', 1);
+
+ -- pw admin
+ -- pw 123456
+ -- pw 654321
+ -- pw 123123
 
 -- --------------------------------------------------------
 
@@ -133,6 +138,17 @@ INSERT INTO res_rooms (reservation_id, room_type_id, check_in_date, check_out_da
 (1013, 2, '2019-07-07', '2019-07-11', 0, 0, 2, null, 119.99, '190705013001', ''),
 (1013, 1, '2019-07-08', '2019-07-10', 0, 0, 1, null, 109.99, '190705013002', 'needs a late checkout time'),
 (1014, 2, '2019-07-13', '2019-07-17', 0, 0, 3, null, 119.99, '190706014001', '');
+
+-- --------------------------------------------------------
+
+--
+-- Seed data for tax_rates
+--
+
+DELETE FROM tax_rates;
+
+INSERT INTO tax_rates (county_tax_rate, city_tax_rate, state_tax_rate) VALUES
+(5.000, 3.000, 7.000);
 
 -- --------------------------------------------------------
 

@@ -55,6 +55,18 @@ export default {
                 console.log(error);
             });
     },
+    getDepartures: (criteria) => {
+        const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
+        const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
+        const rnum = criteria.roomNumber === "" ? "undefined" : criteria.roomNumber;
+        return axios.get('/api/hw/departures/' + fname + "/" + lname + "/" + rnum)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getGuests: (criteria) => {
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
         const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
@@ -95,10 +107,10 @@ export default {
                 console.log(error);
             });
     },
-    getDepartures: () => {
-        return axios.get('/api/hw/departures')
+    updateCleanStatus: (room_id, status) => {
+        return axios.put('/api/hw/updateCleanStatus/' + status + '/' + room_id)
             .then((response) => {
-                return response.data;
+                return response;
             })
             .catch((error) => {
                 console.log(error);
@@ -121,5 +133,14 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
-    }
+    },
+    getTaxRates: () => {
+        return axios.get('/api/hw/tax_rates')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
 }

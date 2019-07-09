@@ -12,7 +12,6 @@ import { isInclusivelyBeforeDay } from 'react-dates';
 const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
-
     state = {
         startDateRange: today,
         firstname: undefined,
@@ -96,9 +95,7 @@ class Arrivals extends Component {
                                                 onChange={this.handleInputChange}
                                                 isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
                                             />
-
                                         </Col>
-
                                         <Col xl={1}>Name:</Col>
                                         <Col xl={2}>
                                             <input style={{ width: "150px" }}
@@ -120,7 +117,6 @@ class Arrivals extends Component {
                                             />
                                         </Col>
                                         <Col xl={1}>
-
                                             <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
                                         </Col>
                                     </Row>
@@ -152,7 +148,7 @@ class Arrivals extends Component {
                                                         {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
                                                             <select id={i} onChange={this.handleRoomChange}>
                                                                 <option value="">Select a room</option>
-                                                                {this.state.roomsArray.filter(roomtype => roomtype.room_type_id == arrival.room_type_id).map(room => (
+                                                                {this.state.roomsArray.filter(roomtype => roomtype.room_type_id === arrival.room_type_id).map(room => (
                                                                     <option key={room.room_id} value={room.room_id}>{room.room_num}</option>
                                                                 ))}
                                                             </select> :
