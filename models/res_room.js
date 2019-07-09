@@ -47,9 +47,9 @@ const ResRoom = {
             room.splice(6, 0, endOfCode);
             connection.execute(queryString, room, (err, result) => {
                 if (err) throw err;
+                cb(result);
             });
         });
-        cb(result);
     },
     cancelSome: (id, cb) => {
         const queryString = "UPDATE res_rooms SET active=0 WHERE reservation_id=?;";
