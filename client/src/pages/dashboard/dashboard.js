@@ -1,9 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart"
-import { Card, Button, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+import InfoPart from "../../components/infoPart";
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
     return (

@@ -69,7 +69,9 @@ class App extends Component {
   };
   checkIfAppIsLoggedIn = () => {
     loginAPI.getLoginStatus().then(res => {
-      this.setState({ user: res.user, loggedIn: res.loggedIn });
+      if(res){
+        this.setState({ user: res.user, loggedIn: res.loggedIn });
+      }
     });
   };
   checkServerIfLoggedIn = () => {
