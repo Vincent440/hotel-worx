@@ -32,7 +32,6 @@ module.exports = {
   updateUserById: (req, res) => {
     console.log(req.isAuthenticated());
     const userData = req.body.vals; // grab onto the new user array of values
-
     bcrypt.hash(userData[1], saltRounds, (err, hash) => {
       // use the index of the password value to pass to bcrypt
       userData[1] = hash; //replace plain text password with hash

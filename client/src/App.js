@@ -13,7 +13,8 @@ import Arrivals from "./pages/arrivals/arrivals";
 import Billing from "./pages/billing/billing";
 import Payment from "./pages/payment/payment";
 import Inhouse from "./pages/inhouse/inhouse";
-import Login from "./pages/login";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import ReservationTest from "./pages/newreservation/reservationTest";
 import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
@@ -75,20 +76,23 @@ class App extends Component {
     loginAPI.getLoginStatus().then(res => res.loggedIn);
   };
   render() {
-    let {user,loggedIn} = this.state;
+    let { user, loggedIn } = this.state;
     return (
       <Router>
         <div>
           <Particles params={particleOpt} id="particul" />
-
           <div>
             <Switch>
-              <Route path="/login" exact strict render={props => (
-                !loggedIn ? ( <Login {...props} user={user} checkIfLoggedIn={this.checkIfAppIsLoggedIn} loggedIn={loggedIn} postLogin={this.postLogin} /> ) : 
-                (<Redirect to="/" />) )}
+              <Route
+                path="/login"
+                exact
+                strict
+                render={props => (!loggedIn ? <Login {...props} user={user} checkIfLoggedIn={this.checkIfAppIsLoggedIn} loggedIn={loggedIn} postLogin={this.postLogin} /> : <Redirect to="/" />)}
               />
+              <Route path="/logout" exact strict render={props => (loggedIn ? <Logout setAppLogout={this.setAppLogout} user={user} /> : <Redirect to="/login" />)} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/" component={Dashboard} />
+              {/* <Route exact path="/" component={Dashboard} user={user} loggedIn={loggedIn} /> */}
+              <PrivateRoute path="/" exact strict component={Dashboard} loggedIn={loggedIn} user={user} />
               <Route exact path="/reserve/new" component={ReserveNew} />
               <Route exact path="/reserve/allreservations" component={UpdateReservation} />
               <Route exact path="/reserve/testUpdatereservation" component={ReserveUpdate} />

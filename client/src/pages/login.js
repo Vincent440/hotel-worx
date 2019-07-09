@@ -28,7 +28,7 @@ class Login extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    if (this.isFormInValid()===false) {
+    if (this.isFormInValid() === false) {
       this.props.postLogin({ username: this.state.username, password: this.state.password });
     }
   };
