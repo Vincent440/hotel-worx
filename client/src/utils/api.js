@@ -55,6 +55,19 @@ export default {
                 console.log(error);
             });
     },
+    getGuests: (criteria) => {
+        const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
+        const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
+        const rnum = criteria.roomNumber === "" ? "undefined" : criteria.roomNumber;
+        const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
+        return axios.get('/api/testing/guests/' + fname + "/" + lname + "/" + rnum + "/" + cnum)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getRoomsArrivals: (date) => {
         return axios.get('/api/testing/rooms_arrivals/' + date)
             .then((response) => {
@@ -84,51 +97,6 @@ export default {
     },
     getDepartures: () => {
         return axios.get('/api/testing/departures')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getCleanRooms: () => {
-        return axios.get('/api/testing/rooms_clean')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getDirtyRooms: () => {
-        return axios.get('/api/testing/rooms_dirty')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getInactiveRooms: () => {
-        return axios.get('/api/testing/rooms_inactive')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getOccupiedRooms: () => {
-        return axios.get('/api/testing/rooms_occupied')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getVacantRooms: () => {
-        return axios.get('/api/testing/rooms_vacant')
             .then((response) => {
                 return response.data;
             })

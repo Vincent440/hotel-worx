@@ -19,6 +19,15 @@ const ResRoom = {
             cb(result);
         });
     },
+    getGuests: (conditions, cb) => {
+        formattedConditions = conditions.join(" && ");
+        const queryString = "SELECT DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rm.room_num, rr.confirmation_code, rr.comments, rt.type, c.first_name, c.last_name FROM res_rooms AS rr INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id INNER JOIN rooms AS rm ON rm.room_id=rr.room_id INNER JOIN reservations AS r ON rr.reservation_id=r.reservation_id INNER JOIN customers AS c ON c.customer_id=r.customer_id WHERE rm.occupied=1 && " + formattedConditions + " ORDER BY rm.room_num ASC;";
+        connection.query(queryString, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
+        // rm.occupied=1 && " + formattedConditions + "
+    },
     deleteSome: (id, cb) => {
         const queryString = "DELETE FROM res_rooms WHERE reservation_id=?;";
         connection.execute(queryString, [id], (err, result) => {
