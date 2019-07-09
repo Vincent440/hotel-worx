@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css"
-import { Nav, Button } from 'react-bootstrap';
-
+import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
 const Header = props => {
     return (
         <Nav className="navbar navbar-default">
@@ -11,8 +11,7 @@ const Header = props => {
                     </p>
                 </div>
                 <ul className="nav navbar-nav navbar-right">
-                    <Button className="btn navbar-right"  href="/" type="submit"> X
-            </Button>
+                    <Link className="btn navbar-right"  to="/" type="submit">X</Link>
                 </ul>
             </div>
         </Nav>

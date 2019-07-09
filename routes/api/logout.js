@@ -3,11 +3,10 @@ const passport = require("passport");
 require("../../controllers/passportController")(passport);
 
 // Matches with "api/logout"
-router.route("/").get(
-    function(req, res) {
-        req.logout();
-        res.status(200).send("User Is Logged Out: " + req.isUnauthenticated());
-    }
-);
+router.route("/").get((req, res) => {
+  req.logout();
+  console.log("\nUser Is now logged out: " + req.isUnauthenticated());
+  res.status(200).json({ user: {}, loggedIn: req.isAuthenticated() });
+});
 
 module.exports = router;
