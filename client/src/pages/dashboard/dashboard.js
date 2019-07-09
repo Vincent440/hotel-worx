@@ -6,12 +6,12 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
-function Dashboard() {
+function Dashboard(props) {
     return (
         <Container>
             <Row>
                 <Col sm={2}>
-                    <InfoPart />
+                    <InfoPart setApplogout={props.setAppLogout} />
                 </Col>
                 <Col sm={10}>
                     <div>

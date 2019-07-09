@@ -87,7 +87,7 @@ class App extends Component {
               <Route path="/logout" exact strict render={props => (loggedIn ? <Logout setAppLogout={this.setAppLogout} user={user} /> : <Redirect to="/login" />)} />
               <Route exact path="/login" component={Login} />
               {/* <Route exact path="/" component={Dashboard} user={user} loggedIn={loggedIn} /> */}
-              <PrivateRoute path="/" exact strict component={Dashboard} loggedIn={loggedIn} user={user} />
+              <PrivateRoute path="/" exact strict component={Dashboard} logout={this.setAppLogout} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/reserve/new" component={ReserveNew} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/reserve/allreservations" component={UpdateReservation} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/reserve/testUpdatereservation" component={ReserveUpdate} loggedIn={loggedIn} user={user} />
