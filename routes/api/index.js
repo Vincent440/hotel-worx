@@ -29,18 +29,11 @@ router.use("/reservations", reservationRoutes);
 router.use("/rooms", roomRoutes);
 
 // '/api/testing' for any ongoing testing route builds
-router.use("/testing",testingRoutes);
-
-// '/api/test' for any ongoing testing route builds
-router.get("/test", (req, res) => {
-    res.status(200).send("sending this from the /api/test route");
-});
+router.use("/testing", testingRoutes);
 
 // '/api' for any ongoing testing the root of /api route
 router.get("/", (req, res) => {
-    res.status(200).send("Succesful get to /api route");
+  res.status(200).send("Succesful get to /api route");
 });
-
-
 
 module.exports = router;
