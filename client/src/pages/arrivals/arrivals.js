@@ -12,7 +12,6 @@ import { isInclusivelyBeforeDay } from 'react-dates';
 const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
-  
     state = {
         startDateRange: today,
         firstname: undefined,
@@ -21,7 +20,7 @@ class Arrivals extends Component {
         arrivalsArray: [],
         roomsArray: []
     };
- 
+
     makeAxiosCall = () => {
         const criteria = {
             startDateRange: moment(this.state.startDateRange).format('YYYY-MM-DD'),
@@ -88,7 +87,7 @@ class Arrivals extends Component {
                                     <Row>
                                         <Col xl={1}>Date</Col>
                                         <Col xl={2}>
-                                        <input style={{width:"150px", height:"30px"}}
+                                            <input style={{ width: "150px", height: "30px" }}
                                                 type="date"
                                                 placeholder="Date"
                                                 name="startDateRange"
@@ -96,12 +95,12 @@ class Arrivals extends Component {
                                                 onChange={this.handleInputChange}
                                                 isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
                                             />
-                                           
+
                                         </Col>
 
                                         <Col xl={1}>Name:</Col>
                                         <Col xl={2}>
-                                        <input style={{width:"150px"}}
+                                            <input style={{ width: "150px" }}
                                                 type="text"
                                                 placeholder="First Name"
                                                 name="firstname"
@@ -111,7 +110,7 @@ class Arrivals extends Component {
                                         </Col>
                                         <Col xl={2}>Last Name:</Col>
                                         <Col xl={3}>
-                                        <input style={{width:"150px", height:"30px"}}
+                                            <input style={{ width: "150px", height: "30px" }}
                                                 type="text"
                                                 placeholder="Last Name"
                                                 name="lastname"
@@ -121,13 +120,12 @@ class Arrivals extends Component {
                                         </Col>
                                         <Col xl={1}>
 
-                                    <SearchSubmit 
-                                    handleFormSubmit={this.handleFormSubmit} />
-                                    </Col>
-                                        </Row>
+                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                                        </Col>
+                                    </Row>
                                 </Col>
 
-                                
+
                             </Row>
                         </div>
                         <div id="res">
@@ -144,27 +142,27 @@ class Arrivals extends Component {
                                                 <th></th>
                                             </tr>
                                             {this.state.arrivalsArray.map((arrival, i) => (
-    <tr key={arrival.res_room_id}>
-        <td>{arrival.name}</td>
-        <td>{arrival.check_in_date}</td>
-        <td>{arrival.check_out_date}</td>
-        <td>{arrival.type}</td>
-        <td>
-            {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
-                <select id={i} onChange={this.handleRoomChange}>
-                    <option value="">Select a room</option>
-                    {this.state.roomsArray.filter(roomtype => roomtype.room_type_id == arrival.room_type_id).map(room => (
-                        <option key={room.room_id} value={room.room_id}>{room.room_num}</option>
-                    ))}
-                </select> :
-                arrival.room_num) : "Not Set"}
-        </td>
-        <td>
-            {this.state.startDateRange === today ? arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In" : ""}
-            
-        </td>
-    </tr>
-))}
+                                                <tr key={arrival.res_room_id}>
+                                                    <td>{arrival.name}</td>
+                                                    <td>{arrival.check_in_date}</td>
+                                                    <td>{arrival.check_out_date}</td>
+                                                    <td>{arrival.type}</td>
+                                                    <td>
+                                                        {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
+                                                            <select id={i} onChange={this.handleRoomChange}>
+                                                                <option value="">Select a room</option>
+                                                                {this.state.roomsArray.filter(roomtype => roomtype.room_type_id == arrival.room_type_id).map(room => (
+                                                                    <option key={room.room_id} value={room.room_id}>{room.room_num}</option>
+                                                                ))}
+                                                            </select> :
+                                                            arrival.room_num) : "Not Set"}
+                                                    </td>
+                                                    <td>
+                                                        {this.state.startDateRange === today ? arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In" : ""}
+
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
 
                                     </Table>

@@ -2,9 +2,9 @@ const router = require("express").Router();
 
 const db = require("../../models/index.js");
 
-// '/api/testing' route
+// '/api/hw' route
 router.route("/").get((req, res) => {
-    res.status(200).send("sending this from the /api/testing route for any test routes");
+    res.status(200).send("sending this from the /api/hw route root");
 });
 
 router.get("/users/:id", (req, res) => {
@@ -75,41 +75,6 @@ router.get("/rooms", (req, res) => {
 
 router.get("/rooms/:id", (req, res) => {
     db.Room.selectOne(req.params.id, (data) => {
-        res.json(data);
-    });
-});
-
-router.get("/rooms_clean", (req, res) => {
-    const condition = "rm.clean=1";
-    db.Room.selectSome(condition, (data) => {
-        res.json(data);
-    });
-});
-
-router.get("/rooms_inactive", (req, res) => {
-    const condition = "rm.active=0";
-    db.Room.selectSome(condition, (data) => {
-        res.json(data);
-    });
-});
-
-router.get("/rooms_occupied", (req, res) => {
-    const condition = "rm.occupied=1";
-    db.Room.selectSome(condition, (data) => {
-        res.json(data);
-    });
-});
-
-router.get("/rooms_vacant", (req, res) => {
-    const condition = "rm.occupied=0";
-    db.Room.selectSome(condition, (data) => {
-        res.json(data);
-    });
-});
-
-router.get("/rooms_dirty", (req, res) => {
-    const condition = "rm.clean=0";
-    db.Room.selectSome(condition, (data) => {
         res.json(data);
     });
 });
@@ -295,6 +260,26 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
 
 router.get("/rooms_arrivals/:date", (req, res) => {
     db.Room.selectAllShort(req.params.date, (result) => {
+        res.json(result);
+    });
+});
+
+router.get("/guests/:fname/:lname/:rnum/:cnum", (req, res) => {
+    let conditions = [];
+    if (req.params.fname !== "undefined") {
+        conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
+    }
+    if (req.params.lname !== "undefined") {
+        conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
+    }
+    if (req.params.rnum !== "undefined") {
+        conditions.push("rm.room_num LIKE '%" + req.params.rnum + "%'");
+    }
+    if (req.params.cnum !== "undefined") {
+        conditions.push("rr.confirmation_code LIKE '%" + req.params.cnum + "%'");
+    }
+    conditions.length === 0 ? conditions.push("(rm.occupied=1)") : conditions;
+    db.ResRoom.getGuests(conditions, (result) => {
         res.json(result);
     });
 });
