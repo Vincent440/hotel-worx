@@ -55,6 +55,13 @@ const ResRoom = {
             if (err) throw err;
             cb(result);
         });
+    },
+    updateCheckOut: (id, cb) => {
+        const queryString = "UPDATE res_rooms SET checked_out=1 WHERE res_room_id=?;";
+        connection.execute(queryString, [id], (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
     }
 }
 

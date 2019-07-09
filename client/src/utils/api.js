@@ -73,6 +73,15 @@ export default {
                 console.log(error);
             });
     },
+    updateRoomCheckout: (id, room_id) => {
+        return axios.put('/api/testing/checkoutRoom/' + id + '/' + room_id)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getDepartures: () => {
         return axios.get('/api/testing/departures')
             .then((response) => {
