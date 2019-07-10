@@ -6,20 +6,20 @@ import "./loginForm.css";
 export default function LoginForm(props) {
   return (
     <div className="Login">
-      <Form onSubmit={e => props.handleSubmit(e)} className="text-center border p-3">
+      <Form onSubmit={e => props.handleSubmit(e)} className="text-center">
         <Form.Row className="justify-content-center">
           <Form.Group controlId="loginUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control size="lg" onChange={props.handleInputChange} autoComplete="username" type="text" name="username" placeholder="Username" />
+            <Form.Control size="lg" onChange={props.handleInputChange} autoComplete="username" type="text" name="username" />
           </Form.Group>
         </Form.Row>
         <Form.Row className="justify-content-center">
           <Form.Group controlId="loginPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control size="lg" onChange={props.handleInputChange} autoComplete="current-password" type="password" name="password" placeholder="Password" />
+            <Form.Control size="lg" onChange={props.handleInputChange} autoComplete="current-password" type="password" name="password"/>
           </Form.Group>
         </Form.Row>
-        <Button disabled={props.isFormInValid()} className="w-75 mx-auto mb-2" type="submit" size="block" variant="success">
+        <Button disabled={props.isFormInValid()} className="w-75 mx-auto mb-2" type="submit" size="block" variant="primary">
           Login
         </Button>
       </Form>
