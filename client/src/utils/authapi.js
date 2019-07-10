@@ -13,7 +13,6 @@ export default {
   postUserLogin: async (user,done) => {
     try {
       const res = await axios.post('/api/login', user);
-      console.log(res)
       // Async function for logging in, setting up callback to return two params, ( error: false if no error, res.data: userData from server )
       return (res.data.user.username ? ( done(false,res.data)) : ( done(false,"error logging in")) );
     }
@@ -24,7 +23,6 @@ export default {
   getLoggedOut: async () => {
     try {
       const res = await axios.get('/api/logout');
-      console.log(res);
       return res;
     }
     catch (err) {
