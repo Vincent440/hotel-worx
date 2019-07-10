@@ -218,7 +218,7 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{paddingTop: "8px" }}>
+                                            <Row style={{paddingTop: "8px",backgroundColor: "white" }}>
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>

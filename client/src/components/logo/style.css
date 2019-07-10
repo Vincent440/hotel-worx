@@ -1,5 +1,14 @@
-img {
+
+
+@media all and (min-width: 480px) {
+  #logo {
     width: 100%;
     margin-bottom: 30px;
   }
   
+  #logoDiv {
+    max-width: 280px;
+    margin: 0 auto;
+    padding-top: 150px;
+  }
+ }

@@ -4,63 +4,30 @@ import "./style3.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import { Container, Table } from 'react-bootstrap';
-
+import api from '../../utils/api';
+import { Link } from 'react-router-dom';
 
 class Payment extends Component {
-    // Setting the initial values of this.state.username and this.state.password
+
     state = {
-        name: "",
-        lastname: "",
-        phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
-        },
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        roomType: "",
-        creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
-        ReservationInfo: {},
-        RoomInfo: []
+        RoomInfo: [],
+        InvoiceArray: [],
+        invoice_id: ""
     };
 
-    // componentdidMount() {
-    //     api.getreservation()
-    //         .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
-    //         .catch(err => console.log(err))
-    // }
-
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
-    }
-
-
-    // handle any changes to the input fields
-    handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
-        const { name, value } = event.target;
-
-        // Set the state for the appropriate input field
-        this.setState({
-            [name]: value
+    componentDidMount() {
+        let invoice_id = "";
+        if (localStorage && localStorage.getItem('invoice_id')) {
+            invoice_id = JSON.parse(localStorage.getItem('invoice_id'));
+        }
+        this.setState({ invoice_id: invoice_id }, () => {
+            api.getInvoice(this.state.invoice_id)
+                .then(res => this.setState({ InvoiceArray: res }))
+                .catch(err => console.log(err))
         });
     }
 
-    // When the form is submitted, prevent the default event and alert the username and password
-    handleFormSubmit = event => {
-        event.preventdefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
-    }
     render() {
-
 
         return (
             <Container>
@@ -68,64 +35,81 @@ class Payment extends Component {
                     <Col sm={2}>
                         <InfoPart />
                     </Col>
-
                     <Col sm={10}>
                         <Row>
                             <Col xl={12}>
-                                <Header>BILLING</Header>
+                                <Header>INVOICE</Header>
                             </Col>
                         </Row>
                         <div id="res">
+                            <div id="res" style={{ paddingBottom: "10px" }}>
 
-                            {this.state.RoomInfo.map((room, i) => (
+                                <Row>
+                                    <Table border="1">
+                                        <tbody>
+                                            {this.state.InvoiceArray.map(invoice => (
+                                                <ul key={invoice.res_room_id}>
+                                                    <tr>
+                                                        <th colspan="2"><strong>Room Number:</strong> {invoice.room_num}</th>
+                                                        <th colspan="2"><strong>Name:</strong> {invoice.last_name}, {invoice.first_name}</th>
+                                                        <th><strong>CC Number: </strong> {invoice.ccLastFour} </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><strong>Num Nights</strong></th>
+                                                        <th><strong>Rate</strong></th>
+                                                        <th><strong>Room Total</strong></th>
+                                                        <th><strong>County Tax</strong></th>
+                                                        <th><strong>City Tax</strong></th>
+                                                        <th><strong>State Tax</strong></th>
+                                                        <th><strong>Total Due</strong></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{invoice.num_days}</td>
+                                                        <td>${invoice.rate}</td>
+                                                        <td>${(parseInt(invoice.num_days) * parseFloat(invoice.rate)).toFixed(2)} </td>
+                                                        <td>${invoice.county_tax}</td>
+                                                        <td>${invoice.city_tax}</td>
+                                                        <td>${invoice.state_tax}</td>
+                                                        <td>${((parseInt(invoice.num_days) * parseFloat(invoice.rate)) + parseFloat(invoice.county_tax) + parseFloat(invoice.city_tax) + parseFloat(invoice.state_tax)).toFixed(2)}</td>
 
-                                <div id="res" style={{ paddingBottom: "10px" }}>
+                                                    </tr>
+                                                </ul>
+                                            ))}
+                                        </tbody>
+                                        <Row style={{ margin: "10px 0px 20px" }}>
+                                            <Col xl={2}>
+                                            </Col>
+                                            <Col xl={2}>
+                                                <strong>  </strong>
+                                            </Col>
+                                            <Col xl={2}>
+                                                Credit Card <input type="radio" name="myCheck" checked/>
+                                            </Col>
+                                            <Col xl={2}>
+                                                Cash <input type="radio" name="myCheck" />
+                                            </Col>
+                                        </Row>
+                                        <Row style={{ margin: "30px 0px 20px" }}>
+                                            <Col xl={5}>
+                                            </Col>
+                                            <Col>
+                                                <Link className="btn navbar-right btn-primary" to="/cashiering/billing" type="submit">Submit Payment</Link>
+                                            </Col>
+                                        </Row>
 
-                                    <Row>
-                                        <h2>Room: {room.room_num}</h2>
-                                        <Table border="1">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Balance: {this.state.balance}</td>
-                                                    <td>Arrival Date: {room.check_in_date}</td>
-                                                    <td>Daily Room Rate:{this.state.roomRate}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status:</td>
-                                                    <td>Departure Date: {room.check_out_date}</td>
-                                                    <td>Room Type: {room.type}</td>
-                                                </tr>
 
-                                                <tr>
-                                                    <th className="tableInfo">{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}</th>
-                                                    <th className="tableInfo">CC: <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
-                                                        {this.state.ccnumber}</th>
-                                                    <th className="tableInfo">Cash:   <input type="checkbox" id="myCheck" onmouseover="myFunction()" onclick="alert('click event occured')" />
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <th className="th" id="date">Date</th>
-                                                    <th className="th" id="description">Description</th>
-                                                    <th className="th" id="amount">Amount</th>
-                                                </tr>
-                                            </tbody>
+                                    </Table>
+                                </Row>
 
-                                        </Table>
-                                    </Row>
-
-                                    <button type="button" class="btn btn-primary" style={{ marginLeft: "350px", marginTop: "10px" }}>Post</button>
+                                {/* <button type="button" class="btn btn-primary" style={{ marginLeft: "350px", marginTop: "10px" }}>Post</button>
                                     <button type="button" class="btn btn-danger" style={{ marginTop: "10px" }}>Payment</button>
                                     <button type="button" class="btn btn-danger" style={{ marginTop: "10px" }}>Check Out</button>
-                                    <button type="button" class="btn btn-primary" style={{ marginTop: "10px", marginLeft: "5px" }}>Close</button>
-                                </div>
-                            ))}
+                                    <button type="button" class="btn btn-primary" style={{ marginTop: "10px", marginLeft: "5px" }}>Close</button> */}
+                            </div>
                         </div>
                     </Col>
-
-
                 </Row >
-            </Container>
-
+            </Container >
         )
     }
 }

@@ -14,40 +14,47 @@ function Dashboard(props) {
                     <InfoPart setApplogout={props.setAppLogout} />
                 </Col>
                 <Col sm={10}>
-                    <div>
-                        <div className="btn-group" style={{ display: 'block' }}>
-                            <Card style={{ marginBottom: "10px" }}>
-                                <Card.Body>RESERVATION</Card.Body>
-                            </Card>
-                            <Link className="btn btn-primary btn-lg" to="/reserve/new">New Reservation</Link>
-                            <Link className="btn btn-primary btn-lg" to="/reserve/allreservations">Update Reservation</Link>
-                            <Link className="btn btn-primary btn-lg" to="/reserve/testUpdatereservation">Test Update Reservation</Link>
-                        </div>
-                        <div className="btn-group" style={{ display: 'block' }}>
-                            <Card style={{ marginBottom: "10px" }}>
-                                <Card.Body>FRONT DESK</Card.Body>
-                            </Card>
-                            <Link className="btn btn-primary btn-lg" to="/frontdesk/arrivals">Arrivals</Link>
-                            <Link className="btn btn-primary btn-lg" to="/frontdesk/inhouse">In-House Guests</Link>
-                        </div>
+                    <Row>
+                    <Col xs={12} sm={12} md={6} lg={3} xl={3}>
+                            <div className="btn-group" style={{ display: 'block' }}>
+                                <Card style={{ marginBottom: "10px" }}>
+                                    <Card.Body>RESERVATION</Card.Body>
+                                </Card>
+                                <Link className="btn btn-primary" to="/reserve/new">New Reservation</Link>
+                                <Link className="btn btn-primary" to="/reserve/allreservations">Update Reservation</Link>
+                                <Link className="btn btn-primary" to="/reserve/testUpdatereservation">Test Update Reservation</Link>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={3} xl={3}>
+                            <div className="btn-group" style={{ display: 'block' }}>
+                                <Card style={{ marginBottom: "10px" }}>
+                                    <Card.Body>FRONT DESK</Card.Body>
+                                </Card>
+                                <Link className="btn btn-primary" to="/frontdesk/arrivals">Arrivals</Link>
+                                <Link className="btn btn-primary" to="/frontdesk/inhouse">In-House Guests</Link>
+                            </div>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={3} xl={3}>
                         <div className="btn-group" style={{ display: 'block' }}>
                             <Card style={{ marginBottom: "10px" }}>
                                 <Card.Body>FINANCE</Card.Body>
                             </Card>
-                            <Link className="btn btn-primary btn-lg" to="/cashiering/billing">Billing</Link>
-                            <Link className="btn btn-primary btn-lg" to="/cashiering/payment">Test Invoice</Link>
+                            <Link className="btn btn-primary" to="/cashiering/billing">Billing</Link>
                         </div>
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={3} xl={3}>
                         <div className="btn-group" style={{ display: 'block' }}>
                             <Card style={{ marginBottom: "10px" }}>
                                 <Card.Body>REPORTS</Card.Body>
                             </Card>
-                            <Link className="btn btn-primary btn-lg" to="/reports/housekeeping">Housekeeping Report</Link>
-                            <Link className="btn btn-primary btn-lg" to="/reports/detailedAvailability">Detailed Availability</Link>
-                            <Link className="btn btn-primary btn-lg" to="/reports/houseStatus">House Status</Link>
+                            <Link className="btn btn-primary" to="/reports/housekeeping">Housekeeping Report</Link>
+                            <Link className="btn btn-primary" to="/reports/detailedAvailability">Detailed Availability</Link>
+                            <Link className="btn btn-primary" to="/reports/houseStatus">House Status</Link>
                         </div>
+                        </Col>
                         <div style={{ clear: "both" }}></div>
 
-                    </div>
+                    </Row>
                 </Col>
             </Row>
         </Container>
