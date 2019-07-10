@@ -90,7 +90,7 @@ class Billing extends Component {
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col sm={6} >Room Number</Col>
                                         <Col sm={6}>
-                                            <input
+                                        <input style={{ width: "150px" }}
                                                 id=""
                                                 onChange={this.handleInputChange}
                                                 name="roomNumber"
