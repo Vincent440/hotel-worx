@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart"
@@ -15,7 +16,10 @@ class Billing extends Component {
         departuredate: "",
         departuresArray: [],
         roomNumber: "",
-        taxRates: {}
+        taxRates: {},
+        checkOutSuccess: false,
+        res_room_id: "",
+        invoice_id: ""
     };
 
     makeAxiosCall = () => {
@@ -31,8 +35,9 @@ class Billing extends Component {
     }
 
     handleCheckOut = (id, room_id) => {
+        this.setState({ res_room_id: id });
         api.updateRoomCheckout(id, room_id)
-            .then(res => this.makeAxiosCall())
+            .then(res => this.setState({ checkOutSuccess: true, invoice_id: res[1].data }))
             .catch(err => console.log(err));
     }
 
@@ -57,6 +62,15 @@ class Billing extends Component {
 
     render() {
 
+        if (this.state.checkOutSuccess) {
+            localStorage.setItem('invoice_id', this.state.invoice_id);
+            return (
+                <Redirect to={{
+                    pathname: '/cashiering/payment'
+                }} />
+            )
+        }
+
         return (
 
             <Container>
@@ -78,11 +92,12 @@ class Billing extends Component {
                                         <Col sm={6}>
                                             <input
                                                 id=""
-                                                onChange={this.handleChange}
+                                                onChange={this.handleInputChange}
                                                 name="roomNumber"
                                                 placeholder="Room Number"
                                                 value={this.state.roomNumber}
-                                            /></Col>
+                                            />
+                                        </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col sm={6}>First Name</Col>
@@ -165,12 +180,11 @@ class Billing extends Component {
                                                     <td>{departure.name}</td>
                                                     <td>{departure.check_in_date}</td>
                                                     <td>{departure.check_out_date}</td>
-                                                    <td>
-                                                        ${((departure.num_days) * (departure.rate) * (1 + (((parseFloat(this.state.taxRates.county_tax_rate) + parseFloat(this.state.taxRates.city_tax_rate) + parseFloat(this.state.taxRates.state_tax_rate)) / 100)))).toFixed(2)}
+                                                    <td>${parseFloat((departure.num_days) * (departure.rate)) + parseFloat(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + parseFloat(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + parseFloat(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))}
                                                     </td>
 
                                                     <td>
-                                                        <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check Out</button>
+                                                        {departure.room_num === "Not Set" ? "" : <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button>}
                                                     </td>
                                                 </tr>
                                             ))}
