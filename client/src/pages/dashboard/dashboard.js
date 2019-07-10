@@ -11,7 +11,7 @@ function Dashboard(props) {
         <Container>
             <Row>
                 <Col sm={2}>
-                    <InfoPart setApplogout={props.setAppLogout} />
+                    <InfoPart user={props.user} logout={props.logout} />
                 </Col>
                 <Col sm={10}>
                     <Row>

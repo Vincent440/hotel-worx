@@ -196,7 +196,7 @@ class ReserveNew extends Component {
             <Container>
                 <Row>
                     <Col xl={2}>
-                        <InfoPart />
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col xl={10}>
                         <Row>
