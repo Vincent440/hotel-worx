@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import LoginForm from "../components/loginForm/loginForm";
 import Logo from "../components/logo/logo";
-
 class Login extends Component {
   constructor(props) {
     super(props);
