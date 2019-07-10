@@ -19,10 +19,10 @@ import HouseStatus from "./pages/houseStatus/houseStatus";
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class PrivateRoute extends Component {
   render() {
-    const { component: Component, loggedIn, ...rest } = this.props;
+    const { component: Component, loggedIn,user,logout, ...rest } = this.props;
     const renderRoute = props => {
       if (loggedIn === true) {
-        return <Component {...props} />;
+        return <Component user={user} logout={logout} loggedIn={loggedIn} {...props} />;
       }
       return <Redirect to="/login" />;
     };
@@ -35,6 +35,7 @@ class App extends Component {
     this.setAppLogin.bind(this);
     this.postLogin.bind(this);
     this.checkIfAppIsLoggedIn.bind(this);
+    this.appLogout.bind(this);
     this.state = {
       user: props.user || {},
       loggedIn: false
@@ -46,7 +47,7 @@ class App extends Component {
       loggedIn: false
     });
   };
-  setAppLogout = () => {
+  appLogout = () => {
     authapi.getLoggedOut().then(this.setAppLogin);
   };
   postLogin = userData => {
@@ -83,18 +84,18 @@ class App extends Component {
                 render={props => (!loggedIn ? <Login {...props} user={user} checkIfLoggedIn={this.checkIfAppIsLoggedIn} loggedIn={loggedIn} postLogin={this.postLogin} /> : <Redirect to="/" />)}
               />
               {/* <Route exact path="/" component={Dashboard} user={user} loggedIn={loggedIn} /> */}
-              <PrivateRoute path="/" exact strict component={Dashboard} logout={this.setAppLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/new" component={ReserveNew} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/allreservations" component={UpdateReservation} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/testUpdatereservation" component={ReserveUpdate} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/testreservation" component={ReservationTest} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/frontdesk/arrivals" component={Arrivals} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/frontdesk/inhouse" component={Inhouse} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/cashiering/billing" component={Billing} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/cashiering/payment" component={Payment} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reports/housekeeping" component={Housekeeping} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reports/detailedAvailability" component={DetailedAvailability} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reports/houseStatus" component={HouseStatus} loggedIn={loggedIn} user={user} />
+              <PrivateRoute path="/" exact strict component={Dashboard} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reserve/new" component={ReserveNew} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reserve/allreservations" component={UpdateReservation} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reserve/testUpdatereservation" component={ReserveUpdate} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reserve/testreservation" component={ReservationTest} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/frontdesk/arrivals" component={Arrivals} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/frontdesk/inhouse" component={Inhouse} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/cashiering/billing" component={Billing} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/cashiering/payment" component={Payment} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reports/housekeeping" component={Housekeeping} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reports/detailedAvailability" component={DetailedAvailability} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/reports/houseStatus" component={HouseStatus} logout={this.appLogout} loggedIn={loggedIn} user={user} />
             </Switch>
           </div>
         </div>

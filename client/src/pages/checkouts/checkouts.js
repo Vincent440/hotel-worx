@@ -62,7 +62,7 @@ class Reservation extends Component {
         return (
 
             <Row id="dashboardTable">
-               <InfoPart />
+               <InfoPart user={this.props.user} logout={this.props.logout} />
                 <Col sm={10}>
                     <row>
                         <form>

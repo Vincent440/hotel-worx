@@ -29,7 +29,7 @@ class Reservation extends Component {
         return (
 
             <Row id="dashboardTable1">
-                <InfoPart />
+                <InfoPart user={this.props.user} logout={this.props.logout} />
                 <Col sm={10}>
                     <row>
                         <div id="header">
