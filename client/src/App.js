@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Particles from "react-particles-js";
-import loginAPI from "./utils/loginAPI";
+import authapi from "./utils/authapi";
 import ReserveNew from "./pages/newreservation/newreservation";
 import ReserveUpdate from "./pages/updatereservation/updatereservation";
 import Dashboard from "./pages/dashboard/dashboard";
@@ -47,12 +47,12 @@ class App extends Component {
     });
   };
   setAppLogout = () => {
-    loginAPI.getLoggedOut().then(this.setAppLogin);
+    authapi.getLoggedOut().then(this.setAppLogin);
   };
   postLogin = userData => {
     if (userData) {
       console.log(userData);
-      loginAPI.postUserLogin(userData, (err, res) => {
+      authapi.postUserLogin(userData, (err, res) => {
         if (err === true) {
           return console.log("err failed to log in");
         } else {
@@ -63,14 +63,14 @@ class App extends Component {
     }
   };
   checkIfAppIsLoggedIn = () => {
-    loginAPI.getLoginStatus().then(res => {
+    authapi.getLoginStatus().then(res => {
       if(res){
         this.setState({ user: res.user, loggedIn: res.loggedIn });
       }
     });
   };
   checkServerIfLoggedIn = () => {
-    loginAPI.getLoginStatus().then(res => res.loggedIn);
+    authapi.getLoginStatus().then(res => res.loggedIn);
   };
   render() {
     let { user, loggedIn } = this.state;
