@@ -268,7 +268,7 @@ router.get("/departures/:fname/:lname/:rnum", (req, res) => {
     if (req.params.rnum !== "undefined") {
         conditions.push("(rm.room_num='" + req.params.rnum + "')");
     }
-    conditions.length === 0 ? conditions.push("(rr.check_in_date=CURDATE())") : conditions;
+    conditions.length === 0 ? conditions.push("(rr.check_out_date=CURDATE())") : conditions;
     db.ResRoom.selectDepartures(conditions, (result) => {
         res.json(result);
     });
@@ -326,12 +326,30 @@ router.put("/checkinRoom/:id/:room_id", (req, res) => {
     });
 });
 
-router.put("/checkoutRoom/:id/:room_id", (req, res) => {
-    const cond = [0, req.params.room_id];
+router.put("/checkoutRoom/:id/:room_num", (req, res) => {
     db.ResRoom.updateCheckOut(req.params.id, (result) => {
-        db.Room.updateOccupied(cond, (result) => {
+        db.Room.updateCheckOut(req.params.room_num, (result) => {
             res.json(result);
         });
+    });
+});
+
+router.post("/invoice", (req, res) => {
+    db.ResRoom.selectForInvoice(req.body.id, (result) => {
+        const room_total = (parseFloat(result[0].rate)*parseFloat(result[0].num_days)).toFixed(2);
+        const county_tax = parseFloat(result[0].county_rate*room_total).toFixed(2);
+        const city_tax = parseFloat(result[0].city_rate*room_total).toFixed(2);
+        const state_tax = parseFloat(result[0].state_rate*room_total).toFixed(2);
+        const vals = [result[0].res_room_id, result[0].num_days, result[0].rate, county_tax, city_tax, state_tax];
+        db.Invoice.insertOne(vals, (result) => {
+            res.json(result.insertId);
+        });
+    });
+});
+
+router.get("/invoice/:id", (req, res) => {
+    db.Invoice.selectOne(req.params.id, (data) => {
+        res.json(data);
     });
 });
 
