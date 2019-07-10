@@ -24,13 +24,13 @@ const DeatiledSubmit = props => {
                             Availability
                         </Col>
                         <Col xl={1}>
-                            <input type="checkbox" id="myCheck" />
+                            <input type="radio" id="myCheck" checked/>
                         </Col>
                         <Col xl={1}>
                             Occupancy
                         </Col>
                         <Col xl={1}>
-                            <input type="checkbox" id="myCheck"  />
+                            <input type="radio" id="myCheck"  />
                         </Col>
                     </Row>
                 </Col>
