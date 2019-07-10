@@ -5,7 +5,6 @@ module.exports = {
     RoomType: require('./room_type'),
     Reservation: require('./reservation'),
     ResRoom: require('./res_room'),
-    TaxRate: require('./tax_rate')
+    TaxRate: require('./tax_rate'),
+    Invoice: require('./invoice')
 };
-
-//     Session: require('./session')

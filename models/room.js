@@ -67,6 +67,14 @@ const Room = {
             cb(result);
         });
     },
+    updateCheckOut: (id, cb) => {
+        const queryString = "UPDATE rooms SET occupied=0, clean=0 WHERE room_num=?;";
+        console.log(id);
+        connection.execute(queryString, [id], (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
+    },
     updateClean: (vals, cb) => {
         const queryString = "UPDATE rooms SET clean=? WHERE room_id=?;";
         connection.execute(queryString, vals, (err, result) => {

@@ -118,4 +118,16 @@ CREATE TABLE tax_rates (
 
 -- --------------------------------------------------------
 
+CREATE TABLE invoices (
+    invoice_id int(10) NOT NULL AUTO_INCREMENT,
+    res_room_id int(10) NOT NULL,
+    FOREIGN KEY (res_room_id) REFERENCES res_rooms(res_room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    created_at datetime DEFAULT CURRENT_TIMESTAMP,
+    room_total decimal(6,2) NOT NULL,
+    tax decimal(5,2) NOT NULL,
+    PRIMARY KEY (invoice_id)
+);
+
+-- --------------------------------------------------------
+
 set foreign_key_checks=1;
