@@ -5,14 +5,9 @@ import InfoPart from "../../components/infoPart"
 import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import { Container, Table } from 'react-bootstrap';
-import moment from 'moment';
 import api from '../../utils/api';
 
-const today = moment().format("YYYY-MM-DD");
-
-
 class Billing extends Component {
-    // Setting the initial values of this.state.username and this.state.password
     state = {
         firstname: "",
         lastname: "",
@@ -22,8 +17,6 @@ class Billing extends Component {
         roomNumber: "",
         taxRates: {}
     };
-
-    // county_tax_rate, city_tax_rate, state_tax_rate
 
     makeAxiosCall = () => {
         const criteria = {

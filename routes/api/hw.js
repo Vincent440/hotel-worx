@@ -238,7 +238,6 @@ router.get("/res_rooms/:id", (req, res) => {
 });
 
 router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
-    const todayDate = new Date().toISOString().slice(0, 10);
     let conditions = [];
     if (req.params.sdate !== "undefined") {
         conditions.push("(rr.check_in_date='" + req.params.sdate + "')");
@@ -252,14 +251,13 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
     if (req.params.cnum !== "undefined") {
         conditions.push("rr.confirmation_code LIKE '%" + req.params.cnum + "%'");
     }
-    conditions.length === 0 ? conditions.push("(rr.check_in_date='" + todayDate + "')") : conditions;
+    conditions.length === 0 ? conditions.push("(rr.check_in_date=CURDATE())") : conditions;
     db.ResRoom.selectArrivals(conditions, (result) => {
         res.json(result);
     });
 });
 
 router.get("/departures/:fname/:lname/:rnum", (req, res) => {
-    const todayDate = new Date().toISOString().slice(0, 10);
     let conditions = [];
     if (req.params.fname !== "undefined") {
         conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
@@ -270,7 +268,7 @@ router.get("/departures/:fname/:lname/:rnum", (req, res) => {
     if (req.params.rnum !== "undefined") {
         conditions.push("(rm.room_num='" + req.params.rnum + "')");
     }
-    conditions.length === 0 ? conditions.push("(rr.check_out_date='" + todayDate + "')") : conditions;
+    conditions.length === 0 ? conditions.push("(rr.check_in_date=CURDATE())") : conditions;
     db.ResRoom.selectDepartures(conditions, (result) => {
         res.json(result);
     });
