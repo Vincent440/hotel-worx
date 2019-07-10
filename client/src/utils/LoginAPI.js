@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export default {
-
   getLoginStatus: async () => {
     try {
       const res = await axios.get('/api/login/status');
