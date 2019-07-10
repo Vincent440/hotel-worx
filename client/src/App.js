@@ -11,7 +11,6 @@ import Billing from "./pages/billing/billing";
 import Payment from "./pages/payment/payment";
 import Inhouse from "./pages/inhouse/inhouse";
 import Login from "./pages/login";
-import Logout from "./pages/logout";
 import ReservationTest from "./pages/newreservation/reservationTest";
 import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
@@ -84,8 +83,6 @@ class App extends Component {
               <Route path="/login" exact strict
                 render={props => (!loggedIn ? <Login {...props} user={user} checkIfLoggedIn={this.checkIfAppIsLoggedIn} loggedIn={loggedIn} postLogin={this.postLogin} /> : <Redirect to="/" />)}
               />
-              <Route path="/logout" exact strict render={props => (loggedIn ? <Logout setAppLogout={this.setAppLogout} user={user} /> : <Redirect to="/login" />)} />
-              <Route exact path="/login" component={Login} />
               {/* <Route exact path="/" component={Dashboard} user={user} loggedIn={loggedIn} /> */}
               <PrivateRoute path="/" exact strict component={Dashboard} logout={this.setAppLogout} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/reserve/new" component={ReserveNew} loggedIn={loggedIn} user={user} />

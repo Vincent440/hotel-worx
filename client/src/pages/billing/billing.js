@@ -5,10 +5,10 @@ import InfoPart from "../../components/infoPart"
 import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import { Container, Table } from 'react-bootstrap';
-import moment from 'moment';
+// import moment from 'moment';
 import api from '../../utils/api';
 
-const today = moment().format("YYYY-MM-DD");
+// const today = moment().format("YYYY-MM-DD");
 
 
 class Billing extends Component {
