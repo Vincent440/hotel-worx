@@ -46,13 +46,20 @@ class Payment extends Component {
                                 <Row>
                                     <Table border="1">
                                         <tbody>
-                                            {this.state.InvoiceArray.map(invoice => (
-                                                <tr key={invoice.res_room_id}>
-                                                    <td>Room Total: ${invoice.room_total}</td>
-                                                    <td>Tax: ${invoice.tax}</td>
-                                                    <td>Total Due: ${(parseFloat(invoice.room_total)+parseFloat(invoice.tax)).toFixed(2)}</td>
-                                                </tr>
-                                            ))}
+                                            <tr><td>
+                                                {this.state.InvoiceArray.map(invoice => (
+                                                    <ul key={invoice.res_room_id}>
+                                                        <li>Num Nights: {invoice.num_days}</li>
+                                                        <li>Rate: ${invoice.rate}</li>
+                                                        <li>Room Total: ${(parseInt(invoice.num_days) * parseFloat(invoice.rate)).toFixed(2)}</li>
+                                                        <li>County Tax: ${invoice.county_tax}</li>
+                                                        <li>City Tax: ${invoice.city_tax}</li>
+                                                        <li>State Tax: ${invoice.state_tax}</li>
+                                                        <li>Total Due: ${((parseInt(invoice.num_days) * parseFloat(invoice.rate)) + parseFloat(invoice.county_tax) + parseFloat(invoice.city_tax) + parseFloat(invoice.state_tax)).toFixed(2)}</li>
+                                                    </ul>
+                                                ))}
+                                            </td></tr>
+
                                         </tbody>
                                     </Table>
                                 </Row>

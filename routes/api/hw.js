@@ -336,9 +336,11 @@ router.put("/checkoutRoom/:id/:room_num", (req, res) => {
 
 router.post("/invoice", (req, res) => {
     db.ResRoom.selectForInvoice(req.body.id, (result) => {
-        const room_total = parseFloat(result[0].room_total).toFixed(2);
-        const tax = parseFloat(result[0].tax_multiplier*result[0].room_total).toFixed(2);
-        const vals = [result[0].res_room_id, room_total, tax];
+        const room_total = (parseFloat(result[0].rate)*parseFloat(result[0].num_days)).toFixed(2);
+        const county_tax = parseFloat(result[0].county_rate*room_total).toFixed(2);
+        const city_tax = parseFloat(result[0].city_rate*room_total).toFixed(2);
+        const state_tax = parseFloat(result[0].state_rate*room_total).toFixed(2);
+        const vals = [result[0].res_room_id, result[0].num_days, result[0].rate, county_tax, city_tax, state_tax];
         db.Invoice.insertOne(vals, (result) => {
             res.json(result.insertId);
         });
