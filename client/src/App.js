@@ -51,7 +51,6 @@ class App extends Component {
   };
   postLogin = userData => {
     if (userData) {
-      console.log(userData);
       authapi.postUserLogin(userData, (err, res) => {
         if (err === true) {
           return console.log("err failed to log in");
