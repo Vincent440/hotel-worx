@@ -49,6 +49,8 @@ class Payment extends Component {
                                             <tr><td>
                                                 {this.state.InvoiceArray.map(invoice => (
                                                     <ul key={invoice.res_room_id}>
+                                                         <li>Room Number: {invoice.room_num}</li>
+                                                         <li>Name: {invoice.last_name}, {invoice.first_name}</li>
                                                         <li>Num Nights: {invoice.num_days}</li>
                                                         <li>Rate: ${invoice.rate}</li>
                                                         <li>Room Total: ${(parseInt(invoice.num_days) * parseFloat(invoice.rate)).toFixed(2)}</li>
