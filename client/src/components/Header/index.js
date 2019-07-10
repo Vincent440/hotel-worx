@@ -11,7 +11,7 @@ const Header = props => {
                     </p>
                 </div>
                 <ul className="nav navbar-nav navbar-right">
-                    <Link className="btn navbar-right"  to="/" type="submit">X</Link>
+                    <Link className="btn navbar-right btn-primary"  to="/" type="submit">X</Link>
                 </ul>
             </div>
         </Nav>

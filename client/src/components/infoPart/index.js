@@ -24,8 +24,8 @@ class InfoPart extends Component {
                         city="Cleveland"
                         units='F' />
                 </div>
-                <button className="btn btn-block btn-default" style={{width:"50px",paddingLeft:"7px", paddingTop:"5px", marginTop:"30px", marginLeft:"70px"}}><i className="fa fa-gear" style={{fontSize:"28px", color:"white" }}></i></button>
-                <button onClick={this.props.setAppLogout} className="btn btn-block btn-default" style={{width:"50px", textAlign:"center", paddingLeft:"7px", paddingTop:"5px" , marginTop:"5px", marginLeft:"70px"}}><i className="fa fa-sign-out-alt" style={{fontSize:"28px", color:"white" }}></i></button>
+                <button className="btn btn-block btn-default" style={{width:"50px",paddingLeft:"7px", paddingTop:"15px", marginTop:"30px", marginLeft:"70px"}}><i class="fa fa-gear" style={{fontSize:"28px", color:"white" }}></i></button>
+                <button onClick={this.props.setAppLogout} className="btn btn-block btn-default" style={{width:"50px", textAlign:"center", paddingLeft:"7px", paddingTop:"5px" , marginTop:"5px", marginLeft:"70px"}}><i class="fa fa-sign-out-alt" style={{fontSize:"28px", color:"white" }}></i></button>
             </Card>
         )
     }

@@ -1,43 +1,167 @@
-.container {
-  max-width: 100%;
-  margin: 0 auto;
-  margin-top: 30px;
-  margin-left: 10px;
+@media all and (max-width: 1775px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-left: 10px;
+  }
+
+  .btn-group a {
+    cursor: pointer; /* Pointer/hand icon */
+    width: 250px;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+  }
+  .btn-group {
+    float: left;
+    margin: 10px 2px;
+    padding: 0px;
+  }
+  .card-body {
+    text-align: center;
+    font-size: 20px;
+  }
 }
 
-.btn-group a {
-  cursor: pointer; /* Pointer/hand icon */
-  width: 250px;
-  display: block;
-  margin-bottom: 10px;
-  margin-left: 0px;
+@media all and (max-width: 1575px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-left: 10px;
+  }
+
+  .btn-group a {
+    cursor: pointer; /* Pointer/hand icon */
+    width: 250px;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 20px;
+  }
+
+  .btn-group {
+    float: left;
+    margin: 10px 15px;
+  }
+  .card {
+    background-color: rgba(255, 255, 255, 0.833);
+  }
+  .card-body {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited {
+    background-color: #ccc439 !important;
+    color: black;
+  }
+
+  .btn-primary:hover {
+    background-color: #faee03 !important;
+  }
 }
 
-.btn-group {
-  float: left;
-  margin: 10px 15px;
-}
-.card {
-  background-color: rgba(255, 255, 255, 0.833);
-}
-.card-body {
-  text-align: center;
-  font-size: 20px;
+@media all and (max-width: 1375px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-left: 10px;
+  }
+
+  .btn-group a {
+    cursor: pointer; /* Pointer/hand icon */
+    width: 230px;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    font-size: 18px;
+  }
+
+  .btn-group {
+    float: left;
+    margin: 10px 15px;
+    
+  }
+  .card {
+    background-color: rgba(255, 255, 255, 0.833);
+  }
+  .card-body {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited {
+    background-color: #ccc439 !important;
+    color: black;
+  }
+
+  .btn-primary:hover {
+    background-color: #faee03 !important;
+  }
 }
 
-.btn-primary,
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary:visited {
-  background-color: #ccc439 !important;
-  color: black;
+@media all and (max-width: 1278px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-left: 10px;
+  }
+
+  .btn-group a {
+    cursor: pointer; /* Pointer/hand icon */
+    width: 200px;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    font-size: 16px;
+  }
+  .card {
+    font-size: 18px;
+  }
+
+  .infopart{
+    width: 70%,
+  }
+  #root > div > div:nth-child(2) > div > div > div:nth-child(2) > div{
+    padding-left: 30px;
+  }
 }
 
-.btn-primary:hover {
-  background-color: #faee03 !important;
-}
 
-max-width: 1224px;{
+@media all and (max-width: 1150px) {
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-left: 10px;
+  }
 
-  
+  .btn-group a {
+    cursor: pointer; /* Pointer/hand icon */
+    width: 200px;
+    display: block;
+    margin-bottom: 10px;
+    margin-right: 0px;
+    font-size: 16px;
+  }
+  .card {
+    font-size: 18px;
+  }
+  .btn-group {
+    margin: 30px 50px;
+  }
+  #root > div > div:nth-child(2) > div > div > div:nth-child(2) > div{
+    padding-left: 50px;
+  }
 }

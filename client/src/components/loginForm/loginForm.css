@@ -7,9 +7,38 @@
     margin: 0 auto;
     max-width: 320px;
     text-align: center;
-      
-  }
+ }
 
 .btn.btn-primary{
   margin-left: 0px;
-}}
+}
+
+.btn.btn-primary,
+.btn.btn-primary:hover,
+.btn.btn-primary:active,
+.btn.btn-primary:visited {
+  background-color: #c5bc13 !important;
+  color: black;
+
+}
+
+.btn.btn-primary:hover {
+  background-color: #faee03 !important;
+}
+
+
+#loginUsername{
+  text-align: center;
+  font-size: 18px;
+
+}
+#loginPassword{
+  text-align: center;
+  font-size: 18px;
+}
+
+.form-label{
+font-size: 22px;
+}
+}
+
