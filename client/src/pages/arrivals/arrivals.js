@@ -73,7 +73,7 @@ class Arrivals extends Component {
             <Container>
                 <Row>
                     <Col sm={2}>
-                        <InfoPart />
+                     <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col sm={10}>
                         <Row>

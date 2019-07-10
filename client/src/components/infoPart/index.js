@@ -7,14 +7,11 @@ import ReactWeather from 'react-open-weather';
 import 'react-open-weather/lib/css/ReactWeather.css';
 
 class InfoPart extends Component {
-    state = {
-        ReservationInfo: "",
-    };
     render() {
         return (
             <Card id="infoCard">
                 <Card.Img variant="top" src={logo} className="App-logo" id="logo" alt="logo" style={{ marginBottom: "50px" }} />
-                <h5 className="card-title">User Name: {this.state.ReservationInfo}</h5>
+                <h5 className="card-title">User Name: {this.props.user.username}</h5>
                 {/* <p className="card-text"> <Calendar /></p> */}
                 <div className="card-text">
                     <ReactWeather
@@ -24,8 +21,8 @@ class InfoPart extends Component {
                         city="Cleveland"
                         units='F' />
                 </div>
-                <button className="btn btn-block btn-default" style={{width:"50px",paddingLeft:"7px", paddingTop:"15px", marginTop:"80px", marginLeft:"70px"}}><i className="fa fa-gear" style={{fontSize:"28px", color:"white" }}></i></button>
-                <button onClick={this.props.setAppLogout} className="btn btn-block btn-default" style={{width:"50px", textAlign:"center", paddingLeft:"7px", paddingTop:"5px" , marginTop:"5px", marginLeft:"70px"}}><i className="fa fa-sign-out-alt" style={{fontSize:"28px", color:"white" }}></i></button>
+                <button className="btn btn-block btn-default" style={{width:"50px",paddingLeft:"7px", paddingTop:"15px", marginTop:"40px", marginLeft:"70px"}}><i className="fa fa-gear" style={{fontSize:"28px", color:"white" }}></i></button>
+                <button onClick={this.props.logout} className="btn btn-block btn-default" style={{width:"50px", textAlign:"center", paddingLeft:"7px", paddingTop:"5px" , marginTop:"5px", marginLeft:"70px"}}><i className="fa fa-sign-out-alt" style={{fontSize:"28px", color:"white" }}></i></button>
             </Card>
         )
     }
