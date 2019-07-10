@@ -59,3 +59,8 @@ h2 {
   font-size: 18px;
   padding-left: 20px;
 }
+
+#res > div > table > tbody > ul {
+  padding-left: 5px;
+  padding-right: 5px;
+}

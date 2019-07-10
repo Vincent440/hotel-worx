@@ -40,7 +40,6 @@ function Dashboard(props) {
                                 <Card.Body>FINANCE</Card.Body>
                             </Card>
                             <Link className="btn btn-primary" to="/cashiering/billing">Billing</Link>
-                            <Link className="btn btn-primary" to="/cashiering/payment">Test Invoice</Link>
                         </div>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={3} xl={3}>

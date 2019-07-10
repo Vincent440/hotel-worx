@@ -5,6 +5,7 @@ import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
+import { Link } from 'react-router-dom';
 
 class Payment extends Component {
 
@@ -46,23 +47,57 @@ class Payment extends Component {
                                 <Row>
                                     <Table border="1">
                                         <tbody>
-                                            <tr><td>
-                                                {this.state.InvoiceArray.map(invoice => (
-                                                    <ul key={invoice.res_room_id}>
-                                                         <li>Room Number: {invoice.room_num}</li>
-                                                         <li>Name: {invoice.last_name}, {invoice.first_name}</li>
-                                                        <li>Num Nights: {invoice.num_days}</li>
-                                                        <li>Rate: ${invoice.rate}</li>
-                                                        <li>Room Total: ${(parseInt(invoice.num_days) * parseFloat(invoice.rate)).toFixed(2)}</li>
-                                                        <li>County Tax: ${invoice.county_tax}</li>
-                                                        <li>City Tax: ${invoice.city_tax}</li>
-                                                        <li>State Tax: ${invoice.state_tax}</li>
-                                                        <li>Total Due: ${((parseInt(invoice.num_days) * parseFloat(invoice.rate)) + parseFloat(invoice.county_tax) + parseFloat(invoice.city_tax) + parseFloat(invoice.state_tax)).toFixed(2)}</li>
-                                                    </ul>
-                                                ))}
-                                            </td></tr>
+                                            {this.state.InvoiceArray.map(invoice => (
+                                                <ul key={invoice.res_room_id}>
+                                                    <tr>
+                                                        <th colspan="2"><strong>Room Number:</strong> {invoice.room_num}</th>
+                                                        <th colspan="2"><strong>Name:</strong> {invoice.last_name}, {invoice.first_name}</th>
+                                                        <th><strong>CC Number: </strong> {invoice.ccLastFour} </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th><strong>Num Nights</strong></th>
+                                                        <th><strong>Rate</strong></th>
+                                                        <th><strong>Room Total</strong></th>
+                                                        <th><strong>County Tax</strong></th>
+                                                        <th><strong>City Tax</strong></th>
+                                                        <th><strong>State Tax</strong></th>
+                                                        <th><strong>Total Due</strong></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{invoice.num_days}</td>
+                                                        <td>${invoice.rate}</td>
+                                                        <td>${(parseInt(invoice.num_days) * parseFloat(invoice.rate)).toFixed(2)} </td>
+                                                        <td>${invoice.county_tax}</td>
+                                                        <td>${invoice.city_tax}</td>
+                                                        <td>${invoice.state_tax}</td>
+                                                        <td>${((parseInt(invoice.num_days) * parseFloat(invoice.rate)) + parseFloat(invoice.county_tax) + parseFloat(invoice.city_tax) + parseFloat(invoice.state_tax)).toFixed(2)}</td>
 
+                                                    </tr>
+                                                </ul>
+                                            ))}
                                         </tbody>
+                                        <Row style={{ margin: "10px 0px 20px" }}>
+                                            <Col xl={2}>
+                                            </Col>
+                                            <Col xl={2}>
+                                                <strong>  </strong>
+                                            </Col>
+                                            <Col xl={2}>
+                                                Credit Card <input type="radio" name="myCheck" checked/>
+                                            </Col>
+                                            <Col xl={2}>
+                                                Cash <input type="radio" name="myCheck" />
+                                            </Col>
+                                        </Row>
+                                        <Row style={{ margin: "30px 0px 20px" }}>
+                                            <Col xl={5}>
+                                            </Col>
+                                            <Col>
+                                                <Link className="btn navbar-right btn-primary" to="/cashiering/billing" type="submit">Submit Payment</Link>
+                                            </Col>
+                                        </Row>
+
+
                                     </Table>
                                 </Row>
 
@@ -74,7 +109,7 @@ class Payment extends Component {
                         </div>
                     </Col>
                 </Row >
-            </Container>
+            </Container >
         )
     }
 }
