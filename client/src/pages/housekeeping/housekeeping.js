@@ -89,7 +89,7 @@ class Housekeeping extends Component {
             case "selectAll":
                 tempState.clean = true;
                 tempState.dirty = true;
-                tempState.outOfOrder = true;
+                // tempState.outOfOrder = true;
                 tempState.vacant = true;
                 tempState.occupied = true;
                 tempState.arrival = true;
@@ -147,13 +147,13 @@ class Housekeeping extends Component {
                                                     <input type="checkbox" id="dirty" checked={this.state.checked.dirty}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
-                                                <Col xl={2}>
+                                                {/* <Col xl={2}>
                                                     <p>Out of Order{this.state.rooms}</p>
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="outOfOrder" checked={this.state.checked.outOfOrder}
                                                         onChange={this.handleCheckboxChange} />
-                                                </Col>
+                                                </Col> */}
                                             </Row>
                                         </Col>
                                         <Col xl={2} style={{ textAlign: "center" }}>
