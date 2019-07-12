@@ -1,44 +1,46 @@
 @media all and (min-width: 480px) {
   .Login {
     padding: 80px 0 100px;
-    color:white;
+    color: BLACK;
   }
   .Login form {
     margin: 0 auto;
     max-width: 320px;
     text-align: center;
- }
+  }
 
-.btn.btn-primary{
-  margin-left: 0px;
+  .btn.btn-primary {
+    margin-left: 0px;
+  }
+
+  .btn.btn-primary,
+  .btn.btn-primary:hover,
+  .btn.btn-primary:active,
+  .btn.btn-primary:visited {
+    background-color: #ccc439 !important;
+    color: black;
+    border: 1px solid black;
+
+  }
+
+  .btn.btn-primary:hover {
+    background-color: #faee03 !important;
+  }
+
+  #loginUsername {
+    text-align: center;
+    font-size: 18px;
+    background-color: #ccc5391f;
+    border: 1px solid black;
+  }
+  #loginPassword {
+    text-align: center;
+    font-size: 18px;
+    background-color:#ccc5391f;
+    border: 1px solid black;
+  }
+
+  .form-label {
+    font-size: 22px;
+  }
 }
-
-.btn.btn-primary,
-.btn.btn-primary:hover,
-.btn.btn-primary:active,
-.btn.btn-primary:visited {
-  background-color:yellow !important;
-  color: black;
-
-}
-
-.btn.btn-primary:hover {
-  background-color: #faee03 !important;
-}
-
-
-#loginUsername{
-  text-align: center;
-  font-size: 18px;
-
-}
-#loginPassword{
-  text-align: center;
-  font-size: 18px;
-}
-
-.form-label{
-font-size: 22px;
-}
-}
-

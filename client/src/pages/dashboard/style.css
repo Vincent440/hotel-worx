@@ -23,6 +23,38 @@
     text-align: center;
     font-size: 20px;
   }
+  #checkin {
+    width: 26px;
+    margin-right: 15px;
+  }
+  #housekeepingLogo {
+    width: 26px;
+    margin-right: 8px;
+  }
+  #inhouseLogo{
+    width: 26px;
+    margin-right: 15px;
+  }
+  #updateLogo{
+    width: 26px;
+    margin-right: 10px;
+  }
+  #bookingLogo{
+    width: 26px;
+    margin-right: 20px;
+  }
+  #billingLogo{
+    width: 28px;
+    margin-right: 25px;
+  }
+  #houseLogo{
+    width: 28px;
+    margin-right: 25px;
+  }
+  #detailedLogo{
+    width: 28px;
+    margin-right: 25px;
+  }
 }
 
 @media all and (max-width: 1575px) {

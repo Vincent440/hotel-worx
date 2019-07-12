@@ -97,7 +97,6 @@ class Arrivals extends Component {
                                                 name="startDateRange"
                                                 value={this.state.startDateRange}
                                                 onChange={this.handleInputChange}
-                                                isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
                                             />
                                         </Col>
                                         <Col xl={1}>Name:</Col>
