@@ -6,6 +6,9 @@ import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import { Container, Table } from 'react-bootstrap';
+import Particles from "react-particles-js";
+
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 class Housekeeping extends Component {
 
@@ -99,8 +102,8 @@ class Housekeeping extends Component {
                 tempState.departed = true;
                 tempState.notReserved = true;
                 break;
-                default:
-                    
+            default:
+
         }
         // set all at once
         this.setState({ checked: tempState });
@@ -114,6 +117,8 @@ class Housekeeping extends Component {
     render() {
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row >
                     <Col xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
@@ -218,7 +223,7 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{paddingTop: "8px",backgroundColor: "white" }}>
+                                            <Row style={{ paddingTop: "8px", backgroundColor: "white" }}>
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>
@@ -255,24 +260,24 @@ class Housekeeping extends Component {
                                         <Col xl={12}>
                                             <Table>
                                                 <tbody>
-                                                <tr>
-                                                    <th>
-                                                        Room
+                                                    <tr>
+                                                        <th>
+                                                            Room
                                                     </th>
-                                                    <th>
-                                                        Room Type
+                                                        <th>
+                                                            Room Type
                                                     </th>
-                                                    <th>
-                                                        Room Status
+                                                        <th>
+                                                            Room Status
                                                     </th>
-                                                    <th>
-                                                        Front Office Status
+                                                        <th>
+                                                            Front Office Status
                                                     </th>
-                                                    <th>
-                                                        Reservation Status
-
+                                                        <th>
+                                                            Reservation Status
+    
                                                     </th>
-                                                </tr>
+                                                    </tr>
                                                     {this.state.searchResults.map(room => (
                                                         <tr key={room.room_num}>
                                                             <td>{room.room_num}</td>

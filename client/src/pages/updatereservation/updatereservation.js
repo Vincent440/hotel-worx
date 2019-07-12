@@ -9,6 +9,10 @@ import DateRange from "../../components/dateRange/dateRange";
 import { Container } from 'react-bootstrap';
 import RegisterForm from "../../components/validationUpdateRes";
 import moment from 'moment';
+import Particles from "react-particles-js";
+
+
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 class ReserveUpdate extends Component {
     constructor(props) {
@@ -138,7 +142,7 @@ class ReserveUpdate extends Component {
         console.log(this);
         e.preventDefault();
         if (this.validateForm()) {
-           this.makeAxiosCall();
+            this.makeAxiosCall();
         }
     }
     makeAxiosCall = () => {
@@ -175,6 +179,7 @@ class ReserveUpdate extends Component {
         }
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
                 <Row>
                     <Col sm={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />

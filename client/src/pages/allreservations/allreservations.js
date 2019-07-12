@@ -8,8 +8,9 @@ import DateRange from "../../components/dateRange/dateRange";
 import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
 import moment from 'moment';
+import Particles from "react-particles-js";
 
-
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class UpdateReservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
     constructor(props) {
@@ -22,7 +23,7 @@ class UpdateReservation extends Component {
     state = {
         firstname: "",
         lastname: "",
-        sdate:undefined,
+        sdate: undefined,
         edate: undefined,
         confirmationNumber: undefined,
         resRooms: []
@@ -74,7 +75,7 @@ class UpdateReservation extends Component {
         this.makeAxiosCall();
 
     }
- 
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -85,9 +86,11 @@ class UpdateReservation extends Component {
     render() {
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row>
                     <Col sm={2}>
-                    <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col sm={10}>
                         <Row>

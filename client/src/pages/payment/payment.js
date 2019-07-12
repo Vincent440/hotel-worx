@@ -6,7 +6,9 @@ import Header from "../../components/Header"
 import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
 import { Link } from 'react-router-dom';
+import Particles from "react-particles-js";
 
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class Payment extends Component {
 
     state = {
@@ -31,9 +33,11 @@ class Payment extends Component {
 
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row>
                     <Col sm={2}>
-                     <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col sm={10}>
                         <Row>
@@ -83,7 +87,7 @@ class Payment extends Component {
                                                 <strong>  </strong>
                                             </Col>
                                             <Col xl={2}>
-                                                Credit Card <input type="radio" name="myCheck" checked/>
+                                                Credit Card <input type="radio" name="myCheck" checked />
                                             </Col>
                                             <Col xl={2}>
                                                 Cash <input type="radio" name="myCheck" />

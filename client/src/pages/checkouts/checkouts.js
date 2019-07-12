@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart"
+import Particles from "react-particles-js";
 
-
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class Reservation extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
@@ -60,6 +61,7 @@ class Reservation extends Component {
         const { selectedOption } = this.state;
 
         return (
+            <Particles params={particleOpt} id="particul" />
 
             <Row id="dashboardTable">
                <InfoPart user={this.props.user} logout={this.props.logout} />

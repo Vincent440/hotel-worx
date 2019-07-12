@@ -20,7 +20,7 @@ export default function LoginForm(props) {
           </Form.Group>
         </Form.Row>
         <Button disabled={props.isFormInValid()} className="w-75 mx-auto mb-2" type="submit" size="block" variant="primary">
-          Login
+        <strong>Login</strong>
         </Button>
       </Form>
     </div>

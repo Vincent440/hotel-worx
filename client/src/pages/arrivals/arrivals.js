@@ -8,7 +8,9 @@ import api from '../../utils/api';
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 import { isInclusivelyBeforeDay } from 'react-dates';
+import Particles from "react-particles-js";
 
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
@@ -71,9 +73,11 @@ class Arrivals extends Component {
     render() {
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row>
                     <Col sm={2}>
-                     <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col sm={10}>
                         <Row>

@@ -4,7 +4,9 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
+import Particles from "react-particles-js";
 
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class Reservation extends Component {
     state = {
         ReservationInfo: {},
@@ -27,6 +29,7 @@ class Reservation extends Component {
     render() {
 
         return (
+            <Particles params={particleOpt} id="particul" />
 
             <Row id="dashboardTable1">
                 <InfoPart user={this.props.user} logout={this.props.logout} />

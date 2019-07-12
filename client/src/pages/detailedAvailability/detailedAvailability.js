@@ -7,9 +7,10 @@ import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
+import Particles from "react-particles-js";
 
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 const today = moment().format("YYYY-MM-DD");
-
 class DetailedAvailability extends Component {
     state = {
         selectedDate: today,
@@ -44,9 +45,11 @@ class DetailedAvailability extends Component {
     render() {
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row >
                     <Col xl={2}>
-                    <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col xl={10}>
                         <Row>
@@ -82,9 +85,9 @@ class DetailedAvailability extends Component {
                                                             <td className="tableTD">{tot.RoomType2}</td>
                                                             <td className="tableTD">{tot.RoomType3}</td>
                                                             <td className="tableTD">{tot.TotalRooms}</td>
-                                                    </tr>
+                                                        </tr>
                                                     ))}
-                                                   
+
                                                 </tbody>
                                             </Table>
                                         </Col>
@@ -97,8 +100,8 @@ class DetailedAvailability extends Component {
                 </Row>
             </Container >
 
-                )
-            }
-        }
+        )
+    }
+}
 
-        export default DetailedAvailability;
+export default DetailedAvailability;

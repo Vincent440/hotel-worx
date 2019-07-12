@@ -5,17 +5,22 @@ import InfoPart from "../../components/infoPart";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import Particles from "react-particles-js";
+
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 function Dashboard(props) {
     return (
         <Container>
+            <Particles params={particleOpt} id="particul" />
+
             <Row>
                 <Col sm={2}>
                     <InfoPart user={props.user} logout={props.logout} />
                 </Col>
                 <Col sm={10}>
                     <Row>
-                    <Col xs={12} sm={12} md={6} lg={3} xl={3}>
+                        <Col xs={12} sm={12} md={6} lg={3} xl={3}>
                             <div className="btn-group" style={{ display: 'block' }}>
                                 <Card style={{ marginBottom: "10px" }}>
                                     <Card.Body>RESERVATION</Card.Body>
@@ -35,22 +40,22 @@ function Dashboard(props) {
                             </div>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={3} xl={3}>
-                        <div className="btn-group" style={{ display: 'block' }}>
-                            <Card style={{ marginBottom: "10px" }}>
-                                <Card.Body>FINANCE</Card.Body>
-                            </Card>
-                            <Link className="btn btn-primary" to="/cashiering/billing">Billing</Link>
-                        </div>
+                            <div className="btn-group" style={{ display: 'block' }}>
+                                <Card style={{ marginBottom: "10px" }}>
+                                    <Card.Body>FINANCE</Card.Body>
+                                </Card>
+                                <Link className="btn btn-primary" to="/cashiering/billing">Billing</Link>
+                            </div>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={3} xl={3}>
-                        <div className="btn-group" style={{ display: 'block' }}>
-                            <Card style={{ marginBottom: "10px" }}>
-                                <Card.Body>REPORTS</Card.Body>
-                            </Card>
-                            <Link className="btn btn-primary" to="/reports/housekeeping">Housekeeping Report</Link>
-                            <Link className="btn btn-primary" to="/reports/detailedAvailability">Detailed Availability</Link>
-                            <Link className="btn btn-primary" to="/reports/houseStatus">House Status</Link>
-                        </div>
+                            <div className="btn-group" style={{ display: 'block' }}>
+                                <Card style={{ marginBottom: "10px" }}>
+                                    <Card.Body>REPORTS</Card.Body>
+                                </Card>
+                                <Link className="btn btn-primary" to="/reports/housekeeping">Housekeeping Report</Link>
+                                <Link className="btn btn-primary" to="/reports/detailedAvailability">Detailed Availability</Link>
+                                <Link className="btn btn-primary" to="/reports/houseStatus">House Status</Link>
+                            </div>
                         </Col>
                         <div style={{ clear: "both" }}></div>
 

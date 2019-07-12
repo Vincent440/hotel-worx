@@ -1,0 +1,11 @@
+#logoLogin {
+    background-color: rgba(128, 128, 128, 0.87);
+    border: 1px solid white;
+    border-radius: 5px;
+    height:650px;
+    width: 350px;
+    margin: 0 auto;
+    padding-top: 5px;
+    margin-top: 70px;
+}
+

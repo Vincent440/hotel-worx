@@ -6,7 +6,9 @@ import Header from "../../components/Header"
 import SearchSubmit from "../../components/searchButton";
 import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
+import Particles from "react-particles-js";
 
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class Inhouse extends Component {
     state = {
         arrivaldate: "",
@@ -45,6 +47,8 @@ class Inhouse extends Component {
     render() {
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row>
                     <Col sm={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Particles from "react-particles-js";
 import authapi from "./utils/authapi";
 import ReserveNew from "./pages/newreservation/newreservation";
 import ReserveUpdate from "./pages/updatereservation/updatereservation";
@@ -10,13 +9,12 @@ import Arrivals from "./pages/arrivals/arrivals";
 import Billing from "./pages/billing/billing";
 import Payment from "./pages/payment/payment";
 import Inhouse from "./pages/inhouse/inhouse";
-import Login from "./pages/login";
+import Login from "./pages/login/login";
 import ReservationTest from "./pages/newreservation/reservationTest";
 import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
 import HouseStatus from "./pages/houseStatus/houseStatus";
 // import PrivateRoute from "./components/PrivateRoute";
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class PrivateRoute extends Component {
   render() {
     const { component: Component, loggedIn,user,logout, ...rest } = this.props;
@@ -77,7 +75,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Particles params={particleOpt} id="particul" />
           <div>
             <Switch>
               <Route path="/login" exact strict

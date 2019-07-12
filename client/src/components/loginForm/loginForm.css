@@ -1,7 +1,7 @@
 @media all and (min-width: 480px) {
   .Login {
-    padding: 20px 0 100px;
-    color: white;
+    padding: 80px 0 100px;
+    color:white;
   }
   .Login form {
     margin: 0 auto;
@@ -17,7 +17,7 @@
 .btn.btn-primary:hover,
 .btn.btn-primary:active,
 .btn.btn-primary:visited {
-  background-color: #c5bc13 !important;
+  background-color:yellow !important;
   color: black;
 
 }

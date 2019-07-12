@@ -9,6 +9,9 @@ import DateRange from "../../components/dateRange/dateRange";
 import { Container } from 'react-bootstrap';
 import RegisterForm from "../../components/validation";
 import moment from 'moment';
+import Particles from "react-particles-js";
+
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 class ReserveNew extends Component {
     constructor(props) {
@@ -124,14 +127,11 @@ class ReserveNew extends Component {
                 errors["phone"] = "*Please enter valid mobile no.";
             }
         }
-
         this.setState({
             errors: errors
         });
         return formIsValid;
-
     }
-
     handleInputChange = event => {
         if (event.target.name === "roomtype") {
             const roomKey = parseInt(event.target.value) - 1;
@@ -143,13 +143,11 @@ class ReserveNew extends Component {
             [name]: value
         });
     }
-
     componentDidMount() {
         api.getRoomTypes()
             .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id, rate: res[0].rate }))
             .catch(err => console.log(err));
     }
-
     handleFormSubmit(e) {
         e.preventDefault();
         if (this.validateForm()) {
@@ -194,6 +192,7 @@ class ReserveNew extends Component {
 
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
                 <Row>
                     <Col xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
