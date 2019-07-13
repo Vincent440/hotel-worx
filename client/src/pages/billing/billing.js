@@ -181,9 +181,8 @@ class Billing extends Component {
                                                     <td>{departure.name}</td>
                                                     <td>{departure.check_in_date}</td>
                                                     <td>{departure.check_out_date}</td>
-                                                    <td>{Number(parseFloat((departure.num_days) * (departure.rate)) + parseFloat(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + parseFloat(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + parseFloat(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                                    <td>{Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                                                     </td>
-
                                                     <td>
                                                         {departure.room_num === "Not Set" ? "" : <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button>}
                                                     </td>
@@ -202,3 +201,5 @@ class Billing extends Component {
 }
 
 export default Billing;
+
+// Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
