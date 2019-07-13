@@ -84,7 +84,6 @@ class Housekeeping extends Component {
                 tempState.dueOut = false;
                 tempState.departed = false;
                 tempState.notReserved = false;
-
                 break;
             case "selectAll":
                 tempState.clean = true;
@@ -99,11 +98,12 @@ class Housekeeping extends Component {
                 tempState.departed = true;
                 tempState.notReserved = true;
                 break;
-                default:
-                    
+            default:
+                break;
         }
-        // set all at once
-        this.setState({ checked: tempState });
+        this.setState({ checked: tempState }, () => {
+            this.makeAxiosCall();
+        });
     }
 
     handleFormSubmit = (event) => {
@@ -218,7 +218,7 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{paddingTop: "8px",backgroundColor: "white" }}>
+                                            <Row style={{ paddingTop: "8px", backgroundColor: "white" }}>
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>
@@ -245,9 +245,6 @@ class Housekeeping extends Component {
                                                 </Col>
                                             </Row>
                                         </Col>
-                                        <Col xl={2} style={{ marginTop: "30px", textAlign: "center" }}>
-                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                        </Col>
                                     </Row>
                                 </div>
                                 <div id="res">
@@ -255,24 +252,13 @@ class Housekeeping extends Component {
                                         <Col xl={12}>
                                             <Table>
                                                 <tbody>
-                                                <tr>
-                                                    <th>
-                                                        Room
-                                                    </th>
-                                                    <th>
-                                                        Room Type
-                                                    </th>
-                                                    <th>
-                                                        Room Status
-                                                    </th>
-                                                    <th>
-                                                        Front Office Status
-                                                    </th>
-                                                    <th>
-                                                        Reservation Status
-
-                                                    </th>
-                                                </tr>
+                                                    <tr>
+                                                        <th>Room</th>
+                                                        <th>Room Type</th>
+                                                        <th>Room Status</th>
+                                                        <th>Front Office Status</th>
+                                                        <th>Reservation Status</th>
+                                                    </tr>
                                                     {this.state.searchResults.map(room => (
                                                         <tr key={room.room_num}>
                                                             <td>{room.room_num}</td>
@@ -296,7 +282,6 @@ class Housekeeping extends Component {
                     </Col>
                 </Row>
             </Container>
-
         )
     }
 }

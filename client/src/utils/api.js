@@ -42,12 +42,35 @@ export default {
                 console.log(error);
             });
     },
+    getArrivalsNew: (criteria, date) => {
+        const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
+        const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
+        const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
+        const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
+        return axios.all([
+            axios.get('/api/hw/arrivals/' + sdate + "/" + fname + "/" + lname + "/" + cnum),
+            axios.get('/api/hw/rooms_arrivals/' + date)
+        ])
+            .then(axios.spread((arrivals, rooms_arrivals) => {
+                // return console.log(arrivals.data, rooms_arrivals.data);
+                return { arrivals: arrivals.data, rooms_arrivals: rooms_arrivals.data };
+            }));
+    },
     getArrivals: (criteria) => {
         const sdate = criteria.startDateRange === "" ? "undefined" : criteria.startDateRange;
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
         const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
         const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
         return axios.get('/api/hw/arrivals/' + sdate + "/" + fname + "/" + lname + "/" + cnum)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    getRoomsArrivals: (date) => {
+        return axios.get('/api/hw/rooms_arrivals/' + date)
             .then((response) => {
                 return response.data;
             })
@@ -73,15 +96,6 @@ export default {
         const rnum = criteria.roomNumber === "" ? "undefined" : criteria.roomNumber;
         const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
         return axios.get('/api/hw/guests/' + fname + "/" + lname + "/" + rnum + "/" + cnum)
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
-    getRoomsArrivals: (date) => {
-        return axios.get('/api/hw/rooms_arrivals/' + date)
             .then((response) => {
                 return response.data;
             })

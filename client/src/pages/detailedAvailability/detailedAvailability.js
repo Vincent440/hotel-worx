@@ -16,10 +16,11 @@ class DetailedAvailability extends Component {
         nights: "",
         noOfRooms: "",
         roomType: "",
-        availabilit: "",
         occupied: "",
         availableRooms: [],
-        roomTypes: []
+        roomTypes: [],
+        availableChecked: true,
+        occupiedChecked: false
     };
 
     componentDidMount() {
@@ -33,12 +34,13 @@ class DetailedAvailability extends Component {
     }
 
     handleStartDate = event => {
-        this.setState({ selectedDate: event.target.value })
+        this.setState({ selectedDate: event.target.value }, () => {
+            this.makeAxiosCall();
+        });
     }
 
-    handleFormSubmit = (event) => {
-        event.preventDefault();
-        this.makeAxiosCall();
+    handleCheckbox = event => {
+        event.target.value==="available" ? this.setState({ availableChecked: true, occupiedChecked: false }) : this.setState({ availableChecked: false, occupiedChecked: true })
     }
 
     render() {
@@ -46,7 +48,7 @@ class DetailedAvailability extends Component {
             <Container>
                 <Row >
                     <Col xl={2}>
-                    <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col xl={10}>
                         <Row>
@@ -58,11 +60,10 @@ class DetailedAvailability extends Component {
                             <Col xl={12}>
                                 <div id="res">
                                     <Row>
-                                        <DeatiledSubmit handleFormSubmit={this.handleFormSubmit} handleStartDate={this.handleStartDate} />
+                                        <DeatiledSubmit availableChecked={this.state.availableChecked} occupiedChecked={this.state.occupiedChecked} handleCheckbox={this.handleCheckbox} handleStartDate={this.handleStartDate} />
                                     </Row>
                                 </div>
                                 <div id="res">
-
                                     <Row style={{ paddingBottom: "20px" }}>
                                         <Col xl={12}>
                                             <Table>
@@ -77,18 +78,15 @@ class DetailedAvailability extends Component {
                                                     {this.state.availableRooms.map(tot => (
                                                         <tr key={tot.date}>
                                                             <td className="tableTD">{tot.date} ({moment(tot.date).format("dddd")})</td>
-                                                            {/* <td className="tableTD">{tot.date}</td> */}
-                                                            <td className="tableTD">{tot.RoomType1}</td>
-                                                            <td className="tableTD">{tot.RoomType2}</td>
-                                                            <td className="tableTD">{tot.RoomType3}</td>
-                                                            <td className="tableTD">{tot.TotalRooms}</td>
-                                                    </tr>
+                                                            <td className="tableTD">{this.state.availableChecked===true ? tot.AvailableType1 : tot.OccupiedType1}</td>
+                                                            <td className="tableTD">{this.state.availableChecked===true ? tot.AvailableType2 : tot.OccupiedType2}</td>
+                                                            <td className="tableTD">{this.state.availableChecked===true ? tot.AvailableType3 : tot.OccupiedType3}</td>
+                                                            <td className="tableTD">{this.state.availableChecked===true ? tot.TotalAvailable : tot.TotalOccupied}</td>
+                                                        </tr>
                                                     ))}
-                                                   
                                                 </tbody>
                                             </Table>
                                         </Col>
-
                                     </Row>
                                 </div>
                             </Col >
@@ -96,9 +94,8 @@ class DetailedAvailability extends Component {
                     </Col>
                 </Row>
             </Container >
+        )
+    }
+}
 
-                )
-            }
-        }
-
-        export default DetailedAvailability;
+export default DetailedAvailability;

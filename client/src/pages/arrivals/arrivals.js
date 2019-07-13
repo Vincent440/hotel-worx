@@ -29,13 +29,17 @@ class Arrivals extends Component {
             confirmationNumber: this.state.confirmationNumber
         };
 
-        api.getArrivals(criteria)
-            .then(res => this.setState({ arrivalsArray: res }))
+        api.getArrivalsNew(criteria, moment(this.state.startDateRange).format('YYYY-MM-DD'))
+            .then(res => this.setState({ arrivalsArray: res.arrivals, roomsArray: res.rooms_arrivals }))
             .catch(err => console.log(err));
 
-        api.getRoomsArrivals(moment(this.state.startDateRange).format('YYYY-MM-DD'))
-            .then(res => this.setState({ roomsArray: res }))
-            .catch(err => console.log(err));
+        // api.getArrivals(criteria)
+        //     .then(res => this.setState({ arrivalsArray: res }))
+        //     .catch(err => console.log(err));
+
+        // api.getRoomsArrivals(moment(this.state.startDateRange).format('YYYY-MM-DD'))
+        //     .then(res => this.setState({ roomsArray: res }))
+        //     .catch(err => console.log(err));
     }
 
     handleCheckIn = (id, room_id) => {
