@@ -28,19 +28,19 @@
   }
 
   #loginUsername {
-    text-align: center;
+    text-align: left;
     font-size: 18px;
     background-color: #ccc5391f;
     border: 1px solid black;
   }
   #loginPassword {
-    text-align: center;
+    text-align: left;
     font-size: 18px;
     background-color:#ccc5391f;
     border: 1px solid black;
   }
 
   .form-label {
-    font-size: 22px;
+    font-size: 16px;
   }
 }

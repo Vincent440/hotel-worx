@@ -28,5 +28,4 @@ class InfoPart extends Component {
     }
 };
 
-
 export default InfoPart;

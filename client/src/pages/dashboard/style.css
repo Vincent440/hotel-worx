@@ -25,35 +25,35 @@
   }
   #checkin {
     width: 26px;
-    margin-right: 15px;
+    float: left;
   }
   #housekeepingLogo {
     width: 26px;
-    margin-right: 8px;
+    float: left;
   }
-  #inhouseLogo{
+  #inhouseLogo {
     width: 26px;
-    margin-right: 15px;
+    float: left;
   }
-  #updateLogo{
+  #updateLogo {
     width: 26px;
-    margin-right: 10px;
+    float: left;
   }
-  #bookingLogo{
+  #bookingLogo {
     width: 26px;
-    margin-right: 20px;
+    float: left;
   }
-  #billingLogo{
+  #billingLogo {
     width: 28px;
-    margin-right: 25px;
+    float: left;
   }
-  #houseLogo{
+  #houseLogo {
     width: 28px;
-    margin-right: 25px;
+    float: left;
   }
-  #detailedLogo{
+  #detailedLogo {
     width: 28px;
-    margin-right: 25px;
+    float: left;
   }
 }
 
@@ -119,7 +119,6 @@
   .btn-group {
     float: left;
     margin: 10px 15px;
-    
   }
   .card {
     background-color: rgba(255, 255, 255, 0.833);
@@ -162,14 +161,13 @@
     font-size: 18px;
   }
 
-  .infopart{
-    width: 70%,
+  .infopart {
+    width: 70%;
   }
-  #root > div > div:nth-child(2) > div > div > div:nth-child(2) > div{
+  #root > div > div:nth-child(2) > div > div > div:nth-child(2) > div {
     padding-left: 30px;
   }
 }
-
 
 @media all and (max-width: 1150px) {
   .container {
@@ -193,7 +191,7 @@
   .btn-group {
     margin: 30px 50px;
   }
-  #root > div > div:nth-child(2) > div > div > div:nth-child(2) > div{
+  #root > div > div:nth-child(2) > div > div > div:nth-child(2) > div {
     padding-left: 50px;
   }
 }
