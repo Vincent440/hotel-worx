@@ -43,11 +43,6 @@ class DetailedAvailability extends Component {
         event.target.value==="available" ? this.setState({ availableChecked: true, occupiedChecked: false }) : this.setState({ availableChecked: false, occupiedChecked: true })
     }
 
-    handleFormSubmit = (event) => {
-        event.preventDefault();
-        this.makeAxiosCall();
-    }
-
     render() {
         return (
             <Container>
@@ -65,7 +60,7 @@ class DetailedAvailability extends Component {
                             <Col xl={12}>
                                 <div id="res">
                                     <Row>
-                                        <DeatiledSubmit availableChecked={this.state.availableChecked} occupiedChecked={this.state.occupiedChecked} handleCheckbox={this.handleCheckbox} handleFormSubmit={this.handleFormSubmit} handleStartDate={this.handleStartDate} />
+                                        <DeatiledSubmit availableChecked={this.state.availableChecked} occupiedChecked={this.state.occupiedChecked} handleCheckbox={this.handleCheckbox} handleStartDate={this.handleStartDate} />
                                     </Row>
                                 </div>
                                 <div id="res">

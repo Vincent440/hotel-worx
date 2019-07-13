@@ -245,9 +245,6 @@ class Housekeeping extends Component {
                                                 </Col>
                                             </Row>
                                         </Col>
-                                        <Col xl={2} style={{ marginTop: "30px", textAlign: "center" }}>
-                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                        </Col>
                                     </Row>
                                 </div>
                                 <div id="res">

@@ -149,7 +149,7 @@ class Arrivals extends Component {
                                                     <td>{arrival.check_out_date}</td>
                                                     <td>{arrival.type}</td>
                                                     <td>
-                                                        {this.state.startDateRange <= today ? (arrival.room_num === "Not Set" ?
+                                                        {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
                                                             <select id={i} onChange={this.handleRoomChange}>
                                                                 <option value="">Select a room</option>
                                                                 {this.state.roomsArray.filter(roomtype => roomtype.room_type_id === arrival.room_type_id).map(room => (
@@ -159,7 +159,7 @@ class Arrivals extends Component {
                                                             arrival.room_num) : "Not Set"}
                                                     </td>
                                                     <td>
-                                                        {this.state.startDateRange <= today ? arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In" : ""}
+                                                        {this.state.startDateRange === today ? arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In" : ""}
 
                                                     </td>
                                                 </tr>
