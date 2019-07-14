@@ -51,6 +51,6 @@ const RoomType = {
             cb(result);
         });
     }
-}
+};
 
 module.exports = RoomType;

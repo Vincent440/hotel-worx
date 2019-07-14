@@ -81,6 +81,6 @@ const Room = {
             cb(result);
         });
     }
-}
+};
 
 module.exports = Room;

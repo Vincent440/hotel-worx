@@ -37,6 +37,6 @@ const Customer = {
             cb(result);
         });
     }
-}
+};
 
 module.exports = Customer;

@@ -1,16 +1,42 @@
 import React, { Component } from 'react';
 import logo from "./solidcolor.png";
+import hotelLogo from "./hotel.png";
 import { Card } from 'react-bootstrap';
 import "./style.css";
 import ReactWeather from 'react-open-weather';
 //Optional include of the default css styles 
 import 'react-open-weather/lib/css/ReactWeather.css';
+import api from '../../utils/api';
 
 class InfoPart extends Component {
+    state = {
+        hotelInfo: []
+    };
+
+    makeAxiosCall = () => {
+        api.getHotelInfo(1)
+            .then(res => this.setState({ hotelInfo: res }))
+            .catch(err => console.log(err));
+    }
+
+    componentDidMount() {
+        this.makeAxiosCall();
+    }
+
     render() {
         return (
             <Card id="infoCard">
-                <Card.Img variant="top" src={logo} className="App-logo" id="logo" alt="logo" style={{ marginBottom: "50px" }} />
+                {this.state.hotelInfo.map(info => (
+                    <div key={InfoPart.hotel_info_id} style={{ marginBottom: "20px" }}>
+                        <div className="text-center"><img src={hotelLogo} width="100" height="auto" /></div>
+                        <div className="text-center">{info.hotel_name}</div>
+                        <div className="small faded">{info.address}</div>
+                        <div className="small faded">{info.city}, {info.state} {info.zip}</div>
+                        <div className="small faded">{info.email}</div>
+                        <div className="text-center">{info.phone}</div>
+                    </div>
+                ))}
+                <Card.Img variant="top" src={logo} className="App-logo" id="logo" alt="logo" style={{ marginBottom: "20px" }} />
                 <h5 className="card-title">User Name: {this.props.user.username}</h5>
                 {/* <p className="card-text"> <Calendar /></p> */}
                 <div className="card-text">

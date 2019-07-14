@@ -8,6 +8,6 @@ const TaxRate = {
             cb(results);
         });
     }
-}
+};
 
 module.exports = TaxRate;

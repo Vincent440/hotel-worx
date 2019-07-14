@@ -115,7 +115,7 @@ export default {
     updateRoomCheckout: (id, room_num) => {
         return axios.all([
             axios.put('/api/hw/checkoutRoom/' + id + '/' + room_num),
-            axios.post('/api/hw/invoice', {id: id})
+            axios.post('/api/hw/invoice', { id: id })
         ])
             .then(axios.spread((res1, res2) => {
                 return [res1, res2];
@@ -166,4 +166,13 @@ export default {
                 console.log(error);
             });
     },
+    getHotelInfo: (id) => {
+        return axios.get('/api/hw/hotel_info/' + id)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 }

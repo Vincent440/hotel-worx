@@ -94,6 +94,6 @@ const ResRoom = {
             cb(result);
         });
     }
-}
+};
 
 module.exports = ResRoom;

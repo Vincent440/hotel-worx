@@ -372,4 +372,10 @@ router.get("/tax_rates", (req, res) => {
     });
 });
 
+router.get("/hotel_info/:id", (req, res) => {
+    db.HotelInfo.selectOne(req.params.id, (data) => {
+        res.json(data);
+    });
+});
+
 module.exports = router;

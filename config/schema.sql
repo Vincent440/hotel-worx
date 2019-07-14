@@ -133,4 +133,20 @@ CREATE TABLE invoices (
 
 -- --------------------------------------------------------
 
+CREATE TABLE hotel_info (
+    hotel_info_id int(6) NOT NULL AUTO_INCREMENT,
+    hotel_name varchar(30) NOT NULL,
+    address varchar(50) NOT NULL,
+    city varchar(50) NOT NULL,
+    state varchar(30) NOT NULL,
+    zip varchar(20) NOT NULL,
+    email varchar(50) NOT NULL,
+    phone varchar(20) NOT NULL,
+    image_url varchar(60) NOT NULL,
+    active boolean DEFAULT 1,
+    PRIMARY KEY (hotel_info_id)
+);
+
+-- --------------------------------------------------------
+
 set foreign_key_checks=1;
