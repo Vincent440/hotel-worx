@@ -10,13 +10,11 @@ import Particles from "react-particles-js";
 
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class Payment extends Component {
-
     state = {
         RoomInfo: [],
         InvoiceArray: [],
         invoice_id: ""
     };
-
     componentDidMount() {
         let invoice_id = "";
         if (localStorage && localStorage.getItem('invoice_id')) {
@@ -28,9 +26,7 @@ class Payment extends Component {
                 .catch(err => console.log(err))
         });
     }
-
     render() {
-
         return (
             <Container>
                 <Particles params={particleOpt} id="particul" />
@@ -47,7 +43,6 @@ class Payment extends Component {
                         </Row>
                         <div id="res">
                             <div id="res" style={{ paddingBottom: "10px" }}>
-
                                 <Row>
                                     <Table border="1">
                                         <tbody>

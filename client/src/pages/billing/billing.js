@@ -50,21 +50,17 @@ class Billing extends Component {
             .then(res => this.setState({ taxRates: res[0] }))
             .catch(err => console.log(err));
     }
-
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     }
-
     handleFormSubmit = event => {
         event.preventDefault();
         this.makeAxiosCall();
     }
-
     render() {
-
         if (this.state.checkOutSuccess) {
             localStorage.setItem('invoice_id', this.state.invoice_id);
             return (
@@ -76,7 +72,6 @@ class Billing extends Component {
         return (
             <Container>
                 <Particles params={particleOpt} id="particul" />
-
                 <Row>
                     <Col sm={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />

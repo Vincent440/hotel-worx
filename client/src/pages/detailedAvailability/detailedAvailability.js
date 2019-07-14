@@ -101,11 +101,4 @@ class DetailedAvailability extends Component {
     }
 }
 
-<<<<<<< HEAD
-        )
-    }
-}
-
-=======
->>>>>>> ef90c687ba8084749a1810ec55115e7f8d253811
 export default DetailedAvailability;
