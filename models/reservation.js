@@ -37,6 +37,6 @@ const Reservation = {
             cb(result);
         });
     }
-}
+};
 
 module.exports = Reservation;

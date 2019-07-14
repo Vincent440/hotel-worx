@@ -49,11 +49,11 @@ export default {
         const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
         return axios.all([
             axios.get('/api/hw/arrivals/' + sdate + "/" + fname + "/" + lname + "/" + cnum),
-            axios.get('/api/hw/rooms_arrivals/' + date)
+            axios.get('/api/hw/rooms_arrivals/' + date),
+            axios.get('/api/hw/pending_departures/' + date)
         ])
-            .then(axios.spread((arrivals, rooms_arrivals) => {
-                // return console.log(arrivals.data, rooms_arrivals.data);
-                return { arrivals: arrivals.data, rooms_arrivals: rooms_arrivals.data };
+            .then(axios.spread((arrivals, rooms_arrivals, pending_departures) => {
+                return { arrivals: arrivals.data, rooms_arrivals: rooms_arrivals.data, pending_departures: pending_departures.data };
             }));
     },
     getArrivals: (criteria) => {
@@ -115,7 +115,7 @@ export default {
     updateRoomCheckout: (id, room_num) => {
         return axios.all([
             axios.put('/api/hw/checkoutRoom/' + id + '/' + room_num),
-            axios.post('/api/hw/invoice', {id: id})
+            axios.post('/api/hw/invoice', { id: id })
         ])
             .then(axios.spread((res1, res2) => {
                 return [res1, res2];
@@ -166,4 +166,13 @@ export default {
                 console.log(error);
             });
     },
+    getHotelInfo: (id) => {
+        return axios.get('/api/hw/hotel_info/' + id)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 }

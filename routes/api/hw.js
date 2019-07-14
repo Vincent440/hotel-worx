@@ -280,6 +280,12 @@ router.get("/rooms_arrivals/:date", (req, res) => {
     });
 });
 
+router.get("/pending_departures/:date", (req, res) => {
+    db.ResRoom.countPendingDeparturesByRoomType(req.params.date, (result) => {
+        res.json(result);
+    });
+});
+
 router.get("/guests/:fname/:lname/:rnum/:cnum", (req, res) => {
     let conditions = [];
     if (req.params.fname !== "undefined") {
@@ -362,6 +368,12 @@ router.put("/updateCleanStatus/:status/:room_id", (req, res) => {
 
 router.get("/tax_rates", (req, res) => {
     db.TaxRate.selectRates((data) => {
+        res.json(data);
+    });
+});
+
+router.get("/hotel_info/:id", (req, res) => {
+    db.HotelInfo.selectOne(req.params.id, (data) => {
         res.json(data);
     });
 });

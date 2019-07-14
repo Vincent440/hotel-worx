@@ -44,6 +44,6 @@ const User = {
             cb(result);
         });
     }
-}
+};
 
 module.exports = User;
