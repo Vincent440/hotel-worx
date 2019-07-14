@@ -15,6 +15,6 @@ const Invoice = {
             cb(result);
         });
     }
-}
+};
 
 module.exports = Invoice;

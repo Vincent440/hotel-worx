@@ -20,7 +20,8 @@ class Arrivals extends Component {
         lastname: undefined,
         confirmationNumber: undefined,
         arrivalsArray: [],
-        roomsArray: []
+        roomsArray: [],
+        pendingArray: []
     };
 
     makeAxiosCall = () => {
@@ -32,16 +33,8 @@ class Arrivals extends Component {
         };
 
         api.getArrivalsNew(criteria, moment(this.state.startDateRange).format('YYYY-MM-DD'))
-            .then(res => this.setState({ arrivalsArray: res.arrivals, roomsArray: res.rooms_arrivals }))
+            .then(res => this.setState({ arrivalsArray: res.arrivals, roomsArray: res.rooms_arrivals, pendingArray: res.pending_departures }))
             .catch(err => console.log(err));
-
-        // api.getArrivals(criteria)
-        //     .then(res => this.setState({ arrivalsArray: res }))
-        //     .catch(err => console.log(err));
-
-        // api.getRoomsArrivals(moment(this.state.startDateRange).format('YYYY-MM-DD'))
-        //     .then(res => this.setState({ roomsArray: res }))
-        //     .catch(err => console.log(err));
     }
 
     handleCheckIn = (id, room_id) => {
@@ -128,8 +121,18 @@ class Arrivals extends Component {
                                         </Col>
                                     </Row>
                                 </Col>
-
-
+                            </Row>
+                        </div>
+                        <div id="res" style={{ paddingBottom: "10px" }}>
+                            <Row>
+                                <Col xl={12}>
+                                    Pending departures by room type:
+                                    {this.state.pendingArray.length === 0 ? " None" :
+                                        (this.state.pendingArray.map((type, i) => (
+                                            <span key={type.room_type_id}> {i>0 ? ", " : ""}({type.type}: {type.pending_departures})</span>
+                                        )))
+                                    }
+                                </Col>
                             </Row>
                         </div>
                         <div id="res">
@@ -155,8 +158,8 @@ class Arrivals extends Component {
                                                         {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
                                                             <select id={i} onChange={this.handleRoomChange}>
                                                                 <option value="">Select a room</option>
-                                                                {this.state.roomsArray.filter(roomtype => roomtype.room_type_id === arrival.room_type_id).map(room => (
-                                                                    <option key={room.room_id} value={room.room_id}>{room.room_num}</option>
+                                                                {this.state.roomsArray.filter(roomtype => (roomtype.room_type_id === arrival.room_type_id && roomtype.occupied === 0)).map(room => (
+                                                                    <option key={room.room_id} value={room.room_id}>{room.room_num} {room.clean === 0 ? " (dirty)" : ""}</option>
                                                                 ))}
                                                             </select> :
                                                             arrival.room_num) : "Not Set"}
@@ -168,7 +171,6 @@ class Arrivals extends Component {
                                                 </tr>
                                             ))}
                                         </tbody>
-
                                     </Table>
                                 </Col>
                             </Row >
