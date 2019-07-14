@@ -20,6 +20,13 @@ const ResRoom = {
             cb(result);
         });
     },
+    countPendingDeparturesByRoomType: (date, cb) => {
+        const queryString = "SELECT rt.room_type_id, rt.type, COUNT(rr.room_type_id) AS pending_departures FROM res_rooms AS rr INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id WHERE rr.checked_out=0 && rr.check_out_date=? GROUP BY rr.room_type_id ORDER BY rt.room_type_id ASC;";
+        connection.execute(queryString, [date], (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
+    },
     selectForInvoice: (id, cb) => {
         const queryString = "SELECT rr.res_room_id, (DATE(rr.check_out_date)-DATE(rr.check_in_date)) AS num_days, rr.rate, tr.county_rate, tr.city_rate, tr.state_rate FROM res_rooms AS rr, (SELECT (county_tax_rate/100) AS county_rate, (city_tax_rate/100) AS city_rate, (state_tax_rate/100) AS state_rate FROM tax_rates WHERE tax_rate_id=1 LIMIT 1) AS tr WHERE rr.res_room_id=? LIMIT 1;";
         connection.execute(queryString, [id], (err, result) => {

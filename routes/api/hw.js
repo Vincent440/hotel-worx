@@ -280,6 +280,12 @@ router.get("/rooms_arrivals/:date", (req, res) => {
     });
 });
 
+router.get("/pending_departures/:date", (req, res) => {
+    db.ResRoom.countPendingDeparturesByRoomType(req.params.date, (result) => {
+        res.json(result);
+    });
+});
+
 router.get("/guests/:fname/:lname/:rnum/:cnum", (req, res) => {
     let conditions = [];
     if (req.params.fname !== "undefined") {
