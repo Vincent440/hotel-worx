@@ -273,7 +273,7 @@ class ReserveNew extends Component {
                                         <Col xl={2}>
                                             <select name="roomtype" onChange={this.handleInputChange}>
                                                 {this.state.RoomTypes.map(type => (
-                                                    <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
+                                                    <option key={type.room_type_id}  value={type.room_type_id}>{type.type} - {type.rate}</option>
                                                 ))}
                                             </select>
 

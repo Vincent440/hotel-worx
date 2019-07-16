@@ -55,6 +55,9 @@
     width: 28px;
     float: left;
   }
+  #dashboardLink{
+    font-size: 19px;
+  }
 }
 
 @media all and (max-width: 1575px) {
@@ -90,7 +93,7 @@
   .btn-primary:hover,
   .btn-primary:active,
   .btn-primary:visited {
-    background-color: #ccc439 !important;
+    background-color: #a19b1e !important;
     color: black;
   }
 

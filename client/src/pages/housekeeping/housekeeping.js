@@ -196,7 +196,7 @@ class Housekeeping extends Component {
                                     </Row>
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "white", paddingTop: "8px" }}>
+                                            <Row style={{ backgroundColor: "white", paddingTop: "8px"}}>
                                                 <Col xl={3}>
                                                     <h6> Reservation Status: </h6>
                                                 </Col>
@@ -223,7 +223,7 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{ paddingTop: "8px", backgroundColor: "white" }}>
+                                            <Row style={{ paddingTop: "8px", backgroundColor: "white",marginBottom:"5px"}}>
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>

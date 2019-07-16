@@ -14,6 +14,7 @@ import ReservationTest from "./pages/newreservation/reservationTest";
 import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
 import HouseStatus from "./pages/houseStatus/houseStatus";
+
 // import PrivateRoute from "./components/PrivateRoute";
 class PrivateRoute extends Component {
   render() {

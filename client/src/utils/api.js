@@ -24,15 +24,7 @@ export default {
                 console.log(error);
             });
     },
-    updateReservation: (id, room_num) => {
-        return axios.all([
-            axios.put('/api/hw/checkoutRoom/' + id + '/' + room_num),
-            axios.post('/api/hw/invoice', { id: id })
-        ])
-            .then(axios.spread((res1, res2) => {
-                return [res1, res2];
-            }));
-    },
+
     getReservations: () => {
         return axios.get('/api/hw/reservations')
             .then((response) => {

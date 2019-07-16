@@ -19,16 +19,13 @@ class UpdateReservation extends Component {
         super(props);
         this.handleFromChange = this.handleFromChange.bind(this);
         this.handleToChange = this.handleToChange.bind(this);
-    }
-    state = {
+    }    state = {
         firstname: "",
         lastname: "",
-        sdate: undefined,
+        sdate:undefined,
         edate: undefined,
         confirmationNumber: undefined,
-        res_room_id:"",
-        reservation_id: [],
-        updateArray: []
+        resRooms: []
     };
     showFromMonth() {
         const { from, to } = this.state;
@@ -42,18 +39,23 @@ class UpdateReservation extends Component {
     handleFromChange(sdate) {
         // Change the from date and focus the "to" input field
         this.setState({ sdate });
+
     }
     handleToChange(edate) {
         this.setState({ edate }, this.showFromMonth);
     }
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
         });
+
     }
+
     componentDidMount() {
         this.makeAxiosCall();
     }
+
     makeAxiosCall = () => {
         const criteria = {
             firstname: this.state.firstname,
@@ -62,43 +64,30 @@ class UpdateReservation extends Component {
             sdate: moment(this.state.sdate).format('YYYY-MM-DD'),
             confirmationNumber: this.state.confirmationNumber
         }
-        api.getReservation(criteria)
-            .then(res => this.setState({ updateArray: res }))
-            .catch(err => console.log(err));
-    }
-    handleFormSubmit = event => {
-        event.preventDefault();
-        this.makeAxiosCall();
-    }
-    handleUpdate = (id, room_id) => {
-        this.setState({ res_room_id: id });
-        api.updateReservation(id, room_id)
-            .then(res => this.setState({ onClick: true, reservation_id: res[1].data }))
+        api.getReservations(criteria)
+            .then(res => this.setState({ resRooms: res }))
             .catch(err => console.log(err));
     }
 
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.makeAxiosCall();
+
+    }
+ 
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     }
+
     render() {
-        if (this.state.checkOutSuccess) {
-            localStorage.setItem('reservation_id', this.state.reservation_id);
-            return (
-                <Redirect to={{
-                    pathname: '/reserve/testUpdatereservation'
-                }} />
-            )
-        }
         return (
             <Container>
-                <Particles params={particleOpt} id="particul" />
-
                 <Row>
                     <Col sm={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                    <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col sm={10}>
                         <Row>
@@ -168,20 +157,34 @@ class UpdateReservation extends Component {
                             </Row>
                         </div>
                         <div id="res">
+
                             <Row style={{ paddingBottom: "20px" }}>
                                 <Col xl={12}>
                                     <Table>
                                         <tbody>
                                             <tr>
-                                                <th>Last Name</th>
-                                                <th>First Name</th>
-                                                <th>Arrival Date</th>
-                                                <th>Departure Date</th>
-                                                <th>Room Type</th>
-                                                <th>Status</th>
+                                                <th>
+                                                    Last Name
+                                                    </th>
+                                                <th>
+                                                    First Name
+                                                    </th>
+                                                <th>
+                                                    Arrival Date
+                                             </th>
+                                                <th>
+                                                    Departure Date
+                                             </th>
+                                                <th>
+                                                    Room Type
+                                                    </th>
+                                                <th>
+                                                    Status
+                                              </th>
                                             </tr>
-                                            {this.state.updateArray.map((res,i) => (
-                                                <tr key={res.res_room_id} onClick={() => this.handleUpdate(res.res_room_id, this.state.updateArray[i].res_room_id)}>
+
+                                            {this.state.resRooms.map(res => (
+                                                <tr key={res.res_room_id}>
                                                     <td>{res.last_name}</td>
                                                     <td>{res.first_name}</td>
                                                     <td>{res.check_in_date}</td>

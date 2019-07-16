@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from "./solidcolor.png";
-import hotelLogo from "./hotel.png";
+import smallLogo from "./solidcolor.png";
 import { Card } from 'react-bootstrap';
 import "./style.css";
 import ReactWeather from 'react-open-weather';
@@ -12,33 +11,30 @@ class InfoPart extends Component {
     state = {
         hotelInfo: []
     };
-
     makeAxiosCall = () => {
         api.getHotelInfo(1)
             .then(res => this.setState({ hotelInfo: res }))
             .catch(err => console.log(err));
     }
-
     componentDidMount() {
         this.makeAxiosCall();
     }
-
     render() {
         return (
             <Card id="infoCard">
+                <Card style={{ marginBottom: "10px" }}>
+                    <Card.Img variant="top" src={smallLogo} className="App-logo" id="smallLogo" alt="smallLogo" style={{ marginBottom: "10px" }} />
+                </Card>
                 {this.state.hotelInfo.map(info => (
-                    <div key={InfoPart.hotel_info_id} style={{ marginBottom: "20px" }}>
-                        <div className="text-center"><img src={hotelLogo} width="100" height="auto" /></div>
-                        <div className="text-center">{info.hotel_name}</div>
-                        <div className="small faded">{info.address}</div>
-                        <div className="small faded">{info.city}, {info.state} {info.zip}</div>
-                        <div className="small faded">{info.email}</div>
-                        <div className="text-center">{info.phone}</div>
+                    <div key={InfoPart.hotel_info_id} id="hotelInfoPart">
+                        <div className="text-center" id="hotelName"><h2>{info.hotel_name}</h2></div>
+                        <div className="small faded" id="hotelAddress">{info.address}</div>
+                        <div className="small faded" id="hotelAddress">{info.city}, {info.state} {info.zip}</div>
+                        <br/>
+                        <div className="small faded" id="hotelEmail">{info.email}</div>
+                        <div className="text-center" id="hotelPhone"><i className="fa fa-phone fa-rotate-90"></i>{info.phone}</div>
                     </div>
                 ))}
-                <Card.Img variant="top" src={logo} className="App-logo" id="logo" alt="logo" style={{ marginBottom: "20px" }} />
-                <h5 className="card-title">User Name: {this.props.user.username}</h5>
-                {/* <p className="card-text"> <Calendar /></p> */}
                 <div className="card-text">
                     <ReactWeather
                         forecast="today"
@@ -47,8 +43,11 @@ class InfoPart extends Component {
                         city="Cleveland"
                         units='F' />
                 </div>
-                <button className="btn btn-block btn-default" style={{width:"50px",paddingLeft:"7px", paddingTop:"15px", marginTop:"40px", marginLeft:"70px"}}><i className="fa fa-gear" style={{fontSize:"28px", color:"white" }}></i></button>
-                <button onClick={this.props.logout} className="btn btn-block btn-default" style={{width:"50px", textAlign:"center", paddingLeft:"7px", paddingTop:"5px" , marginTop:"5px", marginLeft:"70px"}}><i className="fa fa-sign-out-alt" style={{fontSize:"28px", color:"white" }}></i></button>
+                <h5 className="card-title" id="userNameD">User Name: {this.props.user.username}</h5>
+                <div id="optionsDiv">
+                    <button className="btn btn-block btn-default" id="userSetting"><i className="fa fa-gear"></i></button>
+                    <button className="btn btn-block btn-default" id="logOut" onClick={this.props.logout}><i className="fa fa-sign-out-alt"></i></button>
+                </div>
             </Card>
         )
     }
