@@ -257,18 +257,15 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
     });
 });
 
-router.get("/departures/:fname/:lname/:rnum", (req, res) => {
+router.get("/departures/:fname/:lname/:rnum/:sover/:dout/:dpart", (req, res) => {
     let conditions = [];
-    if (req.params.fname !== "undefined") {
-        conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
-    }
-    if (req.params.lname !== "undefined") {
-        conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
-    }
-    if (req.params.rnum !== "undefined") {
-        conditions.push("(rm.room_num='" + req.params.rnum + "')");
-    }
-    conditions.length === 0 ? conditions.push("(rr.check_out_date=CURDATE())") : conditions;
+    req.params.fname !== "undefined" ? conditions.push("c.first_name LIKE '%" + req.params.fname + "%'") : "";
+    req.params.lname !== "undefined" ? conditions.push("c.last_name LIKE '%" + req.params.lname + "%'") : "";
+    req.params.rnum !== "undefined" ? conditions.push("(rm.room_num='" + req.params.rnum + "')") : "";
+    req.params.sover === "true" ? conditions.push("(rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE())") : "";
+    req.params.dout === "true" ? conditions.push("(rr.check_out_date=CURDATE() && rr.checked_out=0)") : "";
+    req.params.dpart === "true" ? conditions.push("(rr.check_out_date=CURDATE() && rr.checked_out=1)") : "";
+    (req.params.sover != "true" && req.params.dout != "true" && req.params.depart != "true") ? conditions.push("((rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE()) || (rr.check_out_date=CURDATE() && rr.checked_out=0) || (rr.check_out_date=CURDATE() && rr.checked_out=1))") : "";
     db.ResRoom.selectDepartures(conditions, (result) => {
         res.json(result);
     });

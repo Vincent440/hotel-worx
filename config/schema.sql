@@ -62,7 +62,6 @@ CREATE TABLE customers (
     phone varchar(20) NOT NULL,
     credit_card_num varchar(30) NOT NULL,
     cc_expiration varchar(10) NOT NULL,
-    active boolean DEFAULT 1,
     PRIMARY KEY (customer_id)
 );
 

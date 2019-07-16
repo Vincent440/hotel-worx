@@ -19,14 +19,20 @@ class Billing extends Component {
         taxRates: {},
         checkOutSuccess: false,
         res_room_id: "",
-        invoice_id: ""
+        invoice_id: "",
+        stayOver: false,
+        dueOut: false,
+        checkedOut: false
     };
 
     makeAxiosCall = () => {
         const criteria = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            roomNumber: this.state.roomNumber
+            roomNumber: this.state.roomNumber,
+            stayOver: this.state.stayOver,
+            dueOut: this.state.dueOut,
+            checkedOut: this.state.checkedOut
         };
 
         api.getDepartures(criteria)
@@ -53,6 +59,10 @@ class Billing extends Component {
         this.setState({
             [name]: value
         });
+    }
+
+    handleCheckChange = event => {
+        event.target.name==="stayOver" ? this.setState({ stayOver: !this.state.stayOver, dueOut: false, checkedOut: false }) : event.target.name==="dueOut" ? this.setState({ stayOver: false, dueOut: !this.state.dueOut, checkedOut: false }) : event.target.name==="checkedOut" ? this.setState({ stayOver: false, dueOut: false, checkedOut: !this.state.checkedOut }) : this.setState({ stayOver: false, dueOut: false, checkedOut: false });
     }
 
     handleFormSubmit = event => {
@@ -90,7 +100,7 @@ class Billing extends Component {
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col sm={6} >Room Number</Col>
                                         <Col sm={6}>
-                                        <input style={{ width: "150px" }}
+                                            <input style={{ width: "150px" }}
                                                 id=""
                                                 onChange={this.handleInputChange}
                                                 name="roomNumber"
@@ -112,9 +122,7 @@ class Billing extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col sm={6} style={{ paddingRight: "30px" }}>
-                                            Last Name
-                                    </Col>
+                                        <Col sm={6} style={{ paddingRight: "30px" }}>Last Name</Col>
                                         <Col sm={6}>
                                             <input style={{ width: "150px", height: "30px" }}
                                                 type="text"
@@ -128,27 +136,33 @@ class Billing extends Component {
                                 </Col>
                                 <Col xl={4} style={{ paddingLeft: "60px" }}>
                                     <Row style={{ paddingBottom: "12px" }}>
+                                        <Col xl={6}>Stay Over</Col>
                                         <Col xl={6}>
-                                            Stay Over
-                                        </Col>
-                                        <Col xl={6}>
-                                            <input type="checkbox" id="myCheck" />
+                                            <input type="checkbox"
+                                                name="stayOver"
+                                                checked={this.state.stayOver}
+                                                onChange={this.handleCheckChange}
+                                            />
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "12px" }}>
+                                        <Col xl={6}>Due Out</Col>
                                         <Col xl={6}>
-                                            Due Out
-                                            </Col>
-                                        <Col xl={6}>
-                                            <input type="checkbox" id="myCheck" />
+                                            <input type="checkbox"
+                                                name="dueOut"
+                                                checked={this.state.dueOut}
+                                                onChange={this.handleCheckChange}
+                                            />
                                         </Col>
                                     </Row>
                                     <Row>
+                                        <Col xl={6}>Checked Out</Col>
                                         <Col xl={6}>
-                                            Checked Out
-                                                </Col>
-                                        <Col xl={6}>
-                                            <input type="checkbox" id="myCheck" />
+                                            <input type="checkbox"
+                                                name="checkedOut"
+                                                checked={this.state.checkedOut}
+                                                onChange={this.handleCheckChange}
+                                            />
                                         </Col>
                                     </Row>
                                 </Col>
@@ -174,7 +188,7 @@ class Billing extends Component {
                                                 <th>Balance</th>
                                                 <th></th>
                                             </tr>
-                                            
+
                                             {this.state.departuresArray.map((departure, i) => (
                                                 <tr key={departure.res_room_id}>
                                                     <td>{departure.room_num}</td>
