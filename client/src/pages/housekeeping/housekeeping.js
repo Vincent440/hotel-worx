@@ -120,10 +120,10 @@ class Housekeeping extends Component {
                 <Particles params={particleOpt} id="particul" />
 
                 <Row >
-                    <Col xl={2}>
+                    <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
-                    <Col xl={10}>
+                    <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>HOUSEKEEPING</Header>
@@ -196,7 +196,7 @@ class Housekeeping extends Component {
                                     </Row>
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "white", paddingTop: "8px"}}>
+                                            <Row style={{ backgroundColor: "white", paddingTop: "8px" }}>
                                                 <Col xl={3}>
                                                     <h6> Reservation Status: </h6>
                                                 </Col>
@@ -223,7 +223,7 @@ class Housekeeping extends Component {
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{ paddingTop: "8px", backgroundColor: "white",marginBottom:"5px"}}>
+                                            <Row style={{ paddingTop: "8px", backgroundColor: "white", marginBottom: "5px" }}>
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>

@@ -73,10 +73,10 @@ class Billing extends Component {
             <Container>
                 <Particles params={particleOpt} id="particul" />
                 <Row>
-                    <Col sm={2}>
+                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
-                    <Col sm={10}>
+                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>FINANCE</Header>

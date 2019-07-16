@@ -14,6 +14,7 @@ import ReservationTest from "./pages/newreservation/reservationTest";
 import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
 import HouseStatus from "./pages/houseStatus/houseStatus";
+import Maintenance from "./pages/maintenance/maintenance";
 
 // import PrivateRoute from "./components/PrivateRoute";
 class PrivateRoute extends Component {
@@ -89,6 +90,7 @@ class App extends Component {
               <PrivateRoute exact path="/reserve/testreservation" component={ReservationTest} logout={this.appLogout} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/frontdesk/arrivals" component={Arrivals} logout={this.appLogout} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/frontdesk/inhouse" component={Inhouse} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateRoute exact path="/frontdesk/maintenance" component={Maintenance} logout={this.appLogout} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/cashiering/billing" component={Billing} logout={this.appLogout} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/cashiering/payment" component={Payment} logout={this.appLogout} loggedIn={loggedIn} user={user} />
               <PrivateRoute exact path="/reports/housekeeping" component={Housekeeping} logout={this.appLogout} loggedIn={loggedIn} user={user} />

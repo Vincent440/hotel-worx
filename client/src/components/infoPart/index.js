@@ -27,12 +27,13 @@ class InfoPart extends Component {
                 </Card>
                 {this.state.hotelInfo.map(info => (
                     <div key={InfoPart.hotel_info_id} id="hotelInfoPart">
-                        <div className="text-center" id="hotelName"><h2>{info.hotel_name}</h2></div>
+                        <div className="text-center" id="hotelName">{info.hotel_name}</div>
                         <div className="small faded" id="hotelAddress">{info.address}</div>
                         <div className="small faded" id="hotelAddress">{info.city}, {info.state} {info.zip}</div>
-                        <br/>
                         <div className="small faded" id="hotelEmail">{info.email}</div>
                         <div className="text-center" id="hotelPhone"><i className="fa fa-phone fa-rotate-90"></i>{info.phone}</div>
+                        <br/>
+
                     </div>
                 ))}
                 <div className="card-text">

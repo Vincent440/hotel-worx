@@ -1,8 +1,8 @@
 #infoCard {
-  background-color:#f0e747b2;
+  background-color:rgba(255, 255, 255, 0.586);
   height: 650px;
   width: 200px;
-  margin-top: 10px;
+  margin-top: 0px;
   border: 1px solid white;
   border-top: none;
   border-radius: 5px;
@@ -97,7 +97,11 @@
 #hotelEmail{
   font-size: 15px;
 }
+#hotelName{
+  text-align: center;
+  font-size: 32px;
 
+}
 #hotelPhone i {
   font-size: 14px;
   margin-right: 5px;
