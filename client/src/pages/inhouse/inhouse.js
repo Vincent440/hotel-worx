@@ -137,7 +137,7 @@ class Inhouse extends Component {
                                             </tr>
                                             {this.state.guestsArray.map((guest, i) => (
                                                 <tr key={guest.res_room_id}>
-                                                    <td>{guest.last_name}, {guest.first_name}</td>
+                                                    <td>{guest.first_name} {guest.last_name}</td>
                                                     <td>{guest.check_in_date}</td>
                                                     <td>{guest.check_out_date}</td>
                                                     <td>{guest.type}</td>
