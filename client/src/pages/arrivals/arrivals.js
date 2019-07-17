@@ -129,7 +129,7 @@ class Arrivals extends Component {
                                     Pending departures by room type:
                                     {this.state.pendingArray.length === 0 ? " None" :
                                         (this.state.pendingArray.map((type, i) => (
-                                            <span key={type.room_type_id}> {i>0 ? ", " : ""}({type.type}: {type.pending_departures})</span>
+                                            <span key={type.room_type_id}>{i>0 ? ", " :" "}({type.type}: {type.pending_departures})</span>
                                         )))
                                     }
                                 </Col>
@@ -159,13 +159,13 @@ class Arrivals extends Component {
                                                             <select id={i} onChange={this.handleRoomChange}>
                                                                 <option value="">Select a room</option>
                                                                 {this.state.roomsArray.filter(roomtype => (roomtype.room_type_id === arrival.room_type_id && roomtype.occupied === 0)).map(room => (
-                                                                    <option key={room.room_id} value={room.room_id}>{room.room_num} {room.clean === 0 ? " (dirty)" : ""}</option>
+                                                                    <option key={room.room_id} value={room.room_id}>{room.room_num} {room.clean === 0 && " (dirty)"}</option>
                                                                 ))}
                                                             </select> :
                                                             arrival.room_num) : "Not Set"}
                                                     </td>
                                                     <td>
-                                                        {this.state.startDateRange === today ? arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In" : ""}
+                                                        {this.state.startDateRange === today && (arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In")}
 
                                                     </td>
                                                 </tr>
