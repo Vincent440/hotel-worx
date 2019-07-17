@@ -39,7 +39,7 @@ class InfoPart extends Component {
                 <div className="card-text">
                     <ReactWeather
                         forecast="today"
-                        apikey="96ccd12f1a9d49be80961318190107"
+                        apikey={process.env.REACT_APP_WEATHER_API_KEY}
                         type="city"
                         city="Cleveland"
                         units='F' />
