@@ -108,6 +108,8 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
     }
     if (req.params.departed === "true") {
         criteria4.push("rr.checked_out=1");
+    } else {
+        criteria4.push("rr.checked_out=0");
     }
     if (req.params.stayOver === "true") {
         criteria4.push("(CURDATE()>rr.check_in_date && CURDATE()<rr.check_out_date)");
@@ -119,7 +121,7 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
         criteria4.push("((rr.check_in_date IS NULL || (CURDATE() NOT BETWEEN rr.check_in_date AND rr.check_out_date)) && rm.active=1)");
     }
     const c4 = "(" + criteria4.join(" || ") + ")";
-    if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true") {
+    if (c4.length > 0) {
         conditions.push(c4);
     }
     if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true" || req.params.clean === "true" || req.params.dirty === "true" || req.params.vacant === "true" || req.params.occupied === "true") {
