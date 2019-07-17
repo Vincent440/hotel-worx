@@ -1,4 +1,5 @@
 "use strict";
+require('dotenv').config()
 const express = require("express");
 const passport = require("passport");
 require('./controllers/passportController')(passport);// pass passport for configuration
