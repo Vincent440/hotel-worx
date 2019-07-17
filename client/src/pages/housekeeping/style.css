@@ -17,3 +17,20 @@ h6 {
   margin-top: 30px;
 
 }
+
+#firstRow{
+  background-color: white;
+  padding-top: 5px;
+}
+
+#secondRow{
+  background-color: white;
+  padding-top: 5px;
+  margin-bottom: 5px;
+}
+
+#thirdRow{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+

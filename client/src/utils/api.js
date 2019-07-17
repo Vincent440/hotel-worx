@@ -83,7 +83,10 @@ export default {
         const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
         const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
         const rnum = criteria.roomNumber === "" ? "undefined" : criteria.roomNumber;
-        return axios.get('/api/hw/departures/' + fname + "/" + lname + "/" + rnum)
+        const sover = criteria.stayOver;
+        const dout = criteria.dueOut;
+        const dpart = criteria.checkedOut;
+        return axios.get('/api/hw/departures/' + fname + "/" + lname + "/" + rnum + "/" + sover + "/" + dout + "/" + dpart)
             .then((response) => {
                 return response.data;
             })
