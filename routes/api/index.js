@@ -7,6 +7,7 @@ const hwRoutes = require("./hw");
 const currentInfoRoutes = require("./current-info");
 const loginRoute = require("./login");
 const logoutRoute = require("./logout");
+const roomTypesRoutes = require("./room-types");
 // login route for employees or managers
 router.use("/login", loginRoute);
 
@@ -28,12 +29,11 @@ router.use("/reservations", reservationRoutes);
 // '/api/rooms' for all routes involving Users
 router.use("/rooms", roomRoutes);
 
-// '/api/testing' for any ongoing testing route builds
+// '/api/rooms/types' for all routes involving the Room types
+router.use("/room/types", roomTypesRoutes);
+
+// '/api/hw' for any ongoing hotel worx functionality
 router.use("/hw",hwRoutes);
 
-// '/api' for any ongoing testing the root of /api route
-router.get("/", (req, res) => {
-  res.status(200).send("Succesful get to /api route");
-});
 
 module.exports = router;

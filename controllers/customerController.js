@@ -4,17 +4,17 @@ module.exports = {
 
     createNewCustomer:(req, res) => {
         db.Customer.insertOne(req.body.vals, (result) => {
-            res.json({ id: result.insertId });
+            res.status(200).json({ id: result.insertId });
         });
     },
     getAllCustomers:(req, res) => {
         db.Customer.selectAll((data) => {
-            res.json(data);
+            res.status(200).json(data);
         });
     },
     getCustomerById:(req, res) => {
         db.Customer.selectOne(req.params.id, (data) => {
-            res.json(data);
+            res.status(200).json(data);
         });
     },
     updateCustomerById:(req, res) => {
@@ -26,9 +26,9 @@ module.exports = {
             }
         });
     },
-    deleteCustomerById:(req, res) => {
+    deleteCustomerById:(req, res) => { // MUST INVESTIGATE FOREIGN KEY CONSTRAINT FAILS
         db.Customer.deleteOne(req.params.id, (data) => {
-            res.json(data);
+            res.status(200).json(data);
         });
     }
 

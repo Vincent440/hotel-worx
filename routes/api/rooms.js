@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const roomController = require("../../controllers/roomController");
-const roomTypesRoutes = require("./room-types");
+
 
 // Matches with '/api/rooms'
 router.route("/")
@@ -18,9 +18,6 @@ router.route("/:id")
 .put(roomController.updateRoomById)
 // DELETE
 .delete(roomController.deleteRoomById);
-
-// '/api/rooms/types' for all routes involving the Room types
-router.use("/types", roomTypesRoutes);
 
 
 module.exports = router;
