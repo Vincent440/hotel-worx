@@ -71,7 +71,7 @@ class Billing extends Component {
         event.preventDefault();
         this.makeAxiosCall();
     }
-    
+
     render() {
         if (this.state.checkOutSuccess) {
             localStorage.setItem('invoice_id', this.state.invoice_id);
@@ -101,7 +101,7 @@ class Billing extends Component {
                                         <Col sm={6} >Room Number</Col>
                                         <Col sm={6}>
                                             <input style={{ width: "150px" }}
-                                                id=""
+                                                type="text"
                                                 onChange={this.handleInputChange}
                                                 name="roomNumber"
                                                 placeholder="Room Number"
@@ -198,7 +198,7 @@ class Billing extends Component {
                                                     <td>{Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                                                     </td>
                                                     <td>
-                                                        {departure.room_num === "Not Set" ? "" : <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button>}
+                                                        {departure.room_num !== "Not Set" ? <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button> : "Checked Out"}
                                                     </td>
                                                 </tr>
                                             ))}
@@ -215,5 +215,3 @@ class Billing extends Component {
 }
 
 export default Billing;
-
-// Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
