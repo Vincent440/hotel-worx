@@ -3,86 +3,81 @@ const router = require("express").Router();
 const db = require("../../models/index.js");
 
 // '/api/hw' route
-// router.route("/").get((req, res) => {
-//     res.status(200).send("sending this from the /api/hw route root");
-// });
+router.route("/").get((req, res) => {
+    res.status(200).send("sending this from the /api/hw route root");
+});
 
-// router.get("/users/:id", (req, res) => {
-//     db.User.selectOneById(req.params.id, (data) => {
-//         res.json(data);
-//     });
-// });
-
-// this route will need to be sent data like: { "vals": ["test_user", "111111", 1] }
-// router.post("/users", (req, res) => {
-//     db.User.insertOne(req.body.vals, (result) => {
-//         res.json({ id: result.insertId });
-//     });
-// });
+router.get("/users/:id", (req, res) => {
+    db.User.selectOneById(req.params.id, (data) => {
+        res.json(data);
+    });
+});
 
 // this route will need to be sent data like: { "vals": ["test_user", "111111", 1] }
-// router.put("/users/:id", (req, res) => {
-//     db.User.updateOne(req.body.vals, req.params.id, (result) => {
-//         if (result.changedRows === 0) {
-//             res.status(204).end();
-//         } else {
-//             res.status(200).end();
-//         }
-//     });
-// });
+router.post("/users", (req, res) => {
+    db.User.insertOne(req.body.vals, (result) => {
+        res.json({ id: result.insertId });
+    });
+});
 
-// router.get("/customers", (req, res) => {
-//     db.Customer.selectAll((data) => {
-//         res.json(data);
-//     });
-// });
+// this route will need to be sent data like: { "vals": ["test_user", "111111", 1] }
+router.put("/users/:id", (req, res) => {
+    db.User.updateOne(req.body.vals, req.params.id, (result) => {
+        if (result.changedRows === 0) {
+            res.status(204).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
 
-// router.get("/customers/:id", (req, res) => {
-//     db.Customer.selectOne(req.params.id, (data) => {
-//         res.json(data);
-//     });
-// });
+router.get("/customers", (req, res) => {
+    db.Customer.selectAll((data) => {
+        res.json(data);
+    });
+});
 
-//  ERRORED OUT 
-//  Error: Cannot delete or update a parent row: 
-//  a foreign key constraint fails 
-//  (`hotel_worx_db`.`reservations`, CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`customer_id`) 
-//  REFERENCES `customers` (`customer_id`) ON DELETE RESTRICT ON UPDATE CASCADE)
-// router.delete("/customers/:id", (req, res) => {
-//     db.Customer.deleteOne(req.params.id, (data) => {
-//         res.json(data);
-//     });
-// });
+router.get("/customers/:id", (req, res) => {
+    db.Customer.selectOne(req.params.id, (data) => {
+        res.json(data);
+    });
+});
 
-// // this route will need to be sent data like this: { "vals": ["Joe", "Blow", "222 E Market St", "Akron", "Ohio", "42116", "joeblow@gmail.com", "440-234-1234", "1234567890123456", "11-21", 1] }
-// router.post("/customers", (req, res) => {
-//     db.Customer.insertOne(req.body.vals, (result) => {
-//         res.json({ id: result.insertId });
-//     });
-// });
+router.delete("/customers/:id", (req, res) => {
+    db.Customer.deleteOne(req.params.id, (data) => {
+        res.json(data);
+    });
+});
 
 // this route will need to be sent data like this: { "vals": ["Joe", "Blow", "222 E Market St", "Akron", "Ohio", "42116", "joeblow@gmail.com", "440-234-1234", "1234567890123456", "11-21", 1] }
-// router.put("/customers/:id", (req, res) => {
-//     db.Customer.updateOne(req.body.vals, req.params.id, (result) => {
-//         if (result.changedRows === 0) {
-//             res.status(204).end();
-//         } else {
-//             res.status(200).end();
-//         }
-//     });
-// });
+router.post("/customers", (req, res) => {
+    db.Customer.insertOne(req.body.vals, (result) => {
+        res.json({ id: result.insertId });
+    });
+});
 
-// router.get("/rooms", (req, res) => {
-//     db.Room.selectAll((data) => {
-//         res.json(data);
-//     });
-// });
+// this route will need to be sent data like this: { "vals": ["Joe", "Blow", "222 E Market St", "Akron", "Ohio", "42116", "joeblow@gmail.com", "440-234-1234", "1234567890123456", "11-21", 1] }
+router.put("/customers/:id", (req, res) => {
+    db.Customer.updateOne(req.body.vals, req.params.id, (result) => {
+        if (result.changedRows === 0) {
+            res.status(204).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
 
-// router.get("/rooms/:id", (req, res) => {
-//     db.Room.selectOne(req.params.id, (data) => {
-//         res.json(data);
-//     });
-// });
+router.get("/rooms", (req, res) => {
+    db.Room.selectAll((data) => {
+        res.json(data);
+    });
+});
+
+router.get("/rooms/:id", (req, res) => {
+    db.Room.selectOne(req.params.id, (data) => {
+        res.json(data);
+    });
+});
 
 router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:arrived/:stayOver/:dueOut/:departed/:notReserved", (req, res) => {
     let conditions = [];
@@ -164,11 +159,11 @@ router.put("/rooms/:id", (req, res) => {
     });
 });
 
-// router.get("/room_types", (req, res) => {
-//     db.RoomType.selectAll((data) => {
-//         res.json(data);
-//     });
-// });
+router.get("/room_types", (req, res) => {
+    db.RoomType.selectAll((data) => {
+        res.json(data);
+    });
+});
 
 router.get("/room_types/:id", (req, res) => {
     db.RoomType.selectOne(req.params.id, (data) => {
