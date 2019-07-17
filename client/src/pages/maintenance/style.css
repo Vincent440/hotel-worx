@@ -40,6 +40,19 @@ button {
   color:red;
 }
 
-h2 {
-  text-align: right;
+#workOrder{
+  width: 100%;
+}
+
+#maintRow{
+    margin-top:8px;
+}
+#maintRow2{
+  margin-top:8px;
+  text-align: center;
+}
+
+#problemInput{
+  width: 500px;
+  height: 50px;
 }

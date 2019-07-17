@@ -118,7 +118,6 @@ class Housekeeping extends Component {
         return (
             <Container>
                 <Particles params={particleOpt} id="particul" />
-
                 <Row >
                     <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
@@ -134,26 +133,26 @@ class Housekeeping extends Component {
                                 <div id="res">
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "white", paddingTop: "5px" }}>
+                                            <Row  id="firstRow">
                                                 <Col xl={3}>
-                                                    <h6 style={{ textAlign: "left" }}>Room Status: </h6>
+                                                    <h6>Room Status:</h6>
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Clean </p>
+                                                    Clean 
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="clean" checked={this.state.checked.clean}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Dirty {this.state.rooms}</p>
+                                                    Dirty {this.state.rooms}
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="dirty" checked={this.state.checked.dirty}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                                 {/* <Col xl={2}>
-                                                    <p>Out of Order{this.state.rooms}</p>
+                                                    Out of Order{this.state.rooms}
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="outOfOrder" checked={this.state.checked.outOfOrder}
@@ -161,19 +160,19 @@ class Housekeeping extends Component {
                                                 </Col> */}
                                             </Row>
                                         </Col>
-                                        <Col xl={2} style={{ textAlign: "center" }}>
+                                        <Col xl={2}>
                                             <button type="button" className="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
                                                 onClick={this.handleCheckboxChange}> Select All </button>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ paddingTop: "8px" }}>
+                                            <Row>
                                                 <Col xl={3}>
                                                     <h6> Front Office Status: </h6>
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Vacant</p>
+                                                    Vacant
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="vacant" checked={this.state.checked.vacant}
@@ -181,7 +180,7 @@ class Housekeeping extends Component {
 
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Occupied </p>
+                                                    Occupied 
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="occupied" checked={this.state.checked.occupied}
@@ -189,26 +188,26 @@ class Housekeeping extends Component {
                                                 </Col>
                                             </Row>
                                         </Col>
-                                        <Col xl={2} style={{ textAlign: "center" }}>
+                                        <Col xl={2}>
                                             <button type="button" className="btn btn-success" id="clearAll" checked={this.state.checked.clearAll}
                                                 onClick={this.handleCheckboxChange}>Clear All </button>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col xl={10}>
-                                            <Row style={{ backgroundColor: "white", paddingTop: "8px" }}>
+                                            <Row id="firstRow">
                                                 <Col xl={3}>
                                                     <h6> Reservation Status: </h6>
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Arrival</p>
+                                                    Arrival
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="arrival" checked={this.state.checked.arrival}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Arrived</p>
+                                                    Arrived
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="arrived" checked={this.state.checked.arrived}
@@ -216,25 +215,25 @@ class Housekeeping extends Component {
                                                 </Col>
 
                                                 <Col xl={2}>
-                                                    <p>Stay Over</p>
+                                                    Stay Over
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="stayOver" checked={this.state.checked.stayOver}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                             </Row>
-                                            <Row style={{ paddingTop: "8px", backgroundColor: "white", marginBottom: "5px" }}>
+                                            <Row id="secondRow">
                                                 <Col xl={3}>
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Departed</p>
+                                                    Departed
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="departed" checked={this.state.checked.departed}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
                                                 <Col xl={1}>
-                                                    <p>Due Out</p>
+                                                    Due Out
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="dueOut" checked={this.state.checked.dueOut}
@@ -242,7 +241,7 @@ class Housekeeping extends Component {
                                                 </Col>
 
                                                 <Col xl={2}>
-                                                    <p>Not Reserved</p>
+                                                    Not Reserved
                                                 </Col>
                                                 <Col xl={1}>
                                                     <input type="checkbox" id="notReserved" checked={this.state.checked.notReserved}
@@ -253,7 +252,7 @@ class Housekeeping extends Component {
                                     </Row>
                                 </div>
                                 <div id="res">
-                                    <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                                    <Row id="thirdRow" >
                                         <Col xl={12}>
                                             <Table>
                                                 <tbody>
