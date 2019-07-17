@@ -6,15 +6,15 @@ import Header from "../../components/Header"
 import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
 import { Link } from 'react-router-dom';
+import Particles from "react-particles-js";
 
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 class Payment extends Component {
-
     state = {
         RoomInfo: [],
         InvoiceArray: [],
         invoice_id: ""
     };
-
     componentDidMount() {
         let invoice_id = "";
         if (localStorage && localStorage.getItem('invoice_id')) {
@@ -26,16 +26,16 @@ class Payment extends Component {
                 .catch(err => console.log(err))
         });
     }
-
     render() {
-
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row>
-                    <Col sm={2}>
-                     <InfoPart user={this.props.user} logout={this.props.logout} />
+                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
-                    <Col sm={10}>
+                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>INVOICE</Header>
@@ -43,7 +43,6 @@ class Payment extends Component {
                         </Row>
                         <div id="res">
                             <div id="res" style={{ paddingBottom: "10px" }}>
-
                                 <Row>
                                     <Table border="1">
                                         <tbody>
@@ -83,7 +82,7 @@ class Payment extends Component {
                                                 <strong>  </strong>
                                             </Col>
                                             <Col xl={2}>
-                                                Credit Card <input type="radio" name="myCheck" checked/>
+                                                Credit Card <input type="radio" name="myCheck" checked />
                                             </Col>
                                             <Col xl={2}>
                                                 Cash <input type="radio" name="myCheck" />

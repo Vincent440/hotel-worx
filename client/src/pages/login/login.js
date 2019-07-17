@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import LoginForm from "../components/loginForm/loginForm";
-import Logo from "../components/logo/logo";
+import { Container } from 'react-bootstrap';
+import LoginForm from "../../components/loginForm/loginForm";
+import "./style.css";
+import Logo from "../../components/logo/logo";
+import BackgroundSlider from 'react-background-slider';
+import image3 from './hotel3.jpg';
+import image5 from './hotel5.jpg';
+import image6 from './hotel6.jpg';
+import image8 from './image8.jpg';
+
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +20,7 @@ class Login extends Component {
       password: ""
     };
   }
+
   componentDidMount() {
     this.props.checkIfLoggedIn();
   }
@@ -31,13 +41,19 @@ class Login extends Component {
       this.props.postLogin({ username: this.state.username, password: this.state.password });
     }
   };
-
-  
   render() {
     return (
       <div>
-        <Logo />
-        <LoginForm username={this.state.username} password={this.state.password} isFormInValid={this.isFormInValid} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
+        <BackgroundSlider
+          images={[ image3, image5, image6,image8]}
+          duration={5}
+          transition={1} />
+        <Container>
+          <div id="logoLogin">
+            <Logo />
+            <LoginForm username={this.state.username} password={this.state.password} isFormInValid={this.isFormInValid} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
+          </div>
+        </Container>
       </div>
     );
   }

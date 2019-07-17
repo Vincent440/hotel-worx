@@ -13,7 +13,7 @@ import Particles from "react-particles-js";
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 const today = moment().format("YYYY-MM-DD");
 
-class Arrivals extends Component {
+class Maintenance extends Component {
     state = {
         startDateRange: today,
         firstname: undefined,
@@ -79,12 +79,12 @@ class Arrivals extends Component {
                     <Col xs={6} sm={8}md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
-                                <Header>ARRIVALS</Header>
+                                <Header>MAINTENANCE</Header>
                             </Col>
                         </Row>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
-                                <Col xl={10}>
+                                <Col xl={12}>
                                     <Row>
                                         <Col xl={1}>Date</Col>
                                         <Col xl={2}>
@@ -96,24 +96,14 @@ class Arrivals extends Component {
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col xl={1}>Name:</Col>
-                                        <Col xl={2}>
+                                        <Col sm={2} >Room Number</Col>
+                                        <Col sm={4}>
                                             <input style={{ width: "150px" }}
-                                                type="text"
-                                                placeholder="First Name"
-                                                name="firstname"
-                                                value={this.state.firstname}
+                                                id=""
                                                 onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={2}>Last Name:</Col>
-                                        <Col xl={3}>
-                                            <input style={{ width: "150px", height: "30px" }}
-                                                type="text"
-                                                placeholder="Last Name"
-                                                name="lastname"
-                                                value={this.state.lastname}
-                                                onChange={this.handleInputChange}
+                                                name="roomNumber"
+                                                placeholder="Room Number"
+                                                value={this.state.roomNumber}
                                             />
                                         </Col>
                                         <Col xl={1}>
@@ -182,4 +172,4 @@ class Arrivals extends Component {
     }
 }
 
-export default Arrivals;
+export default Maintenance;

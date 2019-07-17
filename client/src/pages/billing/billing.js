@@ -7,6 +7,9 @@ import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
+import Particles from "react-particles-js";
+
+const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 class Billing extends Component {
     state = {
@@ -47,21 +50,17 @@ class Billing extends Component {
             .then(res => this.setState({ taxRates: res[0] }))
             .catch(err => console.log(err));
     }
-
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     }
-
     handleFormSubmit = event => {
         event.preventDefault();
         this.makeAxiosCall();
     }
-
     render() {
-
         if (this.state.checkOutSuccess) {
             localStorage.setItem('invoice_id', this.state.invoice_id);
             return (
@@ -70,15 +69,14 @@ class Billing extends Component {
                 }} />
             )
         }
-
         return (
-
             <Container>
+                <Particles params={particleOpt} id="particul" />
                 <Row>
-                    <Col sm={2}>
+                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
-                    <Col sm={10}>
+                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>FINANCE</Header>
@@ -90,7 +88,7 @@ class Billing extends Component {
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col sm={6} >Room Number</Col>
                                         <Col sm={6}>
-                                        <input style={{ width: "150px" }}
+                                            <input style={{ width: "150px" }}
                                                 id=""
                                                 onChange={this.handleInputChange}
                                                 name="roomNumber"

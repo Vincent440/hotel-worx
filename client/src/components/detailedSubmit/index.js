@@ -9,8 +9,8 @@ const DeatiledSubmit = props => {
         <Col xl={12}>
             <Row>
                 <Col xl={10}>
-                    <Row>
-                        <Col xl={2}><h2>Start Date</h2></Col>
+                    <Row style={{marginBottom:"5px"}}>
+                        <Col xl={2}><h5>Start Date</h5></Col>
                         <Col xl={3} >
                             <input
                                 style={{ paddingTop: "0px", paddingBottom: "0px" }}
