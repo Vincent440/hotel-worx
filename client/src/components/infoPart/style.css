@@ -1,15 +1,30 @@
 #infoCard {
-  background-color: transparent;
+  background-color:rgba(255, 255, 255, 0.586);
   height: 650px;
   width: 200px;
   margin-top: 0px;
-  border-right: 1px solid white;
-  border-top:none;
-  border-left: none;
-  border-bottom: none;
+  border: 1px solid white;
+  border-top: none;
   border-radius: 5px;
   color: white;
 }
+@media all and (min-width: 480px) {
+  #smallLogo {
+    width: 56%;
+    margin: 0 auto;
+    margin-bottom: 0px;
+  }
+}
+#userNameD {
+  margin-top: 50px;
+  font-family: 'Nanum Myeongjo', serif;
+  color: black;
+}
+
+#optionsDiv {
+  margin-top: 5px;
+}
+
 .card-text {
   margin-left: 0px;
   height: 150px;
@@ -18,10 +33,10 @@
 }
 #infoCard p {
   margin-top: 30px;
-  color: white;
+  color: black;
 }
 
-#infoCard h5{
+#infoCard h5 {
   text-align: center;
 }
 #dashboardTable div div p div div.rw-main.type-today {
@@ -30,10 +45,6 @@
   border-radius: 5px;
   margin-left: 0;
   color: black;
-}
-
-h2 {
-  font-size: 18px;
 }
 
 .range {
@@ -46,21 +57,19 @@ h2 {
   display: none;
 }
 
-.fa fa-sign-out{
+.fa fa-sign-out {
   color: purple;
 }
 
 #infoCard .card-text .rw-main.type-today {
-  width: 80%;
-  margin: 0 auto;
   text-align: center;
-
+  width:80%;
+  margin: 0 auto;
 }
 #infoCard .card-text .rw-main.type-today .rw-box-left .date {
   font-size: 16px;
   color: black;
 }
-
 #infoCard .card-text .rw-main.type-today .rw-box-right {
   display: none;
 }
@@ -68,13 +77,57 @@ h2 {
   padding: 0px;
   width: 100%;
   margin: 5px;
+  color: black;
+  font-family: 'Nanum Myeongjo', serif;
 }
 #infoCard .card-text .rw-main.type-today .rw-box-left .current {
   font-size: 16px;
 }
-
 #infoCard .card-text .rw-main.type-today .rw-box-left .desc {
   color: black;
 }
+#userSetting {
+  margin-left: 45px;
+  width: 10px;
+  float: left;
+}
+#hotelAddress{
+  font-size: 18px;
+}
+#hotelEmail{
+  font-size: 15px;
+}
+#hotelName{
+  text-align: center;
+  font-size: 32px;
 
+}
+#hotelPhone i {
+  font-size: 14px;
+  margin-right: 5px;
+}
+#hotelInfoPart {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-family: 'Nanum Myeongjo', serif;
+  color: black;
 
+}
+
+#logOut {
+  margin-left: 20px;
+  width: 10px;
+  float: left;
+  margin-top: 0px;
+}
+
+#userSetting i {
+  font-size: 28px;
+  color: black;
+}
+
+#logOut i {
+  font-size: 28px;
+  color: black;
+}

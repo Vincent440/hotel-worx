@@ -5,7 +5,6 @@ import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header"
 
-
 class HouseStatus extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {

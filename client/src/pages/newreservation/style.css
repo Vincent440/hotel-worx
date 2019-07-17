@@ -1,3 +1,24 @@
+@media all and (min-width: 1200px) {
+
+}
+
+@media all and (min-width: 992px) {
+
+}
+
+@media all and (min-width: 768px) {
+ 
+
+}
+
+@media all and (min-width: 576px) {
+
+}
+@media all and (max-width: 576px) {
+
+
+
+}
 
 h1 {
   font-size: 5em;
@@ -19,6 +40,9 @@ p {
   margin-left: 10px;
 }
 
+#res > div:nth-child(3) > div:nth-child(4) > select{
+  width: 188px;
+}
 #res {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;

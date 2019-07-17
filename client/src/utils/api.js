@@ -24,6 +24,7 @@ export default {
                 console.log(error);
             });
     },
+
     getReservations: () => {
         return axios.get('/api/hw/reservations')
             .then((response) => {
