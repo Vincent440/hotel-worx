@@ -3,12 +3,13 @@
 @media all and (min-width: 480px) {
   #logo {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    
   }
   
   #logoDiv {
     max-width: 280px;
     margin: 0 auto;
-    padding-top: 150px;
+    padding-top: 20px;
   }
  }
