@@ -30,6 +30,11 @@ module.exports = {
         db.RoomType.deleteOne(req.params.id, (data) => {
             res.json(data);
         });
+    },
+    getAvailableRoomsByDate: (req, res) => {
+        db.RoomType.selectAvailable(req.params.date, (data) => {
+            res.json(data);
+        });
     }
 
 };

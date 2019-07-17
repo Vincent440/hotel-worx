@@ -18,5 +18,7 @@ router.route("/:id")
 // Delete "api/room/types/:id"
 .delete(roomTypeController.deleteRoomTypeById);
 
+// Matches with GET "api/room/types/available/:date"
+router.get("/available/:date",roomTypeController.getAvailableRoomsByDate);
 
 module.exports = router;
