@@ -62,7 +62,6 @@ CREATE TABLE customers (
     phone varchar(20) NOT NULL,
     credit_card_num varchar(30) NOT NULL,
     cc_expiration varchar(10) NOT NULL,
-    active boolean DEFAULT 1,
     PRIMARY KEY (customer_id)
 );
 
@@ -124,9 +123,14 @@ CREATE TABLE invoices (
     FOREIGN KEY (res_room_id) REFERENCES res_rooms(res_room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     num_days int(3) NOT NULL,
     rate decimal(5,2) NOT NULL,
+    phone_charges decimal(5,2) NOT NULL,
+    laundry_charges decimal(5,2) NOT NULL,
+    room_service_charges decimal(5,2) NOT NULL,
+    misc_charges decimal(5,2) NOT NULL,
     county_tax decimal(5,2) NOT NULL,
     city_tax decimal(5,2) NOT NULL,
     state_tax decimal(5,2) NOT NULL,
+    paid boolean DEFAULT 0,
     created_at datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (invoice_id)
 );

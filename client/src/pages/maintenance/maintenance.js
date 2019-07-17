@@ -7,22 +7,57 @@ import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
-import { isInclusivelyBeforeDay } from 'react-dates';
 import Particles from "react-particles-js";
+import DateRange from "../../components/dateRangeOrg/dateRange";
+
 
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 const today = moment().format("YYYY-MM-DD");
 
 class Maintenance extends Component {
+    constructor(props) {
+        super(props);
+        this.handleFromChange = this.handleFromChange.bind(this);
+        this.handleToChange = this.handleToChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
     state = {
         startDateRange: today,
+        endDay: "",
         firstname: undefined,
         lastname: undefined,
         confirmationNumber: undefined,
-        arrivalsArray: [],
         roomsArray: [],
         pendingArray: []
     };
+
+
+    showFromMonth() {
+        const { from, to } = this.state;
+        if (!from) {
+            return;
+        }
+        if (moment(to).diff(moment(from), 'months') < 2) {
+            this.to.getDayPicker().showMonth(from);
+        }
+    }
+
+    handleFromChange(startDateRange) {
+        // Change the from date and focus the "to" input field
+        this.setState({ startDateRange });
+
+    }
+
+    handleToChange(endDay) {
+        this.setState({ endDay }, this.showFromMonth);
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+    }
 
     makeAxiosCall = () => {
         const criteria = {
@@ -73,10 +108,10 @@ class Maintenance extends Component {
                 <Particles params={particleOpt} id="particul" />
 
                 <Row>
-                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
+                    <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
-                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
+                    <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>MAINTENANCE</Header>
@@ -87,17 +122,17 @@ class Maintenance extends Component {
                                 <Col xl={12}>
                                     <Row>
                                         <Col xl={1}>Date</Col>
-                                        <Col xl={2}>
-                                            <input style={{ width: "150px", height: "30px" }}
+                                        <Col xl={3} >
+                                            <input
+                                                style={{ paddingTop: "0px", paddingBottom: "0px" }}
                                                 type="date"
-                                                placeholder="Date"
-                                                name="startDateRange"
+                                                name="arrivaldate"
                                                 value={this.state.startDateRange}
-                                                onChange={this.handleInputChange}
                                             />
                                         </Col>
-                                        <Col sm={2} >Room Number</Col>
-                                        <Col sm={4}>
+
+                                        <Col xs={6} sm={6} md={6} lg={3} xl={2} >Room Number</Col>
+                                        <Col xs={6} sm={6} md={6} lg={3} xl={2}>
                                             <input style={{ width: "150px" }}
                                                 id=""
                                                 onChange={this.handleInputChange}
@@ -106,7 +141,7 @@ class Maintenance extends Component {
                                                 value={this.state.roomNumber}
                                             />
                                         </Col>
-                                        <Col xl={1}>
+                                        <Col xs={12} sm={12} md={12} lg={1} xl={1}>
                                             <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
                                         </Col>
                                     </Row>
@@ -115,14 +150,68 @@ class Maintenance extends Component {
                         </div>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
-                                <Col xl={12}>
-                                    Pending departures by room type:
-                                    {this.state.pendingArray.length === 0 ? " None" :
-                                        (this.state.pendingArray.map((type, i) => (
-                                            <span key={type.room_type_id}> {i>0 ? ", " : ""}({type.type}: {type.pending_departures})</span>
-                                        )))
-                                    }
+                                <Col xl={3}>
                                 </Col>
+                                <Col xl={2}>
+                                    <bold>Add new work order</bold>
+                                </Col>
+                                <Col xl={6}>
+                                    <input type="checkbox" id="notReserved" />
+                                </Col>
+                            </Row>
+                            <hr />
+                            <Row>
+                                <div id="workOrder">
+                                    <Col xl={12}>
+                                        <Row>
+                                            <Col xl={2}>
+                                                Room Number
+                                        </Col>
+                                            <Col sm={2}>
+                                                <input style={{ width: "150px" }}
+                                                    id=""
+                                                    onChange={this.handleInputChange}
+                                                    name="roomNumber"
+                                                    placeholder="Room Number"
+                                                    value={this.state.roomNumber}
+                                                />
+                                            </Col>
+                                            <Col xl={1}>
+                                                Date
+                                        </Col>
+                                            <Col xl={7}>
+                                                <div>
+                                                    <DateRange
+                                                        handleFromChange={this.handleFromChange}
+                                                        handleToChange={this.handleToChange}
+                                                        from={this.state.startDateRange}
+                                                        to={this.state.endDay}
+                                                    />
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        <Row id="maintRow">
+                                            <Col xl={2}>
+                                                Problem
+                                        </Col>
+                                            <Col xl={5}>
+                                                <input
+                                                    id="problemInput"
+                                                    type="text"
+                                                    name="comment"
+                                                    value={this.props.comment}
+                                                    onChange={this.props.handleChange}
+                                                    style={{ backgroundColor: "#F0EAD6" }}
+                                                />
+                                            </Col>
+                                            <Col xl={2}>
+                                            </Col>
+                                            <Col xl={2}>
+                                                <button type="button" className="btn btn-success">Submit</button>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </div>
                             </Row>
                         </div>
                         <div id="res">
@@ -131,35 +220,27 @@ class Maintenance extends Component {
                                     <Table>
                                         <tbody>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Arrival Date</th>
-                                                <th>Departure Date</th>
-                                                <th>Room Type</th>
                                                 <th>Room Number</th>
+                                                <th>Room Type</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Problem</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
-                                            {this.state.arrivalsArray.map((arrival, i) => (
-                                                <tr key={arrival.res_room_id}>
-                                                    <td>{arrival.name}</td>
-                                                    <td>{arrival.check_in_date}</td>
-                                                    <td>{arrival.check_out_date}</td>
-                                                    <td>{arrival.type}</td>
-                                                    <td>
-                                                        {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
-                                                            <select id={i} onChange={this.handleRoomChange}>
-                                                                <option value="">Select a room</option>
-                                                                {this.state.roomsArray.filter(roomtype => (roomtype.room_type_id === arrival.room_type_id && roomtype.occupied === 0)).map(room => (
-                                                                    <option key={room.room_id} value={room.room_id}>{room.room_num} {room.clean === 0 ? " (dirty)" : ""}</option>
-                                                                ))}
-                                                            </select> :
-                                                            arrival.room_num) : "Not Set"}
-                                                    </td>
-                                                    <td>
-                                                        {this.state.startDateRange === today ? arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In" : ""}
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><button type="button" className="btn btn-success">Update</button>
+                                                </td>
+                                                <td><button type="button" className="btn btn-success">Fixed</button>
+</td>
 
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                            </tr>
+
                                         </tbody>
                                     </Table>
                                 </Col>

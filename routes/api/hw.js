@@ -108,6 +108,8 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
     }
     if (req.params.departed === "true") {
         criteria4.push("rr.checked_out=1");
+    } else {
+        criteria4.push("rr.checked_out=0");
     }
     if (req.params.stayOver === "true") {
         criteria4.push("(CURDATE()>rr.check_in_date && CURDATE()<rr.check_out_date)");
@@ -119,7 +121,7 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
         criteria4.push("((rr.check_in_date IS NULL || (CURDATE() NOT BETWEEN rr.check_in_date AND rr.check_out_date)) && rm.active=1)");
     }
     const c4 = "(" + criteria4.join(" || ") + ")";
-    if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true") {
+    if (c4.length > 0) {
         conditions.push(c4);
     }
     if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true" || req.params.clean === "true" || req.params.dirty === "true" || req.params.vacant === "true" || req.params.occupied === "true") {
@@ -257,18 +259,15 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
     });
 });
 
-router.get("/departures/:fname/:lname/:rnum", (req, res) => {
+router.get("/departures/:fname/:lname/:rnum/:sover/:dout/:dpart", (req, res) => {
     let conditions = [];
-    if (req.params.fname !== "undefined") {
-        conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
-    }
-    if (req.params.lname !== "undefined") {
-        conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
-    }
-    if (req.params.rnum !== "undefined") {
-        conditions.push("(rm.room_num='" + req.params.rnum + "')");
-    }
-    conditions.length === 0 ? conditions.push("(rr.check_out_date=CURDATE())") : conditions;
+    req.params.fname !== "undefined" && conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
+    req.params.lname !== "undefined" && conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
+    req.params.rnum !== "undefined" && conditions.push("(rm.room_num='" + req.params.rnum + "')");
+    req.params.sover === "true" && conditions.push("(rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE())");
+    req.params.dout === "true" && conditions.push("(rr.check_out_date=CURDATE() && rr.checked_out=0)");
+    req.params.dpart === "true" && conditions.push("(rr.check_out_date=CURDATE() && rr.checked_out=1)");
+    conditions.length === 0 && conditions.push("(rr.check_out_date=CURDATE() && rr.checked_out=0)");
     db.ResRoom.selectDepartures(conditions, (result) => {
         res.json(result);
     });
@@ -342,10 +341,10 @@ router.put("/checkoutRoom/:id/:room_num", (req, res) => {
 
 router.post("/invoice", (req, res) => {
     db.ResRoom.selectForInvoice(req.body.id, (result) => {
-        const room_total = (parseFloat(result[0].rate)*parseFloat(result[0].num_days)).toFixed(2);
-        const county_tax = parseFloat(result[0].county_rate*room_total).toFixed(2);
-        const city_tax = parseFloat(result[0].city_rate*room_total).toFixed(2);
-        const state_tax = parseFloat(result[0].state_rate*room_total).toFixed(2);
+        const room_total = (parseFloat(result[0].rate) * parseFloat(result[0].num_days)).toFixed(2);
+        const county_tax = parseFloat(result[0].county_rate * room_total).toFixed(2);
+        const city_tax = parseFloat(result[0].city_rate * room_total).toFixed(2);
+        const state_tax = parseFloat(result[0].state_rate * room_total).toFixed(2);
         const vals = [result[0].res_room_id, result[0].num_days, result[0].rate, county_tax, city_tax, state_tax];
         db.Invoice.insertOne(vals, (result) => {
             res.json(result.insertId);
