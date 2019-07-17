@@ -20,7 +20,6 @@ class InfoPart extends Component {
         this.makeAxiosCall();
     }
     render() {
-        console.log(process.env.REACT_APP_WEATHER_API_KEY);
         return (
             <Card id="infoCard">
                 <Card style={{ marginBottom: "10px" }}>
