@@ -21,18 +21,12 @@
   margin-left: -190px;
 }
 
-#res > div > div > div > div:nth-child(2) > div > div > div {
-  margin-right: 0px;
-}
-#res > div > div > div > div:nth-child(2) > div > div > span > div {
+#workOrder > div > div:nth-child(1) > div:nth-child(4) > div > div > span > div{
   margin-left: 0px;
   margin-right: 0px;
 }
-#workOrder > div:nth-child(2) > div > div > div{
-  margin-right: 0px;
-}
 
-#workOrder > div:nth-child(2) > div > div > span > div{
+#workOrder > div > div:nth-child(1) > div:nth-child(4) > div > div > div{
   margin-left: 0px;
   margin-right: 0px;
 }

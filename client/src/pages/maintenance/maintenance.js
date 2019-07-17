@@ -159,14 +159,27 @@ class Maintenance extends Component {
                                     <input type="checkbox" id="notReserved" />
                                 </Col>
                             </Row>
+                            <hr />
                             <Row>
-                                <Col xl={12}>
-                                    <Row>
-                                        <div id="workOrder">
+                                <div id="workOrder">
+                                    <Col xl={12}>
+                                        <Row>
+                                            <Col xl={2}>
+                                                Room Number
+                                        </Col>
+                                            <Col sm={2}>
+                                                <input style={{ width: "150px" }}
+                                                    id=""
+                                                    onChange={this.handleInputChange}
+                                                    name="roomNumber"
+                                                    placeholder="Room Number"
+                                                    value={this.state.roomNumber}
+                                                />
+                                            </Col>
                                             <Col xl={1}>
                                                 Date
                                         </Col>
-                                            <Col xl={11}>
+                                            <Col xl={7}>
                                                 <div>
                                                     <DateRange
                                                         handleFromChange={this.handleFromChange}
@@ -176,13 +189,30 @@ class Maintenance extends Component {
                                                     />
                                                 </div>
                                             </Col>
-                                        </div>
-                                    </Row>
-                                </Col>
-
+                                        </Row>
+                                        <Row id="maintRow">
+                                            <Col xl={2}>
+                                                Problem
+                                        </Col>
+                                            <Col xl={5}>
+                                                <input
+                                                    id="problemInput"
+                                                    type="text"
+                                                    name="comment"
+                                                    value={this.props.comment}
+                                                    onChange={this.props.handleChange}
+                                                    style={{ backgroundColor: "#F0EAD6" }}
+                                                />
+                                            </Col>
+                                            <Col xl={2}>
+                                            </Col>
+                                            <Col xl={2}>
+                                                <button type="button" className="btn btn-success">Submit</button>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </div>
                             </Row>
-
-
                         </div>
                         <div id="res">
                             <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
@@ -190,11 +220,12 @@ class Maintenance extends Component {
                                     <Table>
                                         <tbody>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Arrival Date</th>
-                                                <th>Departure Date</th>
-                                                <th>Room Type</th>
                                                 <th>Room Number</th>
+                                                <th>Room Type</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Problem</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                             <tr>
@@ -202,11 +233,12 @@ class Maintenance extends Component {
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td>
+                                                <td></td>
+                                                <td><button type="button" className="btn btn-success">Update</button>
                                                 </td>
-                                                <td>
+                                                <td><button type="button" className="btn btn-success">Fixed</button>
+</td>
 
-                                                </td>
                                             </tr>
 
                                         </tbody>
