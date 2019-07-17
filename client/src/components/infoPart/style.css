@@ -7,6 +7,7 @@
   border-top: none;
   border-radius: 5px;
   color: white;
+  margin-bottom: 60px;
 }
 @media all and (min-width: 480px) {
   #smallLogo {
@@ -79,16 +80,19 @@
   margin: 5px;
   color: black;
   font-family: 'Nanum Myeongjo', serif;
+  text-align: center;
 }
+
 #infoCard .card-text .rw-main.type-today .rw-box-left .current {
   font-size: 16px;
 }
 #infoCard .card-text .rw-main.type-today .rw-box-left .desc {
   color: black;
 }
+
 #userSetting {
-  margin-left: 45px;
-  width: 10px;
+  margin-left: 50px;
+  width: 50px;
   float: left;
 }
 #hotelAddress{
@@ -116,8 +120,8 @@
 }
 
 #logOut {
-  margin-left: 20px;
-  width: 10px;
+  margin-left: 0px;
+  width: 50px;
   float: left;
   margin-top: 0px;
 }

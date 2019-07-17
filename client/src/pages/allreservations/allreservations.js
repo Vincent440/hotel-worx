@@ -19,10 +19,10 @@ class UpdateReservation extends Component {
         super(props);
         this.handleFromChange = this.handleFromChange.bind(this);
         this.handleToChange = this.handleToChange.bind(this);
-    }    state = {
+    } state = {
         firstname: "",
         lastname: "",
-        sdate:undefined,
+        sdate: undefined,
         edate: undefined,
         confirmationNumber: undefined,
         resRooms: []
@@ -74,7 +74,7 @@ class UpdateReservation extends Component {
         this.makeAxiosCall();
 
     }
- 
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -85,11 +85,13 @@ class UpdateReservation extends Component {
     render() {
         return (
             <Container>
+                <Particles params={particleOpt} id="particul" />
+
                 <Row>
-                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                    <InfoPart user={this.props.user} logout={this.props.logout} />
+                    <Col xs={6} sm={4} md={3} lg={3} xl={2}>
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
-                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
+                    <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>ALL RESERVATIONS</Header>
