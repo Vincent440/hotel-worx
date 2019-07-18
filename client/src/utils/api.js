@@ -13,7 +13,7 @@ export default {
     createReservation: (data) => {
         const fccNum = data.creditCard.replace(/ /g, "")
         return axios.post('/api/hw/reservation', {
-            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate, 1],
+            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate],
             reserve: [1, ""],
             rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments]]
         })
@@ -153,7 +153,7 @@ export default {
             }));
     },
     getHouseKeepingStatus: (checked) => {
-        return axios.get("/api/hw/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
+        return axios.get("/api/hw/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
                 return response.data;
             })

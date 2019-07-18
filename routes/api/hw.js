@@ -79,7 +79,7 @@ router.get("/rooms/:id", (req, res) => {
     });
 });
 
-router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:arrived/:stayOver/:dueOut/:departed/:notReserved", (req, res) => {
+router.get("/housekeeping_status/:clean/:dirty/:vacant/:occupied/:arrived/:stayOver/:dueOut/:departed/:notReserved", (req, res) => {
     let conditions = [];
     let c1;
     if (req.params.clean === "true" && req.params.dirty === "false") {
@@ -100,35 +100,14 @@ router.get("/housekeeping_status/:clean/:dirty/:oos/:vacant/:occupied/:arrival/:
     }
     conditions.push(c3);
     let criteria4 = [];
-    if (req.params.arrival === "true") {
-        criteria4.push("(rr.check_in_date=CURDATE() && rr.checked_in=0)");
-    }
-    if (req.params.arrived === "true") {
-        criteria4.push("(rr.checked_in=1 && rr.check_in_date=CURDATE() && rr.checked_out=0)");
-    }
-    if (req.params.departed === "true") {
-        criteria4.push("rr.checked_out=1");
-    } else {
-        criteria4.push("rr.checked_out=0");
-    }
-    if (req.params.stayOver === "true") {
-        criteria4.push("(CURDATE()>rr.check_in_date && CURDATE()<rr.check_out_date)");
-    }
-    if (req.params.dueOut === "true") {
-        criteria4.push("(rr.check_out_date=CURDATE() && rr.checked_out=0)");
-    }
-    if (req.params.notReserved === "true") {
-        criteria4.push("((rr.check_in_date IS NULL || (CURDATE() NOT BETWEEN rr.check_in_date AND rr.check_out_date)) && rm.active=1)");
-    }
-    const c4 = "(" + criteria4.join(" || ") + ")";
-    if (c4.length > 0) {
+    req.params.arrived === "true" && criteria4.push("(checked_in=1 && check_in_date=CURDATE() && checked_out=0)");
+    req.params.departed === "true" && criteria4.push("check_out_date=CURDATE() && checked_out=1");
+    req.params.stayOver === "true" && criteria4.push("(CURDATE()>check_in_date && CURDATE()<check_out_date)");
+    req.params.dueOut === "true" && criteria4.push("(check_out_date=CURDATE() && checked_out=0)");
+    req.params.notReserved === "true" && (criteria4.push("(check_in_date IS NULL || (CURDATE() NOT BETWEEN check_in_date AND check_out_date))"));
+    if (criteria4.length > 0) {
+        const c4 = "(" + criteria4.join(" || ") + ")";
         conditions.push(c4);
-    }
-    if (req.params.arrival === "true" || req.params.arrived === "true" || req.params.departed === "true" || req.params.stayOver === "true" || req.params.dueOut === "true" || req.params.notReserved === "true" || req.params.clean === "true" || req.params.dirty === "true" || req.params.vacant === "true" || req.params.occupied === "true") {
-        conditions.push("rm.active=1");
-    }
-    if (req.params.oos === "true") {
-        conditions = ["rm.active=0"]
     }
     db.Room.housekeepingStatus(conditions, (data) => {
         res.json(data);
@@ -201,18 +180,18 @@ router.put("/room_types/:id", (req, res) => {
     });
 });
 
-// { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration", "active"], "reserve": ["user_id", "comments"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults", "comments"]] }
+// { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration"], "reserve": ["user_id", "comments"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults", "rate", "comments"]] }
 // this route will need to be sent data like this:
 // { 
-// 	"cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11-21", 1], 
+// 	"cust": ["Peter", "Pan", "1111 FairyTale Lane", "Fantasyland", "Vermont", "23456", "p.pan@yahoo.net", "555-1212", "1234567890123456", "11 / 21"], 
 // 	"reserve": [1, ""], 
-// 	"rooms": [[2, "2019-08-12", "2019-08-15", 2, "need a good view"], [1, "2019-08-12", "2019-08-17", 2, "want a late checkout"]] 
+// 	"rooms": [[2, "2019-08-12", "2019-08-15", 2, "119.99", "need a good view"], [1, "2019-08-12", "2019-08-17", 2, "109.99", "want a late checkout"]] 
 // }
 router.post("/reservation", (req, res) => {
     db.Customer.insertOne(req.body.cust, (result) => {
         db.Reservation.insertOne(result.insertId, req.body.reserve, (result) => {
             const reservationId = result.insertId;
-            db.ResRoom.insertSome(result.insertId, req.body.rooms, (result) => {
+            db.ResRoom.insertSome(result.insertId, req.body.rooms, () => {
                 res.status(200).send({ reservation_id: reservationId });
             });
         });
@@ -324,7 +303,7 @@ router.put("/cancelReservation/:id", (req, res) => {
 router.put("/checkinRoom/:id/:room_id", (req, res) => {
     const vals = [req.params.room_id, req.params.id];
     const cond = [1, req.params.room_id];
-    db.ResRoom.updateCheckIn(vals, (result) => {
+    db.ResRoom.updateCheckIn(vals, () => {
         db.Room.updateOccupied(cond, (result) => {
             res.json(result);
         });
@@ -332,7 +311,7 @@ router.put("/checkinRoom/:id/:room_id", (req, res) => {
 });
 
 router.put("/checkoutRoom/:id/:room_num", (req, res) => {
-    db.ResRoom.updateCheckOut(req.params.id, (result) => {
+    db.ResRoom.updateCheckOut(req.params.id, () => {
         db.Room.updateCheckOut(req.params.room_num, (result) => {
             res.json(result);
         });

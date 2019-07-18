@@ -163,7 +163,15 @@ CREATE TABLE sessions (
 -- --------------------------------------------------------
 
 CREATE TABLE room_issues (
-    room_issue_id int(10) NOT NULL AUTO_INCREMENT
+    room_issue_id int(10) NOT NULL AUTO_INCREMENT,
+    room_id int(6),
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    issue varchar(255) NOT NULL,
+    user_id int(6) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    created_at datetime DEFAULT CURRENT_TIMESTAMP,
+    fixed boolean DEFAULT 0,
+    PRIMARY KEY (room_issue_id)
 );
 
 -- --------------------------------------------------------
