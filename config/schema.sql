@@ -79,8 +79,6 @@ CREATE TABLE reservations (
     PRIMARY KEY (reservation_id)
 );
 
-ALTER TABLE reservations AUTO_INCREMENT = 1001;
-
 -- --------------------------------------------------------
 
 CREATE TABLE res_rooms (
@@ -102,8 +100,6 @@ CREATE TABLE res_rooms (
     active boolean DEFAULT 1,
     PRIMARY KEY (res_room_id)
 );
-
-ALTER TABLE res_rooms AUTO_INCREMENT = 1001;
 
 -- --------------------------------------------------------
 
@@ -166,10 +162,11 @@ CREATE TABLE room_issues (
     room_issue_id int(10) NOT NULL AUTO_INCREMENT,
     room_id int(6),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    issue varchar(255) NOT NULL,
+    issue text NOT NULL,
     user_id int(6) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    created_at datetime DEFAULT CURRENT_TIMESTAMP,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
     fixed boolean DEFAULT 0,
     PRIMARY KEY (room_issue_id)
 );

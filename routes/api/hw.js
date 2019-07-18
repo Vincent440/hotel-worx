@@ -267,10 +267,10 @@ router.get("/pending_departures/:date", (req, res) => {
 router.get("/guests/:fname/:lname/:rnum/:cnum", (req, res) => {
     let conditions = [];
     if (req.params.fname !== "undefined") {
-        conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
+        conditions.push("c.first_name LIKE '" + req.params.fname + "%'");
     }
     if (req.params.lname !== "undefined") {
-        conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
+        conditions.push("c.last_name LIKE '" + req.params.lname + "%'");
     }
     if (req.params.rnum !== "undefined") {
         conditions.push("rm.room_num LIKE '%" + req.params.rnum + "%'");
@@ -352,6 +352,12 @@ router.get("/tax_rates", (req, res) => {
 
 router.get("/hotel_info/:id", (req, res) => {
     db.HotelInfo.selectOne(req.params.id, (data) => {
+        res.json(data);
+    });
+});
+
+router.get("/room_issues", (req, res) => {
+    db.RoomIssue.selectAll((data) => {
         res.json(data);
     });
 });

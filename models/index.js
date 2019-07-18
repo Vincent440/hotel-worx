@@ -7,5 +7,6 @@ module.exports = {
     ResRoom: require('./res_room'),
     TaxRate: require('./tax_rate'),
     Invoice: require('./invoice'),
-    HotelInfo: require('./hotel_info')
+    HotelInfo: require('./hotel_info'),
+    RoomIssue: require('./room_issues')
 };

@@ -178,5 +178,32 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+    },
+    getRoomIssues: () => {
+        return axios.get('/api/hw/room_issues/')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    updateRoomIssues: (id, data) => {
+        return axios.put('/api/hw/room_issues/' + id, data)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    updateRoomIssuesFixed: (id) => {
+        return axios.put('/api/hw/room_issues/' + id)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
