@@ -362,4 +362,24 @@ router.get("/room_issues", (req, res) => {
     });
 });
 
+router.put("/room_issues/:id", (req, res) => {
+    db.RoomIssue.updateOne(req.body.vals, req.params.id, (result) => {
+        if (result.changedRows === 0) {
+            res.status(204).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
+router.put("/room_issues_fixed/:id", (req, res) => {
+    db.RoomIssue.updateOneFixed(req.params.id, (result) => {
+        if (result.changedRows === 0) {
+            res.status(204).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
+
 module.exports = router;

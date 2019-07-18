@@ -19,14 +19,18 @@ class Maintenance extends Component {
         this.handleFromChange = this.handleFromChange.bind(this);
         this.handleToChange = this.handleToChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
     state = {
+        roomNumber: "",
         startDateRange: today,
         endDay: "",
-        newIssue: false,
         issue: "",
-        roomNumber: "",
+        newIssue: false,
+        updateIssue: false,
+        roomId: "",
+        issueId: "",
         issuesArray: []
     };
 
@@ -50,28 +54,46 @@ class Maintenance extends Component {
         this.setState({ endDay }, this.showFromMonth);
     }
 
-    handleChange(e) {
+    handleChange(event) {
+        const { name, value } = event.target;
         this.setState({
-            [e.target.name]: e.target.value,
+            [name]: value
         });
+    }
+
+    handleUpdate(i) {
+        this.setState({
+            updateIssue: true,
+            issueId: this.state.issuesArray[i].room_issue_id,
+            roomNumber: this.state.issuesArray[i].room_num,
+            startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
+            endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
+            issue: this.state.issuesArray[i].issue
+        });
+    }
+
+    updateFixed(id) {
+
     }
 
     handleCheckChange = event => {
         event.target.name === "newIssue" && this.setState({ newIssue: !this.state.newIssue });
+        event.target.name === "updateIssue" && this.setState({ updateIssue: false, issueId: "", roomNumber: "", startDateRange: today, endDay: "", issue: "" });
     }
 
     makeAxiosCall = () => {
-
-    }
-
-    componentDidMount() {
         api.getRoomIssues()
             .then(res => this.setState({ issuesArray: res }))
             .catch(err => console.log(err));
     }
 
+    componentDidMount() {
+        this.makeAxiosCall();
+    }
+
     handleFormSubmit = event => {
         event.preventDefault();
+        // handle the submit, then after it's done, make the axios call
         this.makeAxiosCall();
     }
 
@@ -92,22 +114,23 @@ class Maintenance extends Component {
                         </Row>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
-                                <Col xl={3}>
-                                </Col>
+                                <Col xl={3}></Col>
                                 <Col xl={2}>
-                                    <bold>Add new work order</bold>
+                                    <b>
+                                        {this.state.updateIssue ? "Update Selected Issue" : "Add new work order"}
+                                    </b>
                                 </Col>
                                 <Col xl={6}>
                                     <input
                                         type="checkbox"
-                                        name="newIssue"
-                                        checked={this.state.newIssue}
+                                        name={this.state.updateIssue ? "updateIssue" : "newIssue"}
+                                        checked={this.state.updateIssue ? this.state.updateIssue : this.state.newIssue}
                                         onChange={this.handleCheckChange}
                                     />
                                 </Col>
                             </Row>
                             <hr />
-                            {this.state.newIssue &&
+                            {(this.state.newIssue || this.state.updateIssue) &&
                                 <Row>
                                     <div id="workOrder">
                                         <Col xl={12}>
@@ -137,13 +160,12 @@ class Maintenance extends Component {
                                                 <Col xl={2}>Problem</Col>
                                                 <Col xl={5}>
                                                     <textarea
-                                                        id="problemInput"
                                                         type="text"
-                                                        name="comment"
-                                                        value={this.props.issue}
-                                                        onChange={this.props.handleChange}
+                                                        name="issue"
+                                                        value={this.state.issue}
+                                                        onChange={this.handleChange}
                                                         style={{ backgroundColor: "#F0EAD6" }}
-                                                    />
+                                                    ></textarea>
                                                 </Col>
                                                 <Col xl={2}>
                                                 </Col>
@@ -170,14 +192,14 @@ class Maintenance extends Component {
                                                 <th></th>
                                                 <th></th>
                                             </tr>
-                                            {this.state.issuesArray.map(issue => (
+                                            {this.state.issuesArray.map((issue, i) => (
                                                 <tr key={issue.room_issue_id}>
                                                     <td>{issue.room_num}</td>
                                                     <td>{issue.type}</td>
                                                     <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>
                                                     <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
                                                     <td>{issue.issue}</td>
-                                                    <td><button type="button" className="btn btn-success">Update</button>
+                                                    <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Select</button>
                                                     </td>
                                                     <td><button type="button" className="btn btn-success">Fixed</button>
                                                     </td>

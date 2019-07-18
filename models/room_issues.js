@@ -2,7 +2,7 @@ const connection = require("../config/connection");
 
 const RoomIssue = {
     selectAll: (cb) => {
-        const queryString = "SELECT ri.room_issue_id, ri.issue, ri.start_date, ri.end_date, rt.type, rm.room_num FROM room_issues AS ri INNER JOIN rooms AS rm ON ri.room_id=rm.room_id INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id ORDER BY rm.room_num ASC;";
+        const queryString = "SELECT ri.room_issue_id, ri.issue, ri.start_date, ri.end_date, rt.type, rm.room_num FROM room_issues AS ri INNER JOIN rooms AS rm ON ri.room_id=rm.room_id INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE ri.fixed=0 ORDER BY rm.room_num ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);

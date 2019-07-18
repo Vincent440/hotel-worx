@@ -188,8 +188,8 @@ export default {
                 console.log(error);
             });
     },
-    updateRoomIssues: (id, data) => {
-        return axios.put('/api/hw/room_issues/' + id, data)
+    updateRoomIssues: (id, vals) => {
+        return axios.put('/api/hw/room_issues/' + id, vals)
             .then((response) => {
                 return response;
             })
@@ -198,7 +198,7 @@ export default {
             });
     },
     updateRoomIssuesFixed: (id) => {
-        return axios.put('/api/hw/room_issues/' + id)
+        return axios.put('/api/hw/room_issues_fixed/' + id)
             .then((response) => {
                 return response;
             })

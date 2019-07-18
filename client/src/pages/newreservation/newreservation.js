@@ -138,7 +138,6 @@ class ReserveNew extends Component {
             this.setState({ rate: this.state.RoomTypes[roomKey].rate });
         }
         const { name, value } = event.target;
-        // Set the state for the appropriate input field
         this.setState({
             [name]: value
         });

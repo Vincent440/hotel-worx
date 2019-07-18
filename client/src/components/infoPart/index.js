@@ -26,7 +26,7 @@ class InfoPart extends Component {
                     <Card.Img variant="top" src={smallLogo} className="App-logo" id="smallLogo" alt="smallLogo" style={{ marginBottom: "10px" }} />
                 </Card>
                 {this.state.hotelInfo.map(info => (
-                    <div key={InfoPart.hotel_info_id} id="hotelInfoPart">
+                    <div key={info.hotel_info_id} id="hotelInfoPart">
                         <div className="text-center" id="hotelName">{info.hotel_name}</div>
                         <div className="small faded" id="hotelAddress">{info.address}</div>
                         <div className="small faded" id="hotelAddress">{info.city}, {info.state} {info.zip}</div>
