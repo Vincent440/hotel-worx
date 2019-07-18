@@ -7,7 +7,7 @@
   border-top: none;
   border-radius: 5px;
   color: white;
-  margin-bottom: 60px;
+  margin-bottom:5px;
 }
 @media all and (min-width: 480px) {
   #smallLogo {

@@ -1,21 +1,33 @@
 html {
   height: 100%;
-
-  }
-body {
-  font-family: 'Nanum Myeongjo', serif;
-  background-image: linear-gradient(to bottom,#10293d,#00315c,#00377b,#003998, #2e35b0);
-  background-repeat: no-repeat;
-  max-height: 100%;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  max-height: 100%;
+  font-family: "Nanum Myeongjo", serif;
+  background-image: linear-gradient(
+    to bottom,
+    #10293d,
+    #00315c,
+    #00377b,
+    #003998,
+    #2e35b0
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
-#root div div:nth-child(1) canvas {
+}
+
+#root div div canvas {
   position: absolute;
   width: 100%;
-  max-height: 100%;
+  height: max-content;
   z-index: -1;
-  
+  margin: 0;
+  min-height: 100%;
 }
 
 .selector-for-some-widget {

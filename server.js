@@ -10,9 +10,12 @@ const cookieParser = require('cookie-parser');
 const routes = require("./routes");
 const sessionStore = require("./config/promiseConnection");
 const PORT = process.env.PORT;
+const pdf = require('html-pdf');
+const cors = require('cors');
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
+app.use(cors());
 app.use(cookieParser('hotelworxmernapplication'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -28,4 +31,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);
+
+app.post('/create-pdf'), (req,res) =>{
+    pdf.create(pdfTemplate(req.data),{}).toFile()
+}
+
 app.listen(PORT, () => console.log(`React API server listening on PORT ${PORT}.`));

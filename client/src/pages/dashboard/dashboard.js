@@ -27,7 +27,7 @@ function Dashboard(props) {
                 <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                     <InfoPart user={props.user} logout={props.logout} />
                 </Col>
-                <Col xs={6} sm={8}md={9} lg={9} xl={10}>
+                <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                     <Row>
                         <Col xs={12} sm={12} md={6} lg={6} xl={3}>
                             <div className="btn-group" style={{ display: 'block' }}>
@@ -50,11 +50,11 @@ function Dashboard(props) {
                                     <Card.Body>FRONT DESK</Card.Body>
                                 </Card>
                                 <Link className="btn btn-primary" id="dashboardLink" to="/frontdesk/arrivals">
-                                    <img id="checkin" className="smallLogos"alt="checkin" src={checkinLogo} />
+                                    <img id="checkin" className="smallLogos" alt="checkin" src={checkinLogo} />
                                     Arrivals
                                     </Link>
                                 <Link className="btn btn-primary" id="dashboardLink" to="/frontdesk/inhouse">
-                                    <img id="inhouseLogo" className="smallLogos"alt="inhouseLogo" src={inhouseLogo} />
+                                    <img id="inhouseLogo" className="smallLogos" alt="inhouseLogo" src={inhouseLogo} />
                                     In-House Guests</Link>
                                 <Link className="btn btn-primary" id="dashboardLink" to="/frontdesk/maintenance">
                                     <img className="smallLogos" id="maintenanceLogo" alt="maintenanceLogo" src={maintenanceLogo} />
@@ -77,11 +77,11 @@ function Dashboard(props) {
                                     <Card.Body>REPORTS</Card.Body>
                                 </Card>
                                 <Link className="btn btn-primary" id="dashboardLink" to="/reports/housekeeping">
-                                    <img id="housekeepingLogo"className="smallLogos" alt="housekeepingLogo" src={housekeepingLogo} />
+                                    <img id="housekeepingLogo" className="smallLogos" alt="housekeepingLogo" src={housekeepingLogo} />
                                     Housekeeping Report
                                 </Link>
                                 <Link className="btn btn-primary" id="dashboardLink" to="/reports/detailedAvailability">
-                                    <img id="detailedLogo" className="smallLogos"alt="detailedLogo" src={detailedLogo} />
+                                    <img id="detailedLogo" className="smallLogos" alt="detailedLogo" src={detailedLogo} />
                                     Detailed Availability
                                     </Link>
                                 <Link className="btn btn-primary" id="dashboardLink" to="/reports/houseStatus">
@@ -90,12 +90,13 @@ function Dashboard(props) {
                             </div>
                         </Col>
                         <div style={{ clear: "both" }}></div>
-
                     </Row>
                 </Col>
             </Row>
-        </Container>
+        </Container >
+
     )
+
 }
 
 export default Dashboard;

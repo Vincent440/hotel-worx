@@ -113,6 +113,9 @@ class Housekeeping extends Component {
         event.preventDefault();
         this.makeAxiosCall();
     }
+    printFunction(){
+        window.print();
+      }
 
     render() {
         return (
@@ -167,7 +170,7 @@ class Housekeeping extends Component {
                                     </Row>
                                     <Row>
                                         <Col xl={10}>
-                                            <Row>
+                                            <Row id="secondRowP">
                                                 <Col xl={3}>
                                                     <h6> Front Office Status: </h6>
                                                 </Col>
@@ -249,9 +252,12 @@ class Housekeeping extends Component {
                                                 </Col>
                                             </Row>
                                         </Col>
+                                        <Col xl={2}>
+                                            <button type="button" className="btn btn-success"  onClick={this.printFunction}>Print</button>
+                                        </Col>
                                     </Row>
                                 </div>
-                                <div id="res">
+                                <div id="res2">
                                     <Row id="thirdRow" >
                                         <Col xl={12}>
                                             <Table>
