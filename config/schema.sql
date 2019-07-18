@@ -79,8 +79,6 @@ CREATE TABLE reservations (
     PRIMARY KEY (reservation_id)
 );
 
-ALTER TABLE reservations AUTO_INCREMENT = 1001;
-
 -- --------------------------------------------------------
 
 CREATE TABLE res_rooms (
@@ -102,8 +100,6 @@ CREATE TABLE res_rooms (
     active boolean DEFAULT 1,
     PRIMARY KEY (res_room_id)
 );
-
-ALTER TABLE res_rooms AUTO_INCREMENT = 1001;
 
 -- --------------------------------------------------------
 
@@ -149,6 +145,30 @@ CREATE TABLE hotel_info (
     image_url varchar(60) NOT NULL,
     active boolean DEFAULT 1,
     PRIMARY KEY (hotel_info_id)
+);
+
+-- --------------------------------------------------------
+
+CREATE TABLE sessions (
+    session_id varchar(128) COLLATE utf8mb4_bin NOT NULL,
+    expires int(11) unsigned NOT NULL,
+    data mediumtext COLLATE utf8mb4_bin,
+    PRIMARY KEY (session_id)
+);
+
+-- --------------------------------------------------------
+
+CREATE TABLE room_issues (
+    room_issue_id int(10) NOT NULL AUTO_INCREMENT,
+    room_id int(6),
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    issue text NOT NULL,
+    user_id int(6) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
+    fixed boolean DEFAULT 0,
+    PRIMARY KEY (room_issue_id)
 );
 
 -- --------------------------------------------------------

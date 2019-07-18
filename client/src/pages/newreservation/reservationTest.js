@@ -45,7 +45,7 @@ class ReservationTest extends Component {
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={2}>
-                                        <strong>Name: </strong>{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}
+                                        <strong>Name: </strong>{this.state.ReservationInfo.first_name} {this.state.ReservationInfo.last_name}
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
