@@ -35,7 +35,7 @@ class ReserveNew extends Component {
         departuredate: "",
         nights: "",
         adults: 1,
-        noOfRooms: "",
+        numRooms: 1,
         RoomTypes: [],
         roomtype: undefined,
         rate: undefined,
@@ -244,8 +244,8 @@ class ReserveNew extends Component {
                                             <input
                                                 type="number"
                                                 placeholder="Number of Rooms"
-                                                name="roomsnumber"
-                                                value={this.state.roomsnumber}
+                                                name="numRooms"
+                                                value={this.state.numRooms}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
