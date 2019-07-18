@@ -3,7 +3,6 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
-import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
@@ -20,16 +19,19 @@ class Maintenance extends Component {
         this.handleFromChange = this.handleFromChange.bind(this);
         this.handleToChange = this.handleToChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
     state = {
+        roomNumber: "",
         startDateRange: today,
         endDay: "",
-        firstname: undefined,
-        lastname: undefined,
-        confirmationNumber: undefined,
-        roomsArray: [],
-        pendingArray: []
+        issue: "",
+        newIssue: false,
+        updateIssue: false,
+        roomId: "",
+        issueId: "",
+        issuesArray: []
     };
 
 
@@ -44,7 +46,6 @@ class Maintenance extends Component {
     }
 
     handleFromChange(startDateRange) {
-        // Change the from date and focus the "to" input field
         this.setState({ startDateRange });
 
     }
@@ -53,28 +54,36 @@ class Maintenance extends Component {
         this.setState({ endDay }, this.showFromMonth);
     }
 
-    handleChange(e) {
+    handleChange(event) {
+        const { name, value } = event.target;
         this.setState({
-            [e.target.name]: e.target.value,
+            [name]: value
         });
     }
 
-    makeAxiosCall = () => {
-        const criteria = {
-            startDateRange: moment(this.state.startDateRange).format('YYYY-MM-DD'),
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            confirmationNumber: this.state.confirmationNumber
-        };
-
-        api.getArrivalsNew(criteria, moment(this.state.startDateRange).format('YYYY-MM-DD'))
-            .then(res => this.setState({ arrivalsArray: res.arrivals, roomsArray: res.rooms_arrivals, pendingArray: res.pending_departures }))
-            .catch(err => console.log(err));
+    handleUpdate(i) {
+        this.setState({
+            updateIssue: true,
+            issueId: this.state.issuesArray[i].room_issue_id,
+            roomNumber: this.state.issuesArray[i].room_num,
+            startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
+            endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
+            issue: this.state.issuesArray[i].issue
+        });
     }
 
-    handleCheckIn = (id, room_id) => {
-        api.updateRoomCheckin(id, room_id)
-            .then(res => this.makeAxiosCall())
+    updateFixed(id) {
+
+    }
+
+    handleCheckChange = event => {
+        event.target.name === "newIssue" && this.setState({ newIssue: !this.state.newIssue });
+        event.target.name === "updateIssue" && this.setState({ updateIssue: false, issueId: "", roomNumber: "", startDateRange: today, endDay: "", issue: "" });
+    }
+
+    makeAxiosCall = () => {
+        api.getRoomIssues()
+            .then(res => this.setState({ issuesArray: res }))
             .catch(err => console.log(err));
     }
 
@@ -82,23 +91,9 @@ class Maintenance extends Component {
         this.makeAxiosCall();
     }
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleRoomChange = event => {
-        const { id, value } = event.target;
-        console.log(id, value);
-        let arrivalsArray = [...this.state.arrivalsArray];
-        arrivalsArray[id].selectedRoom = value;
-        this.setState({ arrivalsArray });
-    }
-
     handleFormSubmit = event => {
         event.preventDefault();
+        // handle the submit, then after it's done, make the axios call
         this.makeAxiosCall();
     }
 
@@ -119,100 +114,69 @@ class Maintenance extends Component {
                         </Row>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
-                                <Col xl={12}>
-                                    <Row>
-                                        <Col xl={1}>Date</Col>
-                                        <Col xl={3} >
-                                            <input
-                                                style={{ paddingTop: "0px", paddingBottom: "0px" }}
-                                                type="date"
-                                                name="arrivaldate"
-                                                value={this.state.startDateRange}
-                                            />
-                                        </Col>
-
-                                        <Col xs={6} sm={6} md={6} lg={3} xl={2} >Room Number</Col>
-                                        <Col xs={6} sm={6} md={6} lg={3} xl={2}>
-                                            <input style={{ width: "150px" }}
-                                                id=""
-                                                onChange={this.handleInputChange}
-                                                name="roomNumber"
-                                                placeholder="Room Number"
-                                                value={this.state.roomNumber}
-                                            />
-                                        </Col>
-                                        <Col xs={12} sm={12} md={12} lg={1} xl={1}>
-                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                        </div>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
-                            <Row>
-                                <Col xl={3}>
-                                </Col>
+                                <Col xl={3}></Col>
                                 <Col xl={2}>
-                                    <bold>Add new work order</bold>
+                                    <b>
+                                        {this.state.updateIssue ? "Update Selected Issue" : "Add new work order"}
+                                    </b>
                                 </Col>
                                 <Col xl={6}>
-                                    <input type="checkbox" id="notReserved" />
+                                    <input
+                                        type="checkbox"
+                                        name={this.state.updateIssue ? "updateIssue" : "newIssue"}
+                                        checked={this.state.updateIssue ? this.state.updateIssue : this.state.newIssue}
+                                        onChange={this.handleCheckChange}
+                                    />
                                 </Col>
                             </Row>
                             <hr />
-                            <Row>
-                                <div id="workOrder">
-                                    <Col xl={12}>
-                                        <Row>
-                                            <Col xl={2}>
-                                                Room Number
-                                        </Col>
-                                            <Col sm={2}>
-                                                <input style={{ width: "150px" }}
-                                                    id=""
-                                                    onChange={this.handleInputChange}
-                                                    name="roomNumber"
-                                                    placeholder="Room Number"
-                                                    value={this.state.roomNumber}
-                                                />
-                                            </Col>
-                                            <Col xl={1}>
-                                                Date
-                                        </Col>
-                                            <Col xl={7}>
-                                                <div>
-                                                    <DateRange
-                                                        handleFromChange={this.handleFromChange}
-                                                        handleToChange={this.handleToChange}
-                                                        from={this.state.startDateRange}
-                                                        to={this.state.endDay}
+                            {(this.state.newIssue || this.state.updateIssue) &&
+                                <Row>
+                                    <div id="workOrder">
+                                        <Col xl={12}>
+                                            <Row>
+                                                <Col xl={2}>Room Number</Col>
+                                                <Col sm={2}>
+                                                    <input style={{ width: "150px" }}
+                                                        onChange={this.handleChange}
+                                                        name="roomNumber"
+                                                        placeholder="Room Number"
+                                                        value={this.state.roomNumber}
                                                     />
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                        <Row id="maintRow">
-                                            <Col xl={2}>
-                                                Problem
+                                                </Col>
+                                                <Col xl={1}>Date</Col>
+                                                <Col xl={7}>
+                                                    <div>
+                                                        <DateRange
+                                                            handleFromChange={this.handleFromChange}
+                                                            handleToChange={this.handleToChange}
+                                                            from={this.state.startDateRange}
+                                                            to={this.state.endDay}
+                                                        />
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                            <Row id="maintRow">
+                                                <Col xl={2}>Problem</Col>
+                                                <Col xl={5}>
+                                                    <textarea
+                                                        type="text"
+                                                        name="issue"
+                                                        value={this.state.issue}
+                                                        onChange={this.handleChange}
+                                                        style={{ backgroundColor: "#F0EAD6" }}
+                                                    ></textarea>
+                                                </Col>
+                                                <Col xl={2}>
+                                                </Col>
+                                                <Col xl={2}>
+                                                    <button type="button" className="btn btn-success">Submit</button>
+                                                </Col>
+                                            </Row>
                                         </Col>
-                                            <Col xl={5}>
-                                                <input
-                                                    id="problemInput"
-                                                    type="text"
-                                                    name="comment"
-                                                    value={this.props.comment}
-                                                    onChange={this.props.handleChange}
-                                                    style={{ backgroundColor: "#F0EAD6" }}
-                                                />
-                                            </Col>
-                                            <Col xl={2}>
-                                            </Col>
-                                            <Col xl={2}>
-                                                <button type="button" className="btn btn-success">Submit</button>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </div>
-                            </Row>
+                                    </div>
+                                </Row>
+                            }
                         </div>
                         <div id="res">
                             <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
@@ -228,18 +192,20 @@ class Maintenance extends Component {
                                                 <th></th>
                                                 <th></th>
                                             </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" className="btn btn-success">Update</button>
-                                                </td>
-                                                <td><button type="button" className="btn btn-success">Fixed</button>
-</td>
+                                            {this.state.issuesArray.map((issue, i) => (
+                                                <tr key={issue.room_issue_id}>
+                                                    <td>{issue.room_num}</td>
+                                                    <td>{issue.type}</td>
+                                                    <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>
+                                                    <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
+                                                    <td>{issue.issue}</td>
+                                                    <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Select</button>
+                                                    </td>
+                                                    <td><button type="button" className="btn btn-success">Fixed</button>
+                                                    </td>
+                                                </tr>
+                                            ))}
 
-                                            </tr>
 
                                         </tbody>
                                     </Table>
