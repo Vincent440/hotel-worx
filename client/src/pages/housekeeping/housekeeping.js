@@ -3,7 +3,6 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
-import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import { Container, Table } from 'react-bootstrap';
 import Particles from "react-particles-js";
@@ -16,10 +15,8 @@ class Housekeeping extends Component {
         checked: {
             clean: false,
             dirty: false,
-            outOfOrder: false,
             vacant: false,
             occupied: false,
-            arrival: false,
             arrived: false,
             stayOver: false,
             dueOut: false,
@@ -48,17 +45,11 @@ class Housekeeping extends Component {
             case "dirty":
                 tempState.dirty = !this.state.checked.dirty;
                 break;
-            case "outOfOrder":
-                tempState.outOfOrder = !this.state.checked.outOfOrder;
-                break;
             case "vacant":
                 tempState.vacant = !this.state.checked.vacant;
                 break;
             case "occupied":
                 tempState.occupied = !this.state.checked.occupied;
-                break;
-            case "arrival":
-                tempState.arrival = !this.state.checked.arrival;
                 break;
             case "arrived":
                 tempState.arrived = !this.state.checked.arrived;
@@ -78,10 +69,8 @@ class Housekeeping extends Component {
             case "clearAll":
                 tempState.clean = false;
                 tempState.dirty = false;
-                tempState.outOfOrder = false;
                 tempState.vacant = false;
                 tempState.occupied = false;
-                tempState.arrival = false;
                 tempState.arrived = false;
                 tempState.stayOver = false;
                 tempState.dueOut = false;
@@ -91,10 +80,8 @@ class Housekeeping extends Component {
             case "selectAll":
                 tempState.clean = true;
                 tempState.dirty = true;
-                // tempState.outOfOrder = true;
                 tempState.vacant = true;
                 tempState.occupied = true;
-                tempState.arrival = true;
                 tempState.arrived = true;
                 tempState.stayOver = true;
                 tempState.dueOut = true;
@@ -154,13 +141,6 @@ class Housekeeping extends Component {
                                                     <input type="checkbox" id="dirty" checked={this.state.checked.dirty}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
-                                                {/* <Col xl={2}>
-                                                    Out of Order{this.state.rooms}
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="outOfOrder" checked={this.state.checked.outOfOrder}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col> */}
                                             </Row>
                                         </Col>
                                         <Col xl={2}>
@@ -203,13 +183,6 @@ class Housekeeping extends Component {
                                                     <h6> Reservation Status: </h6>
                                                 </Col>
                                                 <Col xl={1}>
-                                                    Arrival
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="arrival" checked={this.state.checked.arrival}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
-                                                <Col xl={1}>
                                                     Arrived
                                                 </Col>
                                                 <Col xl={1}>
@@ -235,7 +208,7 @@ class Housekeeping extends Component {
                                                     <input type="checkbox" id="departed" checked={this.state.checked.departed}
                                                         onChange={this.handleCheckboxChange} />
                                                 </Col>
-                                                <Col xl={1}>
+                                                <Col xl={2}>
                                                     Due Out
                                                 </Col>
                                                 <Col xl={1}>
@@ -278,7 +251,7 @@ class Housekeeping extends Component {
                                                             </td>
                                                             <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
                                                             <td>
-                                                                {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : (room.arrival ? room.arrival : "Not Reserved"))))))}
+                                                                {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : "Not Reserved")))))}
                                                             </td>
                                                         </tr>
                                                     ))}

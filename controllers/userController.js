@@ -18,7 +18,7 @@ module.exports = {
       res.status(200).json(data);
     });
   },
-  getUserById: (req, res) => {
+  selectUserById: (req, res) => {
     db.User.selectOneById(req.params.id, data => {
       res.status(200).json(data);
     });

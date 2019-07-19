@@ -15,7 +15,6 @@ import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
 import HouseStatus from "./pages/houseStatus/houseStatus";
 import Maintenance from "./pages/maintenance/maintenance";
-import { saveAs } from 'file-saver';
 // import PrivateRoute from "./components/PrivateRoute";
 class PrivateRoute extends Component {
   render() {

@@ -7,7 +7,6 @@ import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
-import { isInclusivelyBeforeDay } from 'react-dates';
 import Particles from "react-particles-js";
 
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };

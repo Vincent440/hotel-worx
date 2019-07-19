@@ -26,6 +26,10 @@ class ReservationTest extends Component {
         });
     }
 
+    printFunction(){
+        window.print();
+      }
+
     render() {
         return (
             <Container>
@@ -41,12 +45,12 @@ class ReservationTest extends Component {
                         </Row>
                         <Row>
                             <Col xl={12}>
-                                <div id="res" style={{ paddingBottom: "10px" }}>
+                                <div id="res3" style={{ paddingBottom: "10px" }}>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
-                                        <Col xl={2}>
-                                            <strong>Name: </strong>{this.state.ReservationInfo.last_name}, {this.state.ReservationInfo.first_name}
+                                        <Col xl={5}>
+                                        <strong>Name: </strong>{this.state.ReservationInfo.first_name} {this.state.ReservationInfo.last_name}
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
@@ -108,10 +112,10 @@ class ReservationTest extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        <div>
+                        <div id="buttonsReservation">
                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.props.handleFormSubmit}>Change</button>
-                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Print</button>
-                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Email</button>
+                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.printFunction}>Print</button>
+                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} value="Send"><a href={"mailto:" + this.state.ReservationInfo.email}>Email</a></button>
                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Save</button>
 
                         </div>
