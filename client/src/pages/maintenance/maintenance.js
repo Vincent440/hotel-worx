@@ -87,19 +87,7 @@ class Maintenance extends Component {
     }
 
     makeAxiosCall = () => {
-        const data = {
-
-            roomNumber: this.state.roomNumber,
-            startDateRange: moment(this.state.startDateRange).format('YYYY-MM-DD'),
-            endDay: moment(this.state.endDay).format('YYYY-MM-DD'),
-            issue: this.state.issue,
-            newIssue: this.state.newIssue,
-            updateIssue: this.state.updateIssue,
-            roomId: this.state.roomId,
-            issueId: this.state.issueId,
-            issuesArray: this.state.issuesArray
-        }
-        api.getRoomIssues(data)
+        api.getRoomIssues()
             .then(res => this.setState({ issuesArray: res }))
             .catch(err => console.log(err));
     }
