@@ -52,20 +52,12 @@ class Maintenance extends Component {
     handleToChange(endDay) {
         this.setState({ endDay }, this.showFromMonth);
     }
-
-    handleChange(e) {
+    handleChange(event) {
+        const { name, value } = event.target;
         this.setState({
-            [e.target.name]: e.target.value,
+            [name]: value
         });
     }
-
-    // handleChange(event) {
-    //     const { name, value } = event.target;
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
-
     handleUpdate(i) {
         this.setState({
             updateIssue: true,
