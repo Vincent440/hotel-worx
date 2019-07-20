@@ -65,8 +65,8 @@ class Maintenance extends Component {
             updateIssue: true,
             issueId: this.state.issuesArray[i].room_issue_id,
             roomNumber: this.state.issuesArray[i].room_num,
-            // startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
-            // endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
+            startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
+            endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
             issue: this.state.issuesArray[i].issue,
             roomId: this.state.issuesArray[i].room_id
         });
@@ -110,15 +110,16 @@ class Maintenance extends Component {
                 values.unshift(matchingRoom[0].room_id);
                 api.createRoomIssue(values)
                     .then(() => this.makeAxiosCall())
-                    .catch(err => console.log(err));
+                    .catch(err => console.log(err))
+                    .then(() => this.clearStateIssueInfo());
             }
         } else if (this.state.updateIssue) {
             values.unshift(this.state.roomId);
             api.updateRoomIssues(this.state.issueId, values)
                 .then(() => this.makeAxiosCall())
-                .catch(err => console.log(err));
+                .catch(err => console.log(err))
+                .then(() => this.clearStateIssueInfo());
         }
-        this.clearStateIssueInfo();
     }
 
     render() {
