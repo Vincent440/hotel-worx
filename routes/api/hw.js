@@ -230,10 +230,10 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
         conditions.push("(rr.check_in_date='" + req.params.sdate + "')");
     }
     if (req.params.fname !== "undefined") {
-        conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
+        conditions.push("c.first_name LIKE '" + req.params.fname + "%'");
     }
     if (req.params.lname !== "undefined") {
-        conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
+        conditions.push("c.last_name LIKE '" + req.params.lname + "%'");
     }
     if (req.params.cnum !== "undefined") {
         conditions.push("rr.confirmation_code LIKE '%" + req.params.cnum + "%'");
@@ -246,8 +246,8 @@ router.get("/arrivals/:sdate/:fname/:lname/:cnum", (req, res) => {
 
 router.get("/departures/:fname/:lname/:rnum/:sover/:dout/:dpart", (req, res) => {
     let conditions = [];
-    req.params.fname !== "undefined" && conditions.push("c.first_name LIKE '%" + req.params.fname + "%'");
-    req.params.lname !== "undefined" && conditions.push("c.last_name LIKE '%" + req.params.lname + "%'");
+    req.params.fname !== "undefined" && conditions.push("c.first_name LIKE '" + req.params.fname + "%'");
+    req.params.lname !== "undefined" && conditions.push("c.last_name LIKE '" + req.params.lname + "%'");
     req.params.rnum !== "undefined" && conditions.push("(rm.room_num='" + req.params.rnum + "')");
     req.params.sover === "true" && conditions.push("(rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE())");
     req.params.dout === "true" && conditions.push("(rr.check_out_date=CURDATE() && rr.checked_out=0)");
@@ -391,6 +391,18 @@ router.put("/room_issues_fixed/:id", (req, res) => {
 router.post("/room_issues", (req, res) => {
     db.RoomIssue.insertOne(req.body.vals, (result) => {
         res.json({ id: result.insertId });
+    });
+});
+
+router.get("/house_status_res_rooms/:date", (req, res) => {
+    db.ResRoom.selectForHouseStatus(req.params.date, (data) => {
+        res.json(data);
+    });
+});
+
+router.get("/house_status_rooms", (req, res) => {
+    db.Room.selectForHouseStatus((data) => {
+        res.json(data);
     });
 });
 
