@@ -167,7 +167,7 @@ class Arrivals extends Component {
                                                             arrival.room_num) : "Not Set"}
                                                     </td>
                                                     <td>
-                                                        {this.state.startDateRange === today && (arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In")}
+                                                        {this.state.startDateRange === today && (arrival.checked_in === 0 ? <button  id="checkIn" onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In")}
 
                                                     </td>
                                                 </tr>
