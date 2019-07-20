@@ -100,9 +100,9 @@ class Housekeeping extends Component {
         event.preventDefault();
         this.makeAxiosCall();
     }
-    printFunction(){
+    printFunction() {
         window.print();
-      }
+    }
 
     render() {
         return (
@@ -118,153 +118,141 @@ class Housekeeping extends Component {
                                 <Header>HOUSEKEEPING</Header>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col xl={12}>
-                                <div id="res">
-                                    <Row>
-                                        <Col xl={10}>
-                                            <Row  id="firstRow">
-                                                <Col xl={3}>
-                                                    <h6>Room Status:</h6>
-                                                </Col>
-                                                <Col xl={1}>
-                                                    Clean 
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="clean" checked={this.state.checked.clean}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
-                                                <Col xl={1}>
-                                                    Dirty {this.state.rooms}
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="dirty" checked={this.state.checked.dirty}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
-                                            </Row>
+                        <div id="res">
+                            <Row>
+                                <Col xl={10}>
+                                    <Row id="firstRow">
+                                        <Col xs={2} sm={2} md={2} lg={3} xl={3}>
+                                            <h6>Room Status:</h6>
                                         </Col>
-                                        <Col xl={2}>
-                                            <button type="button" className="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
-                                                onClick={this.handleCheckboxChange}> Select All </button>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            Clean
+                                                </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="clean" checked={this.state.checked.clean}
+                                                onChange={this.handleCheckboxChange} />
+                                        </Col>
+                                        <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+                                            Dirty {this.state.rooms}
+                                        </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="dirty" checked={this.state.checked.dirty}
+                                                onChange={this.handleCheckboxChange} />
                                         </Col>
                                     </Row>
-                                    <Row>
-                                        <Col xl={10}>
-                                            <Row id="secondRowP">
-                                                <Col xl={3}>
-                                                    <h6> Front Office Status: </h6>
-                                                </Col>
-                                                <Col xl={1}>
-                                                    Vacant
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="vacant" checked={this.state.checked.vacant}
-                                                        onChange={this.handleCheckboxChange} />
 
-                                                </Col>
-                                                <Col xl={1}>
-                                                    Occupied 
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="occupied" checked={this.state.checked.occupied}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
-                                            </Row>
+                                    <Row id="secondRowP">
+                                        <Col xs={2} sm={2} md={2} lg={3} xl={3}>
+                                            <h6> Front Office Status: </h6>
                                         </Col>
-                                        <Col xl={2}>
-                                            <button type="button" className="btn btn-success" id="clearAll" checked={this.state.checked.clearAll}
-                                                onClick={this.handleCheckboxChange}>Clear All </button>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col xl={10}>
-                                            <Row id="firstRow">
-                                                <Col xl={3}>
-                                                    <h6> Reservation Status: </h6>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            Vacant
                                                 </Col>
-                                                <Col xl={1}>
-                                                    Arrived
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="arrived" checked={this.state.checked.arrived}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="vacant" checked={this.state.checked.vacant}
+                                                onChange={this.handleCheckboxChange} />
 
-                                                <Col xl={2}>
-                                                    Stay Over
+                                        </Col>
+                                        <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+                                            Occupied
                                                 </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="stayOver" checked={this.state.checked.stayOver}
-                                                        onChange={this.handleCheckboxChange} />
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="occupied" checked={this.state.checked.occupied}
+                                                onChange={this.handleCheckboxChange} />
+                                        </Col>
+                                    </Row>
+                                    <Row id="secondRow" >
+                                        <Col xs={2} sm={2} md={2} lg={3} xl={3}>
+                                            <h6> Reservation Status: </h6>
+                                        </Col>
+                                        <Col xs={2} sm={2} md={2} lg={1} xl={1}>
+                                            Arrived
                                                 </Col>
-                                            </Row>
-                                            <Row id="secondRow">
-                                                <Col xl={3}>
-                                                </Col>
-                                                <Col xl={1}>
-                                                    Departed
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="departed" checked={this.state.checked.departed}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
-                                                <Col xl={2}>
-                                                    Due Out
-                                                </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="dueOut" checked={this.state.checked.dueOut}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="arrived" checked={this.state.checked.arrived}
+                                                onChange={this.handleCheckboxChange} />
+                                        </Col>
 
-                                                <Col xl={2}>
-                                                    Not Reserved
+                                        <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+                                            Stay Over
                                                 </Col>
-                                                <Col xl={1}>
-                                                    <input type="checkbox" id="notReserved" checked={this.state.checked.notReserved}
-                                                        onChange={this.handleCheckboxChange} />
-                                                </Col>
-                                            </Row>
-                                        </Col>
-                                        <Col xl={2}>
-                                            <button type="button" className="btn btn-success"  onClick={this.printFunction}>Print</button>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="stayOver" checked={this.state.checked.stayOver}
+                                                onChange={this.handleCheckboxChange} />
                                         </Col>
                                     </Row>
-                                </div>
-                                <div id="res2">
-                                    <Row id="thirdRow" >
-                                        <Col xl={12}>
-                                            <Table>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Room</th>
-                                                        <th>Room Type</th>
-                                                        <th>Room Status</th>
-                                                        <th>Front Office Status</th>
-                                                        <th>Reservation Status</th>
-                                                    </tr>
-                                                    {this.state.searchResults.map(room => (
-                                                        <tr key={room.room_num}>
-                                                            <td>{room.room_num}</td>
-                                                            <td>{room.type}</td>
-                                                            <td>
-                                                                {room.active === 0 ? room.inactive : (room.clean === 1 ? "Clean" : "Dirty")}
-                                                            </td>
-                                                            <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
-                                                            <td>
-                                                                {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : "Not Reserved")))))}
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </Table>
+                                    <Row id="secondRow" >
+                                        <Col xs={2} sm={2} md={2} lg={3} xl={3}>
+                                        </Col>
+                                        <Col xs={2} sm={2} md={2} lg={1} xl={1}>
+                                            Departed
+                                                </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="departed" checked={this.state.checked.departed}
+                                                onChange={this.handleCheckboxChange} />
+                                        </Col>
+                                        <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+                                            Due Out
+                                                </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="dueOut" checked={this.state.checked.dueOut}
+                                                onChange={this.handleCheckboxChange} />
+                                        </Col>
+
+                                        <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+                                            Not Reserved
+                                                </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <input type="checkbox" id="notReserved" checked={this.state.checked.notReserved}
+                                                onChange={this.handleCheckboxChange} />
                                         </Col>
                                     </Row>
-                                </div>
-                            </Col>
-                        </Row>
+                                </Col>
+
+                                <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+                                    <button type="button" className="btn btn-success" id="selectAll" checked={this.state.checked.selectAll}
+                                        onClick={this.handleCheckboxChange}> Select All </button>
+                                    <button type="button" className="btn btn-success" id="clearAll" checked={this.state.checked.clearAll}
+                                        onClick={this.handleCheckboxChange}>Clear All </button>
+                                    <button type="button" className="btn btn-success" onClick={this.printFunction}>Print</button>
+                                </Col>
+                            </Row>
+                        </div>
+
+
+                        <div id="res2">
+                            <Row id="thirdRow" >
+                                <Col xl={12}>
+                                    <Table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Room</th>
+                                                <th>Room Type</th>
+                                                <th>Room Status</th>
+                                                <th>Front Office Status</th>
+                                                <th>Reservation Status</th>
+                                            </tr>
+                                            {this.state.searchResults.map(room => (
+                                                <tr key={room.room_num}>
+                                                    <td>{room.room_num}</td>
+                                                    <td>{room.type}</td>
+                                                    <td>
+                                                        {room.active === 0 ? room.inactive : (room.clean === 1 ? "Clean" : "Dirty")}
+                                                    </td>
+                                                    <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
+                                                    <td>
+                                                        {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : "Not Reserved")))))}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </Row>
+                        </div>
                     </Col>
                 </Row>
-            </Container>
+            </Container >
         )
     }
 }
