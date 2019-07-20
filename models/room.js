@@ -2,7 +2,14 @@ const connection = require("../config/connection");
 
 const Room = {
     selectAll: (cb) => {
-        const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id ORDER BY room_num ASC;";
+        const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id ORDER BY rm.room_num ASC;";
+        connection.query(queryString, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
+    selectAllIdNum: (cb) => {
+        const queryString = "SELECT rm.room_id, rm.room_num FROM rooms AS rm ORDER BY rm.room_id ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);
@@ -17,7 +24,7 @@ const Room = {
         });
     },
     selectOne: (id, cb) => {
-        const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE rm.room_id=? ORDER BY room_num ASC LIMIT 1;";
+        const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE rm.room_id=? ORDER BY rm.room_num ASC LIMIT 1;";
         connection.execute(queryString, [id], (err, results, fields) => {
             if (err) throw err;
             cb(results);
@@ -32,7 +39,7 @@ const Room = {
         });
     },
     selectSome: (condition, cb) => {
-        const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE " + condition + " ORDER BY room_num ASC;";
+        const queryString = "SELECT rm.room_id, rm.room_num, rm.description, rm.num_beds, rm.clean, rm.occupied, rm.active, rt.room_type_id, rt.type, rt.rate FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id WHERE " + condition + " ORDER BY rm.room_num ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);

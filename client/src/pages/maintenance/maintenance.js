@@ -9,9 +9,8 @@ import { Container, Table } from 'react-bootstrap';
 import Particles from "react-particles-js";
 import DateRange from "../../components/dateRangeOrg/dateRange";
 
-
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
-const today = moment().format("YYYY-MM-DD");
+// const today = moment().format("YYYY-MM-DD");
 
 class Maintenance extends Component {
     constructor(props) {
@@ -24,16 +23,16 @@ class Maintenance extends Component {
     }
     state = {
         roomNumber: "",
-        startDateRange: today,
+        startDateRange: "",
         endDay: "",
         issue: "",
         newIssue: false,
         updateIssue: false,
         roomId: "",
         issueId: "",
-        issuesArray: []
+        issuesArray: [],
+        roomsArray: []
     };
-
 
     showFromMonth() {
         const { from, to } = this.state;
@@ -68,17 +67,25 @@ class Maintenance extends Component {
             roomNumber: this.state.issuesArray[i].room_num,
             startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
             endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
-            issue: this.state.issuesArray[i].issue
+            issue: this.state.issuesArray[i].issue,
+            roomId: this.state.issuesArray[i].room_id
         });
     }
 
     updateFixed(id) {
+        this.clearStateIssueInfo();
+        api.updateRoomIssuesFixed(id)
+            .then(() => this.makeAxiosCall())
+            .catch(err => console.log(err));
+    }
 
+    clearStateIssueInfo() {
+        this.setState({ newIssue: false, updateIssue: false, issueId: "", roomNumber: "", startDateRange: "", endDay: "", issue: "", roomId: "" });
     }
 
     handleCheckChange = event => {
         event.target.name === "newIssue" && this.setState({ newIssue: !this.state.newIssue });
-        event.target.name === "updateIssue" && this.setState({ updateIssue: false, issueId: "", roomNumber: "", startDateRange: today, endDay: "", issue: "" });
+        event.target.name === "updateIssue" && this.clearStateIssueInfo();
     }
 
     makeAxiosCall = () => {
@@ -88,13 +95,31 @@ class Maintenance extends Component {
     }
 
     componentDidMount() {
+        api.getRoomsIdNum()
+            .then(res => this.setState({ roomsArray: res }))
+            .catch(err => console.log(err));
         this.makeAxiosCall();
     }
 
     handleFormSubmit = event => {
         event.preventDefault();
-        // handle the submit, then after it's done, make the axios call
-        this.makeAxiosCall();
+        let values = [this.state.issue, this.props.user.user_id, moment(this.state.startDateRange).format("YYYY-MM-DD"), moment(this.state.endDay).format("YYYY-MM-DD")];
+        if (this.state.newIssue) {
+            let matchingRoom = this.state.roomsArray.filter(room => room.room_num === this.state.roomNumber);
+            if (matchingRoom.length === 1) {
+                values.unshift(matchingRoom[0].room_id);
+                api.createRoomIssue(values)
+                    .then(() => this.makeAxiosCall())
+                    .catch(err => console.log(err))
+                    .then(() => this.clearStateIssueInfo());
+            }
+        } else if (this.state.updateIssue) {
+            values.unshift(this.state.roomId);
+            api.updateRoomIssues(this.state.issueId, values)
+                .then(() => this.makeAxiosCall())
+                .catch(err => console.log(err))
+                .then(() => this.clearStateIssueInfo());
+        }
     }
 
     render() {
@@ -170,7 +195,7 @@ class Maintenance extends Component {
                                                 <Col xl={2}>
                                                 </Col>
                                                 <Col xl={2}>
-                                                    <button type="button" className="btn btn-success">Submit</button>
+                                                    <button type="button" className="btn btn-success" onClick={this.handleFormSubmit}>Submit</button>
                                                 </Col>
                                             </Row>
                                         </Col>
@@ -201,7 +226,7 @@ class Maintenance extends Component {
                                                     <td>{issue.issue}</td>
                                                     <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Select</button>
                                                     </td>
-                                                    <td><button type="button" className="btn btn-success">Fixed</button>
+                                                    <td><button type="button" className="btn btn-success" onClick={() => this.updateFixed(issue.room_issue_id)}>Fixed</button>
                                                     </td>
                                                 </tr>
                                             ))}

@@ -22,9 +22,9 @@ class UpdateReservation extends Component {
     } state = {
         firstname: "",
         lastname: "",
-        sdate: undefined,
-        edate: undefined,
-        confirmationNumber: undefined,
+        sdate: "",
+        edate: "",
+        confirmationNumber: "",
         resRooms: []
     };
     showFromMonth() {
