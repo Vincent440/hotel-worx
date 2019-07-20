@@ -1,4 +1,3 @@
-
 h1 {
   font-size: 5em;
   width: 25%;
@@ -37,22 +36,48 @@ button {
 #searchButton {
   size: 30px;
   margin-left: 40%;
-  color:red;
+  color: red;
 }
 
-#workOrder{
+#workOrder {
   width: 100%;
 }
-
-#maintRow{
-    margin-top:8px;
+#questionPart {
+  font-size: 20px;
 }
-#maintRow2{
-  margin-top:8px;
+#maintRow {
+  margin-top: 8px;
+}
+#maintRow2 {
+  margin-top: 8px;
   text-align: center;
 }
 
-#problemInput{
+#maintRow > div:nth-child(2) > textarea {
   width: 500px;
   height: 50px;
+}
+
+input[type="checkbox"] {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}
+
+/* Might want to wrap a span around your checkbox text */
+.checkboxtext {
+  /* Checkbox text */
+  font-size: 110%;
+  display: inline;
+}
+#res > div > div:nth-child(3) {
+  padding-top: 5px;
+}
+
+#fourthRow{
+  margin-top: 5px;
 }

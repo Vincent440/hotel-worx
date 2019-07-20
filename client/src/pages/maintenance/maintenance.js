@@ -52,14 +52,12 @@ class Maintenance extends Component {
     handleToChange(endDay) {
         this.setState({ endDay }, this.showFromMonth);
     }
-
     handleChange(event) {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     }
-
     handleUpdate(i) {
         this.setState({
             updateIssue: true,
@@ -139,13 +137,12 @@ class Maintenance extends Component {
                         </Row>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
-                                <Col xl={3}></Col>
-                                <Col xl={2}>
-                                    <b>
-                                        {this.state.updateIssue ? "Update Selected Issue" : "Add new work order"}
+                                <Col xl={3}>
+                                    <b id="questionPart">
+                                        {this.state.updateIssue ? "Update Selected Issue" : "Add New Work Order"}
                                     </b>
                                 </Col>
-                                <Col xl={6}>
+                                <Col xl={5}>
                                     <input
                                         type="checkbox"
                                         name={this.state.updateIssue ? "updateIssue" : "newIssue"}
@@ -169,8 +166,10 @@ class Maintenance extends Component {
                                                         value={this.state.roomNumber}
                                                     />
                                                 </Col>
-                                                <Col xl={1}>Date</Col>
-                                                <Col xl={7}>
+                                            </Row>
+                                            <Row id="fourthRow">
+                                                <Col xl={2}>Date</Col>
+                                                <Col xl={6}>
                                                     <div>
                                                         <DateRange
                                                             handleFromChange={this.handleFromChange}
@@ -224,7 +223,7 @@ class Maintenance extends Component {
                                                     <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>
                                                     <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
                                                     <td>{issue.issue}</td>
-                                                    <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Select</button>
+                                                    <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Update</button>
                                                     </td>
                                                     <td><button type="button" className="btn btn-success" onClick={() => this.updateFixed(issue.room_issue_id)}>Fixed</button>
                                                     </td>

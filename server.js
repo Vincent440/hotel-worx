@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const routes = require("./routes");
 const sessionStore = require("./config/promiseConnection");
 const PORT = process.env.PORT;
+
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
@@ -28,4 +29,5 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);
+
 app.listen(PORT, () => console.log(`React API server listening on PORT ${PORT}.`));

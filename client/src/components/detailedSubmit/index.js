@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-import SearchSubmit from "../searchButton";
 import { Row, Col } from 'react-grid-system';
 
 

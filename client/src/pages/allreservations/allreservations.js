@@ -9,7 +9,6 @@ import { Container, Table } from 'react-bootstrap';
 import api from '../../utils/api';
 import moment from 'moment';
 import Particles from "react-particles-js";
-import { Redirect } from "react-router-dom";
 
 
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };

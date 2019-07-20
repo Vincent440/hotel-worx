@@ -6,6 +6,7 @@ import api from '../../utils/api';
 import Header from "../../components/Header";
 import { Container } from 'react-bootstrap';
 
+
 class ReservationTest extends Component {
     state = {
         ReservationInfo: {},
@@ -25,12 +26,16 @@ class ReservationTest extends Component {
         });
     }
 
+    printFunction(){
+        window.print();
+      }
+
     render() {
         return (
             <Container>
                 <Row>
                     <Col xl={2}>
-                    <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
                     <Col xl={10}>
                         <Row>
@@ -40,11 +45,11 @@ class ReservationTest extends Component {
                         </Row>
                         <Row>
                             <Col xl={12}>
-                                <div id="res" style={{ paddingBottom: "10px" }}>
+                                <div id="res3" style={{ paddingBottom: "10px" }}>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
-                                        <Col xl={2}>
+                                        <Col xl={5}>
                                         <strong>Name: </strong>{this.state.ReservationInfo.first_name} {this.state.ReservationInfo.last_name}
                                         </Col>
                                     </Row>
@@ -52,27 +57,27 @@ class ReservationTest extends Component {
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={9}>
-                                        <strong>Address: </strong>{this.state.ReservationInfo.address},  {this.state.ReservationInfo.city}, {this.state.ReservationInfo.state}, {this.state.ReservationInfo.zip}
+                                            <strong>Address: </strong>{this.state.ReservationInfo.address},  {this.state.ReservationInfo.city}, {this.state.ReservationInfo.state}, {this.state.ReservationInfo.zip}
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={3}>
-                                        <strong>Email: </strong> {this.state.ReservationInfo.email}
+                                            <strong>Email: </strong> {this.state.ReservationInfo.email}
                                         </Col>
                                         <Col xl={4}>
-                                        <strong>Phone: </strong> {this.state.ReservationInfo.phone}
+                                            <strong>Phone: </strong> {this.state.ReservationInfo.phone}
                                         </Col>
                                     </Row>
                                     <Row style={{ paddingBottom: "5px" }}>
                                         <Col xl={3}>
                                         </Col>
                                         <Col xl={3}>
-                                        <strong>Credit Card Number: </strong>****{this.state.ReservationInfo.ccLastFour}
+                                            <strong>Credit Card Number: </strong>****{this.state.ReservationInfo.ccLastFour}
                                         </Col>
                                         <Col xl={3}>
-                                        <strong>Exp Date: </strong>{this.state.ReservationInfo.cc_expiration}
+                                            <strong>Exp Date: </strong>{this.state.ReservationInfo.cc_expiration}
                                         </Col>
                                     </Row>
                                     <hr />
@@ -107,10 +112,10 @@ class ReservationTest extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        <div>
+                        <div id="buttonsReservation">
                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.props.handleFormSubmit}>Change</button>
-                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Print</button>
-                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Email</button>
+                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.printFunction}>Print</button>
+                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} value="Send"><a href={"mailto:" + this.state.ReservationInfo.email}>Email</a></button>
                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Save</button>
 
                         </div>
