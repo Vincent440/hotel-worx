@@ -73,6 +73,12 @@ router.get("/rooms", (req, res) => {
     });
 });
 
+router.get("/roomsIdNum", (req, res) => {
+    db.Room.selectAllIdNum((data) => {
+        res.json(data);
+    });
+});
+
 router.get("/rooms/:id", (req, res) => {
     db.Room.selectOne(req.params.id, (data) => {
         res.json(data);
@@ -379,6 +385,12 @@ router.put("/room_issues_fixed/:id", (req, res) => {
         } else {
             res.status(200).end();
         }
+    });
+});
+
+router.post("/room_issues", (req, res) => {
+    db.RoomIssue.insertOne(req.body.vals, (result) => {
+        res.json({ id: result.insertId });
     });
 });
 

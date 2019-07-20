@@ -11,7 +11,7 @@ export default {
             }));
     },
     createReservation: (data) => {
-        const fccNum = data.creditCard.replace(/ /g, "")
+        const fccNum = data.creditCard.replace(/ /g, "");
         return axios.post('/api/hw/reservation', {
             cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate],
             reserve: [1, ""],
@@ -24,7 +24,6 @@ export default {
                 console.log(error);
             });
     },
-
     getReservations: () => {
         return axios.get('/api/hw/reservations')
             .then((response) => {
@@ -179,8 +178,17 @@ export default {
                 console.log(error);
             });
     },
+    getRoomsIdNum: () => {
+        return axios.get('/api/hw/roomsIdNum')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getRoomIssues: () => {
-        return axios.get('/api/hw/room_issues/')
+        return axios.get('/api/hw/room_issues')
             .then((response) => {
                 return response.data;
             })
@@ -189,7 +197,7 @@ export default {
             });
     },
     updateRoomIssues: (id, vals) => {
-        return axios.put('/api/hw/room_issues/' + id, vals)
+        return axios.put('/api/hw/room_issues/' + id, { vals })
             .then((response) => {
                 return response;
             })
@@ -199,6 +207,15 @@ export default {
     },
     updateRoomIssuesFixed: (id) => {
         return axios.put('/api/hw/room_issues_fixed/' + id)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    createRoomIssue: (vals) => {
+        return axios.post('/api/hw/room_issues', { vals })
             .then((response) => {
                 return response;
             })
