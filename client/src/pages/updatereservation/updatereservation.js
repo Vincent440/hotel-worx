@@ -35,12 +35,14 @@ class ReserveUpdate extends Component {
         departuredate: "",
         nights: "",
         adults: 1,
-        noOfRooms: "",
+        numRooms: 1,
+        roomNumber: "",
         roomtype: "",
         RoomTypes: [],
         creditCard: "",
         expirationDate: "",
-        reservationSuccess: false,
+        confirmationNumber: "",
+        updateSuccess: false,
         newReservationId: "",
         errors: {}
     };
@@ -54,15 +56,16 @@ class ReserveUpdate extends Component {
         }
     }
     handleFromChange(arrivaldate) {
-        // Change the from date and focus the "to" input field
-        this.setState({ arrivaldate });
-
+        this.setState({ arrivaldate: "", departuredate: "" }, () => {
+            this.setState({ arrivaldate });
+        });
     }
     handleToChange(departuredate) {
-        this.setState({ departuredate }, this.showFromMonth);
+        this.setState({ arrivaldate: "", departuredate: "" }, () => {
+            this.setState({ departuredate }, this.showFromMonth);
+        });
     }
     handleChange(e) {
-
         this.setState({
             [e.target.name]: e.target.value,
         });
@@ -70,12 +73,10 @@ class ReserveUpdate extends Component {
     validateForm() {
         let errors = {};
         let formIsValid = true;
-
         if (!this.state.firstname) {
             formIsValid = false;
             errors["firstname"] = "*Please enter your firstname.";
         }
-
         if (typeof this.state.firstname !== "undefined") {
             if (!this.state.firstname.match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
@@ -86,21 +87,17 @@ class ReserveUpdate extends Component {
             formIsValid = false;
             errors["lastname"] = "*Please enter your lastname.";
         }
-
         if (typeof this.state.lastname !== "undefined") {
             if (!this.state.lastname.match(/^[a-zA-Z ]*$/)) {
                 formIsValid = false;
                 errors["lastname"] = "*Please enter alphabet characters only.";
             }
         }
-
         if (!this.state.email) {
             formIsValid = false;
             errors["email"] = "*Please enter your email-ID.";
         }
-
         if (typeof this.state.email !== "undefined") {
-            //regular expression for email validation
             var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
             if (!pattern.test(this.state.email)) {
                 formIsValid = false;
@@ -111,7 +108,6 @@ class ReserveUpdate extends Component {
             formIsValid = false;
             errors["phone"] = "*Please enter your mobile no.";
         }
-
         if (typeof this.state.phone !== "undefined") {
             if (!this.state.phone.match(/^[0-9]{10}$/)) {
                 formIsValid = false;
@@ -123,12 +119,8 @@ class ReserveUpdate extends Component {
         });
         return formIsValid;
     }
-    // handle any changes to the input fields
     handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
-        // console.log(event.target.value);
         const { name, value } = event.target;
-        // Set the state for the appropriate input field
         this.setState({
             [name]: value
         });
@@ -137,9 +129,11 @@ class ReserveUpdate extends Component {
         api.getRoomTypes()
             .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
             .catch(err => console.log(err));
+        api.getReservation(1199)
+            .then(res => this.setState({ firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].type, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num }))
+            .catch(err => console.log(err));
     }
     handleFormSubmit(e) {
-        console.log(this);
         e.preventDefault();
         if (this.validateForm()) {
             this.makeAxiosCall();
@@ -162,29 +156,26 @@ class ReserveUpdate extends Component {
             adults: this.state.adults,
             roomtype: this.state.roomtype
         }
-        api.createReservation(data)
-            .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
+        api.updateReservation(data)
+            .then(() => this.setState({ updateSuccess: true }))
             .catch(err => console.log(err));
     }
 
     render() {
 
-        if (this.state.reservationSuccess) {
+        if (this.state.updateSuccess) {
             return (
-                <Redirect to={{
-                    pathname: '/ResConfirmation',
-                    state: { newReservationId: this.state.newReservationId }
-                }} />
+                "Reservation was successfully updated!"
             )
         }
         return (
             <Container>
                 <Particles params={particleOpt} id="particul" />
                 <Row>
-                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
+                    <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                         <InfoPart user={this.props.user} logout={this.props.logout} />
                     </Col>
-                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
+                    <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                         <Row>
                             <Col xl={12}>
                                 <Header>UPDATE RESERVATION</Header>
@@ -201,8 +192,8 @@ class ReserveUpdate extends Component {
                                             <input
                                                 type="tel"
                                                 placeholder="Confirmation Number"
-                                                name="guestlastname"
-                                                value={this.state.lastname}
+                                                name="confirmationNumber"
+                                                value={this.state.confirmationNumber}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
@@ -214,8 +205,8 @@ class ReserveUpdate extends Component {
                                             <input
                                                 type="tel"
                                                 placeholder="Room Number"
-                                                name="roomnumber"
-                                                value={this.state.roomnumber}
+                                                name="roomNumber"
+                                                value={this.state.roomNumber}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
@@ -242,11 +233,10 @@ class ReserveUpdate extends Component {
                                         </Col>
                                         <Col xl={3}>
                                             <input
-                                                id=""
                                                 type="number"
                                                 placeholder="Number of Nights"
                                                 name="nights"
-                                                value={this.state.departuredate && Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))}
+                                                value={this.state.departuredate && (Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24)))}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
@@ -257,8 +247,8 @@ class ReserveUpdate extends Component {
                                             <input
                                                 type="number"
                                                 placeholder="Number of Rooms"
-                                                name="roomsnumber"
-                                                value={this.state.roomsnumber}
+                                                name="numRooms"
+                                                value={this.state.numRooms}
                                                 onChange={this.handleInputChange}
                                             />
                                         </Col>
@@ -307,7 +297,6 @@ class ReserveUpdate extends Component {
                                     cvc={this.state.cvc}
                                     errors={this.state.errors}
                                 />
-
                             </Col>
                         </Row>
                     </Col>

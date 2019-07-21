@@ -43,12 +43,9 @@ class Maintenance extends Component {
             this.to.getDayPicker().showMonth(from);
         }
     }
-
     handleFromChange(startDateRange) {
         this.setState({ startDateRange });
-
     }
-
     handleToChange(endDay) {
         this.setState({ endDay }, this.showFromMonth);
     }
@@ -59,46 +56,42 @@ class Maintenance extends Component {
         });
     }
     handleUpdate(i) {
-        this.setState({
-            updateIssue: true,
-            issueId: this.state.issuesArray[i].room_issue_id,
-            roomNumber: this.state.issuesArray[i].room_num,
-            startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
-            endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
-            issue: this.state.issuesArray[i].issue,
-            roomId: this.state.issuesArray[i].room_id
+        this.setState({ startDateRange: "", endDay: "" }, () => {
+            this.setState({
+                updateIssue: true,
+                issueId: this.state.issuesArray[i].room_issue_id,
+                roomNumber: this.state.issuesArray[i].room_num,
+                startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
+                endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
+                issue: this.state.issuesArray[i].issue,
+                roomId: this.state.issuesArray[i].room_id
+            });
         });
     }
-
     updateFixed(id) {
         this.clearStateIssueInfo();
         api.updateRoomIssuesFixed(id)
             .then(() => this.makeAxiosCall())
             .catch(err => console.log(err));
     }
-
     clearStateIssueInfo() {
         this.setState({ newIssue: false, updateIssue: false, issueId: "", roomNumber: "", startDateRange: "", endDay: "", issue: "", roomId: "" });
     }
-
     handleCheckChange = event => {
-        event.target.name === "newIssue" && this.setState({ newIssue: !this.state.newIssue });
+        event.target.name === "newIssue" && this.setState({ newIssue: !this.state.newIssue, startDateRange: "", endDay: "" });
         event.target.name === "updateIssue" && this.clearStateIssueInfo();
     }
-
     makeAxiosCall = () => {
         api.getRoomIssues()
             .then(res => this.setState({ issuesArray: res }))
             .catch(err => console.log(err));
     }
-
     componentDidMount() {
         api.getRoomsIdNum()
             .then(res => this.setState({ roomsArray: res }))
             .catch(err => console.log(err));
         this.makeAxiosCall();
     }
-
     handleFormSubmit = event => {
         event.preventDefault();
         let values = [this.state.issue, this.props.user.user_id, moment(this.state.startDateRange).format("YYYY-MM-DD"), moment(this.state.endDay).format("YYYY-MM-DD")];
