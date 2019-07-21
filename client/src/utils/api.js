@@ -222,5 +222,14 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+    },
+    getHouseStatus: (date) => {
+        return axios.all([
+            axios.get('/api/hw/house_status_rooms'),
+            axios.get('/api/hw/house_status_res_rooms/' + date)
+        ])
+            .then(axios.spread((rooms, res_rooms) => {
+                return { rooms: rooms.data, res_rooms: res_rooms.data };
+            }));
     }
 }
