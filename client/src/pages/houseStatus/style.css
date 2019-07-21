@@ -38,7 +38,7 @@ button {
   padding-left: 5px;
   margin-top: 10px;
 }
-#rowHouse2 {
+.rowHouse2 {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid white;
   padding-left: 10px;

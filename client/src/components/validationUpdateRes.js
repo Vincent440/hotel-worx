@@ -94,9 +94,9 @@ class RegisterForm extends React.Component {
                                         </Col>
                                     <Col xl={9}>
                                         <CreditCardInput
-                                            cardNumberInputProps={{ name: 'creditCard', value: this.creditCard, onChange: this.props.handleChange }}
-                                            cardExpiryInputProps={{ name:'expirationDate', value: this.expirationDate, onChange: this.props.handleChange }}
-                                            cardCVCInputProps={{ name:'cvc'  , value: this.cvc, onChange: this.handleChange }}
+                                            cardNumberInputProps={{ name: 'creditCard', value: this.props.creditCard, onChange: this.props.handleChange }}
+                                            cardExpiryInputProps={{ name:'expirationDate', value: this.props.expirationDate, onChange: this.props.handleChange }}
+                                            cardCVCInputProps={{ name:'cvc'  , value: this.props.cvc, onChange: this.handleChange }}
                                             fieldClassName="input"
                                         />
                                     </Col>

@@ -8,6 +8,13 @@ const Room = {
             cb(results);
         });
     },
+    selectForHouseStatus: (cb) => {
+        const queryString = "SELECT COUNT(*) AS roomsToSell, SUM(CASE WHEN rm.clean=1 && rm.occupied=1 THEN 1 ELSE 0 END) AS cleanOccupied, SUM(CASE WHEN rm.clean=1 && rm.occupied=0 THEN 1 ELSE 0 END) AS cleanVacant, SUM(CASE WHEN rm.clean=0 && rm.occupied=1 THEN 1 ELSE 0 END) AS dirtyOccupied, SUM(CASE WHEN rm.clean=0 && rm.occupied=0 THEN 1 ELSE 0 END) AS dirtyVacant FROM rooms AS rm WHERE rm.active=1;";
+        connection.query(queryString, (err, results) => {
+            if (err) throw err;
+            cb(results);
+        });
+    },
     selectAllIdNum: (cb) => {
         const queryString = "SELECT rm.room_id, rm.room_num FROM rooms AS rm ORDER BY rm.room_id ASC;";
         connection.query(queryString, (err, results) => {
