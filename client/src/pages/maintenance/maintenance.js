@@ -43,12 +43,9 @@ class Maintenance extends Component {
             this.to.getDayPicker().showMonth(from);
         }
     }
-
     handleFromChange(startDateRange) {
         this.setState({ startDateRange });
-
     }
-
     handleToChange(endDay) {
         this.setState({ endDay }, this.showFromMonth);
     }
@@ -172,6 +169,7 @@ class Maintenance extends Component {
                                                 <Col xl={6}>
                                                     <div>
                                                         <DateRange
+                                                        
                                                             handleFromChange={this.handleFromChange}
                                                             handleToChange={this.handleToChange}
                                                             from={this.state.startDateRange}

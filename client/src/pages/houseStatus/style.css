@@ -1,4 +1,4 @@
-#headTop {
+.headTop {
   font-size: 20px;
   padding-left: 10px;
   margin-bottom: 10px;
@@ -24,7 +24,7 @@ button {
   border: 2px solid black;
   border-radius: 5px;
 }
-#rowHouse {
+.rowHouse {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid white;
   padding-left: 10px;

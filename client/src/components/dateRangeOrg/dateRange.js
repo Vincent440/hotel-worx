@@ -3,12 +3,8 @@ import Helmet from 'react-helmet';
 import "./style.css";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-
 import { formatDate, parseDate } from 'react-day-picker/moment';
-
 export default class DateRange extends React.Component {
- 
-  
   render() {
     const { from, to } = this.props;
     const modifiers = { start: from, end: to };

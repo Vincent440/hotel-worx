@@ -6,16 +6,11 @@ body {
   height: 100%;
   max-height: max-content;
   font-family: "Nanum Myeongjo", serif;
-  background-image: linear-gradient(
-    to bottom,
-      #151a83
-  );
+  background-color:
+      #151a83;
   background-size: cover;
   background-position: center;
 
-}
-::-webkit-scrollbar {
-  display: none;
 }
 
 #root div div canvas {

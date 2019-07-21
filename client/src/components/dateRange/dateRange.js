@@ -12,6 +12,7 @@ export default class DateRange extends React.Component {
   render() {
     const { from, to } = this.props;
     const modifiers = { start: from, end: to };
+    
     return (
       <div className="InputFromTo">
         <DayPickerInput
@@ -20,7 +21,7 @@ export default class DateRange extends React.Component {
           format="LL"
           formatDate={formatDate}
           parseDate={parseDate}
-          dayPickerProps={{
+                    dayPickerProps={{
             selectedDays: [from, { from, to }],
             disabledDays: { after: to },
             toMonth: to,
