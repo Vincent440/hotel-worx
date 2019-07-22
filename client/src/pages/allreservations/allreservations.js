@@ -51,19 +51,19 @@ class UpdateReservation extends Component {
 
     }
 
-    componentDidMount() {
-        this.makeAxiosCall();
-    }
+    // componentDidMount() {
+    //     this.makeAxiosCall();
+    // }
 
     makeAxiosCall = () => {
         const criteria = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            edate: moment(this.state.edate).format('YYYY-MM-DD'),
-            sdate: moment(this.state.sdate).format('YYYY-MM-DD'),
+            sdate: this.state.sdate === "" ? "" : moment(this.state.sdate).format('YYYY-MM-DD'),
+            edate: this.state.edate === "" ? "" : moment(this.state.edate).format('YYYY-MM-DD'),
             confirmationNumber: this.state.confirmationNumber
         }
-        api.getReservations(criteria)
+        api.getSomeReservations(criteria)
             .then(res => this.setState({ resRooms: res }))
             .catch(err => console.log(err));
     }

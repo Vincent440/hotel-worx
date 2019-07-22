@@ -33,6 +33,20 @@ export default {
                 console.log(error);
             });
     },
+    getSomeReservations: (criteria) => {
+        const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
+        const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
+        const sdate = criteria.sdate === "" ? "undefined" : criteria.sdate;
+        const edate = criteria.edate === "" ? "undefined" : criteria.edate;
+        const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
+        return axios.get('/api/hw/reservations_list/' + fname + '/' + lname + '/' + sdate + '/' + edate + '/' + cnum)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getRoomTypes: () => {
         return axios.get('/api/hw/room_types')
             .then((response) => {
