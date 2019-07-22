@@ -8,6 +8,7 @@ import api from '../../utils/api';
 import moment from "moment";
 import { Container, Table } from 'react-bootstrap';
 import Particles from "react-particles-js";
+import { Link } from 'react-router-dom';
 
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 const today = moment().format("YYYY-MM-DD");
@@ -128,7 +129,7 @@ class Arrivals extends Component {
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={12}>
-                                    Pending departures by room type:
+                                   <Link to="../../cashiering/billing"> Pending departures by room type:</Link>
                                     {this.state.pendingArray.length === 0 ? " None" :
                                         (this.state.pendingArray.map((type, i) => (
                                             <span key={type.room_type_id}>{i > 0 ? ", " : " "}({type.type}: {type.pending_departures})</span>
