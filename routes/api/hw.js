@@ -212,19 +212,12 @@ router.get("/reservations", (req, res) => {
 
 router.get("/reservations_list/:fname/:lname/:sdate/:edate/:cnum", (req, res) => {
     let conditions = [];
-    console.log(req.params.fname);
-    console.log(req.params.lname);
-    console.log(req.params.sdate);
-    console.log(req.params.edate);
-    console.log(req.params.cnum);
     req.params.fname !== "undefined" && conditions.push("c.first_name LIKE '" + req.params.fname + "%'");
     req.params.lname !== "undefined" && conditions.push("c.last_name LIKE '" + req.params.lname + "%'");
     req.params.sdate !== "undefined" && conditions.push("(rr.check_in_date='" + req.params.sdate + "')");
     req.params.edate !== "undefined" && conditions.push("(rr.check_out_date='" + req.params.edate + "')");
     req.params.cnum !== "undefined" && conditions.push("rr.confirmation_code LIKE '%" + req.params.cnum + "%'");
     conditions.length === 0 && conditions.push("(rr.check_in_date>=CURDATE())");
-    console.log(conditions);
-    // res.end();
     db.Reservation.selectSome(conditions, (data) => {
         res.json(data);
     });

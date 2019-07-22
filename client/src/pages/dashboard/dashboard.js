@@ -40,8 +40,6 @@ function Dashboard(props) {
                                 <Link className="btn btn-primary" id="dashboardLink" to="/reserve/allreservations">
                                     <img id="updateLogo" className="smallLogos" alt="updateLogo" src={updateLogo} />
                                     Update Reservation</Link>
-                                <Link className="btn btn-primary" id="dashboardLink" to="/reserve/testUpdatereservation">
-                                    Test Update Reservation</Link>
                             </div>
                         </Col>
                         <Col xs={12} sm={12} md={6} lg={6} xl={3}>
