@@ -63,7 +63,7 @@ class HouseStatus extends Component {
 
                 <Row>
                     <Col xs={4} sm={4} md={2} lg={2} xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart />
                     </Col>
                     <Col xs={8} sm={8} md={10} lg={10} xl={10}>
                         <Row>

@@ -64,7 +64,7 @@ class Reservation extends Component {
             <Particles params={particleOpt} id="particul" />
 
             <Row id="dashboardTable">
-               <InfoPart user={this.props.user} logout={this.props.logout} />
+               <InfoPart />
                 <Col sm={10}>
                     <row>
                         <form>

@@ -8,21 +8,32 @@ import image3 from './hotel3.jpg';
 import image5 from './hotel5.jpg';
 import image6 from './hotel6.jpg';
 import image8 from './image8.jpg';
-
+import UserContext from '../../UserContext';
 
 class Login extends Component {
+
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = event => {
+      const { name, value } = event.target;
+      this.setState({ [name]: value });
+    };
+    this.handleSubmit = event => {
+      event.preventDefault();
+      if (!this.isFormInValid()) {
+        console.log(this.context);
+        this.context.postUserLogin({ username: this.state.username, password: this.state.password });
+      }
+    };
     this.state = {
       username: "",
       password: ""
     };
   }
-
   componentDidMount() {
-    this.props.checkIfLoggedIn();
+    if (this.context.user.access_id === 0) {
+      this.context.getUserStatus();
+    }
   }
   isFormInValid = () => {
     if (this.state.username.length < 4 || this.state.password.length < 5) {
@@ -31,32 +42,23 @@ class Login extends Component {
       return false;
     }
   };
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-  handleSubmit = event => {
-    event.preventDefault();
-    if (this.isFormInValid() === false) {
-      this.props.postLogin({ username: this.state.username, password: this.state.password });
-    }
-  };
+
   render() {
     return (
-      <div>
-        <BackgroundSlider
-          images={[ image3, image5, image6,image8]}
-          duration={5}
-          transition={1} />
-        <Container>
-          <div id="logoLogin">
-            <Logo />
-            <LoginForm username={this.state.username} password={this.state.password} isFormInValid={this.isFormInValid} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
-          </div>
-        </Container>
-      </div>
+          <span>
+            <BackgroundSlider
+              images={[ image3, image5, image6,image8]}
+              duration={5}
+              transition={1} />
+            <Container>
+              <div id="logoLogin">
+                <Logo />
+                <LoginForm username={this.state.username} password={this.state.password} isFormInValid={this.isFormInValid} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
+              </div>
+            </Container> 
+          </span>
     );
   }
 }
-
+Login.contextType = UserContext;
 export default Login;

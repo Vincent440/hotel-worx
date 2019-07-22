@@ -45,7 +45,8 @@ class ReserveNew extends Component {
         room_comments: "",
         reservationSuccess: false,
         newReservationId: "",
-        errors: {}
+        errors: {},
+        user_id: ""
     };
 
     showFromMonth() {
@@ -168,7 +169,8 @@ class ReserveNew extends Component {
             adults: this.state.adults,
             roomtype: this.state.roomtype,
             rate: this.state.rate,
-            comments: this.state.room_comments
+            comments: this.state.room_comments,
+            user_id: this.state.user_id
         }
         api.createReservation(data)
             .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
@@ -191,7 +193,7 @@ class ReserveNew extends Component {
                 <Particles params={particleOpt} id="particul" />
                 <Row>
                 <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart />
                     </Col>
                     <Col xs={6} sm={8}md={9} lg={9} xl={10}>
                         <Row>

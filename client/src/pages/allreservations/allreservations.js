@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
@@ -24,7 +25,9 @@ class UpdateReservation extends Component {
         sdate: "",
         edate: "",
         confirmationNumber: "",
-        resRooms: []
+        resRooms: [],
+        reservationChosen: false,
+        chosenReservationId: ""
     };
     showFromMonth() {
         const { from, to } = this.state;
@@ -36,9 +39,7 @@ class UpdateReservation extends Component {
         }
     }
     handleFromChange(sdate) {
-        // Change the from date and focus the "to" input field
         this.setState({ sdate });
-
     }
     handleToChange(edate) {
         this.setState({ edate }, this.showFromMonth);
@@ -48,22 +49,17 @@ class UpdateReservation extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-
-    }
-
-    componentDidMount() {
-        this.makeAxiosCall();
     }
 
     makeAxiosCall = () => {
         const criteria = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            edate: moment(this.state.edate).format('YYYY-MM-DD'),
-            sdate: moment(this.state.sdate).format('YYYY-MM-DD'),
+            sdate: this.state.sdate === "" ? "" : moment(this.state.sdate).format('YYYY-MM-DD'),
+            edate: this.state.edate === "" ? "" : moment(this.state.edate).format('YYYY-MM-DD'),
             confirmationNumber: this.state.confirmationNumber
         }
-        api.getReservations(criteria)
+        api.getSomeReservations(criteria)
             .then(res => this.setState({ resRooms: res }))
             .catch(err => console.log(err));
     }
@@ -74,6 +70,10 @@ class UpdateReservation extends Component {
 
     }
 
+    handleChosenReservation = id => {
+        this.setState({ reservationChosen: true, chosenReservationId: id });
+    }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -82,13 +82,22 @@ class UpdateReservation extends Component {
     }
 
     render() {
+        if (this.state.reservationChosen) {
+            localStorage.setItem('reservation_id', this.state.chosenReservationId);
+            return (
+                <Redirect to={{
+                    pathname: '/reserve/testUpdatereservation'
+                }} />
+            )
+        }
+
         return (
             <Container>
                 <Particles params={particleOpt} id="particul" />
 
                 <Row>
                     <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart />
                     </Col>
                     <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                         <Row>
@@ -112,7 +121,7 @@ class UpdateReservation extends Component {
                                     </Row>
 
                                     <Row style={{ marginTop: "5px" }}>
-                                        <Col xl={1}>Name:</Col>
+                                        <Col xl={1}>First Name:</Col>
                                         <Col xl={3}>
                                             <input
                                                 type="text"
@@ -147,8 +156,6 @@ class UpdateReservation extends Component {
 
                                     </Row>
                                 </Col>
-
-
                                 <Col xl={2} style={{ paddingTop: "25px", Left: "30px" }}>
                                     <Col xl={12}>
                                         <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
@@ -158,42 +165,27 @@ class UpdateReservation extends Component {
                             </Row>
                         </div>
                         <div id="res">
-
                             <Row style={{ paddingBottom: "20px" }}>
                                 <Col xl={12}>
                                     <Table>
                                         <tbody>
                                             <tr>
-                                                <th>
-                                                    Last Name
-                                                    </th>
-                                                <th>
-                                                    First Name
-                                                    </th>
-                                                <th>
-                                                    Arrival Date
-                                             </th>
-                                                <th>
-                                                    Departure Date
-                                             </th>
-                                                <th>
-                                                    Room Type
-                                                    </th>
-                                                <th>
-                                                    Status
-                                              </th>
+                                                <th>Last Name</th>
+                                                <th>First Name</th>
+                                                <th>Arrival Date</th>
+                                                <th>Departure Date</th>
+                                                <th>Room Type</th>
+                                                <th>Status</th>
                                             </tr>
 
                                             {this.state.resRooms.map(res => (
-                                                <tr key={res.res_room_id}>
+                                                <tr key={res.res_room_id} onClick={() => this.handleChosenReservation(res.reservation_id)}>
                                                     <td>{res.last_name}</td>
                                                     <td>{res.first_name}</td>
                                                     <td>{res.check_in_date}</td>
                                                     <td>{res.check_out_date}</td>
                                                     <td>{res.type}</td>
-                                                    <td>
-                                                        {res.active === 1 ? "Active" : "Cancelled"}
-                                                    </td>
+                                                    <td>{res.active === 1 ? "Active" : "Cancelled"}</td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -202,7 +194,6 @@ class UpdateReservation extends Component {
                             </Row>
                         </div>
                     </Col>
-
                 </Row >
             </Container >
         )
