@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import UserContext from "./UserContext";
 import authapi from "./utils/authapi";
 import ReserveNew from "./pages/newreservation/newreservation";
 import ReserveUpdate from "./pages/updatereservation/updatereservation";
@@ -15,90 +16,99 @@ import Housekeeping from "./pages/housekeeping/housekeeping";
 import DetailedAvailability from "./pages/detailedAvailability/detailedAvailability";
 import HouseStatus from "./pages/houseStatus/houseStatus";
 import Maintenance from "./pages/maintenance/maintenance";
-// import PrivateRoute from "./components/PrivateRoute";
-class PrivateRoute extends Component {
-  render() {
-    const { component: Component, loggedIn,user,logout, ...rest } = this.props;
-    const renderRoute = props => {
-      if (loggedIn === true) {
-        return <Component user={user} logout={logout} loggedIn={loggedIn} {...props} />;
-      }
-      return <Redirect to="/login" />;
-    };
-    return <Route {...rest} render={renderRoute} />;
-  }
-}
+
+
+const PrivateAccessRoute = ({ component: Component, aId, ...rest }) => (
+  <UserContext.Consumer>
+    {({ user }) => (
+      <Route
+        {...rest}
+        render={props =>
+          user.access_id >= aId ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/",
+                state: { from: props.location }
+              }}
+            />
+          )
+        }
+      />
+    )}
+  </UserContext.Consumer>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
-    this.setAppLogin.bind(this);
-    this.postLogin.bind(this);
-    this.checkIfAppIsLoggedIn.bind(this);
-    this.appLogout.bind(this);
-    this.state = {
-      user: props.user || {},
-      loggedIn: false
+    this.postUserLogin = userData => {
+      if (userData) {
+        authapi.postUserLogin(userData, (err, res) => {
+          if (err === true) {
+            return console.log("an error occurred failed to log user in.");
+          }
+          this.setState({ user: res.user });
+        });
+      }
     };
-  }
-  setAppLogin = () => {
-    this.setState({
-      user: {},
-      loggedIn: false
-    });
-  };
-  appLogout = () => {
-    authapi.getLoggedOut().then(this.setAppLogin);
-  };
-  postLogin = userData => {
-    if (userData) {
-      authapi.postUserLogin(userData, (err, res) => {
-        if (err === true) {
-          return console.log("err failed to log in");
-        } else {
-          console.log(res);
-          this.setState({ user: res.user, loggedIn: res.loggedIn });
+    this.getUserLogout = event => {
+      event.preventDefault();
+      authapi.getLoggedOut().then(this.getUserStatus);
+    };
+    this.getUserStatus = () => {
+      authapi.getLoginStatus().then(res => {
+        if (res) {
+          this.setState(()=>(
+            { user: res.user }
+            )
+          );
         }
       });
-    }
-  };
-  checkIfAppIsLoggedIn = () => {
-    authapi.getLoginStatus().then(res => {
-      if(res){
-        this.setState({ user: res.user, loggedIn: res.loggedIn });
-      }
-    });
-  };
-  checkServerIfLoggedIn = () => {
-    authapi.getLoginStatus().then(res => res.loggedIn);
-  };
+    };
+    this.state = {
+      user: {
+        access_id: 0,
+        type: "Guest",
+        user_id: 0,
+        username: "guest"
+      },
+      getUserStatus: this.getUserStatus,
+      getUserLogout: this.getUserLogout,
+      postUserLogin: this.postUserLogin
+    };
+  }
   render() {
-    let { user, loggedIn } = this.state;
+    let { user } = this.state;
     return (
-      <Router>
-        <div>
-          <div>
+      <UserContext.Provider value={this.state}>
+        <Router> 
+          { user.access_id === 0 ? (
+            <div>
+              <Redirect to="/" />
+              <Login />
+            </div> ) : 
+          (
             <Switch>
-              <Route path="/login" exact strict
-                render={props => (!loggedIn ? <Login {...props} user={user} checkIfLoggedIn={this.checkIfAppIsLoggedIn} loggedIn={loggedIn} postLogin={this.postLogin} /> : <Redirect to="/" />)}
-              />
-              {/* <Route exact path="/" component={Dashboard} user={user} loggedIn={loggedIn} /> */}
-              <PrivateRoute path="/" exact strict component={Dashboard} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/new" component={ReserveNew} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/allreservations" component={UpdateReservation} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/testUpdatereservation" component={ReserveUpdate} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reserve/testreservation" component={ReservationTest} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/frontdesk/arrivals" component={Arrivals} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/frontdesk/inhouse" component={Inhouse} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/frontdesk/maintenance" component={Maintenance} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/cashiering/billing" component={Billing} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/cashiering/payment" component={Payment} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reports/housekeeping" component={Housekeeping} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reports/detailedAvailability" component={DetailedAvailability} logout={this.appLogout} loggedIn={loggedIn} user={user} />
-              <PrivateRoute exact path="/reports/houseStatus" component={HouseStatus} logout={this.appLogout} loggedIn={loggedIn} user={user} />
+              <PrivateAccessRoute exact strict path="/" component={Dashboard} aId="1" />
+              <PrivateAccessRoute exact path="/reserve/new" component={ReserveNew} aId="1" />
+              <PrivateAccessRoute exact path="/reserve/allreservations" component={UpdateReservation} aId="1" />
+              <PrivateAccessRoute exact path="/reserve/testUpdatereservation" component={ReserveUpdate} aId="1" />
+              <PrivateAccessRoute exact path="/reserve/testreservation" component={ReservationTest} aId="1" />
+              <PrivateAccessRoute exact path="/frontdesk/arrivals" component={Arrivals} aId="1" />
+              <PrivateAccessRoute exact path="/frontdesk/inhouse" component={Inhouse} aId="1" />
+              <PrivateAccessRoute exact path="/frontdesk/maintenance" component={Maintenance} aId="1" />
+              <PrivateAccessRoute exact path="/cashiering/billing" component={Billing} aId="1" />
+              <PrivateAccessRoute exact path="/cashiering/payment" component={Payment} aId="1" />
+              <PrivateAccessRoute exact path="/reports/housekeeping" component={Housekeeping} aId="1" />
+              <PrivateAccessRoute exact path="/reports/detailedAvailability" component={DetailedAvailability} aId="1" />
+              <PrivateAccessRoute exact path="/reports/houseStatus" component={HouseStatus} aId="1" />
             </Switch>
-          </div>
-        </div>
-      </Router>
+          )
+        }
+        </Router>
+      </UserContext.Provider>
     );
   }
 }
