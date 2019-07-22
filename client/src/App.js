@@ -47,7 +47,7 @@ class App extends Component {
       if (userData) {
         authapi.postUserLogin(userData, (err, res) => {
           if (err === true) {
-            return console.log("an error occurred failed to log user in.");
+            return console.log("Failed to log in");
           }
           this.setState({ user: res.user });
         });
