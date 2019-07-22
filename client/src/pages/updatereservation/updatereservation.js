@@ -22,6 +22,7 @@ class ReserveUpdate extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
+
     state = {
         firstname: "",
         lastname: "",
@@ -46,6 +47,7 @@ class ReserveUpdate extends Component {
         newReservationId: "",
         errors: {}
     };
+
     showFromMonth() {
         const { from, to } = this.state;
         if (!from) {
@@ -55,21 +57,25 @@ class ReserveUpdate extends Component {
             this.to.getDayPicker().showMonth(from);
         }
     }
+
     handleFromChange(arrivaldate) {
         this.setState({ arrivaldate: "", departuredate: "" }, () => {
             this.setState({ arrivaldate });
         });
     }
+
     handleToChange(departuredate) {
         this.setState({ arrivaldate: "", departuredate: "" }, () => {
             this.setState({ departuredate }, this.showFromMonth);
         });
     }
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
         });
     }
+
     validateForm() {
         let errors = {};
         let formIsValid = true;
@@ -119,26 +125,34 @@ class ReserveUpdate extends Component {
         });
         return formIsValid;
     }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     }
+
     componentDidMount() {
-        api.getRoomTypes()
-            .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
-            .catch(err => console.log(err));
-        api.getReservation(1199)
-            .then(res => this.setState({ firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].type, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num }))
-            .catch(err => console.log(err));
+        let reservation_id = "";
+        if (localStorage && localStorage.getItem('reservation_id')) {
+            reservation_id = JSON.parse(localStorage.getItem('reservation_id'));
+            api.getRoomTypes()
+                .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
+                .catch(err => console.log(err));
+            api.getReservation(reservation_id)
+                .then(res => this.setState({ firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].type, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num }))
+                .catch(err => console.log(err));
+        }
     }
+
     handleFormSubmit(e) {
         e.preventDefault();
         if (this.validateForm()) {
             this.makeAxiosCall();
         }
     }
+
     makeAxiosCall = () => {
         const data = {
             firstname: this.state.firstname,
