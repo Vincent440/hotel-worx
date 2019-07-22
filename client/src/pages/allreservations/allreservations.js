@@ -39,9 +39,7 @@ class UpdateReservation extends Component {
         }
     }
     handleFromChange(sdate) {
-        // Change the from date and focus the "to" input field
         this.setState({ sdate });
-
     }
     handleToChange(edate) {
         this.setState({ edate }, this.showFromMonth);
@@ -51,7 +49,6 @@ class UpdateReservation extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         });
-
     }
 
     makeAxiosCall = () => {
