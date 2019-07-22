@@ -35,7 +35,7 @@ class ReservationTest extends Component {
             <Container>
                 <Row>
                     <Col xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart />
                     </Col>
                     <Col xl={10}>
                         <Row>
