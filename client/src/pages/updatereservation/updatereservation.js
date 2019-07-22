@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import InfoPart from "../../components/infoPart";
@@ -187,7 +187,7 @@ class ReserveUpdate extends Component {
                 <Particles params={particleOpt} id="particul" />
                 <Row>
                     <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                        <InfoPart />
                     </Col>
                     <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                         <Row>

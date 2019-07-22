@@ -34,7 +34,7 @@ class Reservation extends Component {
             <Row id="dashboardTable1">
                 <Col xs={6} sm={4} md={3} lg={3} xl={2}>
 
-                    <InfoPart user={this.props.user} logout={this.props.logout} />
+                    <InfoPart />
                 </Col>
                 <Col xs={6} sm={8} md={9} lg={9} xl={10}>                    <row>
                     <div id="header">

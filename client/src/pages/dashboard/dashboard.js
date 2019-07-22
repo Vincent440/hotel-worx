@@ -18,14 +18,14 @@ import maintenanceLogo from "./images/maintenanceLogo.png";
 
 const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
-function Dashboard(props) {
+function Dashboard() {
     return (
         <Container>
             <Particles params={particleOpt} id="particul" />
 
             <Row>
                 <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                    <InfoPart user={props.user} logout={props.logout} />
+                    <InfoPart />
                 </Col>
                 <Col xs={6} sm={8} md={9} lg={9} xl={10}>
                     <Row>
