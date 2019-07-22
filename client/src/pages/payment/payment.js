@@ -49,9 +49,10 @@ class Payment extends Component {
                                             {this.state.InvoiceArray.map(invoice => (
                                                 <ul key={invoice.res_room_id}>
                                                     <tr>
-                                                        <th colspan="2"><strong>Room Number:</strong> {invoice.room_num}</th>
+                                                        <th><strong>Room Number:</strong> {invoice.room_num}</th>
                                                         <th colspan="2"><strong>Name:</strong> {invoice.last_name}, {invoice.first_name}</th>
                                                         <th><strong>CC Number: </strong> {invoice.ccLastFour} </th>
+                                                        <th><strong>Date: </strong></th>
                                                     </tr>
                                                     <tr>
                                                         <th><strong>Num Nights</strong></th>

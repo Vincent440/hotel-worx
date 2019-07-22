@@ -165,6 +165,7 @@ class Maintenance extends Component {
                                                 <Col xl={6}>
                                                     <div>
                                                         <DateRange
+                                                        
                                                             handleFromChange={this.handleFromChange}
                                                             handleToChange={this.handleToChange}
                                                             from={this.state.startDateRange}
