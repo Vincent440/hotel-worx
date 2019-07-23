@@ -95,7 +95,7 @@ class App extends Component {
               <Login />
             </div> ) : 
           (
-            <Container>
+            <Container className="m-1" fluid>
               <Particles params={particleOpt} id="particul" />
               <Row>
                 <Col xs={6} sm={4} md={3} lg={3} xl={2}>
