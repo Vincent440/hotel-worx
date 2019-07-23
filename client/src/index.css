@@ -9,7 +9,6 @@ body {
   background-color: #151a83;
   background-size: cover;
   background-position: center;
-
 }
 
 #root div div canvas {
@@ -18,6 +17,9 @@ body {
   height:fit-content;
 }
 
+#root{
+  padding-top: 25px;
+}
 .selector-for-some-widget {
   box-sizing: content-box;
 }

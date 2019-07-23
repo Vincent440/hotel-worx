@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart";
 import moment from "moment";
 import Header from "../../components/Header"
-import { Container } from 'react-bootstrap';
-import Particles from "react-particles-js";
-
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 const today = moment().format("YYYY-MM-DD");
 
@@ -57,99 +52,89 @@ class HouseStatus extends Component {
 
     render() {
         return (
-
-            <Container>
-                <Particles params={particleOpt} id="particul" />
-
+    <div>
+        <Row>
+            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Header>HOUSE STATUS</Header>
+            </Col>
+        </Row>
+        <div id="resHouse">
+            <Row>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop" >Room Summary</Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Total Rooms to Sell:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.roomsToSell}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                        <Col xs={8} sm={8} md={8} lg={9} xl={9}>Min. Available Tonight:</Col>
+                        <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.minAvailableTonight}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Max. Occupied Tonight:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.maxOccupiedTonight}</Col>
+                    </Row>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop">Activity</Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Stayovers:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.stayovers}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Expected: </Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresExpected}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Actual:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresActual}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Expected:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsExpected}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Actual:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsActual}</Col>
+                    </Row>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop">Room Status-Housekeeping</Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}></Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Vacant</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Occupied</Col>
+                    </Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Clean</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanVacant}</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanOccupied}</Col>
+                    </Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Dirty</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyVacant}</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyOccupied}</Col>
+                    </Row>
+                </Col>
+            </Row>
+            <div id="dateRow">
                 <Row>
-                    <Col xs={4} sm={4} md={2} lg={2} xl={2}>
-                        <InfoPart />
-                    </Col>
-                    <Col xs={8} sm={8} md={10} lg={10} xl={10}>
-                        <Row>
-                            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-                                <Header>HOUSE STATUS</Header>
-                            </Col>
-                        </Row>
-                        <div id="resHouse">
-                            <Row>
-                                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-                                    <Row className="headTop" >Room Summary</Row>
-                                    <Row className="rowHouse">
-                                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Total Rooms to Sell:</Col>
-                                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.roomsToSell}</Col>
-                                    </Row>
-                                    <Row className="rowHouse">
-                                        <Col xs={8} sm={8} md={8} lg={9} xl={9}>Min. Available Tonight:</Col>
-                                        <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.minAvailableTonight}</Col>
-                                    </Row>
-                                    <Row className="rowHouse">
-                                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Max. Occupied Tonight:</Col>
-                                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.maxOccupiedTonight}</Col>
-                                    </Row>
-                                </Col>
-                                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-                                    <Row className="headTop">Activity</Row>
-                                    <Row className="rowHouse">
-                                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Stayovers:</Col>
-                                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.stayovers}</Col>
-                                    </Row>
-                                    <Row className="rowHouse">
-                                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Expected: </Col>
-                                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresExpected}</Col>
-                                    </Row>
-                                    <Row className="rowHouse">
-                                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Actual:</Col>
-                                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresActual}</Col>
-                                    </Row>
-                                    <Row className="rowHouse">
-                                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Expected:</Col>
-                                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsExpected}</Col>
-                                    </Row>
-                                    <Row className="rowHouse">
-                                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Actual:</Col>
-                                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsActual}</Col>
-                                    </Row>
-                                </Col>
-                                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-                                    <Row className="headTop">Room Status-Housekeeping</Row>
-                                    <Row className="rowHouse2">
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}></Col>
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Vacant</Col>
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Occupied</Col>
-                                    </Row>
-                                    <Row className="rowHouse2">
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Clean</Col>
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanVacant}</Col>
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanOccupied}</Col>
-                                    </Row>
-                                    <Row className="rowHouse2">
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Dirty</Col>
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyVacant}</Col>
-                                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyOccupied}</Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                            <div id="dateRow">
-                                <Row>
-                                    <Col>Date:
-                                        <input className="ml-2" style={{ width: "150px", height: "30px" }}
-                                            type="date"
-                                            name="date"
-                                            value={this.state.date}
-                                            onChange={this.handleDateChange}
-                                        />
-                                    </Col>
-                                </Row>
-                            </div>
-                            <div id="buttonDiv">
-                                <button type="button" className="btn btn-primary"onClick={this.handleFormSubmit}>Search</button>
-                            </div>
-                        </div>
+                    <Col>Date:
+                        <input className="ml-2" style={{ width: "150px", height: "30px" }}
+                            type="date"
+                            name="date"
+                            value={this.state.date}
+                            onChange={this.handleDateChange}
+                        />
                     </Col>
                 </Row>
-            </Container >
-        )
+            </div>
+            <div id="buttonDiv">
+                <button type="button" className="btn btn-primary"onClick={this.handleFormSubmit}>Search</button>
+            </div>
+        </div>
+    </div>
+    )
     }
 }
 

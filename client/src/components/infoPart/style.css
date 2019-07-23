@@ -1,6 +1,6 @@
 #infoCard {
   background-color:rgba(255, 255, 255, 0.586);
-  height: 650px;
+  height: 570px;
   width: 200px;
   margin-top: 0px;
   border: 1px solid white;
@@ -16,23 +16,23 @@
   }
 }
 #userNameD {
-  margin-top: 50px;
+  margin-top: 40px;
   font-family: 'Nanum Myeongjo', serif;
   color: black;
 }
 
 #optionsDiv {
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .card-text {
   margin-left: 0px;
-  height: 150px;
+  height: 120px;
   width: 200px;
   font-size: 10px;
 }
 #infoCard p {
-  margin-top: 30px;
+  margin-top: 0px;
   color: black;
 }
 
@@ -76,7 +76,7 @@
 #infoCard .card-text .rw-main.type-today .rw-box-left {
   padding: 0px;
   width: 100%;
-  margin: 5px;
+  margin: 0px;
   color: black;
   font-family: 'Nanum Myeongjo', serif;
   text-align: center;
@@ -90,6 +90,7 @@
 }
 
 #userSetting {
+  padding: 0px;
   margin-left: 50px;
   width: 50px;
   float: left;
@@ -110,8 +111,7 @@
   margin-right: 5px;
 }
 #hotelInfoPart {
-  margin-top: 20px;
-  margin-bottom: 25px;
+  margin: 0px;
   text-align: center;
   font-family: 'Nanum Myeongjo', serif;
   color: black;
@@ -120,6 +120,7 @@
 
 #logOut {
   margin-left: 0px;
+  padding: 0px;
   width: 50px;
   float: left;
   margin-top: 0px;

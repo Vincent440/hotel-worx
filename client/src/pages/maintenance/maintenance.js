@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
 import api from '../../utils/api';
 import moment from "moment";
-import { Container, Table } from 'react-bootstrap';
-import Particles from "react-particles-js";
+import Table from 'react-bootstrap/Table';
 import DateRange from "../../components/dateRangeOrg/dateRange";
-
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 // const today = moment().format("YYYY-MM-DD");
 
 class Maintenance extends Component {
@@ -115,125 +111,116 @@ class Maintenance extends Component {
 
     render() {
         return (
-            <Container>
-                <Particles params={particleOpt} id="particul" />
-
+    <div>
+        <Row>
+            <Col xl={12}>
+                <Header>MAINTENANCE</Header>
+            </Col>
+        </Row>
+        <div id="res" style={{ paddingBottom: "10px" }}>
+            <Row>
+                <Col xl={3}>
+                    <b id="questionPart">
+                        {this.state.updateIssue ? "Update Selected Issue" : "Add New Work Order"}
+                    </b>
+                </Col>
+                <Col xl={5}>
+                    <input
+                        type="checkbox"
+                        name={this.state.updateIssue ? "updateIssue" : "newIssue"}
+                        checked={this.state.updateIssue ? this.state.updateIssue : this.state.newIssue}
+                        onChange={this.handleCheckChange}
+                    />
+                </Col>
+            </Row>
+            <hr />
+            {(this.state.newIssue || this.state.updateIssue) &&
                 <Row>
-                    <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart />
-                    </Col>
-                    <Col xs={6} sm={8} md={9} lg={9} xl={10}>
-                        <Row>
-                            <Col xl={12}>
-                                <Header>MAINTENANCE</Header>
-                            </Col>
-                        </Row>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
+                    <div id="workOrder">
+                        <Col xl={12}>
                             <Row>
-                                <Col xl={3}>
-                                    <b id="questionPart">
-                                        {this.state.updateIssue ? "Update Selected Issue" : "Add New Work Order"}
-                                    </b>
-                                </Col>
-                                <Col xl={5}>
-                                    <input
-                                        type="checkbox"
-                                        name={this.state.updateIssue ? "updateIssue" : "newIssue"}
-                                        checked={this.state.updateIssue ? this.state.updateIssue : this.state.newIssue}
-                                        onChange={this.handleCheckChange}
+                                <Col xl={2}>Room Number</Col>
+                                <Col sm={2}>
+                                    <input style={{ width: "150px" }}
+                                        onChange={this.handleChange}
+                                        name="roomNumber"
+                                        placeholder="Room Number"
+                                        value={this.state.roomNumber}
                                     />
                                 </Col>
                             </Row>
-                            <hr />
-                            {(this.state.newIssue || this.state.updateIssue) &&
-                                <Row>
-                                    <div id="workOrder">
-                                        <Col xl={12}>
-                                            <Row>
-                                                <Col xl={2}>Room Number</Col>
-                                                <Col sm={2}>
-                                                    <input style={{ width: "150px" }}
-                                                        onChange={this.handleChange}
-                                                        name="roomNumber"
-                                                        placeholder="Room Number"
-                                                        value={this.state.roomNumber}
-                                                    />
-                                                </Col>
-                                            </Row>
-                                            <Row id="fourthRow">
-                                                <Col xl={2}>Date</Col>
-                                                <Col xl={6}>
-                                                    <div>
-                                                        <DateRange
-                                                        
-                                                            handleFromChange={this.handleFromChange}
-                                                            handleToChange={this.handleToChange}
-                                                            from={this.state.startDateRange}
-                                                            to={this.state.endDay}
-                                                        />
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row id="maintRow">
-                                                <Col xl={2}>Problem</Col>
-                                                <Col xl={5}>
-                                                    <textarea
-                                                        type="text"
-                                                        name="issue"
-                                                        value={this.state.issue}
-                                                        onChange={this.handleChange}
-                                                        style={{ backgroundColor: "#F0EAD6" }}
-                                                    ></textarea>
-                                                </Col>
-                                                <Col xl={2}>
-                                                </Col>
-                                                <Col xl={2}>
-                                                    <button type="button" className="btn btn-success" onClick={this.handleFormSubmit}>Submit</button>
-                                                </Col>
-                                            </Row>
-                                        </Col>
+                            <Row id="fourthRow">
+                                <Col xl={2}>Date</Col>
+                                <Col xl={6}>
+                                    <div>
+                                        <DateRange
+                                        
+                                            handleFromChange={this.handleFromChange}
+                                            handleToChange={this.handleToChange}
+                                            from={this.state.startDateRange}
+                                            to={this.state.endDay}
+                                        />
                                     </div>
-                                </Row>
-                            }
-                        </div>
-                        <div id="res">
-                            <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
-                                <Col xl={12}>
-                                    <Table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Room Number</th>
-                                                <th>Room Type</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Problem</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                            {this.state.issuesArray.map((issue, i) => (
-                                                <tr key={issue.room_issue_id}>
-                                                    <td>{issue.room_num}</td>
-                                                    <td>{issue.type}</td>
-                                                    <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>
-                                                    <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
-                                                    <td>{issue.issue}</td>
-                                                    <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Update</button>
-                                                    </td>
-                                                    <td><button type="button" className="btn btn-success" onClick={() => this.updateFixed(issue.room_issue_id)}>Fixed</button>
-                                                    </td>
-                                                </tr>
-                                            ))}
-
-
-                                        </tbody>
-                                    </Table>
                                 </Col>
-                            </Row >
-                        </div>
-                    </Col>
-                </Row >
-            </Container >
-        )
+                            </Row>
+                            <Row id="maintRow">
+                                <Col xl={2}>Problem</Col>
+                                <Col xl={5}>
+                                    <textarea
+                                        type="text"
+                                        name="issue"
+                                        value={this.state.issue}
+                                        onChange={this.handleChange}
+                                        style={{ backgroundColor: "#F0EAD6" }}
+                                    ></textarea>
+                                </Col>
+                                <Col xl={2}>
+                                </Col>
+                                <Col xl={2}>
+                                    <button type="button" className="btn btn-success" onClick={this.handleFormSubmit}>Submit</button>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </div>
+                </Row>
+            }
+        </div>
+        <div id="res">
+            <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                <Col xl={12}>
+                    <Table>
+                        <tbody>
+                            <tr>
+                                <th>Room Number</th>
+                                <th>Room Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Problem</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            {this.state.issuesArray.map((issue, i) => (
+                                <tr key={issue.room_issue_id}>
+                                    <td>{issue.room_num}</td>
+                                    <td>{issue.type}</td>
+                                    <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>
+                                    <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
+                                    <td>{issue.issue}</td>
+                                    <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Update</button>
+                                    </td>
+                                    <td><button type="button" className="btn btn-success" onClick={() => this.updateFixed(issue.room_issue_id)}>Fixed</button>
+                                    </td>
+                                </tr>
+                            ))}
+
+
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row >
+        </div>
+    </div>
+    )
     }
 }
 

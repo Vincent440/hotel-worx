@@ -10,6 +10,9 @@ h1 {
   padding: 30px 50px;
   height: 700px;
 }
+#printButton2{
+  width: 100%;
+}
 
 p {
   font-size: 18px;

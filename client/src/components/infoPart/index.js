@@ -26,7 +26,7 @@ class InfoPart extends Component {
         {({ user,getUserLogout }) => (
         <Card id="infoCard">
             <Card style={{ marginBottom: "10px" }}>
-                <Card.Img variant="top" src={smallLogo} className="App-logo" id="smallLogo" alt="smallLogo" style={{ marginBottom: "10px" }} />
+                <Card.Img variant="top" src={smallLogo} className="App-logo" id="smallLogo" alt="smallLogo" />
             </Card>
             {this.state.hotelInfo.map(info => (
                 <div key={info.hotel_info_id} id="hotelInfoPart">
@@ -36,10 +36,9 @@ class InfoPart extends Component {
                     <div className="small faded" id="hotelEmail">{info.email}</div>
                     <div className="text-center" id="hotelPhone"><i className="fa fa-phone fa-rotate-90"></i>{info.phone}</div>
                     <br/>
-
                 </div>
             ))}
-            <div className="card-text">
+            <div className="card-text m-0">
                 <ReactWeather
                     forecast="today"
                     apikey={process.env.REACT_APP_WEATHER_API_KEY}
@@ -47,7 +46,7 @@ class InfoPart extends Component {
                     city="Cleveland"
                     units='F' />
             </div>
-            <h5 className="card-title" id="userNameD">User Name: {user.username}</h5>
+            <h5 className="card-title text-capitalize" id="userNameD">User Name: {user.username}</h5>
             <div id="optionsDiv">
                 <button className="btn btn-block btn-default" id="userSetting"><i className="fa fa-gear"></i></button>
                 <button className="btn btn-block btn-default" id="logOut" onClick={getUserLogout}><i className="fa fa-sign-out-alt"></i></button>

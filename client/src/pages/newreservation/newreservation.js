@@ -2,16 +2,11 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart";
 import api from '../../utils/api';
 import Header from "../../components/Header";
 import DateRange from "../../components/dateRange/dateRange";
-import { Container } from 'react-bootstrap';
 import RegisterForm from "../../components/validation";
 import moment from 'moment';
-import Particles from "react-particles-js";
-
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 class ReserveNew extends Component {
     constructor(props) {
@@ -189,24 +184,17 @@ class ReserveNew extends Component {
         }
 
         return (
-            <Container>
-                <Particles params={particleOpt} id="particul" />
+            <div>
                 <Row>
-                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart />
+                    <Col xl={12}>
+                        <Header>NEW RESERVATION</Header>
                     </Col>
-                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
-                        <Row>
-                            <Col xl={12}>
-                                <Header>NEW RESERVATION</Header>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xl={12}>
+                </Row>
+                <Row>
+                    <Col xl={12}>
 
-                                <div id="res" style={{ paddingBottom: "10px" }}>
-                                    <Row style={{ paddingBottom: "5px" }}>
-
+                        <div id="res" style={{ paddingBottom: "10px" }}>
+                            <Row style={{ paddingBottom: "5px" }}>
                                     <Col xs={3} sm={3} md={1} lg={1} xl={1}>
                                             Arrival
                                         </Col>
@@ -233,76 +221,73 @@ class ReserveNew extends Component {
                                                 name="nights"
                                                 value={this.state.departuredate && Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))}
 
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={2}>
-                                            No of Rooms
-                                        </Col>
-                                        <Col xl={2}>
-                                            <input
-                                                type="number"
-                                                placeholder="Number of Rooms"
-                                                name="numRooms"
-                                                value={this.state.numRooms}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                                <Col xl={2}>
+                                    No of Rooms
+                                </Col>
+                                <Col xl={2}>
+                                    <input
+                                        type="number"
+                                        placeholder="Number of Rooms"
+                                        name="numRooms"
+                                        value={this.state.numRooms}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
 
-                                    </Row>
-                                    <Row>
-                                        <Col xl={1}>
-                                            Adults
-                                        </Col>
-                                        <Col xl={3}>
-                                            <input
-                                                id=""
-                                                type="number"
-                                                name="adults"
-                                                placeholder="Adults"
-                                                value={this.state.adults}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
+                            </Row>
+                            <Row>
+                                <Col xl={1}>
+                                    Adults
+                                </Col>
+                                <Col xl={3}>
+                                    <input
+                                        id=""
+                                        type="number"
+                                        name="adults"
+                                        placeholder="Adults"
+                                        value={this.state.adults}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
 
-                                        <Col xl={2}>
-                                            Room Type:
-                                        </Col>
-                                        <Col xl={2}>
-                                            <select name="roomtype" onChange={this.handleInputChange}>
-                                                {this.state.RoomTypes.map(type => (
-                                                    <option key={type.room_type_id}  value={type.room_type_id}>{type.type} - {type.rate}</option>
-                                                ))}
-                                            </select>
+                                <Col xl={2}>
+                                    Room Type:
+                                </Col>
+                                <Col xl={2}>
+                                    <select name="roomtype" onChange={this.handleInputChange}>
+                                        {this.state.RoomTypes.map(type => (
+                                            <option key={type.room_type_id}  value={type.room_type_id}>{type.type} - {type.rate}</option>
+                                        ))}
+                                    </select>
 
-                                        </Col>
-                                    </Row>
-                                </div>
+                                </Col>
+                            </Row>
+                        </div>
 
-                                <RegisterForm
-                                    handleFormSubmit={this.handleFormSubmit}
-                                    handleChange={this.handleChange}
-                                    firstname={this.state.firstname}
-                                    lastname={this.state.lastname}
-                                    phone={this.state.phone}
-                                    email={this.state.email}
-                                    address={this.state.address}
-                                    city={this.state.city}
-                                    state={this.state.state}
-                                    zip={this.state.zip}
-                                    creditCard={this.state.creditCard}
-                                    expirationDate={this.state.expirationDate}
-                                    comments={this.state.room_comments}
-                                    cvc={this.state.cvc}
-                                    errors={this.state.errors}
-                                />
+                        <RegisterForm
+                            handleFormSubmit={this.handleFormSubmit}
+                            handleChange={this.handleChange}
+                            firstname={this.state.firstname}
+                            lastname={this.state.lastname}
+                            phone={this.state.phone}
+                            email={this.state.email}
+                            address={this.state.address}
+                            city={this.state.city}
+                            state={this.state.state}
+                            zip={this.state.zip}
+                            creditCard={this.state.creditCard}
+                            expirationDate={this.state.expirationDate}
+                            comments={this.state.room_comments}
+                            cvc={this.state.cvc}
+                            errors={this.state.errors}
+                        />
 
-                            </Col>
-                        </Row>
                     </Col>
                 </Row>
-            </Container>
-
+            </div>            
         )
     }
 }

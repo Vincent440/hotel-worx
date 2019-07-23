@@ -1,5 +1,3 @@
-
-
 #res table tr td {
   width: 210px;
 }
@@ -7,8 +5,14 @@
   width: 200px;
 }
 
-#res{
+#res {
   padding-top: 10px;
   margin-left: -15px;
-
 }
+
+#reservationUpt:hover td{
+  background-color: rgb(235, 235, 217);
+}
+
+
+
