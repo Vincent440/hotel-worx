@@ -207,10 +207,10 @@ class ReserveNew extends Component {
                                 <div id="res" style={{ paddingBottom: "10px" }}>
                                     <Row style={{ paddingBottom: "5px" }}>
 
-                                        <Col xl={1}>
+                                    <Col xs={3} sm={3} md={1} lg={1} xl={1}>
                                             Arrival
                                         </Col>
-                                        <Col xl={7}>
+                                        <Col xs={9} sm={9} md={5} lg={7} xl={7}>
                                             <div>
                                                 <DateRange
                                                     handleFromChange={this.handleFromChange}
