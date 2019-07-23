@@ -1,6 +1,6 @@
 #infoCard {
   background-color:rgba(255, 255, 255, 0.586);
-  height: 570px;
+  height: 600px;
   width: 200px;
   margin-top: 0px;
   border: 1px solid white;
@@ -16,7 +16,7 @@
   }
 }
 #userNameD {
-  margin-top: 40px;
+  margin-top: 60px;
   font-family: 'Nanum Myeongjo', serif;
   color: black;
 }

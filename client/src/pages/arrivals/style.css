@@ -11,7 +11,8 @@ h1 {
   height: 700px;
 }
 #printButton2{
-  width: 100%;
+  width:80px;
+  height:38px;
 }
 
 p {

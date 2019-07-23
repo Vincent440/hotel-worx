@@ -14,5 +14,13 @@
   background-color: rgb(235, 235, 217);
 }
 
+@media all and (min-width: 768px) {
+  #res > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div > span > div{
+    margin-left: 115px;
+  }
+  #res > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div > div{
+    margin-right: 90px;
 
+  }
+}
 

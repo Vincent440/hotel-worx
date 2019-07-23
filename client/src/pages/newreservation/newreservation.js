@@ -115,7 +115,7 @@ class ReserveNew extends Component {
         }
 
         if (typeof this.state.phone !== "undefined") {
-            if (!this.state.phone.match(/^[0-9]{10}$/)) {
+            if (!this.state.phone.match(/^\d{3}-\d{3}-\d{4}$/)) {
                 formIsValid = false;
                 errors["phone"] = "*Please enter valid mobile no.";
             }
@@ -193,41 +193,41 @@ class ReserveNew extends Component {
                 <Row>
                     <Col xl={12}>
 
-                        <div id="res" style={{ paddingBottom: "10px" }}>
-                            <Row style={{ paddingBottom: "5px" }}>
-                                    <Col xs={3} sm={3} md={1} lg={1} xl={1}>
-                                            Arrival
+                        <div id="res">
+                            <Row>
+                                <Col xs={3} sm={3} md={1} lg={1} xl={2}>
+                                    Arrival
                                         </Col>
-                                        <Col xs={9} sm={9} md={5} lg={7} xl={7}>
-                                            <div>
-                                                <DateRange
-                                                    handleFromChange={this.handleFromChange}
-                                                    handleToChange={this.handleToChange}
-                                                    from={this.state.arrivaldate}
-                                                    to={this.state.departuredate}
-                                                />
-                                            </div>
+                                <Col xs={9} sm={5} md={11} lg={11} xl={5}>
+                                    <div id="dateRangeU">
+                                        <DateRange
+                                            handleFromChange={this.handleFromChange}
+                                            handleToChange={this.handleToChange}
+                                            from={this.state.arrivaldate}
+                                            to={this.state.departuredate}
+                                        />
+                                    </div>
+                                </Col>
+                                <Col xs={6} sm={6} md={4} lg={2} xl={1}>
+                                    Nights  
                                         </Col>
-                                    </Row>
-                                    <Row style={{ paddingBottom: "4px" }}>
-                                        <Col xl={1}>
-                                            Nights
-                                        </Col>
-                                        <Col xl={3}>
-                                            <input
-                                                id=""
-                                                type="number"
-                                                placeholder="Number of Nights"
-                                                name="nights"
-                                                value={this.state.departuredate && Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))}
+                                <Col xs={6} sm={6} md={6} lg={6} xl={2}>
+                                    <input
+                                        id=""
+                                        type="number"
+                                        placeholder="Number of Nights"
+                                        name="nights"
+                                        value={this.state.departuredate && Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24))}
 
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xl={2}>
+                            </Row>
+                            <Row id="newRow">
+                                <Col xs={6} sm={6} md={4} lg={2} xl={2}>
                                     No of Rooms
                                 </Col>
-                                <Col xl={2}>
+                                <Col xs={6} sm={6} md={6} lg={10} xl={2}>
                                     <input
                                         type="number"
                                         placeholder="Number of Rooms"
@@ -236,13 +236,10 @@ class ReserveNew extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-
-                            </Row>
-                            <Row>
-                                <Col xl={1}>
+                                <Col xs={6} sm={6} md={4} lg={2} xl={1}>
                                     Adults
                                 </Col>
-                                <Col xl={3}>
+                                <Col xs={6} sm={6} md={6} lg={10} xl={2}>
                                     <input
                                         id=""
                                         type="number"
@@ -252,14 +249,13 @@ class ReserveNew extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-
-                                <Col xl={2}>
-                                    Room Type:
+                                <Col xs={6} sm={6} md={4} lg={2} xl={1}>
+                                    Room Type
                                 </Col>
-                                <Col xl={2}>
+                                <Col xs={6} sm={6} md={6} lg={2} xl={2}>
                                     <select name="roomtype" onChange={this.handleInputChange}>
                                         {this.state.RoomTypes.map(type => (
-                                            <option key={type.room_type_id}  value={type.room_type_id}>{type.type} - {type.rate}</option>
+                                            <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
                                         ))}
                                     </select>
 
@@ -287,7 +283,7 @@ class ReserveNew extends Component {
 
                     </Col>
                 </Row>
-            </div>            
+            </div>
         )
     }
 }
