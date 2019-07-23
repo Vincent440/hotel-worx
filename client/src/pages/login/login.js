@@ -45,18 +45,18 @@ class Login extends Component {
 
   render() {
     return (
-          <span>
-            <BackgroundSlider
-              images={[ image3, image5, image6,image8]}
-              duration={5}
-              transition={1} />
-            <Container>
-              <div id="logoLogin">
-                <Logo />
-                <LoginForm username={this.state.username} password={this.state.password} isFormInValid={this.isFormInValid} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
-              </div>
-            </Container> 
-          </span>
+      <span>
+        <BackgroundSlider
+          images={[ image3, image5, image6,image8]}
+          duration={5}
+          transition={1} />
+        <Container>
+          <div id="logoLogin">
+            <Logo />
+            <LoginForm username={this.state.username} password={this.state.password} isFormInValid={this.isFormInValid} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
+          </div>
+        </Container> 
+      </span>
     );
   }
 }
