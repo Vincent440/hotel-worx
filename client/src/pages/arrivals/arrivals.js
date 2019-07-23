@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
-import { Container, Table } from 'react-bootstrap';
-import Particles from "react-particles-js";
+import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
@@ -72,14 +69,7 @@ class Arrivals extends Component {
 
     render() {
         return (
-            <Container>
-                <Particles params={particleOpt} id="particul" />
-
-                <Row>
-                    <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart />
-                    </Col>
-                    <Col xs={6} sm={8} md={9} lg={9} xl={10}>
+                <div>
                         <Row>
                             <Col xl={12}>
                                 <Header>ARRIVALS</Header>
@@ -178,9 +168,7 @@ class Arrivals extends Component {
                                 </Col>
                             </Row >
                         </div>
-                    </Col>
-                </Row >
-            </Container >
+            </div>
         )
     }
 }
