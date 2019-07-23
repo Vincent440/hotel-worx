@@ -21,7 +21,7 @@ import DetailedAvailability from "./pages/detailedAvailability/detailedAvailabil
 import HouseStatus from "./pages/houseStatus/houseStatus";
 import Maintenance from "./pages/maintenance/maintenance";
 
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
+const particleOptions = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 const PrivateAccessRoute = ({ component: Component, aId, ...rest }) => (
   <UserContext.Consumer>
@@ -95,9 +95,9 @@ class App extends Component {
               <Login />
             </div> ) : 
           (
-            <Container className="m-1" fluid>
-              <Particles params={particleOpt} id="particul" />
-              <Row>
+            <Container className="m-0 p-0">
+              <Particles params={particleOptions} />
+              <Row className="m-0 py-2">
                 <Col xs={6} sm={4} md={3} lg={3} xl={2}>
                     <InfoPart />
                 </Col>
