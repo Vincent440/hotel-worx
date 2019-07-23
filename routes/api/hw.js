@@ -204,6 +204,17 @@ router.post("/reservation", (req, res) => {
     });
 });
 
+router.put("/reservation", (req, res) => {
+    db.Customer.insertOne(req.body.cust, (result) => {
+        db.Reservation.insertOne(result.insertId, req.body.reserve, (result) => {
+            const reservationId = result.insertId;
+            db.ResRoom.insertSome(result.insertId, req.body.rooms, () => {
+                res.status(200).send({ reservation_id: reservationId });
+            });
+        });
+    });
+});
+
 router.get("/reservations", (req, res) => {
     db.Reservation.selectAll((data) => {
         res.json(data);

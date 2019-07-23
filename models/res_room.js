@@ -3,7 +3,7 @@ const connection = require("../config/connection");
 const ResRoom = {
     selectForHouseStatus: (date, cb) => {
         const preQueryString = "SET @input_date=?;";
-        const queryString = "SELECT SUM(CASE WHEN rr.check_in_date<@input_date && rr.check_out_date>@input_date THEN 1 ELSE 0 END) AS stayovers, SUM(CASE WHEN rr.check_out_date=@input_date && rr.checked_out=0 THEN 1 ELSE 0 END) AS departuresPending, SUM(CASE WHEN rr.check_out_date=@input_date && rr.checked_out=1 THEN 1 ELSE 0 END) AS departuresActual, SUM(CASE WHEN rr.check_in_date=@input_date && rr.checked_in=0 THEN 1 ELSE 0 END) AS arrivalsPending, SUM(CASE WHEN rr.check_in_date=@input_date && rr.checked_in=1 THEN 1 ELSE 0 END) AS arrivalsActual FROM res_rooms AS rr WHERE (rr.check_in_date<@input_date && rr.check_out_date>@input_date) || rr.check_out_date=@input_date || rr.check_in_date=@input_date;";
+        const queryString = "SELECT SUM(CASE WHEN rr.check_in_date<@input_date && rr.check_out_date>@input_date THEN 1 ELSE 0 END) AS stayovers, SUM(CASE WHEN rr.check_out_date=@input_date && rr.checked_out=0 THEN 1 ELSE 0 END) AS departuresPending, SUM(CASE WHEN rr.check_out_date=@input_date && rr.checked_out=1 THEN 1 ELSE 0 END) AS departuresActual, SUM(CASE WHEN rr.check_in_date=@input_date && rr.checked_in=0 THEN 1 ELSE 0 END) AS arrivalsPending, SUM(CASE WHEN rr.check_in_date=@input_date && rr.checked_in=1 THEN 1 ELSE 0 END) AS arrivalsActual FROM res_rooms AS rr WHERE rr.active=1 && (rr.check_in_date<@input_date && rr.check_out_date>@input_date) || rr.check_out_date=@input_date || rr.check_in_date=@input_date;";
         connection.query(preQueryString + queryString, [date], (err, result) => {
             if (err) throw err;
             cb(result[1]);
@@ -11,7 +11,7 @@ const ResRoom = {
     },
     selectArrivals: (conditions, cb) => {
         formattedConditions = conditions.join(" && ");
-        const queryString = "SELECT r.reservation_id, CONCAT(c.first_name, ' ', c.last_name) AS name, rr.res_room_id, rr.room_type_id, DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rr.checked_in, rr.checked_out, IFNULL(rm.room_num, 'Not Set') AS room_num, rt.type, '' AS selectedRoom FROM reservations AS r INNER JOIN customers AS c ON r.customer_id=c.customer_id INNER JOIN res_rooms AS rr ON r.reservation_id=rr.reservation_id INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id LEFT JOIN rooms AS rm ON rr.room_id=rm.room_id WHERE " + formattedConditions + " ORDER BY rr.res_room_id ASC;";
+        const queryString = "SELECT r.reservation_id, CONCAT(c.first_name, ' ', c.last_name) AS name, rr.res_room_id, rr.room_type_id, DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rr.checked_in, rr.checked_out, IFNULL(rm.room_num, 'Not Set') AS room_num, rt.type, '' AS selectedRoom FROM reservations AS r INNER JOIN customers AS c ON r.customer_id=c.customer_id INNER JOIN res_rooms AS rr ON r.reservation_id=rr.reservation_id INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id LEFT JOIN rooms AS rm ON rr.room_id=rm.room_id WHERE rr.active=1 && " + formattedConditions + " ORDER BY rr.res_room_id ASC;";
         connection.query(queryString, (err, result) => {
             if (err) throw err;
             cb(result);
@@ -19,21 +19,21 @@ const ResRoom = {
     },
     selectDepartures: (conditions, cb) => {
         formattedConditions = conditions.join(" && ");
-        const queryString = "SELECT r.reservation_id, CONCAT(c.first_name, ' ', c.last_name) AS name, rr.res_room_id, rr.room_type_id, DATE(check_out_date)-DATE(check_in_date) AS num_days, DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rr.checked_in, rr.checked_out, rr.rate, IFNULL(rm.room_num, 'Not Set') AS room_num, rt.type FROM reservations AS r INNER JOIN customers AS c ON r.customer_id=c.customer_id INNER JOIN res_rooms AS rr ON r.reservation_id=rr.reservation_id INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id LEFT JOIN rooms AS rm ON rr.room_id=rm.room_id WHERE rr.checked_in && " + formattedConditions + " ORDER BY rm.room_num ASC;";
+        const queryString = "SELECT r.reservation_id, CONCAT(c.first_name, ' ', c.last_name) AS name, rr.res_room_id, rr.room_type_id, DATE(check_out_date)-DATE(check_in_date) AS num_days, DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rr.checked_in, rr.checked_out, rr.rate, IFNULL(rm.room_num, 'Not Set') AS room_num, rt.type FROM reservations AS r INNER JOIN customers AS c ON r.customer_id=c.customer_id INNER JOIN res_rooms AS rr ON r.reservation_id=rr.reservation_id INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id LEFT JOIN rooms AS rm ON rr.room_id=rm.room_id WHERE rr.active=1 && rr.checked_in && " + formattedConditions + " ORDER BY rm.room_num ASC;";
         connection.query(queryString, (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
     countPendingDeparturesByRoomType: (date, cb) => {
-        const queryString = "SELECT rt.room_type_id, rt.type, COUNT(rr.room_type_id) AS pending_departures FROM res_rooms AS rr INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id WHERE rr.checked_out=0 && rr.check_out_date=? GROUP BY rr.room_type_id ORDER BY rt.room_type_id ASC;";
+        const queryString = "SELECT rt.room_type_id, rt.type, COUNT(rr.room_type_id) AS pending_departures FROM res_rooms AS rr INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id WHERE rr.active=1 && rr.checked_out=0 && rr.check_out_date=? GROUP BY rr.room_type_id ORDER BY rt.room_type_id ASC;";
         connection.execute(queryString, [date], (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
     selectForInvoice: (id, cb) => {
-        const queryString = "SELECT rr.res_room_id, (DATE(rr.check_out_date)-DATE(rr.check_in_date)) AS num_days, rr.rate, tr.county_rate, tr.city_rate, tr.state_rate FROM res_rooms AS rr, (SELECT (county_tax_rate/100) AS county_rate, (city_tax_rate/100) AS city_rate, (state_tax_rate/100) AS state_rate FROM tax_rates WHERE tax_rate_id=1 LIMIT 1) AS tr WHERE rr.res_room_id=? LIMIT 1;";
+        const queryString = "SELECT rr.res_room_id, (DATE(rr.check_out_date)-DATE(rr.check_in_date)) AS num_days, rr.rate, tr.county_rate, tr.city_rate, tr.state_rate FROM res_rooms AS rr, (SELECT (county_tax_rate/100) AS county_rate, (city_tax_rate/100) AS city_rate, (state_tax_rate/100) AS state_rate FROM tax_rates WHERE tax_rate_id=1 LIMIT 1) AS tr WHERE rr.active=1 && rr.res_room_id=? LIMIT 1;";
         connection.execute(queryString, [id], (err, result) => {
             if (err) throw err;
             cb(result);
@@ -48,7 +48,7 @@ const ResRoom = {
     },
     getGuests: (conditions, cb) => {
         formattedConditions = conditions.join(" && ");
-        const queryString = "SELECT DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rm.room_num, rr.confirmation_code, rr.comments, rt.type, c.first_name, c.last_name FROM res_rooms AS rr INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id INNER JOIN rooms AS rm ON rm.room_id=rr.room_id INNER JOIN reservations AS r ON rr.reservation_id=r.reservation_id INNER JOIN customers AS c ON c.customer_id=r.customer_id WHERE rr.checked_in=1 && rr.checked_out=0 && " + formattedConditions + " ORDER BY rm.room_num ASC;";
+        const queryString = "SELECT DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rm.room_num, rr.confirmation_code, rr.comments, rt.type, c.first_name, c.last_name FROM res_rooms AS rr INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id INNER JOIN rooms AS rm ON rm.room_id=rr.room_id INNER JOIN reservations AS r ON rr.reservation_id=r.reservation_id INNER JOIN customers AS c ON c.customer_id=r.customer_id WHERE rr.active=1 && rr.checked_in=1 && rr.checked_out=0 && " + formattedConditions + " ORDER BY rm.room_num ASC;";
         connection.query(queryString, (err, result) => {
             if (err) throw err;
             cb(result);

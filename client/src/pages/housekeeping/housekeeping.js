@@ -215,7 +215,6 @@ class Housekeeping extends Component {
                     </Row>
                 </div>
 
-
                 <div id="res2">
                     <Row id="thirdRow" >
                         <Col xl={12}>
@@ -228,7 +227,7 @@ class Housekeeping extends Component {
                                         <th>Front Office Status</th>
                                         <th>Reservation Status</th>
                                     </tr>
-                                    {this.state.searchResults.map(room => (
+                                    {this.state.searchResults.map((room, i) => (
                                         <tr key={room.room_num}>
                                             <td>{room.room_num}</td>
                                             <td>{room.type}</td>

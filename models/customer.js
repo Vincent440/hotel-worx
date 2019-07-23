@@ -29,8 +29,7 @@ const Customer = {
             cb(result);
         });
     },
-    updateOne: (vals, id, cb) => {
-        vals.push(id);
+    updateOne: (vals, cb) => {
         const queryString = "UPDATE customers SET first_name=?, last_name=?, address=?, city=?, state=?, zip=?, email=?, phone=?, credit_card_num=?, cc_expiration=? WHERE customer_id=?;";
         connection.execute(queryString, vals, (err, result) => {
             if (err) throw err;
