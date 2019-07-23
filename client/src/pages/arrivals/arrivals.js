@@ -129,7 +129,7 @@ class Arrivals extends Component {
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={12}>
-                                   <Link to="../../cashiering/billing"> Pending departures by room type:</Link>
+                                   <Link to="../../cashiering/billing">Pending departures</Link> by room type:
                                     {this.state.pendingArray.length === 0 ? " None" :
                                         (this.state.pendingArray.map((type, i) => (
                                             <span key={type.room_type_id}>{i > 0 ? ", " : " "}({type.type}: {type.pending_departures})</span>

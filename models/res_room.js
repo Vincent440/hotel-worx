@@ -3,7 +3,7 @@ const connection = require("../config/connection");
 const ResRoom = {
     selectForHouseStatus: (date, cb) => {
         const preQueryString = "SET @input_date=?;";
-        const queryString = "SELECT SUM(CASE WHEN rr.check_in_date<@input_date && rr.check_out_date>@input_date THEN 1 ELSE 0 END) AS stayovers, SUM(CASE WHEN rr.check_out_date=@input_date THEN 1 ELSE 0 END) AS departuresExpected, SUM(CASE WHEN rr.check_out_date=@input_date && rr.checked_out=1 THEN 1 ELSE 0 END) AS departuresActual, SUM(CASE WHEN rr.check_in_date=@input_date THEN 1 ELSE 0 END) AS arrivalsExpected, SUM(CASE WHEN rr.check_in_date=@input_date && rr.checked_in=1 THEN 1 ELSE 0 END) AS arrivalsActual FROM res_rooms AS rr WHERE (rr.check_in_date<@input_date && rr.check_out_date>@input_date) || rr.check_out_date=@input_date || rr.check_in_date=@input_date;";
+        const queryString = "SELECT SUM(CASE WHEN rr.check_in_date<@input_date && rr.check_out_date>@input_date THEN 1 ELSE 0 END) AS stayovers, SUM(CASE WHEN rr.check_out_date=@input_date && rr.checked_out=0 THEN 1 ELSE 0 END) AS departuresPending, SUM(CASE WHEN rr.check_out_date=@input_date && rr.checked_out=1 THEN 1 ELSE 0 END) AS departuresActual, SUM(CASE WHEN rr.check_in_date=@input_date && rr.checked_in=0 THEN 1 ELSE 0 END) AS arrivalsPending, SUM(CASE WHEN rr.check_in_date=@input_date && rr.checked_in=1 THEN 1 ELSE 0 END) AS arrivalsActual FROM res_rooms AS rr WHERE (rr.check_in_date<@input_date && rr.check_out_date>@input_date) || rr.check_out_date=@input_date || rr.check_in_date=@input_date;";
         connection.query(preQueryString + queryString, [date], (err, result) => {
             if (err) throw err;
             cb(result[1]);
