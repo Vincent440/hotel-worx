@@ -53,7 +53,7 @@ p {
   margin-bottom: 5px;
   margin-top: 5px;
   padding-top: 10px;
-  margin-left: -15px;
+  margin-left: 0px;
 }
 #res3 {
   background-color: rgba(255, 255, 255, 0.774);
@@ -62,7 +62,7 @@ p {
   margin-bottom: 5px;
   margin-top: 5px;
   padding-top: 10px;
-  margin-left: -15px;
+  margin-left: 0px;
 }
 #guestinfo {
   background-color: rgba(255, 255, 255, 0.774);
@@ -71,7 +71,7 @@ p {
   margin-bottom: 10px;
   padding: 20px;
   max-width: 100%;
-  margin-left: -15px;
+  margin-left: 0px;
 }
 
 button {
