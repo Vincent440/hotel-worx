@@ -44,6 +44,8 @@ class ReserveUpdate extends Component {
         comments: "",
         rate: "",
         cancelSuccess: false,
+        checkedIn: 0,
+        active: 1,
         errors: {}
     };
 
@@ -149,7 +151,7 @@ class ReserveUpdate extends Component {
                 .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
                 .catch(err => console.log(err));
             api.getReservation(reservation_id)
-                .then(res => this.setState({ customerId: res.resCust[0].customer_id, firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, resRoomId: res.resRooms[0].res_room_id, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].room_type_id, rate: res.resRooms[0].rate, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num, comments: res.resRooms[0].comments }))
+                .then(res => this.setState({ active: res.resCust[0].active, customerId: res.resCust[0].customer_id, firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, resRoomId: res.resRooms[0].res_room_id, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].room_type_id, rate: res.resRooms[0].rate, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num, comments: res.resRooms[0].comments, checkedIn: res.resRooms[0].checked_in }))
                 .catch(err => console.log(err));
         }
     }
@@ -164,7 +166,7 @@ class ReserveUpdate extends Component {
     handleCancelSubmit(e) {
         e.preventDefault();
         api.cancelReservation(this.state.reservationId)
-            .then(() => this.setState({ cancelSuccess: true, updateSuccess: false }))
+            .then(() => this.setState({ cancelSuccess: true, active: 0, updateSuccess: false }))
             .catch(err => console.log(err));
     }
 
@@ -191,7 +193,7 @@ class ReserveUpdate extends Component {
             rate: this.state.rate
         }
         api.updateReservation(data)
-            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false }))
+            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false, active: 1 }))
             .catch(err => console.log(err));
     }
     render() {
@@ -321,6 +323,8 @@ class ReserveUpdate extends Component {
                             comments={this.state.comments}
                             updateSuccess={this.state.updateSuccess}
                             cancelSuccess={this.state.cancelSuccess}
+                            checkedIn={this.state.checkedIn}
+                            active={this.state.active}
                             handleCancelSubmit={this.handleCancelSubmit}
                         />
                     </Col>
