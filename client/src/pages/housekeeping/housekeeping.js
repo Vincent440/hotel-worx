@@ -3,7 +3,7 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import Header from "../../components/Header";
 import api from '../../utils/api';
-import Table  from 'react-bootstrap/Table';
+import Table from 'react-bootstrap/Table';
 
 class Housekeeping extends Component {
     state = {
@@ -29,6 +29,17 @@ class Housekeeping extends Component {
 
     componentDidMount() {
         this.makeAxiosCall();
+    }
+
+    handleCleanChange = event => {
+        const { id, value } = event.target;
+        let searchResults = [...this.state.searchResults];
+        searchResults[id].clean = value;
+        this.setState({ searchResults }, () => {
+            api.updateCleanStatus(this.state.searchResults[id].room_id, value)
+                .then(() => { })
+                .catch(err => console.log(err));
+        });
     }
 
     handleCheckboxChange = event => {
@@ -207,40 +218,41 @@ class Housekeeping extends Component {
                 </Col>
             </Row>
         </div>
-
-
-        <div id="res2">
-            <Row id="thirdRow" >
-                <Col xl={12}>
-                    <Table>
-                        <tbody>
-                            <tr>
-                                <th>Room</th>
-                                <th>Room Type</th>
-                                <th>Room Status</th>
-                                <th>Front Office Status</th>
-                                <th>Reservation Status</th>
-                            </tr>
-                            {this.state.searchResults.map(room => (
-                                <tr key={room.room_num}>
-                                    <td>{room.room_num}</td>
-                                    <td>{room.type}</td>
-                                    <td>
-                                        {room.active === 0 ? room.inactive : (room.clean === 1 ? "Clean" : "Dirty")}
-                                    </td>
-                                    <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
-                                    <td>
-                                        {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : "Not Reserved")))))}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
-        </div>
-    </div>
-    )
+                <div id="res2">
+                    <Row id="thirdRow" >
+                        <Col xl={12}>
+                            <Table>
+                                <tbody>
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Room Type</th>
+                                        <th>Room Status</th>
+                                        <th>Front Office Status</th>
+                                        <th>Reservation Status</th>
+                                    </tr>
+                                    {this.state.searchResults.map((room, i) => (
+                                        <tr key={room.room_num}>
+                                            <td>{room.room_num}</td>
+                                            <td>{room.type}</td>
+                                            <td>
+                                                <select id={i} className="p-1" value={room.clean} onChange={this.handleCleanChange}>
+                                                    <option value="1">Clean</option>
+                                                    <option value="0">Dirty</option>
+                                                </select>
+                                            </td>
+                                            <td>{room.occupied === 1 ? "Occupied" : "Vacant"}</td>
+                                            <td>
+                                                {room.checked_out === 1 ? "Departed" : (room.departure ? room.departure : ((room.stayover ? room.stayover : ((room.checked_in === 1 ? "Arrived" : "Not Reserved")))))}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </div>
+            </div>
+        )
     }
 }
 

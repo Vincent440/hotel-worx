@@ -24,6 +24,29 @@ export default {
                 console.log(error);
             });
     },
+    updateReservation: (data) => {
+        const fccNum = data.creditCard.replace(/ /g, "");
+        return axios.put('/api/hw/reservation', {
+            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate, data.customerId],
+            reserve: [2, "", data.reservation_id],
+            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments, data.resRoomId]]
+        })
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    cancelReservation: (id) => {
+        return axios.put('/api/hw/cancelReservation/' + id)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getReservations: () => {
         return axios.get('/api/hw/reservations')
             .then((response) => {

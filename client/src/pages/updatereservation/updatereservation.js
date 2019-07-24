@@ -14,9 +14,11 @@ class ReserveUpdate extends Component {
         this.handleToChange = this.handleToChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleCancelSubmit = this.handleCancelSubmit.bind(this);
     }
 
     state = {
+        customerId: "",
         firstname: "",
         lastname: "",
         phone: "",
@@ -37,7 +39,11 @@ class ReserveUpdate extends Component {
         expirationDate: "",
         confirmationNumber: "",
         updateSuccess: false,
-        newReservationId: "",
+        reservationId: "",
+        resRoomId: "",
+        comments: "",
+        rate: "",
+        cancelSuccess: false,
         errors: {}
     };
 
@@ -51,16 +57,20 @@ class ReserveUpdate extends Component {
         }
     }
 
+    handleArrivalDateChange() {
+        this.setState({ arrivaldate: "" });
+    }
+
+    handleDeparturedateDateChange() {
+        this.setState({ departuredate: "" });
+    }
+
     handleFromChange(arrivaldate) {
-        this.setState({ arrivaldate: "", departuredate: "" }, () => {
-            this.setState({ arrivaldate });
-        });
+        this.setState({ arrivaldate });
     }
 
     handleToChange(departuredate) {
-        this.setState({ arrivaldate: "", departuredate: "" }, () => {
-            this.setState({ departuredate }, this.showFromMonth);
-        });
+        this.setState({ departuredate }, this.showFromMonth);
     }
 
     handleChange(e) {
@@ -120,6 +130,10 @@ class ReserveUpdate extends Component {
     }
 
     handleInputChange = event => {
+        if (event.target.name === "roomtype") {
+            const roomKey = parseInt(event.target.value) - 1;
+            this.setState({ rate: this.state.RoomTypes[roomKey].rate });
+        }
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -130,11 +144,12 @@ class ReserveUpdate extends Component {
         let reservation_id = "";
         if (localStorage && localStorage.getItem('reservation_id')) {
             reservation_id = JSON.parse(localStorage.getItem('reservation_id'));
+            this.setState({ reservationId: reservation_id });
             api.getRoomTypes()
                 .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
                 .catch(err => console.log(err));
             api.getReservation(reservation_id)
-                .then(res => this.setState({ firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].type, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num }))
+                .then(res => this.setState({ customerId: res.resCust[0].customer_id, firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, resRoomId: res.resRooms[0].res_room_id, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].room_type_id, rate: res.resRooms[0].rate, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num, comments: res.resRooms[0].comments }))
                 .catch(err => console.log(err));
         }
     }
@@ -149,8 +164,17 @@ class ReserveUpdate extends Component {
     defaultValue = new Date();
 
 
+    handleCancelSubmit(e) {
+        e.preventDefault();
+        api.cancelReservation(this.state.reservationId)
+                .then(() => this.setState({ cancelSuccess: true, updateSuccess: false }))
+                .catch(err => console.log(err));
+    }
+
     makeAxiosCall = () => {
         const data = {
+            reservation_id: this.state.reservationId,
+            customerId: this.state.customerId,
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             address: this.state.address,
@@ -164,19 +188,16 @@ class ReserveUpdate extends Component {
             departuredate: this.state.departuredate,
             arrivaldate: this.state.arrivaldate,
             adults: this.state.adults,
-            roomtype: this.state.roomtype
+            roomtype: this.state.roomtype,
+            resRoomId: this.state.resRoomId,
+            comments: this.state.comments,
+            rate: this.state.rate
         }
         api.updateReservation(data)
-            .then(() => this.setState({ updateSuccess: true }))
+            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false }))
             .catch(err => console.log(err));
     }
     render() {
-
-        if (this.state.updateSuccess) {
-            return (
-                "Reservation was successfully updated!"
-            )
-        }
         return (
     <div>
         <Row>
@@ -198,6 +219,7 @@ class ReserveUpdate extends Component {
                                 name="confirmationNumber"
                                 value={this.state.confirmationNumber}
                                 onChange={this.handleInputChange}
+                                disabled
                             />
                         </Col>
                         <Col xs={6} sm={4} md={4} lg={4} xl={2}>
@@ -221,11 +243,12 @@ class ReserveUpdate extends Component {
                         <Col xs={6} sm={8} md={8} lg={12} xl={10}>
                             <div>
                                 <DateRange
+                                    handleArrivalDateChange={this.handleArrivalDateChange}
+                                    handleDeparturedateDateChange={this.handleDeparturedateDateChange}
                                     handleFromChange={this.handleFromChange}
                                     handleToChange={this.handleToChange}
                                     from={this.state.arrivaldate}
                                     to={this.state.departuredate}
-                                    defaultShow={this.defaultShow}
                                 />
                             </div>
                         </Col>
@@ -303,6 +326,7 @@ class ReserveUpdate extends Component {
             </Col>
         </Row>
     </div>
+           
         )
     }
 }

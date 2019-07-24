@@ -204,6 +204,16 @@ router.post("/reservation", (req, res) => {
     });
 });
 
+router.put("/reservation", (req, res) => {
+    db.Customer.updateOne(req.body.cust, () => {
+        db.Reservation.updateOne(req.body.reserve, () => {
+            db.ResRoom.updateSome(req.body.rooms, (result) => {
+                res.status(200).send(result);
+            });
+        });
+    });
+});
+
 router.get("/reservations", (req, res) => {
     db.Reservation.selectAll((data) => {
         res.json(data);
@@ -311,8 +321,7 @@ router.post("/res_rooms", (req, res) => {
 });
 
 router.put("/cancelReservation/:id", (req, res) => {
-    db.Reservation.cancelOne(req.params.id, (result) => {
-        console.log(`Changed reservation_id ${result.affectedRows} to canceled.`);
+    db.Reservation.cancelOne(req.params.id, () => {
         db.ResRoom.cancelSome(req.params.id, (data) => {
             res.json(data);
         });

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import Header from "../../components/Header";
-import SearchSubmit from "../../components/searchButton";
+// import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
 import Table from 'react-bootstrap/Table';
@@ -13,9 +13,9 @@ const today = moment().format("YYYY-MM-DD");
 class Arrivals extends Component {
     state = {
         startDateRange: today,
-        firstname: undefined,
-        lastname: undefined,
-        confirmationNumber: undefined,
+        firstname: "",
+        lastname: "",
+        confirmationNumber: "",
         arrivalsArray: [],
         roomsArray: [],
         pendingArray: []
@@ -46,8 +46,8 @@ class Arrivals extends Component {
 
     handleInputChange = event => {
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
+        this.setState({ [name]: value }, () => {
+            this.makeAxiosCall();
         });
     }
 
@@ -111,9 +111,9 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xs={6} sm={6} md={3} lg={2} xl={1}>
+                                {/* <Col xs={6} sm={6} md={3} lg={2} xl={1}>
                                     <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                </Col>
+                                </Col> */}
                                 <Col xs={2} sm={3} md={2} lg={2} xl={1}>
                                     <button type="button" className="btn btn-success" id="printButton2" onClick={this.printFunction}>Print</button>
                                 </Col>
@@ -123,7 +123,7 @@ class Arrivals extends Component {
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={12}>
-                                   <Link to="../../cashiering/billing"> Pending departures by room type:</Link>
+                                   <Link to="../../cashiering/billing">Pending departures</Link> by room type:
                                     {this.state.pendingArray.length === 0 ? " None" :
                                         (this.state.pendingArray.map((type, i) => (
                                             <span key={type.room_type_id}>{i > 0 ? ", " : " "}({type.type}: {type.pending_departures})</span>
