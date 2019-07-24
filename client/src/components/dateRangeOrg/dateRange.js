@@ -4,6 +4,7 @@ import "./style.css";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import { formatDate, parseDate } from 'react-day-picker/moment';
+import moment from 'moment';
 export default class DateRange extends React.Component {
   render() {
     const { from, to } = this.props;
@@ -11,14 +12,15 @@ export default class DateRange extends React.Component {
     return (
       <div className="InputFromTo">
         <DayPickerInput
-          value={from}
+          {...from}
+          value={moment(from.value).format('YYYY-MM-DD')}
           placeholder="From"
           format="YYYY-MM-DD"
           formatDate={formatDate}
           parseDate={parseDate}
           dayPickerProps={{
             selectedDays: [from, { from, to }],
-            disabledDays: { after: to },
+            disabledDays: { before: new Date(),after: to },
             toMonth: to,
             modifiers,
             numberOfMonths: 2,
@@ -28,6 +30,8 @@ export default class DateRange extends React.Component {
         /> {' '}- {' '}
         <span className="InputFromTo-to">
           <DayPickerInput
+            {...to}
+            value={moment(to.value).format('YYYY-MM-DD')}
             ref={el => (this.to = el)}
             value={to}
             placeholder="To"
