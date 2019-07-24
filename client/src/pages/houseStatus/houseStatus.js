@@ -1,115 +1,132 @@
-import React from 'react';
-import CreditCardInput from 'react-credit-card-input';
+import React, { Component } from "react";
+import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
-import NumberFormat from 'react-number-format';
-class RegisterForm extends React.Component {
+import "./style.css";
+import moment from "moment";
+import Header from "../../components/Header"
+const today = moment().format("YYYY-MM-DD");
+class HouseStatus extends Component {
+    constructor(props) {
+        super(props);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
+    state = {
+        date: today,
+        roomsToSell: "",
+        minAvailableTonight: "",
+        maxOccupiedTonight: "",
+        stayovers: "",
+        departuresPending: "",
+        departuresActual: "",
+        arrivalsPending: "",
+        arrivalsActual: "",
+        cleanVacant: "",
+        cleanOccupied: "",
+        dirtyVacant: "",
+        dirtyOccupied: ""
+    };
+    makeAxiosCall = () => {
+        api.getHouseStatus(this.state.date)
+            .then(res => this.setState({ roomsToSell: res.rooms[0].roomsToSell, cleanVacant: res.rooms[0].cleanVacant, cleanOccupied: res.rooms[0].cleanOccupied, dirtyVacant: res.rooms[0].dirtyVacant, dirtyOccupied: res.rooms[0].dirtyOccupied, stayovers: res.res_rooms[0].stayovers, departuresPending: res.res_rooms[0].departuresPending, departuresActual: res.res_rooms[0].departuresActual, arrivalsPending: res.res_rooms[0].arrivalsPending, arrivalsActual: res.res_rooms[0].arrivalsActual, minAvailableTonight: Number(res.rooms[0].roomsToSell) - Number(res.res_rooms[0].stayovers) - Number(res.res_rooms[0].arrivalsPending), maxOccupiedTonight: Number(res.res_rooms[0].stayovers) + Number(res.res_rooms[0].arrivalsPending) }))
+            .catch(err => console.log(err));
+    }
+    componentDidMount() {
+        this.makeAxiosCall();
+    }
+    handleDateChange = event => {
+        this.setState({
+            date: event.target.value
+        });
+    }
+    handleFormSubmit = event => {
+        event.preventDefault();
+        this.makeAxiosCall();
+    }
     render() {
         return (
-            <div id="res">
+    <div>
+        <Row>
+            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Header>HOUSE STATUS</Header>
+            </Col>
+        </Row>
+        <div id="resHouse">
+            <Row>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop" >Room Summary</Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Total Rooms to Sell:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.roomsToSell}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                        <Col xs={8} sm={8} md={8} lg={9} xl={9}>Min. Available Tonight:</Col>
+                        <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.minAvailableTonight}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Max. Occupied Tonight:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.maxOccupiedTonight}</Col>
+                    </Row>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop">Activity</Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Stayovers:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.stayovers}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Pending: </Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresPending}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Actual:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresActual}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Pending:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsPending}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Actual:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsActual}</Col>
+                    </Row>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop">Room Status-Housekeeping</Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}></Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Vacant</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Occupied</Col>
+                    </Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Clean</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanVacant}</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanOccupied}</Col>
+                    </Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Dirty</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyVacant}</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyOccupied}</Col>
+                    </Row>
+                </Col>
+            </Row>
+            <div id="dateRow">
                 <Row>
-                    <Col xl={10}>
-                        <form method="post" name="userRegistrationForm" onSubmit={this.props.handleFormSubmit} >
-                            <Row style={{ paddingBottom: "2px" }}>
-                                <Col xs={6} sm={4} md={2} lg={2} xl={2}><label>First Name</label></Col>
-                                <Col xs={6} sm={8} md={4} lg={3} xl={3}>
-                                    <input type="text" name="firstname" placeholder="First Name" value={this.props.firstname} onChange={this.props.handleChange} />
-                                    <div className="errorMsg">{this.props.errors.firstname}</div>
-                                </Col>
-                                <Col xs={6} sm={4} md={2} lg={2} xl={2}><label>Last Name</label></Col>
-                                <Col xs={6} sm={8} md={2} lg={2} xl={2}>
-                                    <input type="text" name="lastname" placeholder="Last Name" value={this.props.lastname} onChange={this.props.handleChange} />
-                                    <div className="errorMsg">{this.props.errors.lastname}</div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={6} sm={4} md={2} lg={2} xl={2}>Phone Number</Col>
-                                <Col xs={6} sm={8} md={4} lg={3} xl={3}>
-                                    <NumberFormat format="###-###-####" mask="_" placeholder="Phone Number"
-                                        name="phone" value={this.props.phone} onChange={this.props.handleChange} />
-                                    <div className="errorMsg">{this.props.errors.phone}</div>
-                                </Col>
-                                <Col xs={6} sm={4} md={2} lg={2} xl={2}>Email Address</Col>
-                                <Col xs={6} sm={8} md={2} lg={2} xl={2}>
-                                    <input type="text" name="email" placeholder="Email Address" value={this.props.email} onChange={this.props.handleChange} />
-                                    <div className="errorMsg">{this.props.errors.email}</div>
-                                </Col>
-                            </Row>
-                            <Row style={{ marginTop: "5px" }}>
-                                <Col xs={6} sm={4} md={2} lg={2} xl={2}>Address</Col>
-                                <Col xs={6} sm={8} md={3} lg={3} xl={3}>
-                                    <input
-                                        type="text"
-                                        placeholder="Adress"
-                                        name="address"
-                                        value={this.props.address}
-                                        onChange={this.props.handleChange}
-                                    />
-                                </Col>
-                                <Col xs={1} sm={1} md={2} lg={2} xl={2}>
-                                    <input
-                                        type="text"
-                                        placeholder="City"
-                                        name="city"
-                                        value={this.props.city}
-                                        onChange={this.props.handleChange}
-                                    />
-                                </Col>
-                                <Col xs={1} sm={1} md={1} lg={1} xl={2}>
-                                    <input
-                                        type="text"
-                                        placeholder="State"
-                                        name="state"
-                                        value={this.props.state}
-                                        onChange={this.props.handleChange}
-                                    />
-                                </Col>
-                                <Col xs={1} sm={1} md={1} lg={1} xl={1}>
-                                    <input
-                                        type="text"
-                                        placeholder="ZipCode"
-                                        name="zip"
-                                        value={this.props.zip}
-                                        onChange={this.props.handleChange}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row style={{ marginTop: "5px" }}>
-                                <Col xs={2} sm={4} md={2} lg={2} xl={2}>Credit Card Number</Col>
-                                <Col xs={10} sm={8} md={8} lg={9} xl={9}>
-                                    <CreditCardInput
-                                        cardNumberInputProps={{ name: 'creditCard', value: this.props.creditCard, onChange: this.props.handleChange }}
-                                        cardExpiryInputProps={{ name: 'expirationDate', value: this.props.expirationDate, onChange: this.props.handleChange }}
-                                        cardCVCInputProps={{ name: 'cvc', value: this.props.cvc, onChange: this.handleChange }}
-                                        fieldClassName="input"
-                                    />
-                                </Col>
-                            </Row>
-                            <Row style={{ marginBottom: "20px" }}>
-                                <Col xs={2} sm={4} md={2} lg={2} xl={2}>Comments</Col>
-                                <Col xs={10} sm={8} md={10} lg={10} xl={10}>
-                                    <input
-                                        type="text"
-                                        placeholder="Comments"
-                                        name="comments"
-                                        value={this.props.comments}
-                                        onChange={this.props.handleChange}
-                                        style={{ backgroundColor: "#F0EAD6" }}
-                                    />
-                                </Col>
-                            </Row>
-                        </form>
+                    <Col>Date:
+                        <input className="ml-2" style={{ width: "150px", height: "30px" }}
+                            type="date"
+                            name="date"
+                            value={this.state.date}
+                            onChange={this.handleDateChange}
+                        />
                     </Col>
                 </Row>
-                <div className="text-center">
-                    <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleCancelSubmit}>Cancel Reservation</button>
-                    <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleFormSubmit}>Submit</button>
-                    <br />
-                    <span className="text-light">{this.props.updateSuccess && "Reservation was successfully updated!"}</span>
-                    <span className="text-light">{this.props.cancelSuccess && "Reservation has been cancelled!"}</span>
-                </div>
             </div>
-        );
+            <div id="buttonDiv">
+                <button type="button" className="btn btn-primary"onClick={this.handleFormSubmit}>Search</button>
+            </div>
+        </div>
+    </div>
+    )
     }
 }
-export default RegisterForm;
-
+export default HouseStatus;
