@@ -57,8 +57,8 @@ class Maintenance extends Component {
                 updateIssue: true,
                 issueId: this.state.issuesArray[i].room_issue_id,
                 roomNumber: this.state.issuesArray[i].room_num,
-                startDateRange: new Date (moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD")),
-                endDay: new Date (moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD")),
+                startDateRange: new Date(this.state.issuesArray[i].start_date),
+                endDay: new Date(this.state.issuesArray[i].end_date),
                 issue: this.state.issuesArray[i].issue,
                 roomId: this.state.issuesArray[i].room_id
             });
@@ -91,21 +91,20 @@ class Maintenance extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         let values = [this.state.issue, this.props.user.user_id, moment(this.state.startDateRange).format("YYYY-MM-DD"), moment(this.state.endDay).format("YYYY-MM-DD")];
-        if (this.state.newIssue) {
-            let matchingRoom = this.state.roomsArray.filter(room => room.room_num === this.state.roomNumber);
-            if (matchingRoom.length === 1) {
-                values.unshift(matchingRoom[0].room_id);
+        let matchingRoom = this.state.roomsArray.filter(room => room.room_num === this.state.roomNumber);
+        if (matchingRoom.length === 1) {
+            values.unshift(matchingRoom[0].room_id);
+            if (this.state.newIssue) {
                 api.createRoomIssue(values)
                     .then(() => this.makeAxiosCall())
                     .catch(err => console.log(err))
                     .then(() => this.clearStateIssueInfo());
+            } else if (this.state.updateIssue) {
+                api.updateRoomIssues(this.state.issueId, values)
+                    .then(() => this.makeAxiosCall())
+                    .catch(err => console.log(err))
+                    .then(() => this.clearStateIssueInfo());
             }
-        } else if (this.state.updateIssue) {
-            values.unshift(this.state.roomId);
-            api.updateRoomIssues(this.state.issueId, values)
-                .then(() => this.makeAxiosCall())
-                .catch(err => console.log(err))
-                .then(() => this.clearStateIssueInfo());
         }
     }
 
@@ -206,7 +205,7 @@ class Maintenance extends Component {
                                         <tr key={issue.room_issue_id}>
                                             <td>{issue.room_num}</td>
                                             <td>{issue.type}</td>
-                                            <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>                                  
+                                            <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>
                                             <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
                                             <td>{issue.issue}</td>
                                             <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Update</button>

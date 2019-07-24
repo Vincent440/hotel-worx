@@ -51,8 +51,8 @@ export default class DateRange extends React.Component {
         </span>
         <Helmet>
 
-        </Helmet>
-      </div>
-    );
-  }
+                </Helmet>
+            </div>
+        );
+    }
 }
