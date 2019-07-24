@@ -4,15 +4,12 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import moment from "moment";
 import Header from "../../components/Header"
-
 const today = moment().format("YYYY-MM-DD");
-
 class HouseStatus extends Component {
     constructor(props) {
         super(props);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
-
     state = {
         date: today,
         roomsToSell: "",
@@ -28,28 +25,23 @@ class HouseStatus extends Component {
         dirtyVacant: "",
         dirtyOccupied: ""
     };
-
     makeAxiosCall = () => {
         api.getHouseStatus(this.state.date)
             .then(res => this.setState({ roomsToSell: res.rooms[0].roomsToSell, cleanVacant: res.rooms[0].cleanVacant, cleanOccupied: res.rooms[0].cleanOccupied, dirtyVacant: res.rooms[0].dirtyVacant, dirtyOccupied: res.rooms[0].dirtyOccupied, stayovers: res.res_rooms[0].stayovers, departuresPending: res.res_rooms[0].departuresPending, departuresActual: res.res_rooms[0].departuresActual, arrivalsPending: res.res_rooms[0].arrivalsPending, arrivalsActual: res.res_rooms[0].arrivalsActual, minAvailableTonight: Number(res.rooms[0].roomsToSell) - Number(res.res_rooms[0].stayovers) - Number(res.res_rooms[0].arrivalsPending), maxOccupiedTonight: Number(res.res_rooms[0].stayovers) + Number(res.res_rooms[0].arrivalsPending) }))
             .catch(err => console.log(err));
     }
-
     componentDidMount() {
         this.makeAxiosCall();
     }
-
     handleDateChange = event => {
         this.setState({
             date: event.target.value
         });
     }
-
     handleFormSubmit = event => {
         event.preventDefault();
         this.makeAxiosCall();
     }
-
     render() {
         return (
     <div>
@@ -137,5 +129,4 @@ class HouseStatus extends Component {
     )
     }
 }
-
 export default HouseStatus;

@@ -59,7 +59,6 @@ class UpdateReservation extends Component {
             .then(res => this.setState({ resRooms: res }))
             .catch(err => console.log(err));
     }
-
     handleFormSubmit = event => {
         event.preventDefault();
         this.makeAxiosCall();
@@ -94,34 +93,41 @@ class UpdateReservation extends Component {
                         <Header>ALL RESERVATIONS</Header>
                     </Col>
                 </Row>
-                <div id="res" style={{ paddingBottom: "10px" }}>
-                    <Row>
-                        <Col xl={10}>
+                <Row>
+                    <Col xl={12}>
+
+                        <div id="res">
                             <Row>
-                                <Col xl={1}>Arrival</Col>
-                                <Col xl={8}>
-                                    <DateRange
-                                        handleFromChange={this.handleFromChange}
-                                        handleToChange={this.handleToChange}
-                                        sdate={this.state.sdate}
-                                        edate={this.state.edate}
+                                <Col xs={3} sm={4} md={2} lg={2} xl={1}>
+                                    Arrival</Col>
+                                <Col xs={9} sm={8} md={10} lg={10} xl={5}>
+                                    <div id="dateRangeU">
+                                        <DateRange
+                                            handleFromChange={this.handleFromChange}
+                                            handleToChange={this.handleToChange}
+                                            sdate={this.state.sdate}
+                                            edate={this.state.edate}
+                                        />
+                                    </div>
+                                </Col>
+                                <Col xs={6} sm={4} md={2} lg={2} xl={1}>
+                                    Confirmation
+                                </Col>
+                                <Col xs={6} sm={8} md={6} lg={6} xl={2}>
+                                    <input
+                                        type="tel"
+                                        placeholder="Confirmation No"
+                                        name="confirmationNumber"
+                                        value={this.state.confirmationNumber}
+                                        onChange={this.handleInputChange}
                                     />
                                 </Col>
                             </Row>
 
                             <Row style={{ marginTop: "5px" }}>
-                                <Col xl={1}>First Name:</Col>
-                                <Col xl={3}>
-                                    <input
-                                        type="text"
-                                        placeholder="First Name"
-                                        name="firstname"
-                                        value={this.state.firstname}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </Col>
-                                <Col xl={3} style={{ paddingLeft: "67px" }}>Last Name:</Col>
-                                <Col xl={2}>
+                                <Col xs={6} sm={4} md={2} lg={2} xl={1}>
+                                    Last Name</Col>
+                                <Col xs={6} sm={8} md={4} lg={10} xl={2}>
                                     <input
                                         type="text"
                                         placeholder="Last Name"
@@ -130,29 +136,25 @@ class UpdateReservation extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                            </Row>
-                            <Row style={{ marginTop: "5px" }}>
-                                <Col xl={3}>Confirmation Number:</Col>
-                                <Col xl={1}>
+                                <Col xs={6} sm={4} md={2} lg={2} xl={1}>
+                                    First Name</Col>
+                                <Col xs={6} sm={8} md={4} lg={2} xl={6}>
                                     <input
-                                        type="tel"
-                                        placeholder="Confirmation Number"
-                                        name="confirmationNumber"
-                                        value={this.state.confirmationNumber}
+                                        type="text"
+                                        placeholder="First Name"
+                                        name="firstname"
+                                        value={this.state.firstname}
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
+                                <Col xs={6} sm={6} md={2} lg={12} xl={1}>
+                                    <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                                </Col>
 
                             </Row>
-                        </Col>
-                        <Col xl={2} style={{ paddingTop: "25px", Left: "30px" }}>
-                            <Col xl={12}>
-                                <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-
-                            </Col>
-                        </Col>
-                    </Row>
-                </div>
+                        </div>
+                    </Col>
+                </Row>
                 <div id="res">
                     <Row style={{ paddingBottom: "20px" }}>
                         <Col xl={12}>
@@ -168,7 +170,7 @@ class UpdateReservation extends Component {
                                     </tr>
 
                                     {this.state.resRooms.map(res => (
-                                        <tr key={res.res_room_id} onClick={() => this.handleChosenReservation(res.reservation_id)}>
+                                        <tr id="reservationUpt" key={res.res_room_id} onClick={() => this.handleChosenReservation(res.reservation_id)}>
                                             <td>{res.last_name}</td>
                                             <td>{res.first_name}</td>
                                             <td>{res.check_in_date}</td>
