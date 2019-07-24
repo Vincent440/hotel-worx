@@ -90,7 +90,7 @@ class Maintenance extends Component {
     }
     handleFormSubmit = event => {
         event.preventDefault();
-        let values = [this.state.issue, this.props.user_id, moment(this.state.startDateRange).format("YYYY-MM-DD"), moment(this.state.endDay).format("YYYY-MM-DD")];
+        let values = [this.state.issue, this.props.user.user_id, moment(this.state.startDateRange).format("YYYY-MM-DD"), moment(this.state.endDay).format("YYYY-MM-DD")];
         if (this.state.newIssue) {
             let matchingRoom = this.state.roomsArray.filter(room => room.room_num === this.state.roomNumber);
             if (matchingRoom.length === 1) {
