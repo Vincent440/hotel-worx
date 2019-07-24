@@ -145,6 +145,9 @@ class ReserveUpdate extends Component {
             this.makeAxiosCall();
         }
     }
+    
+    defaultValue = new Date();
+
 
     makeAxiosCall = () => {
         const data = {
@@ -158,8 +161,8 @@ class ReserveUpdate extends Component {
             phone: this.state.phone,
             creditCard: this.state.creditCard,
             expirationDate: this.state.expirationDate,
-            departuredate: moment(this.state.departuredate).format('YYYY-MM-DD'),
-            arrivaldate: moment(this.state.arrivaldate).format('YYYY-MM-DD'),
+            departuredate: this.state.departuredate,
+            arrivaldate: this.state.arrivaldate,
             adults: this.state.adults,
             roomtype: this.state.roomtype
         }
@@ -167,7 +170,6 @@ class ReserveUpdate extends Component {
             .then(() => this.setState({ updateSuccess: true }))
             .catch(err => console.log(err));
     }
-
     render() {
 
         if (this.state.updateSuccess) {
@@ -186,10 +188,10 @@ class ReserveUpdate extends Component {
             <Col xl={12}>
                 <div id="res" >
                     <Row >
-                    <Col xs={6} sm={6} md={4} lg={4} xl={1}>
+                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
                             Confirmation
                     </Col>
-                    <Col xs={6} sm={6} md={6} lg={8} xl={3}>
+                    <Col xs={6} sm={8} md={6} lg={8} xl={3}>
                             <input
                                 type="tel"
                                 placeholder="Confirmation Number"
@@ -198,10 +200,10 @@ class ReserveUpdate extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </Col>
-                        <Col xs={6} sm={6} md={4} lg={4} xl={2}>
+                        <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                             Room Number
                     </Col>
-                    <Col xs={6} sm={6} md={6} lg={8} xl={2}>
+                    <Col xs={6} sm={8} md={6} lg={8} xl={2}>
                             <input
                                 type="tel"
                                 placeholder="Room Number"
@@ -213,25 +215,26 @@ class ReserveUpdate extends Component {
 
                     </Row>
                     <Row >
-                    <Col xs={6} sm={3} md={4} lg={4} xl={1}>
+                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
                             Arrival
                         </Col>
-                        <Col xs={6} sm={5} md={8} lg={12} xl={10}>
+                        <Col xs={6} sm={8} md={8} lg={12} xl={10}>
                             <div>
                                 <DateRange
                                     handleFromChange={this.handleFromChange}
                                     handleToChange={this.handleToChange}
                                     from={this.state.arrivaldate}
                                     to={this.state.departuredate}
+                                    defaultShow={this.defaultShow}
                                 />
                             </div>
                         </Col>
                     </Row>
                     <Row >
-                    <Col xs={6} sm={6} md={4} lg={4} xl={1}>
+                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
                             Nights
                         </Col>
-                        <Col xs={6} sm={6} md={8} lg={8} xl={3}>
+                        <Col xs={6} sm={8} md={8} lg={8} xl={3}>
                             <input
                                 type="number"
                                 placeholder="Number of Nights"
@@ -240,10 +243,10 @@ class ReserveUpdate extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </Col>
-                        <Col xs={6} sm={6} md={4} lg={4} xl={2}>
+                        <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                             No of Rooms
                         </Col>
-                        <Col xs={6} sm={6} md={6} lg={8} xl={2}>
+                        <Col xs={6} sm={8} md={6} lg={8} xl={2}>
                             <input
                                 type="number"
                                 placeholder="Number of Rooms"
@@ -254,10 +257,10 @@ class ReserveUpdate extends Component {
                         </Col>
                     </Row>
                     <Row>
-                    <Col xs={6} sm={6} md={4} lg={4} xl={1}>
+                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
                             Adults
                         </Col>
-                        <Col xs={6} sm={6} md={8} lg={8} xl={3}>
+                        <Col xs={6} sm={8} md={8} lg={8} xl={3}>
                             <input
                                 id=""
                                 type="number"
@@ -267,10 +270,10 @@ class ReserveUpdate extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </Col>
-                        <Col xs={6} sm={6} md={4} lg={4} xl={2}>
+                        <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                             Room Type
                         </Col>
-                        <Col xs={6} sm={6} md={8} lg={8} xl={2}>
+                        <Col xs={6} sm={8} md={8} lg={8} xl={2}>
                             <select id="roomType" name="roomtype" onChange={this.handleInputChange}>
                                 {this.state.RoomTypes.map(type => (
                                     <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>

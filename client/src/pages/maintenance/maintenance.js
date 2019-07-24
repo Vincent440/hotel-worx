@@ -57,8 +57,8 @@ class Maintenance extends Component {
                 updateIssue: true,
                 issueId: this.state.issuesArray[i].room_issue_id,
                 roomNumber: this.state.issuesArray[i].room_num,
-                startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
-                endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
+                startDateRange: this.state.issuesArray[i].start_date,
+                endDay: this.state.issuesArray[i].end_date,
                 issue: this.state.issuesArray[i].issue,
                 roomId: this.state.issuesArray[i].room_id
             });
@@ -90,7 +90,7 @@ class Maintenance extends Component {
     }
     handleFormSubmit = event => {
         event.preventDefault();
-        let values = [this.state.issue, this.props.user.user_id, moment(this.state.startDateRange).format("YYYY-MM-DD"), moment(this.state.endDay).format("YYYY-MM-DD")];
+        let values = [this.state.issue, this.props.user_id, this.state.startDateRange, this.state.endDay];
         if (this.state.newIssue) {
             let matchingRoom = this.state.roomsArray.filter(room => room.room_num === this.state.roomNumber);
             if (matchingRoom.length === 1) {
@@ -139,8 +139,9 @@ class Maintenance extends Component {
                     <div id="workOrder">
                         <Col xl={12}>
                             <Row>
-                                <Col xl={2}>Room Number</Col>
-                                <Col sm={2}>
+                            <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                                    Room Number</Col>
+                                    <Col xs={6} sm={6} md={4} lg={2} xl={2}>
                                     <input style={{ width: "150px" }}
                                         onChange={this.handleChange}
                                         name="roomNumber"
@@ -150,8 +151,9 @@ class Maintenance extends Component {
                                 </Col>
                             </Row>
                             <Row id="fourthRow">
-                                <Col xl={2}>Date</Col>
-                                <Col xl={6}>
+                            <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                                    Date</Col>
+                                    <Col xs={6} sm={6} md={8} lg={8} xl={8}>
                                     <div>
                                         <DateRange
                                         
@@ -164,8 +166,9 @@ class Maintenance extends Component {
                                 </Col>
                             </Row>
                             <Row id="maintRow">
-                                <Col xl={2}>Problem</Col>
-                                <Col xl={5}>
+                            <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                                    Problem</Col>
+                                    <Col xs={6} sm={6} md={5} lg={5} xl={5}>
                                     <textarea
                                         type="text"
                                         name="issue"
@@ -174,9 +177,9 @@ class Maintenance extends Component {
                                         style={{ backgroundColor: "#F0EAD6" }}
                                     ></textarea>
                                 </Col>
-                                <Col xl={2}>
+                                <Col xs={6} sm={6} md={4} lg={2} xl={2}>
                                 </Col>
-                                <Col xl={2}>
+                                <Col xs={6} sm={6} md={4} lg={2} xl={2}>
                                     <button type="button" className="btn btn-success" onClick={this.handleFormSubmit}>Submit</button>
                                 </Col>
                             </Row>
@@ -199,12 +202,12 @@ class Maintenance extends Component {
                                 <th></th>
                                 <th></th>
                             </tr>
-                            {this.state.issuesArray.map((issue, i) => (
+                            {this.state.issuesArray.map((issue, i) => ( 
                                 <tr key={issue.room_issue_id}>
                                     <td>{issue.room_num}</td>
                                     <td>{issue.type}</td>
-                                    <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>
-                                    <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
+                                    <td>{issue.start_date}</td>
+                                    <td>{issue.end_date}</td>
                                     <td>{issue.issue}</td>
                                     <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Update</button>
                                     </td>

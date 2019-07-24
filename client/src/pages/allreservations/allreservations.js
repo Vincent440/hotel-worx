@@ -51,8 +51,8 @@ class UpdateReservation extends Component {
         const criteria = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            sdate: this.state.sdate === "" ? "" : moment(this.state.sdate).format('YYYY-MM-DD'),
-            edate: this.state.edate === "" ? "" : moment(this.state.edate).format('YYYY-MM-DD'),
+            sdate: this.state.sdate === "" ? "" : this.state.sdate,
+            edate: this.state.edate === "" ? "" : this.state.edate,
             confirmationNumber: this.state.confirmationNumber
         }
         api.getSomeReservations(criteria)
@@ -99,9 +99,9 @@ class UpdateReservation extends Component {
 
                         <div id="res">
                             <Row>
-                                <Col xs={3} sm={3} md={2} lg={2} xl={1}>
+                                <Col xs={3} sm={4} md={2} lg={2} xl={1}>
                                     Arrival</Col>
-                                <Col xs={9} sm={5} md={10} lg={10} xl={6}>
+                                <Col xs={9} sm={8} md={10} lg={10} xl={5}>
                                     <div id="dateRangeU">
                                         <DateRange
                                             handleFromChange={this.handleFromChange}
@@ -111,10 +111,10 @@ class UpdateReservation extends Component {
                                         />
                                     </div>
                                 </Col>
-                                <Col xs={6} sm={6} md={2} lg={2} xl={2}>
+                                <Col xs={6} sm={4} md={2} lg={2} xl={1}>
                                     Confirmation
                                 </Col>
-                                <Col xs={6} sm={6} md={6} lg={6} xl={2}>
+                                <Col xs={6} sm={8} md={6} lg={6} xl={2}>
                                     <input
                                         type="tel"
                                         placeholder="Confirmation No"
@@ -126,9 +126,9 @@ class UpdateReservation extends Component {
                             </Row>
 
                             <Row style={{ marginTop: "5px" }}>
-                                <Col xs={6} sm={6} md={2} lg={2} xl={1}>
+                                <Col xs={6} sm={4} md={2} lg={2} xl={1}>
                                     Last Name</Col>
-                                <Col xs={6} sm={6} md={4} lg={3} xl={2}>
+                                <Col xs={6} sm={8} md={4} lg={10} xl={2}>
                                     <input
                                         type="text"
                                         placeholder="Last Name"
@@ -137,9 +137,9 @@ class UpdateReservation extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xs={6} sm={6} md={2} lg={2} xl={1}>
+                                <Col xs={6} sm={4} md={2} lg={2} xl={1}>
                                     First Name</Col>
-                                <Col xs={6} sm={6} md={4} lg={2} xl={5}>
+                                <Col xs={6} sm={8} md={4} lg={2} xl={6}>
                                     <input
                                         type="text"
                                         placeholder="First Name"

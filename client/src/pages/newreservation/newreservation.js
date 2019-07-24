@@ -186,7 +186,7 @@ class ReserveNew extends Component {
         return (
             <div>
                 <Row>
-                    <Col xl={12}>
+                <Col xl={12}>
                         <Header>NEW RESERVATION</Header>
                     </Col>
                 </Row>
@@ -195,10 +195,10 @@ class ReserveNew extends Component {
 
                         <div id="res">
                             <Row>
-                                <Col xs={3} sm={3} md={1} lg={1} xl={2}>
+                                <Col xs={3} sm={4} md={1} lg={1} xl={2}>
                                     Arrival
                                         </Col>
-                                <Col xs={9} sm={5} md={11} lg={11} xl={5}>
+                                <Col xs={9} sm={8} md={11} lg={11} xl={5}>
                                     <div id="dateRangeU">
                                         <DateRange
                                             handleFromChange={this.handleFromChange}
@@ -208,10 +208,10 @@ class ReserveNew extends Component {
                                         />
                                     </div>
                                 </Col>
-                                <Col xs={6} sm={6} md={4} lg={2} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={2} xl={1}>
                                     Nights  
                                         </Col>
-                                <Col xs={6} sm={6} md={6} lg={6} xl={2}>
+                                <Col xs={6} sm={8} md={6} lg={6} xl={2}>
                                     <input
                                         id=""
                                         type="number"
@@ -224,10 +224,10 @@ class ReserveNew extends Component {
                                 </Col>
                             </Row>
                             <Row id="newRow">
-                                <Col xs={6} sm={6} md={4} lg={2} xl={2}>
+                                <Col xs={6} sm={4} md={4} lg={2} xl={2}>
                                     No of Rooms
                                 </Col>
-                                <Col xs={6} sm={6} md={6} lg={10} xl={2}>
+                                <Col xs={6} sm={8} md={6} lg={10} xl={2}>
                                     <input
                                         type="number"
                                         placeholder="Number of Rooms"
@@ -236,10 +236,10 @@ class ReserveNew extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xs={6} sm={6} md={4} lg={2} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={2} xl={1}>
                                     Adults
                                 </Col>
-                                <Col xs={6} sm={6} md={6} lg={10} xl={2}>
+                                <Col xs={6} sm={8} md={6} lg={10} xl={2}>
                                     <input
                                         id=""
                                         type="number"
@@ -249,10 +249,10 @@ class ReserveNew extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xs={6} sm={6} md={4} lg={2} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={2} xl={1}>
                                     Room Type
                                 </Col>
-                                <Col xs={6} sm={6} md={6} lg={2} xl={2}>
+                                <Col xs={6} sm={8} md={6} lg={2} xl={2}>
                                     <select name="roomtype" onChange={this.handleInputChange}>
                                         {this.state.RoomTypes.map(type => (
                                             <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
