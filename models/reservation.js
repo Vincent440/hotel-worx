@@ -37,6 +37,13 @@ const Reservation = {
             if (err) throw err;
             cb(result);
         });
+    },
+    updateOne: (vals, cb) => {
+        const queryString = "UPDATE reservations SET user_id=?, comments=? WHERE reservation_id=?;";
+        connection.execute(queryString, vals, (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
     }
 };
 

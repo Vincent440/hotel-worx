@@ -19,9 +19,9 @@ class HouseStatus extends Component {
         minAvailableTonight: "",
         maxOccupiedTonight: "",
         stayovers: "",
-        departuresExpected: "",
+        departuresPending: "",
         departuresActual: "",
-        arrivalsExpected: "",
+        arrivalsPending: "",
         arrivalsActual: "",
         cleanVacant: "",
         cleanOccupied: "",
@@ -31,7 +31,7 @@ class HouseStatus extends Component {
 
     makeAxiosCall = () => {
         api.getHouseStatus(this.state.date)
-            .then(res => this.setState({ roomsToSell: res.rooms[0].roomsToSell, cleanVacant: res.rooms[0].cleanVacant, cleanOccupied: res.rooms[0].cleanOccupied, dirtyVacant: res.rooms[0].dirtyVacant, dirtyOccupied: res.rooms[0].dirtyOccupied, stayovers: res.res_rooms[0].stayovers, departuresExpected: res.res_rooms[0].departuresExpected, departuresActual: res.res_rooms[0].departuresActual, arrivalsExpected: res.res_rooms[0].arrivalsExpected, arrivalsActual: res.res_rooms[0].arrivalsActual, minAvailableTonight: Number(res.rooms[0].roomsToSell) - Number(res.res_rooms[0].stayovers) - Number(res.res_rooms[0].arrivalsExpected), maxOccupiedTonight: Number(res.res_rooms[0].stayovers) + Number(res.res_rooms[0].arrivalsExpected) }))
+            .then(res => this.setState({ roomsToSell: res.rooms[0].roomsToSell, cleanVacant: res.rooms[0].cleanVacant, cleanOccupied: res.rooms[0].cleanOccupied, dirtyVacant: res.rooms[0].dirtyVacant, dirtyOccupied: res.rooms[0].dirtyOccupied, stayovers: res.res_rooms[0].stayovers, departuresPending: res.res_rooms[0].departuresPending, departuresActual: res.res_rooms[0].departuresActual, arrivalsPending: res.res_rooms[0].arrivalsPending, arrivalsActual: res.res_rooms[0].arrivalsActual, minAvailableTonight: Number(res.rooms[0].roomsToSell) - Number(res.res_rooms[0].stayovers) - Number(res.res_rooms[0].arrivalsPending), maxOccupiedTonight: Number(res.res_rooms[0].stayovers) + Number(res.res_rooms[0].arrivalsPending) }))
             .catch(err => console.log(err));
     }
 
@@ -82,16 +82,16 @@ class HouseStatus extends Component {
                     <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.stayovers}</Col>
                     </Row>
                     <Row className="rowHouse">
-                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Expected: </Col>
-                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresExpected}</Col>
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Pending: </Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresPending}</Col>
                     </Row>
                     <Row className="rowHouse">
                     <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Actual:</Col>
                     <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresActual}</Col>
                     </Row>
                     <Row className="rowHouse">
-                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Expected:</Col>
-                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsExpected}</Col>
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Pending:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsPending}</Col>
                     </Row>
                     <Row className="rowHouse">
                     <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Actual:</Col>
