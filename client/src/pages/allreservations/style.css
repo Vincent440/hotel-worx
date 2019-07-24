@@ -10,7 +10,7 @@
   margin-left: -15px;
 }
 
-.reservationUpt:hover td{
+#reservationUpt:hover td{
   background-color: rgb(235, 235, 217);
 }
 

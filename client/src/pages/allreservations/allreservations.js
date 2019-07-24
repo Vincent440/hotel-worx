@@ -170,7 +170,7 @@ class UpdateReservation extends Component {
                                     </tr>
 
                                     {this.state.resRooms.map(res => (
-                                        <tr className="reservationUpt" key={res.res_room_id} onClick={() => this.handleChosenReservation(res.reservation_id)}>
+                                        <tr id="reservationUpt" key={res.res_room_id} onClick={() => this.handleChosenReservation(res.reservation_id)}>
                                             <td>{res.last_name}</td>
                                             <td>{res.first_name}</td>
                                             <td>{res.check_in_date}</td>
