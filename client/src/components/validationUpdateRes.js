@@ -1,7 +1,7 @@
 import React from 'react';
 import CreditCardInput from 'react-credit-card-input';
 import { Row, Col } from 'react-grid-system';
-
+import NumberFormat from 'react-number-format';
 
 class RegisterForm extends React.Component {
 
@@ -11,36 +11,47 @@ class RegisterForm extends React.Component {
                 <div id="res">
                     <Row>
                         <Col xl={10}>
+
                             <form method="post" name="userRegistrationForm" onSubmit={this.props.handleFormSubmit} >
                                 <Row style={{ paddingBottom: "2px" }}>
-                                    <Col xl={2}><label>First Name</label></Col>
-                                    <Col xl={3}>
-                                        <input type="text" name="firstname" value={this.props.firstname} onChange={this.props.handleChange} />
+                                    <Col xs={6} sm={4} md={2} lg={2} xl={2}>
+                                        <label>First Name</label>
+                                    </Col>
+                                    <Col xs={6} sm={8} md={4} lg={3} xl={3}>
+                                        <input type="text" name="firstname" placeholder="First Name" value={this.props.firstname} onChange={this.props.handleChange} />
                                         <div className="errorMsg">{this.props.errors.firstname}</div>
                                     </Col>
-                                    <Col xl={2}><label>Last Name</label></Col>
-                                    <Col xl={2}>
-                                        <input type="text" name="lastname" value={this.props.lastname} onChange={this.props.handleChange} />
+                                    <Col xs={6} sm={4} md={2} lg={2} xl={2}>
+                                        <label>Last Name</label>
+                                    </Col>
+                                    <Col xs={6} sm={8} md={2} lg={2} xl={2}>
+                                        <input type="text" name="lastname" placeholder="Last Name" value={this.props.lastname} onChange={this.props.handleChange} />
                                         <div className="errorMsg">{this.props.errors.lastname}</div>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xl={2}>Phone Number</Col>
-                                    <Col xl={3}>
-                                        <input type="tel" name="phone" placeholder="888 888 8888" pattern='[0-9]{3} [0-9]{3} [0-9]{4}' value={this.props.phone} onChange={this.props.handleChange} required />
-
+                                    <Col xs={6} sm={4} md={2} lg={2} xl={2}>
+                                        Phone Number
+                                </Col>
+                                    <Col xs={6} sm={8} md={4} lg={3} xl={3}>
+                                        <NumberFormat format="###-###-####" mask="_" placeholder="Phone Number"
+                                            name="phone" value={this.props.phone} onChange={this.props.handleChange} />
                                         <div className="errorMsg">{this.props.errors.phone}</div>
                                     </Col>
-                                    <Col xl={2}>Email Address</Col>
-                                    <Col xl={2}>
-                                        <input type="text" name="email" value={this.props.email} onChange={this.props.handleChange} />
+                                    <Col xs={6} sm={4} md={2} lg={2} xl={2}>
+                                        Email Address
+                                </Col>
+                                    <Col xs={6} sm={8} md={2} lg={2} xl={2}>
+                                        <input type="text" name="email" placeholder="Email Address" value={this.props.email} onChange={this.props.handleChange} />
                                         <div className="errorMsg">{this.props.errors.email}</div>
                                     </Col>
                                 </Row>
 
                                 <Row style={{ marginTop: "5px" }}>
-                                    <Col xl={2}>Address</Col>
-                                    <Col xl={3}>
+                                    <Col xs={6} sm={4} md={2} lg={2} xl={2}>
+                                        Address
+                                        </Col>
+                                    <Col xs={6} sm={8} md={3} lg={3} xl={3}>
                                         <input
                                             type="text"
                                             placeholder="Adress"
@@ -50,7 +61,7 @@ class RegisterForm extends React.Component {
                                         />
                                     </Col>
 
-                                    <Col xl={2}>
+                                    <Col xs={1} sm={1} md={2} lg={2} xl={2}>
                                         <input
                                             type="text"
                                             placeholder="City"
@@ -59,7 +70,7 @@ class RegisterForm extends React.Component {
                                             onChange={this.props.handleChange}
                                         />
                                     </Col>
-                                    <Col xl={2}>
+                                    <Col xs={1} sm={1} md={1} lg={1} xl={2}>
                                         <input
                                             type="text"
                                             placeholder="State"
@@ -67,7 +78,7 @@ class RegisterForm extends React.Component {
                                             value={this.props.state}
                                             onChange={this.props.handleChange}
                                         /></Col>
-                                    <Col xl={1}>
+                                    <Col xs={1} sm={1} md={1} lg={1} xl={1}>
                                         <input
                                             type="text"
                                             placeholder="ZipCode"
@@ -78,10 +89,10 @@ class RegisterForm extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row style={{ marginTop: "5px" }}>
-                                    <Col xl={3} style={{ marginRight: "-85px", marginBottom: "10px" }}>
+                                    <Col xs={2} sm={4} md={2} lg={2} xl={2}>
                                         Credit Card Number
                                         </Col>
-                                    <Col xl={9}>
+                                    <Col xs={10} sm={8} md={8} lg={9} xl={9}>
                                         <CreditCardInput
                                             cardNumberInputProps={{ name: 'creditCard', value: this.props.creditCard, onChange: this.props.handleChange }}
                                             cardExpiryInputProps={{ name: 'expirationDate', value: this.props.expirationDate, onChange: this.props.handleChange }}
@@ -91,17 +102,21 @@ class RegisterForm extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row style={{ marginBottom: "20px" }}>
-                                    <Col xl={2}>Comments</Col>
-                                    <Col xl={10}>
+                                    <Col xs={2} sm={4} md={2} lg={2} xl={2}>
+                                        Comments
+                                        </Col>
+                                    <Col xs={10} sm={8} md={10} lg={10} xl={10}>
                                         <input
                                             type="text"
-                                            placeholder="Comments"
-                                            name="comments"
-                                            value={this.props.comments}
+                                            placeholder="Comment"
+                                            name="comment"
+                                            value={this.props.comment}
                                             onChange={this.props.handleChange}
                                             style={{ backgroundColor: "#F0EAD6" }}
                                         />
                                     </Col>
+
+
                                 </Row>
                             </form>
                         </Col>
@@ -119,9 +134,6 @@ class RegisterForm extends React.Component {
 
         );
     }
-
-
 }
-
 
 export default RegisterForm;

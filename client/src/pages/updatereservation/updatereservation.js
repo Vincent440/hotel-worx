@@ -164,8 +164,8 @@ class ReserveUpdate extends Component {
     handleCancelSubmit(e) {
         e.preventDefault();
         api.cancelReservation(this.state.reservationId)
-                .then(() => this.setState({ cancelSuccess: true, updateSuccess: false }))
-                .catch(err => console.log(err));
+            .then(() => this.setState({ cancelSuccess: true, updateSuccess: false }))
+            .catch(err => console.log(err));
     }
 
     makeAxiosCall = () => {
@@ -215,7 +215,6 @@ class ReserveUpdate extends Component {
                                         placeholder="Confirmation Number"
                                         name="confirmationNumber"
                                         value={this.state.confirmationNumber}
-                                        onChange={this.handleInputChange}
                                         disabled
                                     />
                                 </Col>
