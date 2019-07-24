@@ -34,7 +34,6 @@ export default class DateRange extends React.Component {
         <span className="InputFromTo-to">
           <DayPickerInput
             ref={el => (this.to = el)}
-            component={props => <input {...props} />}
             value={to}
             placeholder="To"
             format="YYYY-MM-DD"
