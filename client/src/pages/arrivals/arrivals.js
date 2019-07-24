@@ -1,24 +1,21 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
-import SearchSubmit from "../../components/searchButton";
+// import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
-import { Container, Table } from 'react-bootstrap';
-import { isInclusivelyBeforeDay } from 'react-dates';
-import Particles from "react-particles-js";
+import Table from 'react-bootstrap/Table';
+import { Link } from 'react-router-dom';
 
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 const today = moment().format("YYYY-MM-DD");
 
 class Arrivals extends Component {
     state = {
         startDateRange: today,
-        firstname: undefined,
-        lastname: undefined,
-        confirmationNumber: undefined,
+        firstname: "",
+        lastname: "",
+        confirmationNumber: "",
         arrivalsArray: [],
         roomsArray: [],
         pendingArray: []
@@ -49,8 +46,8 @@ class Arrivals extends Component {
 
     handleInputChange = event => {
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
+        this.setState({ [name]: value }, () => {
+            this.makeAxiosCall();
         });
     }
 
@@ -66,77 +63,77 @@ class Arrivals extends Component {
         event.preventDefault();
         this.makeAxiosCall();
     }
+    printFunction() {
+        window.print();
+    }
 
     render() {
         return (
-            <Container>
-                <Particles params={particleOpt} id="particul" />
-
-                <Row>
-                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
-                    </Col>
-                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
+                <div>
                         <Row>
                             <Col xl={12}>
                                 <Header>ARRIVALS</Header>
                             </Col>
                         </Row>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
-                            <Row>
-                                <Col xl={10}>
-                                    <Row>
-                                        <Col xl={1}>Date</Col>
-                                        <Col xl={2}>
-                                            <input style={{ width: "150px", height: "30px" }}
-                                                type="date"
-                                                placeholder="Date"
-                                                name="startDateRange"
-                                                value={this.state.startDateRange}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={1}>Name:</Col>
-                                        <Col xl={2}>
-                                            <input style={{ width: "150px" }}
-                                                type="text"
-                                                placeholder="First Name"
-                                                name="firstname"
-                                                value={this.state.firstname}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={2}>Last Name:</Col>
-                                        <Col xl={3}>
-                                            <input style={{ width: "150px", height: "30px" }}
-                                                type="text"
-                                                placeholder="Last Name"
-                                                name="lastname"
-                                                value={this.state.lastname}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                        <Col xl={1}>
-                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                        </Col>
-                                    </Row>
+                        <div id="res">
+                            <Row id="arrivalLine">
+                            <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                    Date
+                                </Col>
+                                <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                                    <input style={{height:"30px"}}
+                                        type="date"
+                                        placeholder="Date"
+                                        name="startDateRange"
+                                        value={this.state.startDateRange}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                                <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                    Name</Col>
+                                    <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                                    <input 
+                                        type="text"
+                                        placeholder="First Name"
+                                        name="firstname"
+                                        value={this.state.firstname}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                                <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                    Last Name</Col>
+                                    <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                                    <input 
+                                        type="text"
+                                        placeholder="Last Name"
+                                        name="lastname"
+                                        value={this.state.lastname}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                                {/* <Col xs={6} sm={6} md={3} lg={2} xl={1}>
+                                    <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                                </Col> */}
+                                <Col xs={2} sm={3} md={2} lg={2} xl={1}>
+                                    <button type="button" className="btn btn-success" id="printButton2" onClick={this.printFunction}>Print</button>
                                 </Col>
                             </Row>
+
                         </div>
                         <div id="res" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={12}>
-                                    Pending departures by room type:
+                                   <Link to="../../cashiering/billing">Pending departures</Link> by room type:
                                     {this.state.pendingArray.length === 0 ? " None" :
                                         (this.state.pendingArray.map((type, i) => (
-                                            <span key={type.room_type_id}>{i>0 ? ", " :" "}({type.type}: {type.pending_departures})</span>
+                                            <span key={type.room_type_id}>{i > 0 ? ", " : " "}({type.type}: {type.pending_departures})</span>
                                         )))
                                     }
                                 </Col>
                             </Row>
                         </div>
-                        <div id="res">
-                            <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                        <div id="res2">
+                            <Row>
                                 <Col xl={12}>
                                     <Table>
                                         <tbody>
@@ -165,7 +162,7 @@ class Arrivals extends Component {
                                                             arrival.room_num) : "Not Set"}
                                                     </td>
                                                     <td>
-                                                        {this.state.startDateRange === today && (arrival.checked_in === 0 ? <button onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In")}
+                                                        {this.state.startDateRange === today && (arrival.checked_in === 0 ? <button  id="checkIn" onClick={() => this.handleCheckIn(arrival.res_room_id, this.state.arrivalsArray[i].selectedRoom)}>Check In</button> : "Checked In")}
 
                                                     </td>
                                                 </tr>
@@ -175,9 +172,7 @@ class Arrivals extends Component {
                                 </Col>
                             </Row >
                         </div>
-                    </Col>
-                </Row >
-            </Container >
+            </div>
         )
     }
 }

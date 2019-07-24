@@ -2,7 +2,7 @@
 require('dotenv').config()
 const express = require("express");
 const passport = require("passport");
-require('./controllers/passportController')(passport);// pass passport for configuration
+require('./config/passportConfig')(passport); // pass passport for configuration
 const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');

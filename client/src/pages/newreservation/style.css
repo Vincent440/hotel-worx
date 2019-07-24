@@ -1,23 +1,52 @@
 @media all and (min-width: 1200px) {
-
 }
 
-@media all and (min-width: 992px) {
 
+@media all and (min-width: 992px) {
+  
 }
 
 @media all and (min-width: 768px) {
- 
+  #res > div:nth-child(1) > div:nth-child(2) > div > div > span > div {
+    margin-left: 1px;
+    width: 10px;
+  }
+  #res > div:nth-child(1) > div:nth-child(2) > div > div > span > div {
+    margin-right: 0px;
+    margin-left: 37px;
+  }
+  #res > div:nth-child(1) > div:nth-child(2) > div > div > div {
+    margin-right: 5px;
+  }
+  #dateRangeU{padding-bottom: 5px;
+  }
+  #res > div:nth-child(1) > div:nth-child(1){
+    padding-top: 8px;
+  }
+  #res > div:nth-child(2) > div:nth-child(1){
+    padding-top: 8px;
 
+  }
+  #newRow{
+   padding-bottom: 8px;
+
+  }
 }
 
 @media all and (min-width: 576px) {
-
 }
 @media all and (max-width: 576px) {
-
-
-
+}
+@media print {
+  #infoCard {
+    display: none;
+  }
+  #buttonsReservation {
+    display: none;
+  }
+  body {
+    padding-top: 10px;
+  }
 }
 
 h1 {
@@ -40,7 +69,7 @@ p {
   margin-left: 10px;
 }
 
-#res > div:nth-child(3) > div:nth-child(4) > select{
+#res > div:nth-child(3) > div:nth-child(4) > select {
   width: 188px;
 }
 #res {
@@ -50,10 +79,17 @@ p {
   margin-bottom: 5px;
   margin-top: 5px;
   padding-top: 10px;
-  margin-left: -15px;
-
+  margin-left: 0px;
 }
-
+#res3 {
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-top: 10px;
+  margin-left: 0px;
+}
 #guestinfo {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
@@ -61,7 +97,7 @@ p {
   margin-bottom: 10px;
   padding: 20px;
   max-width: 100%;
-  margin-left: -15px;
+  margin-left: 0px;
 }
 
 button {
@@ -72,9 +108,9 @@ button {
 #submitButton {
   size: 30px;
   margin-left: 40%;
-  color:red;
+  color: red;
 }
-.input{
+.input {
   width: 100%;
 }
 h2 {
@@ -94,29 +130,33 @@ h2 {
   padding-left: 2px;
 }
 
-#field-wrapper{
+#field-wrapper {
   height: 30px;
-  
 }
 
-.sc-htpNat{
+.sc-htpNat {
   margin-bottom: 0px;
   width: 30px;
 }
-#res div div select{
-  width:199px;
+#res div div select {
+  width: 199px;
   height: 30px;
 }
 
-#guestinfo > div > div > div:nth-child(5) > div:nth-child(2) > input[type=text] {
-  width:390px;
-  height:50px;
+#guestinfo
+  > div
+  > div
+  > div:nth-child(5)
+  > div:nth-child(2)
+  > input[type="text"] {
+  width: 390px;
+  height: 50px;
   vertical-align: top;
   max-width: 100%;
-
 }
-ul{
-list-style-type:none;}
-li{
+ul {
+  list-style-type: none;
+}
+li {
   padding-bottom: 5px;
 }

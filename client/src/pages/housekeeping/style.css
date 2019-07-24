@@ -7,6 +7,10 @@
   max-width: 100%;
   margin-left: -15px;
 }
+#printButton{
+  width:80px;
+  height:38px;
+}
 
 h6 {
   font-weight: bold;
@@ -15,22 +19,50 @@ h6 {
   max-width: 100%;
   margin: 0 auto;
   margin-top: 30px;
-
 }
 
-#firstRow{
+#firstRow {
   background-color: white;
   padding-top: 5px;
 }
 
-#secondRow{
+#secondRow {
   background-color: white;
-  padding-top: 5px;
-  margin-bottom: 5px;
-}
-
-#thirdRow{
   padding-top: 5px;
   padding-bottom: 5px;
 }
+#secondRowP {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#thirdRow {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+}
 
+#res2 {
+  background-color: rgba(255, 255, 255, 0.774);
+  border: 2px solid black;
+  border-radius: 5px;
+  padding-left: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding-top: 10px;
+  margin-left: -15px;
+}
+
+#res2 table tr td {
+  background-color: white;
+  padding-right: 10px;
+}
+@media print {
+  #infoCard {
+    display: none;
+  }
+  #res {
+    display: none;
+  }
+}

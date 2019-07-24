@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart";
 import Header from "../../components/Header";
-import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
-import { Container, Table } from 'react-bootstrap';
-import Particles from "react-particles-js";
+import Table from 'react-bootstrap/Table';
 import DateRange from "../../components/dateRangeOrg/dateRange";
-
-
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
-const today = moment().format("YYYY-MM-DD");
+// const today = moment().format("YYYY-MM-DD");
 
 class Maintenance extends Component {
     constructor(props) {
@@ -20,18 +14,21 @@ class Maintenance extends Component {
         this.handleFromChange = this.handleFromChange.bind(this);
         this.handleToChange = this.handleToChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
     state = {
-        startDateRange: today,
+        roomNumber: "",
+        startDateRange: "",
         endDay: "",
-        firstname: undefined,
-        lastname: undefined,
-        confirmationNumber: undefined,
-        roomsArray: [],
-        pendingArray: []
+        issue: "",
+        newIssue: false,
+        updateIssue: false,
+        roomId: "",
+        issueId: "",
+        issuesArray: [],
+        roomsArray: []
     };
-
 
     showFromMonth() {
         const { from, to } = this.state;
@@ -42,213 +39,188 @@ class Maintenance extends Component {
             this.to.getDayPicker().showMonth(from);
         }
     }
-
     handleFromChange(startDateRange) {
-        // Change the from date and focus the "to" input field
         this.setState({ startDateRange });
-
     }
-
     handleToChange(endDay) {
         this.setState({ endDay }, this.showFromMonth);
     }
-
-    handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
-    }
-
-    makeAxiosCall = () => {
-        const criteria = {
-            startDateRange: moment(this.state.startDateRange).format('YYYY-MM-DD'),
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            confirmationNumber: this.state.confirmationNumber
-        };
-
-        api.getArrivalsNew(criteria, moment(this.state.startDateRange).format('YYYY-MM-DD'))
-            .then(res => this.setState({ arrivalsArray: res.arrivals, roomsArray: res.rooms_arrivals, pendingArray: res.pending_departures }))
-            .catch(err => console.log(err));
-    }
-
-    handleCheckIn = (id, room_id) => {
-        api.updateRoomCheckin(id, room_id)
-            .then(res => this.makeAxiosCall())
-            .catch(err => console.log(err));
-    }
-
-    componentDidMount() {
-        this.makeAxiosCall();
-    }
-
-    handleInputChange = event => {
+    handleChange(event) {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     }
-
-    handleRoomChange = event => {
-        const { id, value } = event.target;
-        console.log(id, value);
-        let arrivalsArray = [...this.state.arrivalsArray];
-        arrivalsArray[id].selectedRoom = value;
-        this.setState({ arrivalsArray });
+    handleUpdate(i) {
+        this.setState({ startDateRange: "", endDay: "" }, () => {
+            this.setState({
+                updateIssue: true,
+                issueId: this.state.issuesArray[i].room_issue_id,
+                roomNumber: this.state.issuesArray[i].room_num,
+                startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
+                endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
+                issue: this.state.issuesArray[i].issue,
+                roomId: this.state.issuesArray[i].room_id
+            });
+        });
     }
-
+    updateFixed(id) {
+        this.clearStateIssueInfo();
+        api.updateRoomIssuesFixed(id)
+            .then(() => this.makeAxiosCall())
+            .catch(err => console.log(err));
+    }
+    clearStateIssueInfo() {
+        this.setState({ newIssue: false, updateIssue: false, issueId: "", roomNumber: "", startDateRange: "", endDay: "", issue: "", roomId: "" });
+    }
+    handleCheckChange = event => {
+        event.target.name === "newIssue" && this.setState({ newIssue: !this.state.newIssue, startDateRange: "", endDay: "" });
+        event.target.name === "updateIssue" && this.clearStateIssueInfo();
+    }
+    makeAxiosCall = () => {
+        api.getRoomIssues()
+            .then(res => this.setState({ issuesArray: res }))
+            .catch(err => console.log(err));
+    }
+    componentDidMount() {
+        api.getRoomsIdNum()
+            .then(res => this.setState({ roomsArray: res }))
+            .catch(err => console.log(err));
+        this.makeAxiosCall();
+    }
     handleFormSubmit = event => {
         event.preventDefault();
-        this.makeAxiosCall();
+        let values = [this.state.issue, this.props.user.user_id, moment(this.state.startDateRange).format("YYYY-MM-DD"), moment(this.state.endDay).format("YYYY-MM-DD")];
+        if (this.state.newIssue) {
+            let matchingRoom = this.state.roomsArray.filter(room => room.room_num === this.state.roomNumber);
+            if (matchingRoom.length === 1) {
+                values.unshift(matchingRoom[0].room_id);
+                api.createRoomIssue(values)
+                    .then(() => this.makeAxiosCall())
+                    .catch(err => console.log(err))
+                    .then(() => this.clearStateIssueInfo());
+            }
+        } else if (this.state.updateIssue) {
+            values.unshift(this.state.roomId);
+            api.updateRoomIssues(this.state.issueId, values)
+                .then(() => this.makeAxiosCall())
+                .catch(err => console.log(err))
+                .then(() => this.clearStateIssueInfo());
+        }
     }
 
     render() {
         return (
-            <Container>
-                <Particles params={particleOpt} id="particul" />
-
+            <div>
                 <Row>
-                    <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                    <Col xl={12}>
+                        <Header>MAINTENANCE</Header>
                     </Col>
-                    <Col xs={6} sm={8} md={9} lg={9} xl={10}>
+                </Row>
+                <div id="res" style={{ paddingBottom: "10px" }}>
+                    <Row>
+                        <Col xl={3}>
+                            <b id="questionPart">
+                                {this.state.updateIssue ? "Update Selected Issue" : "Add New Work Order"}
+                            </b>
+                        </Col>
+                        <Col xl={5}>
+                            <input
+                                type="checkbox"
+                                name={this.state.updateIssue ? "updateIssue" : "newIssue"}
+                                checked={this.state.updateIssue ? this.state.updateIssue : this.state.newIssue}
+                                onChange={this.handleCheckChange}
+                            />
+                        </Col>
+                    </Row>
+                    <hr />
+                    {(this.state.newIssue || this.state.updateIssue) &&
                         <Row>
-                            <Col xl={12}>
-                                <Header>MAINTENANCE</Header>
-                            </Col>
-                        </Row>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
-                            <Row>
+                            <div id="workOrder">
                                 <Col xl={12}>
                                     <Row>
-                                        <Col xl={1}>Date</Col>
-                                        <Col xl={3} >
-                                            <input
-                                                style={{ paddingTop: "0px", paddingBottom: "0px" }}
-                                                type="date"
-                                                name="arrivaldate"
-                                                value={this.state.startDateRange}
-                                            />
-                                        </Col>
-
-                                        <Col xs={6} sm={6} md={6} lg={3} xl={2} >Room Number</Col>
-                                        <Col xs={6} sm={6} md={6} lg={3} xl={2}>
+                                        <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                                            Room Number</Col>
+                                        <Col xs={6} sm={6} md={4} lg={2} xl={2}>
                                             <input style={{ width: "150px" }}
-                                                id=""
-                                                onChange={this.handleInputChange}
+                                                onChange={this.handleChange}
                                                 name="roomNumber"
                                                 placeholder="Room Number"
                                                 value={this.state.roomNumber}
                                             />
                                         </Col>
-                                        <Col xs={12} sm={12} md={12} lg={1} xl={1}>
-                                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                                    </Row>
+                                    <Row id="fourthRow">
+                                        <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                                            Date</Col>
+                                        <Col xs={6} sm={6} md={8} lg={8} xl={8}>
+                                            <div>
+                                                <DateRange
+
+                                                    handleFromChange={this.handleFromChange}
+                                                    handleToChange={this.handleToChange}
+                                                    from={this.state.startDateRange}
+                                                    to={this.state.endDay}
+                                                />
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                    <Row id="maintRow">
+                                        <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                                            Problem</Col>
+                                        <Col xs={6} sm={6} md={5} lg={5} xl={5}>
+                                            <textarea
+                                                type="text"
+                                                name="issue"
+                                                value={this.state.issue}
+                                                onChange={this.handleChange}
+                                                style={{ backgroundColor: "#F0EAD6" }}
+                                            ></textarea>
+                                        </Col>
+                                        <Col xs={6} sm={6} md={4} lg={2} xl={2}>
+                                        </Col>
+                                        <Col xs={6} sm={6} md={4} lg={2} xl={2}>
+                                            <button type="button" className="btn btn-success" onClick={this.handleFormSubmit}>Submit</button>
                                         </Col>
                                     </Row>
                                 </Col>
-                            </Row>
-                        </div>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
-                            <Row>
-                                <Col xl={3}>
-                                </Col>
-                                <Col xl={2}>
-                                    <bold>Add new work order</bold>
-                                </Col>
-                                <Col xl={6}>
-                                    <input type="checkbox" id="notReserved" />
-                                </Col>
-                            </Row>
-                            <hr />
-                            <Row>
-                                <div id="workOrder">
-                                    <Col xl={12}>
-                                        <Row>
-                                            <Col xl={2}>
-                                                Room Number
-                                        </Col>
-                                            <Col sm={2}>
-                                                <input style={{ width: "150px" }}
-                                                    id=""
-                                                    onChange={this.handleInputChange}
-                                                    name="roomNumber"
-                                                    placeholder="Room Number"
-                                                    value={this.state.roomNumber}
-                                                />
-                                            </Col>
-                                            <Col xl={1}>
-                                                Date
-                                        </Col>
-                                            <Col xl={7}>
-                                                <div>
-                                                    <DateRange
-                                                        handleFromChange={this.handleFromChange}
-                                                        handleToChange={this.handleToChange}
-                                                        from={this.state.startDateRange}
-                                                        to={this.state.endDay}
-                                                    />
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                        <Row id="maintRow">
-                                            <Col xl={2}>
-                                                Problem
-                                        </Col>
-                                            <Col xl={5}>
-                                                <input
-                                                    id="problemInput"
-                                                    type="text"
-                                                    name="comment"
-                                                    value={this.props.comment}
-                                                    onChange={this.props.handleChange}
-                                                    style={{ backgroundColor: "#F0EAD6" }}
-                                                />
-                                            </Col>
-                                            <Col xl={2}>
-                                            </Col>
-                                            <Col xl={2}>
-                                                <button type="button" className="btn btn-success">Submit</button>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </div>
-                            </Row>
-                        </div>
-                        <div id="res">
-                            <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
-                                <Col xl={12}>
-                                    <Table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Room Number</th>
-                                                <th>Room Type</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Problem</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><button type="button" className="btn btn-success">Update</button>
-                                                </td>
-                                                <td><button type="button" className="btn btn-success">Fixed</button>
-</td>
-
-                                            </tr>
-
-                                        </tbody>
-                                    </Table>
-                                </Col>
-                            </Row >
-                        </div>
-                    </Col>
-                </Row >
-            </Container >
+                            </div>
+                        </Row>
+                    }
+                </div>
+                <div id="res">
+                    <Row style={{ paddingTop: "5px", paddingBottom: "5px" }}>
+                        <Col xl={12}>
+                            <Table>
+                                <tbody>
+                                    <tr>
+                                        <th>Room Number</th>
+                                        <th>Room Type</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Problem</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    {this.state.issuesArray.map((issue, i) => (
+                                        <tr key={issue.room_issue_id}>
+                                            <td>{issue.room_num}</td>
+                                            <td>{issue.type}</td>
+                                            <td>{moment(issue.start_date).format("YYYY-MM-DD")}</td>                                  
+                                            <td>{moment(issue.end_date).format("YYYY-MM-DD")}</td>
+                                            <td>{issue.issue}</td>
+                                            <td><button type="button" className="btn btn-success" name="issueId" onClick={() => this.handleUpdate(i)}>Update</button>
+                                            </td>
+                                            <td><button type="button" className="btn btn-success" onClick={() => this.updateFixed(issue.room_issue_id)}>Fixed</button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row >
+                </div>
+            </div>
         )
     }
 }

@@ -11,9 +11,9 @@ export default {
             }));
     },
     createReservation: (data) => {
-        const fccNum = data.creditCard.replace(/ /g, "")
+        const fccNum = data.creditCard.replace(/ /g, "");
         return axios.post('/api/hw/reservation', {
-            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate, 1],
+            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate],
             reserve: [1, ""],
             rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments]]
         })
@@ -24,9 +24,45 @@ export default {
                 console.log(error);
             });
     },
-
+    updateReservation: (data) => {
+        const fccNum = data.creditCard.replace(/ /g, "");
+        return axios.put('/api/hw/reservation', {
+            cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate, data.customerId],
+            reserve: [2, "", data.reservation_id],
+            rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments, data.resRoomId]]
+        })
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    cancelReservation: (id) => {
+        return axios.put('/api/hw/cancelReservation/' + id)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     getReservations: () => {
         return axios.get('/api/hw/reservations')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    getSomeReservations: (criteria) => {
+        const fname = criteria.firstname === "" ? "undefined" : criteria.firstname;
+        const lname = criteria.lastname === "" ? "undefined" : criteria.lastname;
+        const sdate = criteria.sdate === "" ? "undefined" : criteria.sdate;
+        const edate = criteria.edate === "" ? "undefined" : criteria.edate;
+        const cnum = criteria.confirmationNumber === "" ? "undefined" : criteria.confirmationNumber;
+        return axios.get('/api/hw/reservations_list/' + fname + '/' + lname + '/' + sdate + '/' + edate + '/' + cnum)
             .then((response) => {
                 return response.data;
             })
@@ -153,7 +189,7 @@ export default {
             }));
     },
     getHouseKeepingStatus: (checked) => {
-        return axios.get("/api/hw/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.outOfOrder + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrival + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
+        return axios.get("/api/hw/housekeeping_status/" + checked.clean + "/" + checked.dirty + "/" + checked.vacant + "/" + checked.occupied + "/" + checked.arrived + "/" + checked.stayOver + "/" + checked.dueOut + "/" + checked.departed + "/" + checked.notReserved)
             .then((response) => {
                 return response.data;
             })
@@ -178,5 +214,59 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+    },
+    getRoomsIdNum: () => {
+        return axios.get('/api/hw/roomsIdNum')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    getRoomIssues: () => {
+        return axios.get('/api/hw/room_issues')
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    updateRoomIssues: (id, vals) => {
+        return axios.put('/api/hw/room_issues/' + id, { vals })
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    updateRoomIssuesFixed: (id) => {
+        return axios.put('/api/hw/room_issues_fixed/' + id)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    createRoomIssue: (vals) => {
+        return axios.post('/api/hw/room_issues', { vals })
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    getHouseStatus: (date) => {
+        return axios.all([
+            axios.get('/api/hw/house_status_rooms'),
+            axios.get('/api/hw/house_status_res_rooms/' + date)
+        ])
+            .then(axios.spread((rooms, res_rooms) => {
+                return { rooms: rooms.data, res_rooms: res_rooms.data };
+            }));
     }
 }

@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart"
 import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
-import { Container, Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import api from '../../utils/api';
-import Particles from "react-particles-js";
-
-const particleOpt = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } };
 
 class Billing extends Component {
     state = {
@@ -64,7 +60,7 @@ class Billing extends Component {
     }
 
     handleCheckChange = event => {
-        event.target.name==="stayOver" ? this.setState({ stayOver: !this.state.stayOver, dueOut: false, checkedOut: false }) : event.target.name==="dueOut" ? this.setState({ stayOver: false, dueOut: !this.state.dueOut, checkedOut: false }) : event.target.name==="checkedOut" ? this.setState({ stayOver: false, dueOut: false, checkedOut: !this.state.checkedOut }) : this.setState({ stayOver: false, dueOut: false, checkedOut: false });
+        event.target.name === "stayOver" ? this.setState({ stayOver: !this.state.stayOver, dueOut: false, checkedOut: false }) : event.target.name === "dueOut" ? this.setState({ stayOver: false, dueOut: !this.state.dueOut, checkedOut: false }) : event.target.name === "checkedOut" ? this.setState({ stayOver: false, dueOut: false, checkedOut: !this.state.checkedOut }) : this.setState({ stayOver: false, dueOut: false, checkedOut: false });
     }
 
     handleFormSubmit = event => {
@@ -82,134 +78,129 @@ class Billing extends Component {
             )
         }
         return (
-            <Container>
-                <Particles params={particleOpt} id="particul" />
+            <div>
                 <Row>
-                <Col xs={6} sm={4} md={3} lg={3} xl={2}>
-                        <InfoPart user={this.props.user} logout={this.props.logout} />
+                    <Col xl={12}>
+                        <Header>FINANCE</Header>
                     </Col>
-                    <Col xs={6} sm={8}md={9} lg={9} xl={10}>
-                        <Row>
-                            <Col xl={12}>
-                                <Header>FINANCE</Header>
-                            </Col>
-                        </Row>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
+                </Row>
+                <div id="res" style={{ paddingBottom: "10px" }}>
+                    <Row>
+                        <Col xs={8} sm={8} md={8} lg={5} xl={4}>
+                            <Row style={{ paddingBottom: "5px" }}>
+                                <Col xs={4} sm={6} md={4} lg={6} xl={4} >
+                                    Room No</Col>
+                                <Col xs={4} sm={4} md={4} lg={2} xl={2}>
+                                    <input style={{ width: "150px" }}
+                                        type="text"
+                                        onChange={this.handleInputChange}
+                                        name="roomNumber"
+                                        placeholder="Room Number"
+                                        value={this.state.roomNumber}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row style={{ paddingBottom: "5px" }}>
+                                <Col xs={4} sm={6} md={4} lg={6} xl={4}>
+                                    First Name</Col>
+                                <Col xs={4} sm={4} md={4} lg={2} xl={2}>
+                                    <input style={{ width: "150px" }}
+                                        type="text"
+                                        placeholder="First Name"
+                                        name="firstname"
+                                        value={this.state.firstname}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                            </Row>
                             <Row>
-                                <Col sm={4}>
-                                    <Row style={{ paddingBottom: "5px" }}>
-                                        <Col sm={6} >Room Number</Col>
-                                        <Col sm={6}>
-                                            <input style={{ width: "150px" }}
-                                                type="text"
-                                                onChange={this.handleInputChange}
-                                                name="roomNumber"
-                                                placeholder="Room Number"
-                                                value={this.state.roomNumber}
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row style={{ paddingBottom: "5px" }}>
-                                        <Col sm={6}>First Name</Col>
-                                        <Col sm={6}>
-                                            <input style={{ width: "150px" }}
-                                                type="text"
-                                                placeholder="First Name"
-                                                name="firstname"
-                                                value={this.state.firstname}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col sm={6} style={{ paddingRight: "30px" }}>Last Name</Col>
-                                        <Col sm={6}>
-                                            <input style={{ width: "150px", height: "30px" }}
-                                                type="text"
-                                                placeholder="Last Name"
-                                                name="lastname"
-                                                value={this.state.lastname}
-                                                onChange={this.handleInputChange}
-                                            />
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <Col xl={4} style={{ paddingLeft: "60px" }}>
-                                    <Row style={{ paddingBottom: "12px" }}>
-                                        <Col xl={6}>Stay Over</Col>
-                                        <Col xl={6}>
-                                            <input type="checkbox"
-                                                name="stayOver"
-                                                checked={this.state.stayOver}
-                                                onChange={this.handleCheckChange}
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row style={{ paddingBottom: "12px" }}>
-                                        <Col xl={6}>Due Out</Col>
-                                        <Col xl={6}>
-                                            <input type="checkbox"
-                                                name="dueOut"
-                                                checked={this.state.dueOut}
-                                                onChange={this.handleCheckChange}
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col xl={6}>Checked Out</Col>
-                                        <Col xl={6}>
-                                            <input type="checkbox"
-                                                name="checkedOut"
-                                                checked={this.state.checkedOut}
-                                                onChange={this.handleCheckChange}
-                                            />
-                                        </Col>
-                                    </Row>
-                                </Col>
-                                <Col>
-                                </Col>
-                                <Col xl={2} style={{ marginTop: "30px" }}>
-                                    <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                </Col>
-
-                            </Row>
-                        </div>
-
-                        <div id="res">
-                            <Row style={{ paddingBottom: "20px" }}>
-                                <Col xl={12}>
-                                    <Table>
-                                        <tbody>
-                                            <tr>
-                                                <th>Room Number</th>
-                                                <th>Name</th>
-                                                <th>Arrival Date</th>
-                                                <th>Departure Date</th>
-                                                <th>Balance</th>
-                                                <th></th>
-                                            </tr>
-
-                                            {this.state.departuresArray.map((departure, i) => (
-                                                <tr key={departure.res_room_id}>
-                                                    <td>{departure.room_num}</td>
-                                                    <td>{departure.name}</td>
-                                                    <td>{departure.check_in_date}</td>
-                                                    <td>{departure.check_out_date}</td>
-                                                    <td>{Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                                                    </td>
-                                                    <td>
-                                                        {departure.room_num !== "Not Set" ? <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button> : "Checked Out"}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </Table>
+                                <Col xs={4} sm={6} md={4} lg={6} xl={4}> Last Name</Col>
+                                <Col xs={4} sm={4} md={4} lg={2} xl={2}>
+                                    <input style={{ width: "150px", height: "30px" }}
+                                        type="text"
+                                        placeholder="Last Name"
+                                        name="lastname"
+                                        value={this.state.lastname}
+                                        onChange={this.handleInputChange}
+                                    />
                                 </Col>
                             </Row>
-                        </div>
-                    </Col>
-                </Row >
-            </Container>
+                        </Col>
+                        <Col xs={4} sm={6} md={4} lg={5} xl={4}>
+                            <Row style={{ paddingBottom: "12px" }}>
+                                <Col xs={4} sm={8} md={8} lg={6} xl={4}>
+                                    Stay Over</Col>
+                                <Col xs={4} sm={4} md={2} lg={2} xl={2}>
+                                    <input type="checkbox"
+                                        name="stayOver"
+                                        checked={this.state.stayOver}
+                                        onChange={this.handleCheckChange}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row style={{ paddingBottom: "12px" }}>
+                                <Col xs={4} sm={8} md={8} lg={6} xl={4}>
+                                    Due Out</Col>
+                                <Col xs={4} sm={4} md={2} lg={2} xl={2}>
+                                    <input type="checkbox"
+                                        name="dueOut"
+                                        checked={this.state.dueOut}
+                                        onChange={this.handleCheckChange}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={4} sm={8} md={8} lg={6} xl={4}>
+                                    Checked Out</Col>
+                                <Col xs={4} sm={4} md={2} lg={2} xl={2}>
+                                    <input type="checkbox"
+                                        name="checkedOut"
+                                        checked={this.state.checkedOut}
+                                        onChange={this.handleCheckChange}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col xs={4} sm={4} md={4} lg={2} xl={4} style={{ marginTop: "20px" }}>
+                            <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                        </Col>
+
+                    </Row>
+                </div>
+
+                <div id="res">
+                    <Row style={{ paddingBottom: "20px" }}>
+                        <Col xl={12}>
+                            <Table>
+                                <tbody>
+                                    <tr>
+                                        <th>Room Number</th>
+                                        <th>Name</th>
+                                        <th>Arrival Date</th>
+                                        <th>Departure Date</th>
+                                        <th>Balance</th>
+                                        <th></th>
+                                    </tr>
+
+                                    {this.state.departuresArray.map((departure, i) => (
+                                        <tr key={departure.res_room_id}>
+                                            <td>{departure.room_num}</td>
+                                            <td>{departure.name}</td>
+                                            <td>{departure.check_in_date}</td>
+                                            <td>{departure.check_out_date}</td>
+                                            <td>{Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                                            </td>
+                                            <td>
+                                                {departure.room_num !== "Not Set" ? <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button> : "Checked Out"}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </div>
+            </div>
         )
     }
 }

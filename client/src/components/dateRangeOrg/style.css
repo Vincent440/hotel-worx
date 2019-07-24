@@ -20,13 +20,3 @@
 .InputFromTo-to .DayPickerInput-Overlay {
   margin-left: -190px;
 }
-
-#workOrder > div > div:nth-child(1) > div:nth-child(4) > div > div > span > div{
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
-#workOrder > div > div:nth-child(1) > div:nth-child(4) > div > div > div{
-  margin-left: 0px;
-  margin-right: 0px;
-}

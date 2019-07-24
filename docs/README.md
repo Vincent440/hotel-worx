@@ -1,32 +1,60 @@
 # Hotel Worx
-Project 3 repository. Hotel Employee booking software.
+A [Property management system](https://en.wikipedia.org/wiki/Property_management_system) used by Employees, & Managers.
+
+A React.js client making axios requests to an Express.js/Node.js server connected to a MySQL database for persistent storage.
+
+This application is a simple and easy to use React web-based Property Management System.
+Allowing employees and managers to supervise the day-to-day operations of their properties.
 
 ---
-[HotelWorx Wiki](https://github.com/Vincent440/hotel-worx/wiki)
+Nav:
+ * [View Hotel Worx](https://hotelworx.herokuapp.com/)
+ * [HotelWorx Wiki](https://github.com/Vincent440/hotel-worx/wiki)
 ---
 
-## How users can get started with the project:
+
+## Getting started:
 
 To use this project, you'll need to do the following:
+* View on heroku here [Hotel Worx](https://hotelworx.herokuapp.com/)
 
-* clone this repository onto your computer or upload it to a web server of your choice
+* Clone this repository:
+```bash
+git clone https://github.com/Vincent440/hotel-worx.git
+```
+* Upload it to a web server of your choice (Heroku, Aws, Azure, ETC.)
 
-* if you're running it locally on your pc, also perform these steps:
+* If you're running it locally on your pc, also perform these steps:
 
     * run 'npm i' from the terminal (this will install the npm modules)
     * create a mysql database using the schema in: **config/schema.sql**
     * populate the newly created database with the data in: **config/seeds.sql**
-    * create a **config/pwd.js** file with the following contents (since this was excluded from being sent to guthub in the .gitignore file):
+    * create a `.env` file with the following contents (since this was excluded from being sent to guthub in the .gitignore file):
 
-```js
-var pwd = <your_password>;
-
-module.exports = pwd;
 ```
+# Port to host application on.
+PORT=3001
+
+# Name of the mysql database you will be connecting to.
+DB_NAME=DatabaseName
+
+# Host name for connecting to MySQL database
+DB_HOST=hostname
+
+#Port to connect to MySQL database
+DB_PORT=DatabasePort
+
+# User for connecting to MySQL database
+DB_USER=userstringhere
+
+# Password for connecting to MySQL database
+DB_PASSWORD=passwordstringhere
+```
+This allows `server.js` && `config/connection.js` to use Node.js `process.env` variables set on runtime to connect to either the local database or the hosted database.
 
 ---
 
-## About the code in this project:
+## Example of the complexity of Hotel Worx's Data Structure
 
 One of the more difficult queries was in returning detailed room availability for the next n-number of days. In our case, we decided on 14 days to display on that page.
  * We passed the date to be used into MySQL and saved it to a variable **(SET @input_date=?;)**... with **?** being used as a placeholder until it's set in 'connection.query'. This made it easy to iterate through the days included in the query using a loop... allowing us to use the loop iterator to increment the date interval for each row to return.
@@ -56,7 +84,9 @@ selectAvailable: (date, cb) => {
 ---
 
 ## Contributers
+Project 3 Of _*Case Western Reserve University Coding Bootcamp*_
 
+_**Created June, 2019**_ By:
 * [Sibel Baslamisli](https://sialbul.github.io/sibel-portfolio/)
 * [Mike Gullo](https://mike14747.github.io/)
 * [Vincent Shury](https://vincent440.github.io/)

@@ -2,157 +2,131 @@ import React, { Component } from "react";
 import api from '../../utils/api';
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
-import InfoPart from "../../components/infoPart";
+import moment from "moment";
 import Header from "../../components/Header"
-
+const today = moment().format("YYYY-MM-DD");
 class HouseStatus extends Component {
-    // Setting the initial values of this.state.username and this.state.password
+    constructor(props) {
+        super(props);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
     state = {
-        name: "",
-        lastname: "",
-        phonenumber: "",
-        address: {
-            street: "",
-            state: "",
-            city: "",
-            zipcode: ""
-        },
-        arrivaldate: "",
-        departuredate: "",
-        nights: "",
-        adults: "",
-        noOfRooms: "",
-        roomType: "",
-        creditCard: "",
-        expirationDate: "",
-        selectedOption: ["Two Quenns", "King Single", "Suite"],
-        ReservationInfo: {},
-        RoomInfo: []
+        date: today,
+        roomsToSell: "",
+        minAvailableTonight: "",
+        maxOccupiedTonight: "",
+        stayovers: "",
+        departuresPending: "",
+        departuresActual: "",
+        arrivalsPending: "",
+        arrivalsActual: "",
+        cleanVacant: "",
+        cleanOccupied: "",
+        dirtyVacant: "",
+        dirtyOccupied: ""
     };
-
+    makeAxiosCall = () => {
+        api.getHouseStatus(this.state.date)
+            .then(res => this.setState({ roomsToSell: res.rooms[0].roomsToSell, cleanVacant: res.rooms[0].cleanVacant, cleanOccupied: res.rooms[0].cleanOccupied, dirtyVacant: res.rooms[0].dirtyVacant, dirtyOccupied: res.rooms[0].dirtyOccupied, stayovers: res.res_rooms[0].stayovers, departuresPending: res.res_rooms[0].departuresPending, departuresActual: res.res_rooms[0].departuresActual, arrivalsPending: res.res_rooms[0].arrivalsPending, arrivalsActual: res.res_rooms[0].arrivalsActual, minAvailableTonight: Number(res.rooms[0].roomsToSell) - Number(res.res_rooms[0].stayovers) - Number(res.res_rooms[0].arrivalsPending), maxOccupiedTonight: Number(res.res_rooms[0].stayovers) + Number(res.res_rooms[0].arrivalsPending) }))
+            .catch(err => console.log(err));
+    }
     componentDidMount() {
-        api.getReservation(1)
-            .then(res => this.setState({ ReservationInfo: res.resCust.result[0], RoomInfo: res.resRooms.result }))
-            .catch(err => console.log(err))
+        this.makeAxiosCall();
     }
-
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
-    }
-
-    // handle any changes to the input fields
-    handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
-        const { name, value } = event.target;
-
-        // Set the state for the appropriate input field
+    handleDateChange = event => {
         this.setState({
-            [name]: value
+            date: event.target.value
         });
     }
-
-    // When the form is submitted, prevent the default event and alert the username and password
     handleFormSubmit = event => {
         event.preventDefault();
-        alert(`Username: ${this.state.username}\nPassword: ${this.state.password}`);
-        this.setState({ username: "", password: "" });
+        this.makeAxiosCall();
     }
     render() {
         return (
-
-            <Row id="dashboardTable1">
-                <InfoPart user={this.props.user} logout={this.props.logout} />
-                <Col sm={10}>
-                    <row>
-                        <Header>HOUSE STATUS</Header>
-                        <form>
-                            <div id="resHouse">
-                                {this.state.RoomInfo.map((room, i) => (
-                                    <div key={room.res_room_id}>
-                                        <table>
-                                            <tr>
-                                                <th><p>Room Summary</p></th>
-                                                <th><p>Activity</p></th>
-                                                <th><p>Housekeeping Room Status</p></th>
-                                            </tr>
-
-                                            <td>
-                                                <tr>
-                                                    <td><p> Total Rooms to Sell: {}</p></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><p>Min. Available Tonight:{}</p></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><p>Max. Occupied Tonight{} </p></td>
-                                                </tr>
-                                            </td>
-                                            <td>
-
-                                                <tr>
-                                                    <td><p>Stayovers: {}</p></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><p>Departures Expected: {}</p></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><p>Departures Actual: {}</p></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><p>Arrivals Expected: {}</p></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><p>Arrivals Actual: {}</p></td>
-                                                </tr>
-                                            </td>
-                                            <td>
-                                                <tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td><p>Vacant</p></td>
-                                                        <td><p>Occupied</p></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Clean</td>
-                                                        <td id="vacantClean" style={{ border: "1px solid black", width: "40px;" }}>{}</td>
-                                                        <td id="occupiedClean" style={{ border: "1px solid black", width: "30px;" }}>{}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Dirty</td>
-                                                        <td id="vacantDirty" style={{ border: "1px solid black", width: "40px;" }}>{}</td>
-                                                        <td id="occupiedDirty" style={{ border: "1px solid black", width: "30px;" }}>{}</td>
-                                                    </tr>
-                                                </tr>
-                                            </td>
-
-                                            <tr style={{ marginTop: "20px;", }} >
-                                                <td style={{ textAlign: "right", marginLeft: "20px;", }}><p>Date</p></td>
-                                                <td><input
-                                                    id=""
-                                                    type="date"
-                                                    name="arrivaldate"
-                                                    value={this.state.arrivaldate}
-                                                    onChange={this.handleInputChange}
-                                                /></td>
-                                            </tr>
-
-                                        </table>
-                                    </div>
-                                ))}
-                            </div>
-                            <div id="buttonDiv">
-                                <button type="button" className="btn btn-primary" style={{marginLeft:"450px"}}>Search</button>
-
-                                <button type="button" className="btn btn-primary" style={{marginLeft:"20px"}}>Close</button>
-
-                            </div>
-                        </form>
-                    </row>
-                </Col >
-            </Row >
-        )
+    <div>
+        <Row>
+            <Col xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Header>HOUSE STATUS</Header>
+            </Col>
+        </Row>
+        <div id="resHouse">
+            <Row>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop" >Room Summary</Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Total Rooms to Sell:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.roomsToSell}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                        <Col xs={8} sm={8} md={8} lg={9} xl={9}>Min. Available Tonight:</Col>
+                        <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.minAvailableTonight}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Max. Occupied Tonight:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.maxOccupiedTonight}</Col>
+                    </Row>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop">Activity</Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Stayovers:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.stayovers}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Pending: </Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresPending}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Departures Actual:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.departuresActual}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Pending:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsPending}</Col>
+                    </Row>
+                    <Row className="rowHouse">
+                    <Col xs={8} sm={8} md={8} lg={9} xl={9}>Arrivals Actual:</Col>
+                    <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.arrivalsActual}</Col>
+                    </Row>
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Row className="headTop">Room Status-Housekeeping</Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}></Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Vacant</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Occupied</Col>
+                    </Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Clean</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanVacant}</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.cleanOccupied}</Col>
+                    </Row>
+                    <Row className="rowHouse2">
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>Dirty</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyVacant}</Col>
+                        <Col xs={3} sm={3} md={2} lg={4} xl={4}>{this.state.dirtyOccupied}</Col>
+                    </Row>
+                </Col>
+            </Row>
+            <div id="dateRow">
+                <Row>
+                    <Col>Date:
+                        <input className="ml-2" style={{ width: "150px", height: "30px" }}
+                            type="date"
+                            name="date"
+                            value={this.state.date}
+                            onChange={this.handleDateChange}
+                        />
+                    </Col>
+                </Row>
+            </div>
+            <div id="buttonDiv">
+                <button type="button" className="btn btn-primary"onClick={this.handleFormSubmit}>Search</button>
+            </div>
+        </div>
+    </div>
+    )
     }
 }
-
 export default HouseStatus;
