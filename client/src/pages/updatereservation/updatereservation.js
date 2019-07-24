@@ -211,11 +211,10 @@ class ReserveUpdate extends Component {
                                 </Col>
                                 <Col xs={6} sm={8} md={6} lg={8} xl={3}>
                                     <input
-                                        type="tel"
+                                        type="text"
                                         placeholder="Confirmation Number"
                                         name="confirmationNumber"
                                         value={this.state.confirmationNumber}
-                                        onChange={this.handleInputChange}
                                         disabled
                                     />
                                 </Col>
