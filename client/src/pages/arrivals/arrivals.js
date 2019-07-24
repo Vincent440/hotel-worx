@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import Header from "../../components/Header";
-import SearchSubmit from "../../components/searchButton";
+// import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api';
 import moment from "moment";
 import Table from 'react-bootstrap/Table';
@@ -13,9 +13,9 @@ const today = moment().format("YYYY-MM-DD");
 class Arrivals extends Component {
     state = {
         startDateRange: today,
-        firstname: undefined,
-        lastname: undefined,
-        confirmationNumber: undefined,
+        firstname: "",
+        lastname: "",
+        confirmationNumber: "",
         arrivalsArray: [],
         roomsArray: [],
         pendingArray: []
@@ -46,8 +46,8 @@ class Arrivals extends Component {
 
     handleInputChange = event => {
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
+        this.setState({ [name]: value }, () => {
+            this.makeAxiosCall();
         });
     }
 
@@ -87,7 +87,7 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xl={1}>Name:</Col>
+                                <Col xl={1}>First Name:</Col>
                                 <Col xl={2}>
                                     <input style={{ width: "150px" }}
                                         type="text"
@@ -107,9 +107,9 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xl={1}>
+                                {/* <Col xl={1}>
                                     <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                </Col>
+                                </Col> */}
                                 <Col xl={1}>
                                     <button type="button" className="btn btn-success" onClick={this.printFunction}>Print</button>
                                 </Col>

@@ -212,8 +212,6 @@ class Maintenance extends Component {
                                     </td>
                                 </tr>
                             ))}
-
-
                         </tbody>
                     </Table>
                 </Col>

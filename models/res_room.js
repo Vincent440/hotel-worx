@@ -98,7 +98,16 @@ const ResRoom = {
             if (err) throw err;
             cb(result);
         });
-    }
+    },
+    updateSome: (vals, cb) => {
+        const queryString = "UPDATE res_rooms SET room_type_id=?, check_in_date=?, check_out_date=?, adults=?, rate=?, comments=? WHERE res_room_id=?;";
+        vals.forEach(function (room) {
+            connection.execute(queryString, room, (err, result) => {
+                if (err) throw err;
+                cb(result);
+            });
+        });
+    },
 };
 
 module.exports = ResRoom;

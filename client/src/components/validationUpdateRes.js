@@ -11,36 +11,27 @@ class RegisterForm extends React.Component {
                 <div id="res">
                     <Row>
                         <Col xl={10}>
-
                             <form method="post" name="userRegistrationForm" onSubmit={this.props.handleFormSubmit} >
-                            <Row style={{ paddingBottom: "2px" }}>
-                                    <Col xl={2}>
-                                        <label>First Name</label>
-                                    </Col>
+                                <Row style={{ paddingBottom: "2px" }}>
+                                    <Col xl={2}><label>First Name</label></Col>
                                     <Col xl={3}>
                                         <input type="text" name="firstname" value={this.props.firstname} onChange={this.props.handleChange} />
                                         <div className="errorMsg">{this.props.errors.firstname}</div>
                                     </Col>
-                                    <Col xl={2}>
-                                        <label>Last Name</label>
-                                    </Col>
+                                    <Col xl={2}><label>Last Name</label></Col>
                                     <Col xl={2}>
                                         <input type="text" name="lastname" value={this.props.lastname} onChange={this.props.handleChange} />
                                         <div className="errorMsg">{this.props.errors.lastname}</div>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xl={2}>
-                                        Phone Number
-                                </Col>
+                                    <Col xl={2}>Phone Number</Col>
                                     <Col xl={3}>
-                                        <input type="tel" name="phone"  placeholder="888 888 8888" pattern='[0-9]{3} [0-9]{3} [0-9]{4}' value={this.props.phone} onChange={this.props.handleChange} required/>
+                                        <input type="tel" name="phone" placeholder="888 888 8888" pattern='[0-9]{3} [0-9]{3} [0-9]{4}' value={this.props.phone} onChange={this.props.handleChange} required />
 
                                         <div className="errorMsg">{this.props.errors.phone}</div>
                                     </Col>
-                                    <Col xl={2}>
-                                        Email Address
-                                </Col>
+                                    <Col xl={2}>Email Address</Col>
                                     <Col xl={2}>
                                         <input type="text" name="email" value={this.props.email} onChange={this.props.handleChange} />
                                         <div className="errorMsg">{this.props.errors.email}</div>
@@ -48,9 +39,7 @@ class RegisterForm extends React.Component {
                                 </Row>
 
                                 <Row style={{ marginTop: "5px" }}>
-                                    <Col xl={2}>
-                                        Address
-                                        </Col>
+                                    <Col xl={2}>Address</Col>
                                     <Col xl={3}>
                                         <input
                                             type="text"
@@ -95,37 +84,37 @@ class RegisterForm extends React.Component {
                                     <Col xl={9}>
                                         <CreditCardInput
                                             cardNumberInputProps={{ name: 'creditCard', value: this.props.creditCard, onChange: this.props.handleChange }}
-                                            cardExpiryInputProps={{ name:'expirationDate', value: this.props.expirationDate, onChange: this.props.handleChange }}
-                                            cardCVCInputProps={{ name:'cvc'  , value: this.props.cvc, onChange: this.handleChange }}
+                                            cardExpiryInputProps={{ name: 'expirationDate', value: this.props.expirationDate, onChange: this.props.handleChange }}
+                                            cardCVCInputProps={{ name: 'cvc', value: this.props.cvc, onChange: this.handleChange }}
                                             fieldClassName="input"
                                         />
                                     </Col>
                                 </Row>
-                                <Row style={{marginBottom:"20px"}}>
-                                    <Col xl={2}>
-                                        Comments
-                                        </Col>
+                                <Row style={{ marginBottom: "20px" }}>
+                                    <Col xl={2}>Comments</Col>
                                     <Col xl={10}>
                                         <input
                                             type="text"
-                                            placeholder="Comment"
-                                            name="comment"
-                                            value={this.props.comment}
+                                            placeholder="Comments"
+                                            name="comments"
+                                            value={this.props.comments}
                                             onChange={this.props.handleChange}
                                             style={{ backgroundColor: "#F0EAD6" }}
                                         />
                                     </Col>
-
-
                                 </Row>
                             </form>
                         </Col>
                     </Row>
 
                 </div>
-                <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={this.props.handleFormSubmit}>Cancel Reservation</button>
-
-                <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Submit</button>
+                <div className="text-center">
+                    <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleCancelSubmit}>Cancel Reservation</button>
+                    <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleFormSubmit}>Submit</button>
+                    <br />
+                    <span className="text-light">{this.props.updateSuccess && "Reservation was successfully updated!"}</span>
+                    <span className="text-light">{this.props.cancelSuccess && "Reservation has been cancelled!"}</span>
+                </div>
             </div>
 
         );

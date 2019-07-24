@@ -14,6 +14,7 @@ class ReserveUpdate extends Component {
         this.handleToChange = this.handleToChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleCancelSubmit = this.handleCancelSubmit.bind(this);
     }
 
     state = {
@@ -39,6 +40,10 @@ class ReserveUpdate extends Component {
         confirmationNumber: "",
         updateSuccess: false,
         reservationId: "",
+        resRoomId: "",
+        comments: "",
+        rate: "",
+        cancelSuccess: false,
         errors: {}
     };
 
@@ -125,6 +130,10 @@ class ReserveUpdate extends Component {
     }
 
     handleInputChange = event => {
+        if (event.target.name === "roomtype") {
+            const roomKey = parseInt(event.target.value) - 1;
+            this.setState({ rate: this.state.RoomTypes[roomKey].rate });
+        }
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -140,7 +149,7 @@ class ReserveUpdate extends Component {
                 .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
                 .catch(err => console.log(err));
             api.getReservation(reservation_id)
-                .then(res => this.setState({ customerId: res.resCust[0].customer_id, firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].room_type_id, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num }))
+                .then(res => this.setState({ customerId: res.resCust[0].customer_id, firstname: res.resCust[0].first_name, lastname: res.resCust[0].last_name, address: res.resCust[0].address, city: res.resCust[0].city, state: res.resCust[0].state, zip: res.resCust[0].zip, email: res.resCust[0].email, phone: res.resCust[0].phone, creditCard: res.resCust[0].credit_card_num, expirationDate: res.resCust[0].cc_expiration, resRoomId: res.resRooms[0].res_room_id, departuredate: moment(res.resRooms[0].check_out_date).format('YYYY-MM-DD'), arrivaldate: moment(res.resRooms[0].check_in_date).format('YYYY-MM-DD'), adults: res.resRooms[0].adults, roomtype: res.resRooms[0].room_type_id, rate: res.resRooms[0].rate, confirmationNumber: res.resRooms[0].confirmation_code, roomNumber: res.resRooms[0].room_num, comments: res.resRooms[0].comments }))
                 .catch(err => console.log(err));
         }
     }
@@ -150,6 +159,13 @@ class ReserveUpdate extends Component {
         if (this.validateForm()) {
             this.makeAxiosCall();
         }
+    }
+
+    handleCancelSubmit(e) {
+        e.preventDefault();
+        api.cancelReservation(this.state.reservationId)
+                .then(() => this.setState({ cancelSuccess: true, updateSuccess: false }))
+                .catch(err => console.log(err));
     }
 
     makeAxiosCall = () => {
@@ -169,20 +185,18 @@ class ReserveUpdate extends Component {
             departuredate: moment(this.state.departuredate).format('YYYY-MM-DD'),
             arrivaldate: moment(this.state.arrivaldate).format('YYYY-MM-DD'),
             adults: this.state.adults,
-            roomtype: this.state.roomtype
+            roomtype: this.state.roomtype,
+            resRoomId: this.state.resRoomId,
+            comments: this.state.comments,
+            rate: this.state.rate
         }
         api.updateReservation(data)
-            .then(() => this.setState({ updateSuccess: true }))
+            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false }))
             .catch(err => console.log(err));
     }
 
     render() {
 
-        if (this.state.updateSuccess) {
-            return (
-                "Reservation was successfully updated!"
-            )
-        }
         return (
             <div>
                 <Row>
@@ -197,11 +211,12 @@ class ReserveUpdate extends Component {
                                 <Col xl={1}>Confirmation Number</Col>
                                 <Col xl={3}>
                                     <input
-                                        type="tel"
+                                        type="text"
                                         placeholder="Confirmation Number"
                                         name="confirmationNumber"
                                         value={this.state.confirmationNumber}
                                         onChange={this.handleInputChange}
+                                        disabled
                                     />
                                 </Col>
                                 <Col xl={2}>Room Number</Col>
@@ -290,6 +305,10 @@ class ReserveUpdate extends Component {
                             expirationDate={this.state.expirationDate}
                             cvc={this.state.cvc}
                             errors={this.state.errors}
+                            comments={this.state.comments}
+                            updateSuccess={this.state.updateSuccess}
+                            cancelSuccess={this.state.cancelSuccess}
+                            handleCancelSubmit={this.handleCancelSubmit}
                         />
                     </Col>
                 </Row>
