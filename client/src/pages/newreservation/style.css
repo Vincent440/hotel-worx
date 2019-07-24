@@ -1,10 +1,36 @@
 @media all and (min-width: 1200px) {
 }
 
+
 @media all and (min-width: 992px) {
+  
 }
 
 @media all and (min-width: 768px) {
+  #res > div:nth-child(1) > div:nth-child(2) > div > div > span > div {
+    margin-left: 1px;
+    width: 10px;
+  }
+  #res > div:nth-child(1) > div:nth-child(2) > div > div > span > div {
+    margin-right: 0px;
+    margin-left: 37px;
+  }
+  #res > div:nth-child(1) > div:nth-child(2) > div > div > div {
+    margin-right: 5px;
+  }
+  #dateRangeU{padding-bottom: 5px;
+  }
+  #res > div:nth-child(1) > div:nth-child(1){
+    padding-top: 8px;
+  }
+  #res > div:nth-child(2) > div:nth-child(1){
+    padding-top: 8px;
+
+  }
+  #newRow{
+   padding-bottom: 8px;
+
+  }
 }
 
 @media all and (min-width: 576px) {
@@ -19,7 +45,7 @@
     display: none;
   }
   body {
-  padding-top:10px;
+    padding-top: 10px;
   }
 }
 
@@ -53,7 +79,7 @@ p {
   margin-bottom: 5px;
   margin-top: 5px;
   padding-top: 10px;
-  margin-left: -15px;
+  margin-left: 0px;
 }
 #res3 {
   background-color: rgba(255, 255, 255, 0.774);
@@ -62,7 +88,7 @@ p {
   margin-bottom: 5px;
   margin-top: 5px;
   padding-top: 10px;
-  margin-left: -15px;
+  margin-left: 0px;
 }
 #guestinfo {
   background-color: rgba(255, 255, 255, 0.774);
@@ -71,7 +97,7 @@ p {
   margin-bottom: 10px;
   padding: 20px;
   max-width: 100%;
-  margin-left: -15px;
+  margin-left: 0px;
 }
 
 button {

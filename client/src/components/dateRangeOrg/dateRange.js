@@ -13,7 +13,7 @@ export default class DateRange extends React.Component {
         <DayPickerInput
           value={from}
           placeholder="From"
-          format="LL"
+          format="YYYY-MM-DD"
           formatDate={formatDate}
           parseDate={parseDate}
           dayPickerProps={{
@@ -31,7 +31,7 @@ export default class DateRange extends React.Component {
             ref={el => (this.to = el)}
             value={to}
             placeholder="To"
-            format="LL"
+            format="YYYY-MM-DD"
             formatDate={formatDate}
             parseDate={parseDate}
             dayPickerProps={{

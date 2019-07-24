@@ -56,10 +56,10 @@ class Inhouse extends Component {
                 <Row>
                     <Col xl={9}>
                         <Row style={{ marginTop: "5px" }}>
-                            <Col xl={2}>
+                        <Col xs={6} sm={6} md={2} lg={2} xl={2}>
                                 Room
                             </Col>
-                            <Col xl={3}>
+                            <Col xs={6} sm={6} md={10} lg={3} xl={3}>
                                 <input
                                     id=""
                                     name="roomNumber"
@@ -68,10 +68,10 @@ class Inhouse extends Component {
                                     onChange={this.handleInputChange}
                                 />
                             </Col>
-                            <Col xl={3}>
-                                Confirmation Number
+                            <Col xs={6} sm={6} md={2} lg={2} xl={2}>
+                                Confirmation No
                             </Col>
-                            <Col xl={1}>
+                            <Col xs={6} sm={6} md={10} lg={3} xl={3}>
                                 <input
                                     type="tel"
                                     placeholder="Confirmation Number"
@@ -82,10 +82,10 @@ class Inhouse extends Component {
                             </Col>
                         </Row>
                         <Row style={{ paddingTop: "5px" }}>
-                            <Col xl={2}>
+                        <Col xs={6} sm={6} md={2} lg={2} xl={2}>
                                 First Name
                             </Col>
-                            <Col xl={3} >
+                            <Col xs={6} sm={6} md={10} lg={3} xl={3}>
                                 <input
                                     type="text"
                                     placeholder="Name"
@@ -94,10 +94,10 @@ class Inhouse extends Component {
                                     onChange={this.handleInputChange}
                                 />
                             </Col>
-                            <Col xl={3}>
+                            <Col xs={6} sm={6} md={2} lg={2} xl={2}>
                                 Last Name
                             </Col>
-                            <Col xl={2}>
+                            <Col xs={6} sm={6} md={10} lg={3} xl={2}>
                                 <input
                                     type="text"
                                     placeholder="Last Name"
@@ -108,11 +108,11 @@ class Inhouse extends Component {
                             </Col>
                         </Row>
                     </Col>
-                    <Col xl={1}>
+                    <Col xs={2} sm={2} md={2} lg={2} xl={1}>
                         <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
                     </Col>
-                    <Col xl={1} id="printButton">
-                        <button type="button" className="btn btn-success" onClick={this.printFunction}>Print</button>
+                    <Col xs={6} sm={6} md={6} lg={2} xl={1}>
+                        <button type="button" className="btn btn-success" id="printButton2" onClick={this.printFunction}>Print</button>
                     </Col>
                 </Row>
             </div>

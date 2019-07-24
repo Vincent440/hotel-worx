@@ -22,7 +22,7 @@ class InfoPart extends Component {
   }
   render() {
     return (
-        <UserContext.Consumer>
+    <UserContext.Consumer>
         {({ user,getUserLogout }) => (
         <Card id="infoCard">
             <Card style={{ marginBottom: "10px" }}>

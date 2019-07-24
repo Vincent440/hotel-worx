@@ -76,10 +76,12 @@ class Arrivals extends Component {
                             </Col>
                         </Row>
                         <div id="res">
-                            <Row>
-                                <Col xl={1}>Date</Col>
-                                <Col xl={2}>
-                                    <input style={{ width: "150px", height: "30px" }}
+                            <Row id="arrivalLine">
+                            <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                    Date
+                                </Col>
+                                <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                                    <input style={{height:"30px"}}
                                         type="date"
                                         placeholder="Date"
                                         name="startDateRange"
@@ -87,9 +89,10 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xl={1}>First Name:</Col>
-                                <Col xl={2}>
-                                    <input style={{ width: "150px" }}
+                                <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                    Name</Col>
+                                    <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                                    <input 
                                         type="text"
                                         placeholder="First Name"
                                         name="firstname"
@@ -97,9 +100,10 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xl={1}>Last Name:</Col>
-                                <Col xl={2}>
-                                    <input style={{ width: "150px", height: "30px" }}
+                                <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                    Last Name</Col>
+                                    <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                                    <input 
                                         type="text"
                                         placeholder="Last Name"
                                         name="lastname"
@@ -107,11 +111,11 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                {/* <Col xl={1}>
+                                {/* <Col xs={6} sm={6} md={3} lg={2} xl={1}>
                                     <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
                                 </Col> */}
-                                <Col xl={1}>
-                                    <button type="button" className="btn btn-success" onClick={this.printFunction}>Print</button>
+                                <Col xs={2} sm={3} md={2} lg={2} xl={1}>
+                                    <button type="button" className="btn btn-success" id="printButton2" onClick={this.printFunction}>Print</button>
                                 </Col>
                             </Row>
 

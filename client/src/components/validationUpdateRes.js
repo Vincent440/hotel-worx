@@ -2,9 +2,7 @@ import React from 'react';
 import CreditCardInput from 'react-credit-card-input';
 import { Row, Col } from 'react-grid-system';
 import NumberFormat from 'react-number-format';
-
 class RegisterForm extends React.Component {
-
     render() {
         return (
             <div>
@@ -46,7 +44,6 @@ class RegisterForm extends React.Component {
                                         <div className="errorMsg">{this.props.errors.email}</div>
                                     </Col>
                                 </Row>
-
                                 <Row style={{ marginTop: "5px" }}>
                                     <Col xs={6} sm={4} md={2} lg={2} xl={2}>
                                         Address
@@ -60,7 +57,6 @@ class RegisterForm extends React.Component {
                                             onChange={this.props.handleChange}
                                         />
                                     </Col>
-
                                     <Col xs={1} sm={1} md={2} lg={2} xl={2}>
                                         <input
                                             type="text"
@@ -115,13 +111,10 @@ class RegisterForm extends React.Component {
                                             style={{ backgroundColor: "#F0EAD6" }}
                                         />
                                     </Col>
-
-
                                 </Row>
                             </form>
                         </Col>
                     </Row>
-
                 </div>
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleCancelSubmit}>Cancel Reservation</button>
@@ -131,9 +124,7 @@ class RegisterForm extends React.Component {
                     <span className="text-light">{this.props.cancelSuccess && "Reservation has been cancelled!"}</span>
                 </div>
             </div>
-
         );
     }
 }
-
 export default RegisterForm;
