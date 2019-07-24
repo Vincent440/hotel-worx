@@ -117,7 +117,7 @@ class RegisterForm extends React.Component {
                     </Row>
                 </div>
                 <div className="text-center">
-                    <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleCancelSubmit}>Cancel Reservation</button>
+                    {(this.props.checkedIn === 1 || this.props.active === 0) ? <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleCancelSubmit} disabled>Cancel Reservation</button> : <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleCancelSubmit}>Cancel Reservation</button>}
                     <button type="submit" className="btn btn-primary m-2" onClick={this.props.handleFormSubmit}>Submit</button>
                     <br />
                     <span className="text-light">{this.props.updateSuccess && "Reservation was successfully updated!"}</span>
