@@ -145,7 +145,7 @@ class ReserveUpdate extends Component {
         if (localStorage && localStorage.getItem('reservation_id')) {
             reservation_id = JSON.parse(localStorage.getItem('reservation_id'));
             this.setState({ reservationId: reservation_id });
-        api.getRoomTypes()
+            api.getRoomTypes()
                 .then(res => this.setState({ RoomTypes: res, roomtype: res[0].room_type_id }))
                 .catch(err => console.log(err));
             api.getReservation(reservation_id)
@@ -160,12 +160,12 @@ class ReserveUpdate extends Component {
             this.makeAxiosCall();
         }
     }
-    
+
     handleCancelSubmit(e) {
         e.preventDefault();
         api.cancelReservation(this.state.reservationId)
-                .then(() => this.setState({ cancelSuccess: true, updateSuccess: false }))
-                .catch(err => console.log(err));
+            .then(() => this.setState({ cancelSuccess: true, updateSuccess: false }))
+            .catch(err => console.log(err));
     }
 
     makeAxiosCall = () => {
@@ -175,158 +175,158 @@ class ReserveUpdate extends Component {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             address: this.state.address,
-                    city: this.state.city,
-                    state: this.state.state,
-                    zip: this.state.zip,
-                        email: this.state.email,
-                    phone: this.state.phone,
-                    creditCard: this.state.creditCard,
-                    expirationDate: this.state.expirationDate,
-                    departuredate: this.state.departuredate,
-                        arrivaldate: this.state.arrivaldate,
-                            adults: this.state.adults,
-                                roomtype: this.state.roomtype,
-                                    resRoomId: this.state.resRoomId,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            email: this.state.email,
+            phone: this.state.phone,
+            creditCard: this.state.creditCard,
+            expirationDate: this.state.expirationDate,
+            departuredate: this.state.departuredate,
+            arrivaldate: this.state.arrivaldate,
+            adults: this.state.adults,
+            roomtype: this.state.roomtype,
+            resRoomId: this.state.resRoomId,
             comments: this.state.comments,
-                                rate: this.state.rate
-                                    }
-                                        api.updateReservation(data)
-                            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false }))
-                            .catch(err => console.log(err));
+            rate: this.state.rate
+        }
+        api.updateReservation(data)
+            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false }))
+            .catch(err => console.log(err));
     }
-                                    render() {    
- return (
-                                <div>
-                                    <Row>
-                                        <Col xl={12}>
-                                            <Header>UPDATE RESERVATION</Header>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col xl={12}>
-                                            <div id="res" >
-                                                <Row >
-                                                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
-                                                        Confirmation
+    render() {
+        return (
+            <div>
+                <Row>
+                    <Col xl={12}>
+                        <Header>UPDATE RESERVATION</Header>
                     </Col>
-                                                    <Col xs={6} sm={8} md={6} lg={8} xl={3}>
-                                                        <input
-                                                            type="tel"
-                                                            placeholder="Confirmation Number"
-                                                            name="confirmationNumber"
-                                                            value={this.state.confirmationNumber}
-                                                            onChange={this.handleInputChange}
-                                                            disabled
-                                                        />
-                                                    </Col>
-                                                    <Col xs={6} sm={4} md={4} lg={4} xl={2}>
-                                                        Room Number
+                </Row>
+                <Row>
+                    <Col xl={12}>
+                        <div id="res" >
+                            <Row >
+                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                    Confirmation
+                                </Col>
+                                <Col xs={6} sm={8} md={6} lg={8} xl={3}>
+                                    <input
+                                        type="tel"
+                                        placeholder="Confirmation Number"
+                                        name="confirmationNumber"
+                                        value={this.state.confirmationNumber}
+                                        onChange={this.handleInputChange}
+                                        disabled
+                                    />
+                                </Col>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
+                                    Room Number
+                                </Col>
+                                <Col xs={6} sm={8} md={6} lg={8} xl={2}>
+                                    <input
+                                        type="tel"
+                                        placeholder="Room Number"
+                                        name="roomNumber"
+                                        value={this.state.roomNumber}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+
+                            </Row>
+                            <Row >
+                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                    Arrival
+                                </Col>
+                                <Col xs={6} sm={8} md={8} lg={12} xl={10}>
+                                    <div>
+                                        <DateRange
+                                            handleArrivalDateChange={this.handleArrivalDateChange}
+                                            handleDeparturedateDateChange={this.handleDeparturedateDateChange}
+                                            handleFromChange={this.handleFromChange}
+                                            handleToChange={this.handleToChange}
+                                            from={this.state.arrivaldate}
+                                            to={this.state.departuredate}
+                                        />
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row >
+                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                    Nights
+                                </Col>
+                                <Col xs={6} sm={8} md={8} lg={8} xl={3}>
+                                    <input
+                                        type="number"
+                                        placeholder="Number of Nights"
+                                        name="nights"
+                                        value={this.state.departuredate && (Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24)))}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
+                                    No of Rooms
+                                </Col>
+                                <Col xs={6} sm={8} md={6} lg={8} xl={2}>
+                                    <input
+                                        type="number"
+                                        placeholder="Number of Rooms"
+                                        name="numRooms"
+                                        value={this.state.numRooms}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                    Adults
+                                </Col>
+                                <Col xs={6} sm={8} md={8} lg={8} xl={3}>
+                                    <input
+                                        id=""
+                                        type="number"
+                                        name="adults"
+                                        placeholder="Adults"
+                                        value={this.state.adults}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </Col>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
+                                    Room Type
+                                </Col>
+                                <Col xs={6} sm={8} md={8} lg={8} xl={2}>
+                                    <select id="roomType" name="roomtype" onChange={this.handleInputChange}>
+                                        {this.state.RoomTypes.map(type => (
+                                            <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
+                                        ))}
+                                    </select>
+
+                                </Col>
+                            </Row>
+                        </div>
+
+                        <RegisterForm
+                            handleFormSubmit={this.handleFormSubmit}
+                            handleChange={this.handleChange}
+                            firstname={this.state.firstname}
+                            lastname={this.state.lastname}
+                            phone={this.state.phone}
+                            email={this.state.email}
+                            address={this.state.address}
+                            city={this.state.city}
+                            state={this.state.state}
+                            zip={this.state.zip}
+                            creditCard={this.state.creditCard}
+                            expirationDate={this.state.expirationDate}
+                            cvc={this.state.cvc}
+                            errors={this.state.errors}
+                            comments={this.state.comments}
+                            updateSuccess={this.state.updateSuccess}
+                            cancelSuccess={this.state.cancelSuccess}
+                            handleCancelSubmit={this.handleCancelSubmit}
+                        />
                     </Col>
-                                                    <Col xs={6} sm={8} md={6} lg={8} xl={2}>
-                                                        <input
-                                                            type="tel"
-                                                            placeholder="Room Number"
-                                                            name="roomNumber"
-                                                            value={this.state.roomNumber}
-                                                            onChange={this.handleInputChange}
-                                                        />
-                                                    </Col>
-
-                                                </Row>
-                                                <Row >
-                                                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
-                                                        Arrival
-                        </Col>
-                                                    <Col xs={6} sm={8} md={8} lg={12} xl={10}>
-                                                        <div>
-                                                            <DateRange
-                                                                handleArrivalDateChange={this.handleArrivalDateChange}
-                                                                handleDeparturedateDateChange={this.handleDeparturedateDateChange}
-                                                                handleFromChange={this.handleFromChange}
-                                                                handleToChange={this.handleToChange}
-                                                                from={this.state.arrivaldate}
-                                                                to={this.state.departuredate}
-                                                            />
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row >
-                                                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
-                                                        Nights
-                        </Col>
-                                                    <Col xs={6} sm={8} md={8} lg={8} xl={3}>
-                                                        <input
-                                                            type="number"
-                                                            placeholder="Number of Nights"
-                                                            name="nights"
-                                                            value={this.state.departuredate && (Math.round((this.state.departuredate - this.state.arrivaldate) / (1000 * 60 * 60 * 24)))}
-                                                            onChange={this.handleInputChange}
-                                                        />
-                                                    </Col>
-                                                    <Col xs={6} sm={4} md={4} lg={4} xl={2}>
-                                                        No of Rooms
-                        </Col>
-                                                    <Col xs={6} sm={8} md={6} lg={8} xl={2}>
-                                                        <input
-                                                            type="number"
-                                                            placeholder="Number of Rooms"
-                                                            name="numRooms"
-                                                            value={this.state.numRooms}
-                                                            onChange={this.handleInputChange}
-                                                        />
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col xs={6} sm={4} md={4} lg={4} xl={1}>
-                                                        Adults
-                        </Col>
-                                                    <Col xs={6} sm={8} md={8} lg={8} xl={3}>
-                                                        <input
-                                                            id=""
-                                                            type="number"
-                                                            name="adults"
-                                                            placeholder="Adults"
-                                                            value={this.state.adults}
-                                                            onChange={this.handleInputChange}
-                                                        />
-                                                    </Col>
-                                                    <Col xs={6} sm={4} md={4} lg={4} xl={2}>
-                                                        Room Type
-                        </Col>
-                                                    <Col xs={6} sm={8} md={8} lg={8} xl={2}>
-                                                        <select id="roomType" name="roomtype" onChange={this.handleInputChange}>
-                                                            {this.state.RoomTypes.map(type => (
-                                                                <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
-                                                            ))}
-                                                        </select>
-
-                                                    </Col>
-                                                </Row>
-                                            </div>
-
-                                            <RegisterForm
-                                                handleFormSubmit={this.handleFormSubmit}
-                                                handleChange={this.handleChange}
-                                                firstname={this.state.firstname}
-                                                lastname={this.state.lastname}
-                                                phone={this.state.phone}
-                                                email={this.state.email}
-                                                address={this.state.address}
-                                                city={this.state.city}
-                                                state={this.state.state}
-                                                zip={this.state.zip}
-                                                creditCard={this.state.creditCard}
-                                                expirationDate={this.state.expirationDate}
-                                                cvc={this.state.cvc}
-                                                errors={this.state.errors}
-                                                comments={this.state.comments}
-                                                updateSuccess={this.state.updateSuccess}
-                                                cancelSuccess={this.state.cancelSuccess}
-                                                handleCancelSubmit={this.handleCancelSubmit}
-                                            />
-                                        </Col>
-                                    </Row>
-                                </div>
+                </Row>
+            </div>
 
         )
     }
