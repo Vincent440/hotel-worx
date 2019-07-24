@@ -57,8 +57,8 @@ class Maintenance extends Component {
                 updateIssue: true,
                 issueId: this.state.issuesArray[i].room_issue_id,
                 roomNumber: this.state.issuesArray[i].room_num,
-                startDateRange: this.state.issuesArray[i].start_date,
-                endDay: this.state.issuesArray[i].end_date,
+                startDateRange: moment(this.state.issuesArray[i].start_date).format("YYYY-MM-DD"),
+                endDay: moment(this.state.issuesArray[i].end_date).format("YYYY-MM-DD"),
                 issue: this.state.issuesArray[i].issue,
                 roomId: this.state.issuesArray[i].room_id
             });
