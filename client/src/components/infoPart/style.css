@@ -1,6 +1,6 @@
 #infoCard {
   background-color:rgba(255, 255, 255, 0.586);
-  height: 90vh;
+  height: 92vh;
   width: 200px;
   margin-top: 0px;
   border: 1px solid white;
@@ -18,9 +18,6 @@
 #userNameD {
   font-family: 'Nanum Myeongjo', serif;
   color: black;
-  margin:0px;
-  padding: 10px;
-  margin-top: 50px;
 }
 
 #optionsDiv {
@@ -67,7 +64,6 @@
   text-align: center;
   width:80%;
   margin: 0 auto;
-  margin-top: 50px;
 }
 #infoCard .card-text .rw-main.type-today .rw-box-left .date {
   font-size: 16px;
@@ -100,7 +96,7 @@
 }
 #hotelName{
   text-align: center;
-  font-size: 32px;
+  font-size: 28px;
 
 }
 #hotelPhone i {
@@ -116,7 +112,6 @@
 
 
 #logOut {
-  margin: 80px;
   padding: 0px;
   width: 50px;
   float: left;

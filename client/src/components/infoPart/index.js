@@ -29,7 +29,7 @@ class InfoPart extends Component {
                 <Card.Img variant="top" src={smallLogo} className="App-logo" id="smallLogo" alt="smallLogo" />
             </Card>
             {this.state.hotelInfo.map(info => (
-                <div key={info.hotel_info_id} id="hotelInfoPart">
+                <div key={info.hotel_info_id} id="hotelInfoPart" className="my-auto">
                     <div className="text-center" id="hotelName">{info.hotel_name}</div>
                     <div className="small faded" id="hotelAddress">{info.address}</div>
                     <div className="small faded" id="hotelAddress">{info.city}, {info.state} {info.zip}</div>
@@ -38,7 +38,8 @@ class InfoPart extends Component {
                     <br/>
                 </div>
             ))}
-            <div className="card-text m-0">
+            <div className="py-xl-2"></div>
+            <div className="card-text m-0 my-auto">
                 <ReactWeather
                     forecast="today"
                     apikey={process.env.REACT_APP_WEATHER_API_KEY}
@@ -46,6 +47,7 @@ class InfoPart extends Component {
                     city="Cleveland"
                     units='F' />
             </div>
+            <div className="py-xl-3"></div>
             <h5 className="card-title text-capitalize" id="userNameD">User Name: {user.username}</h5>
             <div id="optionsDiv">
                 <button className="btn btn-block btn-default" id="logOut" onClick={getUserLogout}><i className="fa fa-sign-out-alt"></i></button>
