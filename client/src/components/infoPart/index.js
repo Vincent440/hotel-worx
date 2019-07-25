@@ -48,7 +48,6 @@ class InfoPart extends Component {
             </div>
             <h5 className="card-title text-capitalize" id="userNameD">User Name: {user.username}</h5>
             <div id="optionsDiv">
-                <button className="btn btn-block btn-default" id="userSetting"><i className="fa fa-gear"></i></button>
                 <button className="btn btn-block btn-default" id="logOut" onClick={getUserLogout}><i className="fa fa-sign-out-alt"></i></button>
             </div>
         </Card>

@@ -20,6 +20,7 @@
   color: black;
   margin:0px;
   padding: 10px;
+  margin-top: 50px;
 }
 
 #optionsDiv {
@@ -66,6 +67,7 @@
   text-align: center;
   width:80%;
   margin: 0 auto;
+  margin-top: 50px;
 }
 #infoCard .card-text .rw-main.type-today .rw-box-left .date {
   font-size: 16px;
@@ -90,12 +92,6 @@
   color: black;
 }
 
-#userSetting {
-  padding: 0px;
-  margin-left: 50px;
-  width: 50px;
-  float: left;
-}
 #hotelAddress{
   font-size: 18px;
 }
@@ -116,20 +112,15 @@
   text-align: center;
   font-family: 'Nanum Myeongjo', serif;
   color: black;
-
 }
 
+
 #logOut {
-  margin-left: 0px;
+  margin: 80px;
   padding: 0px;
   width: 50px;
   float: left;
   margin-top: 0px;
-}
-
-#userSetting i {
-  font-size: 28px;
-  color: black;
 }
 
 #logOut i {
