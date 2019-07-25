@@ -146,7 +146,7 @@ class Arrivals extends Component {
                                                     <td>{arrival.type}</td>
                                                     <td>
                                                         {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
-                                                            <select id={i} onChange={this.handleRoomChange}>
+                                                            <select id={i} onChange={this.handleRoomChange} className="p-1">
                                                                 <option value="">Select a room</option>
                                                                 {this.state.roomsArray.filter(roomtype => (roomtype.room_type_id === arrival.room_type_id && roomtype.occupied === 0)).map(room => (
                                                                     <option key={room.room_id} value={room.room_id}>{room.room_num} {room.clean === 0 && " (dirty)"}</option>
