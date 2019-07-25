@@ -8,7 +8,7 @@ class RegisterForm extends React.Component {
             <div>
                 <div id="res">
                     <Row>
-                        <Col xl={10}>
+                        <Col xl={12}>
 
                             <form method="post" name="userRegistrationForm" onSubmit={this.props.handleFormSubmit} >
                                 <Row style={{ paddingBottom: "2px" }}>

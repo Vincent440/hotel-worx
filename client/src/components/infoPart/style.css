@@ -1,6 +1,6 @@
 #infoCard {
   background-color:rgba(255, 255, 255, 0.586);
-  height: 90vh;
+  height: 92vh;
   width: 200px;
   margin-top: 0px;
   border: 1px solid white;
@@ -18,8 +18,6 @@
 #userNameD {
   font-family: 'Nanum Myeongjo', serif;
   color: black;
-  margin:0px;
-  padding: 10px;
 }
 
 #optionsDiv {
@@ -90,12 +88,6 @@
   color: black;
 }
 
-#userSetting {
-  padding: 0px;
-  margin-left: 50px;
-  width: 50px;
-  float: left;
-}
 #hotelAddress{
   font-size: 18px;
 }
@@ -104,7 +96,7 @@
 }
 #hotelName{
   text-align: center;
-  font-size: 32px;
+  font-size: 28px;
 
 }
 #hotelPhone i {
@@ -116,20 +108,14 @@
   text-align: center;
   font-family: 'Nanum Myeongjo', serif;
   color: black;
-
 }
 
+
 #logOut {
-  margin-left: 0px;
   padding: 0px;
   width: 50px;
   float: left;
   margin-top: 0px;
-}
-
-#userSetting i {
-  font-size: 28px;
-  color: black;
 }
 
 #logOut i {

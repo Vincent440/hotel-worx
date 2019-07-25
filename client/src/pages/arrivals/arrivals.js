@@ -59,10 +59,6 @@ class Arrivals extends Component {
         this.setState({ arrivalsArray });
     }
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        this.makeAxiosCall();
-    }
     printFunction() {
         window.print();
     }
@@ -100,7 +96,7 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                <Col xs={6} sm={3} md={3} lg={2} xl={2}>
                                     Last Name</Col>
                                     <Col xs={6} sm={9} md={9} lg={10} xl={2}>
                                     <input 
@@ -111,19 +107,16 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                {/* <Col xs={6} sm={6} md={3} lg={2} xl={1}>
-                                    <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
-                                </Col> */}
                                 <Col xs={2} sm={3} md={2} lg={2} xl={1}>
                                     <button type="button" className="btn btn-success" id="printButton2" onClick={this.printFunction}>Print</button>
                                 </Col>
                             </Row>
 
                         </div>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
+                        <div id="res3" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={12}>
-                                   <Link to="../../cashiering/billing">Pending departures</Link> by room type:
+                                   <Link id="pendingLink" to="../../cashiering/billing">Pending departures</Link> by room type:
                                     {this.state.pendingArray.length === 0 ? " None" :
                                         (this.state.pendingArray.map((type, i) => (
                                             <span key={type.room_type_id}>{i > 0 ? ", " : " "}({type.type}: {type.pending_departures})</span>
@@ -153,7 +146,7 @@ class Arrivals extends Component {
                                                     <td>{arrival.type}</td>
                                                     <td>
                                                         {this.state.startDateRange === today ? (arrival.room_num === "Not Set" ?
-                                                            <select id={i} onChange={this.handleRoomChange}>
+                                                            <select id={i} onChange={this.handleRoomChange} className="p-1">
                                                                 <option value="">Select a room</option>
                                                                 {this.state.roomsArray.filter(roomtype => (roomtype.room_type_id === arrival.room_type_id && roomtype.occupied === 0)).map(room => (
                                                                     <option key={room.room_id} value={room.room_id}>{room.room_num} {room.clean === 0 && " (dirty)"}</option>

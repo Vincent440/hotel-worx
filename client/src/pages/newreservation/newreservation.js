@@ -40,8 +40,7 @@ class ReserveNew extends Component {
         room_comments: "",
         reservationSuccess: false,
         newReservationId: "",
-        errors: {},
-        user_id: ""
+        errors: {}
     };
 
     showFromMonth() {
@@ -120,6 +119,16 @@ class ReserveNew extends Component {
                 errors["phone"] = "*Please enter valid mobile no.";
             }
         }
+
+        if (!this.state.creditCard) {
+            formIsValid = false;
+            errors["creditCard"] = "*Please enter credit card no.";
+        }
+
+        if (!this.state.expirationDate) {
+            formIsValid = false;
+            errors["expirationDate"] = "*Please enter expiration date.";
+        }
         this.setState({
             errors: errors
         });
@@ -165,7 +174,7 @@ class ReserveNew extends Component {
             roomtype: this.state.roomtype,
             rate: this.state.rate,
             comments: this.state.room_comments,
-            user_id: this.state.user_id
+            user_id: this.props.user.user_id
         }
         api.createReservation(data)
             .then(res => this.setState({ reservationSuccess: true, newReservationId: res.data.reservation_id }))
@@ -233,7 +242,7 @@ class ReserveNew extends Component {
                                         placeholder="Number of Rooms"
                                         name="numRooms"
                                         value={this.state.numRooms}
-                                        onChange={this.handleInputChange}
+                                        disabled
                                     />
                                 </Col>
                                 <Col xs={6} sm={4} md={4} lg={2} xl={1}>
