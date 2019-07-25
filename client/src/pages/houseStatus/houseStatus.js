@@ -25,7 +25,7 @@ class HouseStatus extends Component {
 
     makeAxiosCall = () => {
         api.getHouseStatus(this.state.date)
-            .then(res => this.setState({ roomsToSell: res.rooms[0].roomsToSell, cleanVacant: res.rooms[0].cleanVacant, cleanOccupied: res.rooms[0].cleanOccupied, dirtyVacant: res.rooms[0].dirtyVacant, dirtyOccupied: res.rooms[0].dirtyOccupied, stayovers: res.res_rooms[0].stayovers, departuresPending: res.res_rooms[0].departuresPending, departuresActual: res.res_rooms[0].departuresActual, arrivalsPending: res.res_rooms[0].arrivalsPending, arrivalsActual: res.res_rooms[0].arrivalsActual, minAvailableTonight: Number(res.rooms[0].roomsToSell) - Number(res.res_rooms[0].stayovers) - Number(res.res_rooms[0].arrivalsPending), maxOccupiedTonight: Number(res.res_rooms[0].stayovers) + Number(res.res_rooms[0].arrivalsPending) }))
+            .then(res => this.setState({ roomsToSell: res.rooms[0].roomsToSell, cleanVacant: res.rooms[0].cleanVacant, cleanOccupied: res.rooms[0].cleanOccupied, dirtyVacant: res.rooms[0].dirtyVacant, dirtyOccupied: res.rooms[0].dirtyOccupied, stayovers: res.res_rooms[0].stayovers, departuresPending: res.res_rooms[0].departuresPending, departuresActual: res.res_rooms[0].departuresActual, arrivalsPending: res.res_rooms[0].arrivalsPending, arrivalsActual: res.res_rooms[0].arrivalsActual, minAvailableTonight: Number(res.rooms[0].roomsToSell) - Number(res.res_rooms[0].stayovers) - Number(res.res_rooms[0].arrivalsPending) - Number(res.res_rooms[0].arrivalsActual), maxOccupiedTonight: Number(res.res_rooms[0].stayovers) + Number(res.res_rooms[0].arrivalsPending) + Number(res.res_rooms[0].arrivalsActual) }))
             .catch(err => console.log(err));
     }
 
