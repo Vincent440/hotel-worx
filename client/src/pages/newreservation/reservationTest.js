@@ -123,7 +123,6 @@ class ReservationTest extends Component {
                     <button type="submit" className="btn btn-primary" style={{ marginLeft: "480px" }} onClick={() => this.handleChosenReservation(this.state.reservation_id)}>Change</button>
                     <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.printFunction}>Print</button>
                     <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} value="Send"><a href={"mailto:" + this.state.ReservationInfo.email}>Email</a></button>
-                    {/* <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={this.props.handleFormSubmit}>Save</button> */}
                 </div>
             </div>
         )
