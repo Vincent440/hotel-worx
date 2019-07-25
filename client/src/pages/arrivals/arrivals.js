@@ -100,7 +100,7 @@ class Arrivals extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Col>
-                                <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                                <Col xs={6} sm={3} md={3} lg={2} xl={2}>
                                     Last Name</Col>
                                     <Col xs={6} sm={9} md={9} lg={10} xl={2}>
                                     <input 
@@ -120,10 +120,10 @@ class Arrivals extends Component {
                             </Row>
 
                         </div>
-                        <div id="res" style={{ paddingBottom: "10px" }}>
+                        <div id="res3" style={{ paddingBottom: "10px" }}>
                             <Row>
                                 <Col xl={12}>
-                                   <Link to="../../cashiering/billing">Pending departures</Link> by room type:
+                                   <Link id="pendingLink" to="../../cashiering/billing">Pending departures</Link> by room type:
                                     {this.state.pendingArray.length === 0 ? " None" :
                                         (this.state.pendingArray.map((type, i) => (
                                             <span key={type.room_type_id}>{i > 0 ? ", " : " "}({type.type}: {type.pending_departures})</span>

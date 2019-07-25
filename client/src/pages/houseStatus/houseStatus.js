@@ -53,7 +53,7 @@ class HouseStatus extends Component {
         <div id="resHouse">
             <Row>
                 <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <Row className="headTop" >Room Summary</Row>
+                    <div className="headTop" >Room Summary</div>
                     <Row className="rowHouse">
                     <Col xs={8} sm={8} md={8} lg={9} xl={9}>Total Rooms to Sell:</Col>
                     <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.roomsToSell}</Col>
@@ -68,7 +68,7 @@ class HouseStatus extends Component {
                     </Row>
                 </Col>
                 <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <Row className="headTop">Activity</Row>
+                    <div className="headTop">Activity</div>
                     <Row className="rowHouse">
                     <Col xs={8} sm={8} md={8} lg={9} xl={9}>Stayovers:</Col>
                     <Col xs={4} sm={4} md={4} lg={3} xl={3}>{this.state.stayovers}</Col>
@@ -91,7 +91,7 @@ class HouseStatus extends Component {
                     </Row>
                 </Col>
                 <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-                    <Row className="headTop">Room Status-Housekeeping</Row>
+                    <div className="headTop">Room Status-Housekeeping</div>
                     <Row className="rowHouse2">
                         <Col xs={3} sm={3} md={2} lg={4} xl={4}></Col>
                         <Col xs={3} sm={3} md={2} lg={4} xl={4}>Vacant</Col>

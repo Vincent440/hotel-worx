@@ -201,7 +201,7 @@ class ReserveUpdate extends Component {
                     <Col xl={12}>
                         <div id="res" >
                             <Row >
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Confirmation
                                 </Col>
                                 <Col xs={6} sm={8} md={6} lg={8} xl={3}>
@@ -228,7 +228,7 @@ class ReserveUpdate extends Component {
 
                             </Row>
                             <Row >
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Arrival
                                 </Col>
                                 <Col xs={6} sm={8} md={8} lg={12} xl={10}>
@@ -243,7 +243,7 @@ class ReserveUpdate extends Component {
                                 </Col>
                             </Row>
                             <Row >
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Nights
                                 </Col>
                                 <Col xs={6} sm={8} md={8} lg={8} xl={3}>
@@ -269,7 +269,7 @@ class ReserveUpdate extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Adults
                                 </Col>
                                 <Col xs={6} sm={8} md={8} lg={8} xl={3}>
