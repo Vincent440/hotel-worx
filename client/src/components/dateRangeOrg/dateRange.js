@@ -33,7 +33,6 @@ export default class DateRange extends React.Component {
             {...to}
             value={moment(to.value).format('YYYY-MM-DD')}
             ref={el => (this.to = el)}
-            value={to}
             placeholder="To"
             format="YYYY-MM-DD"
             formatDate={formatDate}
