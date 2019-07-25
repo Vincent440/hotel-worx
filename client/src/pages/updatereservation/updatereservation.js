@@ -264,7 +264,7 @@ class ReserveUpdate extends Component {
                                         placeholder="Number of Rooms"
                                         name="numRooms"
                                         value={this.state.numRooms}
-                                        onChange={this.handleInputChange}
+                                        disabled
                                     />
                                 </Col>
                             </Row>
