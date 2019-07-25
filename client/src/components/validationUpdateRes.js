@@ -84,7 +84,7 @@ class RegisterForm extends React.Component {
                                         />
                                     </Col>
                                 </Row>
-                                <Row style={{ marginTop: "5px" }}>
+                                <Row style={{ marginTop: "5px", marginBottom:"5px" }}>
                                     <Col xs={2} sm={4} md={2} lg={2} xl={2}>
                                         Credit Card Number
                                         </Col>
@@ -108,7 +108,7 @@ class RegisterForm extends React.Component {
                                             name="comment"
                                             value={this.props.comment}
                                             onChange={this.props.handleChange}
-                                            style={{ backgroundColor: "#F0EAD6" }}
+                                            style={{ backgroundColor: "	#F0E68C", width:"30%", height:"50px" }}
                                         />
                                     </Col>
                                 </Row>
