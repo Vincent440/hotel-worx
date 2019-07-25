@@ -187,7 +187,7 @@ class ReserveUpdate extends Component {
             user_id: this.props.user.user_id
         }
         api.updateReservation(data)
-            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false, active: 1 }))
+            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false }))
             .catch(err => console.log(err));
     }
     render() {
