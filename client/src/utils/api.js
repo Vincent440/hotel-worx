@@ -14,7 +14,7 @@ export default {
         const fccNum = data.creditCard.replace(/ /g, "");
         return axios.post('/api/hw/reservation', {
             cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate],
-            reserve: [1, ""],
+            reserve: [data.user_id, ""],
             rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments]]
         })
             .then((response) => {
@@ -28,7 +28,7 @@ export default {
         const fccNum = data.creditCard.replace(/ /g, "");
         return axios.put('/api/hw/reservation', {
             cust: [data.firstname, data.lastname, data.address, data.city, data.state, data.zip, data.email, data.phone, fccNum, data.expirationDate, data.customerId],
-            reserve: [2, "", data.reservation_id],
+            reserve: [data.user_id, "", data.reservation_id],
             rooms: [[data.roomtype, data.arrivaldate, data.departuredate, data.adults, data.rate, data.comments, data.resRoomId]]
         })
             .then((response) => {

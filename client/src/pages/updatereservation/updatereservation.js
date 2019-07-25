@@ -183,10 +183,11 @@ class ReserveUpdate extends Component {
             roomtype: this.state.roomtype,
             resRoomId: this.state.resRoomId,
             comments: this.state.comments,
-            rate: this.state.rate
+            rate: this.state.rate,
+            user_id: this.props.user.user_id
         }
         api.updateReservation(data)
-            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false, active: 1 }))
+            .then(() => this.setState({ updateSuccess: true, cancelSuccess: false }))
             .catch(err => console.log(err));
     }
     render() {
@@ -264,7 +265,7 @@ class ReserveUpdate extends Component {
                                         placeholder="Number of Rooms"
                                         name="numRooms"
                                         value={this.state.numRooms}
-                                        onChange={this.handleInputChange}
+                                        disabled
                                     />
                                 </Col>
                             </Row>

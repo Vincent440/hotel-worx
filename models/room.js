@@ -39,7 +39,7 @@ const Room = {
     },
     housekeepingStatus: (conditions, cb) => {
         formattedConditions = conditions.join(" && ");
-        const queryString = "SELECT rm.room_num, rm.clean, rm.occupied, rm.active, rt.type, rr.checked_in, rr.checked_out, rr.room_id, CASE WHEN rr.check_out_date=CURDATE() THEN ('Due Out') END AS departure, CASE WHEN rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE() THEN ('Stay Over') END AS stayover FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id LEFT JOIN res_rooms AS rr ON rm.room_id=rr.room_id WHERE rm.active=1 && rr.active=1 && " + formattedConditions + " GROUP BY rm.room_id ORDER BY rm.room_id ASC;";
+        const queryString = "SELECT rm.room_num, rm.clean, rm.occupied, rm.active, rt.type, rr.checked_in, rr.checked_out, rr.room_id, CASE WHEN rr.check_out_date=CURDATE() THEN ('Due Out') END AS departure, CASE WHEN rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE() THEN ('Stay Over') END AS stayover FROM rooms AS rm INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id LEFT JOIN res_rooms AS rr ON rm.room_id=rr.room_id && rr.active=1 WHERE rm.active=1 && " + formattedConditions + " GROUP BY rm.room_id ORDER BY rm.room_id ASC;";
         connection.query(queryString, (err, results) => {
             if (err) throw err;
             cb(results);
