@@ -22,12 +22,12 @@ export default class DateRange extends React.Component {
           parseDate={parseDate}
           dayPickerProps={{
             selectedDays: [from, { from, to }],
-            disabledDays: { after: to },
+            disabledDays: { before: new Date(),after: to },
             toMonth: to,
             modifiers,
             numberOfMonths: 2,
-            onDayClick: () => this.to.getInput().focus(),
-          }}
+        onDayClick: () => this.to.getInput().focus(),
+      }}
           onDayChange={this.props.handleFromChange}
         /> {' '} Departure
        {' '}

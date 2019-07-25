@@ -4,7 +4,7 @@ import { Row, Col } from 'react-grid-system';
 import "./style.css";
 import Header from "../../components/Header";
 import SearchSubmit from "../../components/searchButton";
-import DateRange from "../../components/dateRange/dateRange";
+import DateRange from "../../components/dateRangeUpd/dateRange";
 import Table from 'react-bootstrap/Table';
 import api from '../../utils/api';
 import moment from 'moment';

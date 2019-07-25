@@ -119,6 +119,16 @@ class ReserveNew extends Component {
                 errors["phone"] = "*Please enter valid mobile no.";
             }
         }
+
+        if (!this.state.creditCard) {
+            formIsValid = false;
+            errors["creditCard"] = "*Please enter credit card no.";
+        }
+
+        if (!this.state.expirationDate) {
+            formIsValid = false;
+            errors["expirationDate"] = "*Please enter expiration date.";
+        }
         this.setState({
             errors: errors
         });

@@ -11,8 +11,7 @@ class RegisterForm extends React.Component {
             <div>
                 <div id="res">
                     <Row>
-                        <Col xl={10}>
-
+                        <Col xl={12}>
                             <form method="post" name="userRegistrationForm" onSubmit={this.props.handleFormSubmit} >
                                 <Row style={{ paddingBottom: "2px" }}>
                                     <Col xs={6} sm={4} md={2} lg={2} xl={2}>
@@ -91,7 +90,6 @@ class RegisterForm extends React.Component {
                                 </Row>
                                 <Row style={{ marginTop: "5px" }}>
                                     <Col xs={2} sm={4} md={2} lg={2} xl={2}>
-
                                         Credit Card No
                                         </Col>
                                     <Col xs={10} sm={8} md={8} lg={9} xl={9}>

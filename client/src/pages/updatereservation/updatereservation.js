@@ -202,7 +202,7 @@ class ReserveUpdate extends Component {
                     <Col xl={12}>
                         <div id="res" >
                             <Row >
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Confirmation
                                 </Col>
                                 <Col xs={6} sm={8} md={6} lg={8} xl={3}>
@@ -229,7 +229,7 @@ class ReserveUpdate extends Component {
 
                             </Row>
                             <Row >
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Arrival
                                 </Col>
                                 <Col xs={6} sm={8} md={8} lg={12} xl={10}>
@@ -244,7 +244,7 @@ class ReserveUpdate extends Component {
                                 </Col>
                             </Row>
                             <Row >
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Nights
                                 </Col>
                                 <Col xs={6} sm={8} md={8} lg={8} xl={3}>
@@ -270,7 +270,7 @@ class ReserveUpdate extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={6} sm={4} md={4} lg={4} xl={1}>
+                                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                                     Adults
                                 </Col>
                                 <Col xs={6} sm={8} md={8} lg={8} xl={3}>
@@ -287,7 +287,7 @@ class ReserveUpdate extends Component {
                                     Room Type
                                 </Col>
                                 <Col xs={6} sm={8} md={8} lg={8} xl={2}>
-                                    <select id="roomType" name="roomtype" value={this.state.roomtype} onChange={this.handleInputChange}>
+                                    <select id="roomType" name="roomtype" onChange={this.handleInputChange}>
                                         {this.state.RoomTypes.map(type => (
                                             <option key={type.room_type_id} value={type.room_type_id}>{type.type} - {type.rate}</option>
                                         ))}

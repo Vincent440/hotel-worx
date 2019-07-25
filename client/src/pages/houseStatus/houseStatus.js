@@ -7,10 +7,6 @@ import Header from "../../components/Header"
 const today = moment().format("YYYY-MM-DD");
 
 class HouseStatus extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         date: today,
         roomsToSell: "",
@@ -122,9 +118,6 @@ class HouseStatus extends Component {
                             </Col>
                         </Row>
                     </div>
-                    {/* <div id="buttonDiv">
-                <button type="button" className="btn btn-primary"onClick={this.handleFormSubmit}>Search</button>
-            </div> */}
                 </div>
             </div>
         )
