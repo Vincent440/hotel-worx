@@ -152,14 +152,23 @@ export default {
                 console.log(error);
             });
     },
-    updateRoomCheckout: (id, room_num) => {
+    updateRoomCheckout: (id, room_num, payment_type) => {
         return axios.all([
             axios.put('/api/hw/checkoutRoom/' + id + '/' + room_num),
-            axios.post('/api/hw/invoice', { id: id })
+            axios.post('/api/hw/invoice', { id: id, payment_type: payment_type })
         ])
             .then(axios.spread((res1, res2) => {
                 return [res1, res2];
             }));
+    },
+    getPreInvoice: (id) => {
+        return axios.get('/api/hw/pre_invoice/' + id)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
     getInvoice: (id) => {
         return axios.get('/api/hw/invoice/' + id)

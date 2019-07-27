@@ -78,16 +78,20 @@ class Billing extends Component {
     render() {
         if (this.state.checkOutSuccess) {
             if (this.state.checked_out) {
-                localStorage.setItem('invoice_id', this.state.invoice_id);
+                return (
+                    <Redirect to={{
+                        pathname: '/cashiering/payment',
+                        state: { invoice_id: this.state.invoice_id, room_num: this.state.room_num }
+                    }} />
+                )
             } else {
-                localStorage.setItem('res_room_id', this.state.res_room_id);
+                return (
+                    <Redirect to={{
+                        pathname: '/cashiering/payment',
+                        state: { res_room_id: this.state.res_room_id, room_num: this.state.room_num }
+                    }} />
+                )
             }
-            localStorage.setItem('room_num', this.state.room_num);
-            return (
-                <Redirect to={{
-                    pathname: '/cashiering/payment'
-                }} />
-            )
         }
         return (
             <div>

@@ -352,10 +352,22 @@ router.post("/invoice", (req, res) => {
         const county_tax = parseFloat(result[0].county_rate * room_total).toFixed(2);
         const city_tax = parseFloat(result[0].city_rate * room_total).toFixed(2);
         const state_tax = parseFloat(result[0].state_rate * room_total).toFixed(2);
-        const vals = [result[0].res_room_id, result[0].num_days, result[0].rate, county_tax, city_tax, state_tax];
+        const payment_type = req.body.payment_type;
+        const vals = [result[0].res_room_id, result[0].num_days, result[0].rate, county_tax, city_tax, state_tax, payment_type];
         db.Invoice.insertOne(vals, (result) => {
             res.json(result.insertId);
         });
+    });
+});
+
+router.get("/pre_invoice/:id", (req, res) => {
+    db.ResRoom.selectForPreInvoice(req.params.id, (result) => {
+        const room_total = (parseFloat(result[0].rate) * parseFloat(result[0].num_days)).toFixed(2);
+        const county_tax = parseFloat(result[0].county_rate * room_total).toFixed(2);
+        const city_tax = parseFloat(result[0].city_rate * room_total).toFixed(2);
+        const state_tax = parseFloat(result[0].state_rate * room_total).toFixed(2);
+        const pre_invoice = [{ first_name: result[0].first_name, last_name: result[0].last_name, ccLastFour: result[0].ccLastFour, check_in_date: result[0].check_in_date, check_out_date: result[0].check_out_date, res_room_id: result[0].res_room_id, num_days: result[0].num_days, rate: result[0].rate, county_tax: county_tax, city_tax: city_tax, state_tax: state_tax, payment_type: "" }];
+        res.json(pre_invoice);
     });
 });
 

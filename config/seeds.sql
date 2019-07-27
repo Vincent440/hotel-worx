@@ -832,4 +832,14 @@ INSERT INTO room_issues (room_id, issue, user_id, start_date, end_date, fixed) V
 (89, "Needs a new toilet, plus there's a bad stain on the carpet near the window.", 1, "2019-07-16", "2019-07-20", 0),
 (96, "The tub drain is clogged and the shower curtain needs to be replaced.", 1, "2019-07-17", "2019-07-19", 0);
 
+-- --------------------------------------------------------
+
+--
+-- Seeds data for invoices
+--
+
+TRUNCATE TABLE invoices;
+
+-- --------------------------------------------------------
+
 set foreign_key_checks=1;

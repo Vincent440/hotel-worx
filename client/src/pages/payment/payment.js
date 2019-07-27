@@ -8,35 +8,53 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 class Payment extends Component {
+
     state = {
         RoomInfo: [],
         InvoiceArray: [],
         invoice_id: "",
         paid: false,
         res_room_id: "",
-        room_num: ""
+        room_num: "",
+        taxRates: {},
+        creditCardChecked: true,
+        cashChecked: false,
+        payment_type: "Credit Card"
     };
 
     componentDidMount() {
-        if (localStorage && localStorage.getItem('invoice_id')) {
-            const invoice_id = JSON.parse(localStorage.getItem('invoice_id'));
-            this.setState({ paid: true }, () => {
-                api.getInvoice(invoice_id)
+        if (this.props.location.state.invoice_id) {
+            this.setState({ paid: true, room_num: this.props.location.state.room_num }, () => {
+                this.makeAxiosCall(this.props.location.state.invoice_id);
+            })
+        } else if (this.props.location.state.res_room_id) {
+            api.getTaxRates()
+                .then(res => this.setState({ taxRates: res[0] }))
+                .catch(err => console.log(err));
+            this.setState({ res_room_id: this.props.location.state.res_room_id, room_num: this.props.location.state.room_num }, () => {
+                api.getPreInvoice(this.state.res_room_id)
                     .then(res => this.setState({ InvoiceArray: res }))
                     .catch(err => console.log(err))
-            })
-        } else if (localStorage && localStorage.getItem('res_room_id')) {
-            const res_room_id = JSON.parse(localStorage.getItem('res_room_id'));
-            const room_num = JSON.parse(localStorage.getItem('room_num'));
-            this.setState({ res_room_id: res_room_id, room_num: room_num })
+            });
         }
+    }
+
+    makeAxiosCall = (id) => {
+        api.getInvoice(id)
+            .then(res => this.setState({ InvoiceArray: res }))
+            .catch(err => console.log(err))
+    }
+
+    handleCheckbox = event => {
+        event.target.value === "creditCard" ? this.setState({ creditCardChecked: true, cashChecked: false, payment_type: "Credit Card" }) : this.setState({ creditCardChecked: false, cashChecked: true, payment_type: "Cash" })
     }
 
     handleSubmitPayment = event => {
         event.preventDefault();
-        api.updateRoomCheckout(this.state.res_room_id, this.state.room_num)
+        api.updateRoomCheckout(this.state.res_room_id, this.state.room_num, this.state.payment_type)
             .then(res => this.setState({ paid: true, invoice_id: res[1].data }))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .then(() => this.makeAxiosCall(this.state.invoice_id));
     }
 
     render() {
@@ -47,68 +65,89 @@ class Payment extends Component {
                         <Header>INVOICE</Header>
                     </Col>
                 </Row>
-                <div id="res">
-                    <div id="res" style={{ paddingBottom: "10px" }}>
-                        <Row>
-                            <Table border="1">
-                                <tbody>
-                                    {this.state.InvoiceArray.map(invoice => (
-                                        <ul key={invoice.res_room_id}>
-                                            <tr>
-                                                <th><strong>Room Number:</strong> {invoice.room_num}</th>
-                                                <th colspan="2"><strong>Name:</strong> {invoice.last_name}, {invoice.first_name}</th>
-                                                <th><strong>CC Number: </strong> {invoice.ccLastFour} </th>
-                                                <th colSpan="2"><strong>Date: {moment(invoice.check_in_date).format('YYYY-MM-DD')} to {moment(invoice.check_out_date).format('YYYY-MM-DD')}</strong></th>
-                                            </tr>
-                                            <tr>
-                                                <th><strong>Num Nights</strong></th>
-                                                <th><strong>Rate</strong></th>
-                                                <th><strong>Room Total</strong></th>
-                                                <th><strong>County Tax</strong></th>
-                                                <th><strong>City Tax</strong></th>
-                                                <th><strong>State Tax</strong></th>
-                                                <th><strong>Total Due</strong></th>
-                                            </tr>
-                                            <tr>
-                                                <td>{invoice.num_days}</td>
-                                                <td>${invoice.rate}</td>
-                                                <td>${(parseInt(invoice.num_days) * parseFloat(invoice.rate)).toFixed(2)} </td>
-                                                <td>${invoice.county_tax}</td>
-                                                <td>${invoice.city_tax}</td>
-                                                <td>${invoice.state_tax}</td>
-                                                <td>${((parseInt(invoice.num_days) * parseFloat(invoice.rate)) + parseFloat(invoice.county_tax) + parseFloat(invoice.city_tax) + parseFloat(invoice.state_tax)).toFixed(2)}</td>
-
-                                            </tr>
-                                        </ul>
-                                    ))}
-                                </tbody>
-                                <Row style={{ margin: "10px 0px 20px" }}>
-                                    <Col xl={2}>
-                                    </Col>
-                                    <Col xl={2}>
-                                        <strong>  </strong>
-                                    </Col>
-                                    <Col xl={2}>
-                                        Credit Card <input type="radio" name="myCheck" checked />
-                                    </Col>
-                                    <Col xl={2}>
-                                        Cash <input type="radio" name="myCheck" />
-                                    </Col>
-                                </Row>
-                                <Row style={{ margin: "30px 0px 20px" }}>
-                                    <Col xl={5}>
-                                    </Col>
-                                    <Col className="text-center">
-                                        {this.state.paid ? <div><button className="btn btn-primary" disabled>Submit Payment</button><p className="small text-dark">Payment has been submitted</p></div> : <button onClick={() => this.handleSubmitPayment()}>Submit Payment</button>}
-                                        <br />
-                                        <Link className="btn btn-primary mt-1" to="/cashiering/billing">Back to Billing</Link>
-                                    </Col>
-                                </Row>
-
-
-                            </Table>
-                        </Row>
-                    </div>
+                <div id="res" style={{ paddingLeft: "15px", paddingBottom: "10px" }}>
+                    <Row>
+                        {this.state.InvoiceArray.map(invoice => (
+                            <div className="p-2" key={invoice.res_room_id}>
+                                <Table border="1" className="mb-3">
+                                    <tbody>
+                                        <tr>
+                                            <th>Room Number:</th>
+                                            <th>Name:</th>
+                                            <th>CC Number: </th>
+                                            <th>Checked In Date:</th>
+                                            <th>Check Out Date:</th>
+                                            <th>Payment Type:</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{this.state.room_num}</td>
+                                            <td>{invoice.first_name} {invoice.last_name}</td>
+                                            <td>**** **** **** {invoice.ccLastFour}</td>
+                                            <td>{moment(invoice.check_in_date).format('YYYY-MM-DD')}</td>
+                                            <td>{moment(invoice.check_out_date).format('YYYY-MM-DD')}</td>
+                                            <td>{invoice.payment_type}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                                <Table border="1">
+                                    <tbody>
+                                        <tr>
+                                            <th>Num Nights</th>
+                                            <th>Rate</th>
+                                            <th>Room Total</th>
+                                            <th>County Tax</th>
+                                            <th>City Tax</th>
+                                            <th>State Tax</th>
+                                            <th>Total Due</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{invoice.num_days}</td>
+                                            <td>${invoice.rate}</td>
+                                            <td>${(parseInt(invoice.num_days) * parseFloat(invoice.rate)).toFixed(2)} </td>
+                                            <td>${invoice.county_tax}</td>
+                                            <td>${invoice.city_tax}</td>
+                                            <td>${invoice.state_tax}</td>
+                                            <td>${((parseInt(invoice.num_days) * parseFloat(invoice.rate)) + parseFloat(invoice.county_tax) + parseFloat(invoice.city_tax) + parseFloat(invoice.state_tax)).toFixed(2)}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            </div>
+                        ))}
+                    </Row>
+                    {this.state.paid ? "" :
+                        <div>
+                            <Row>
+                                <Col className="text-center">
+                                    Credit Card
+                                <input
+                                        className="mt-4 ml-2 mr-4"
+                                        type="checkbox"
+                                        value="creditCard"
+                                        checked={this.state.creditCardChecked}
+                                        onChange={this.handleCheckbox}
+                                    />
+                                    Cash
+                                <input
+                                        className="mt-4 ml-2"
+                                        type="checkbox"
+                                        value="cash"
+                                        checked={this.state.cashChecked}
+                                        onChange={this.handleCheckbox}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row className="mt-4">
+                                <Col className="text-center">
+                                    <button className="btn btn-primary" onClick={this.handleSubmitPayment}>Submit Payment</button>
+                                </Col>
+                            </Row>
+                        </div>
+                    }
+                    <Row className="mt-4">
+                        <Col className="text-center">
+                            <Link className="btn btn-primary m-3" to="/cashiering/billing">Back to Billing</Link>
+                        </Col>
+                    </Row>
                 </div>
             </div>
         )
