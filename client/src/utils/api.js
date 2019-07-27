@@ -170,6 +170,15 @@ export default {
                 console.log(error);
             });
     },
+    getInvoiceId: (id) => {
+        return axios.get('/api/hw/invoice_id/' + id)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
     updateCleanStatus: (room_id, status) => {
         return axios.put('/api/hw/updateCleanStatus/' + status + '/' + room_id)
             .then((response) => {
