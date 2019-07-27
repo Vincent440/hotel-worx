@@ -17,11 +17,13 @@ class Billing extends Component {
         roomNumber: "",
         taxRates: {},
         checkOutSuccess: false,
+        checked_out: false,
         res_room_id: "",
         invoice_id: "",
         stayOver: false,
         dueOut: false,
-        checkedOut: false
+        checkedOut: false,
+        room_num: ""
     };
 
     makeAxiosCall = () => {
@@ -39,17 +41,14 @@ class Billing extends Component {
             .catch(err => console.log(err));
     }
 
-    handleCheckOut = (id) => {
-        this.setState({ res_room_id: id, checkOutSuccess: true });
-        // api.updateRoomCheckout(id, room_id)
-        //     .then(res => this.setState({ checkOutSuccess: true, invoice_id: res[1].data }))
-        //     .catch(err => console.log(err));
+    handleCheckOut = (id, room_num) => {
+        this.setState({ res_room_id: id, checkOutSuccess: true, room_num: room_num });
     }
 
-    handleLinkInvoice = (id) => {
-        this.setState({ res_room_id: id });
+    handleLinkInvoice = (id, room_num) => {
+        this.setState({ res_room_id: id, room_num: room_num });
         api.getInvoiceId(id)
-            .then(res => this.setState({ checkOutSuccess: true, invoice_id: res[0].invoice_id }))
+            .then(res => this.setState({ checkOutSuccess: true, invoice_id: res[0].invoice_id, checked_out: true }))
             .catch(err => console.log(err));
     }
 
@@ -78,7 +77,12 @@ class Billing extends Component {
 
     render() {
         if (this.state.checkOutSuccess) {
-            localStorage.setItem('invoice_id', this.state.invoice_id);
+            if (this.state.checked_out) {
+                localStorage.setItem('invoice_id', this.state.invoice_id);
+            } else {
+                localStorage.setItem('res_room_id', this.state.res_room_id);
+            }
+            localStorage.setItem('room_num', this.state.room_num);
             return (
                 <Redirect to={{
                     pathname: '/cashiering/payment'
@@ -199,7 +203,7 @@ class Billing extends Component {
                                             <td>{Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                                             </td>
                                             <td>
-                                                {this.state.departuresArray[i].checked_out === 0 ? <button onClick={() => this.handleCheckOut(departure.res_room_id)}>Check Out</button> : <button onClick={() => this.handleLinkInvoice(departure.res_room_id)}>Invoice</button>}
+                                                {this.state.departuresArray[i].checked_out === 0 ? <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button> : <button onClick={() => this.handleLinkInvoice(departure.res_room_id, this.state.departuresArray[i].room_num)}>Invoice</button>}
                                             </td>
                                         </tr>
                                     ))}
