@@ -365,6 +365,12 @@ router.get("/invoice/:id", (req, res) => {
     });
 });
 
+router.get("/invoice_id/:id", (req, res) => {
+    db.Invoice.selectOneId(req.params.id, (data) => {
+        res.json(data);
+    });
+});
+
 router.put("/updateCleanStatus/:status/:room_id", (req, res) => {
     const cond = [req.params.status, req.params.room_id];
     db.Room.updateClean(cond, (result) => {
