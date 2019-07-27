@@ -5,6 +5,7 @@ import Header from "../../components/Header"
 import Table from 'react-bootstrap/Table';
 import api from '../../utils/api';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 class Payment extends Component {
     state = {
@@ -42,7 +43,7 @@ class Payment extends Component {
                                             <th><strong>Room Number:</strong> {invoice.room_num}</th>
                                             <th colspan="2"><strong>Name:</strong> {invoice.last_name}, {invoice.first_name}</th>
                                             <th><strong>CC Number: </strong> {invoice.ccLastFour} </th>
-                                            <th><strong>Date: </strong></th>
+                                            <th colSpan="2"><strong>Date: {moment(invoice.check_in_date).format('YYYY-MM-DD')} to {moment(invoice.check_out_date).format('YYYY-MM-DD')}</strong></th>
                                         </tr>
                                         <tr>
                                             <th><strong>Num Nights</strong></th>

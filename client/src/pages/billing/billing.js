@@ -39,11 +39,11 @@ class Billing extends Component {
             .catch(err => console.log(err));
     }
 
-    handleCheckOut = (id, room_id) => {
-        this.setState({ res_room_id: id });
-        api.updateRoomCheckout(id, room_id)
-            .then(res => this.setState({ checkOutSuccess: true, invoice_id: res[1].data }))
-            .catch(err => console.log(err));
+    handleCheckOut = (id) => {
+        this.setState({ res_room_id: id, checkOutSuccess: true });
+        // api.updateRoomCheckout(id, room_id)
+        //     .then(res => this.setState({ checkOutSuccess: true, invoice_id: res[1].data }))
+        //     .catch(err => console.log(err));
     }
 
     handleLinkInvoice = (id) => {
@@ -59,6 +59,7 @@ class Billing extends Component {
             .then(res => this.setState({ taxRates: res[0] }))
             .catch(err => console.log(err));
     }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -198,8 +199,7 @@ class Billing extends Component {
                                             <td>{Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                                             </td>
                                             <td>
-                                                {this.state.departuresArray[i].checked_out === 0 ? <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button> : <button onClick={() => this.handleLinkInvoice(departure.res_room_id)}>Invoice</button>}
-                                                {/* <Link to="../../cashiering/payment"><button>Pay Invoice</button></Link>*/}
+                                                {this.state.departuresArray[i].checked_out === 0 ? <button onClick={() => this.handleCheckOut(departure.res_room_id)}>Check Out</button> : <button onClick={() => this.handleLinkInvoice(departure.res_room_id)}>Invoice</button>}
                                             </td>
                                         </tr>
                                     ))}

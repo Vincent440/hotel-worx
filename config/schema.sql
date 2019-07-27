@@ -126,7 +126,6 @@ CREATE TABLE invoices (
     county_tax decimal(5,2) NOT NULL,
     city_tax decimal(5,2) NOT NULL,
     state_tax decimal(5,2) NOT NULL,
-    paid boolean DEFAULT 0,
     created_at datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (invoice_id)
 );
