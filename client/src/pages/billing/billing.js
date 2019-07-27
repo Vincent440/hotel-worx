@@ -46,6 +46,13 @@ class Billing extends Component {
             .catch(err => console.log(err));
     }
 
+    handleLinkInvoice = (id) => {
+        this.setState({ res_room_id: id });
+        api.getInvoiceId(id)
+            .then(res => this.setState({ checkOutSuccess: true, invoice_id: res[0].invoice_id }))
+            .catch(err => console.log(err));
+    }
+
     componentDidMount() {
         this.makeAxiosCall();
         api.getTaxRates()
@@ -191,7 +198,7 @@ class Billing extends Component {
                                             <td>{Number(Number((departure.num_days) * (departure.rate)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.county_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.city_rate).toFixed(2)) + Number(((departure.num_days) * (departure.rate) * this.state.taxRates.state_rate).toFixed(2))).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                                             </td>
                                             <td>
-                                                {this.state.departuresArray[i].checked_out === 0 ? <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button> : <button onClick={() => this.handleLinkInvoice(departure.res_room_id)}>Go to Invoice</button>}
+                                                {this.state.departuresArray[i].checked_out === 0 ? <button onClick={() => this.handleCheckOut(departure.res_room_id, this.state.departuresArray[i].room_num)}>Check Out</button> : <button onClick={() => this.handleLinkInvoice(departure.res_room_id)}>Invoice</button>}
                                                 {/* <Link to="../../cashiering/payment"><button>Pay Invoice</button></Link>*/}
                                             </td>
                                         </tr>
