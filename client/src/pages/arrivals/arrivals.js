@@ -40,6 +40,10 @@ class Arrivals extends Component {
             .catch(err => console.log(err));
     }
 
+    handleRoomAssign = () => {
+        
+    }
+
     componentDidMount() {
         this.makeAxiosCall();
     }
