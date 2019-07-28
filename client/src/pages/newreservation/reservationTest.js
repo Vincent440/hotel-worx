@@ -52,25 +52,26 @@ class ReservationTest extends Component {
                 </Row>
                 <Row>
                     <Col xl={12}>
+
                         <div id="res3" style={{ paddingBottom: "10px" }}>
                             <Row style={{ paddingBottom: "5px" }}>
                                 <Col xl={3}>
                                 </Col>
-                                <Col xl={5}>
+                                <Col xl={5} style={{textAlign:"left", paddingLeft:"47px"}}>
                                     <strong>Name: </strong>{this.state.ReservationInfo.first_name} {this.state.ReservationInfo.last_name}
                                 </Col>
                             </Row>
                             <Row style={{ paddingBottom: "5px" }}>
                                 <Col xl={3}>
                                 </Col>
-                                <Col xl={9}>
+                                <Col xl={5}>
                                     <strong>Address: </strong>{this.state.ReservationInfo.address},  {this.state.ReservationInfo.city}, {this.state.ReservationInfo.state}, {this.state.ReservationInfo.zip}
                                 </Col>
                             </Row>
                             <Row style={{ paddingBottom: "5px" }}>
                                 <Col xl={3}>
                                 </Col>
-                                <Col xl={3}>
+                                <Col xl={3} style={{paddingLeft:"8px"}}>
                                     <strong>Email: </strong> {this.state.ReservationInfo.email}
                                 </Col>
                                 <Col xl={4}>
@@ -83,7 +84,7 @@ class ReservationTest extends Component {
                                 <Col xl={3}>
                                     <strong>Credit Card Number: </strong>****{this.state.ReservationInfo.ccLastFour}
                                 </Col>
-                                <Col xl={3}>
+                                <Col xl={4}>
                                     <strong>Exp Date: </strong>{this.state.ReservationInfo.cc_expiration}
                                 </Col>
                             </Row>
@@ -93,7 +94,7 @@ class ReservationTest extends Component {
                                 </Col>
                                 {this.state.RoomInfo.map((room) => (
                                     <div key={room.res_room_id}>
-                                        <ul style={{ marginLeft: "-25px" }}>
+                                        <ul>
                                             <li><strong>Confirmation Number: </strong>{room.confirmation_code}</li>
                                             <li><strong>Arrival Date: </strong>{room.check_in_date}</li>
                                             <li><strong>Departure Date: </strong>{room.check_out_date}</li>
