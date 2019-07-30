@@ -39,6 +39,13 @@ const ResRoom = {
             cb(result);
         });
     },
+    selectForPreInvoice: (id, cb) => {
+        const queryString = "SELECT rr.res_room_id, c.first_name, c.last_name, SUBSTRING(c.credit_card_num, -4) AS ccLastFour, rr.check_in_date, rr.check_out_date, (DATE(rr.check_out_date)-DATE(rr.check_in_date)) AS num_days, rr.rate, tr.county_rate, tr.city_rate, tr.state_rate FROM res_rooms AS rr INNER JOIN reservations AS r ON r.reservation_id=rr.reservation_id INNER JOIN customers AS c ON c.customer_id=r.customer_id, (SELECT (county_tax_rate/100) AS county_rate, (city_tax_rate/100) AS city_rate, (state_tax_rate/100) AS state_rate FROM tax_rates WHERE tax_rate_id=1 LIMIT 1) AS tr WHERE rr.active=1 && rr.res_room_id=? LIMIT 1;";
+        connection.execute(queryString, [id], (err, result) => {
+            if (err) throw err;
+            cb(result);
+        });
+    },
     selectSome: (id, cb) => {
         const queryString = "SELECT rr.res_room_id, rr.room_type_id, DATE_FORMAT(rr.check_in_date, '%b %d, %Y') AS check_in_date, DATE_FORMAT(rr.check_out_date, '%b %d, %Y') AS check_out_date, rr.checked_in, rr.checked_out, rr.adults, IFNULL(rm.room_num, 'Not Set') AS room_num, rr.confirmation_code, rr.comments, rt.type, rt.rate FROM res_rooms AS rr INNER JOIN room_types AS rt ON rr.room_type_id=rt.room_type_id LEFT JOIN rooms AS rm ON rm.room_id=rr.room_id WHERE rr.reservation_id=?;";
         connection.execute(queryString, [id], (err, result) => {
