@@ -21,13 +21,12 @@ class Login extends Component {
     this.handleSubmit = event => {
       event.preventDefault();
       if (!this.isFormInValid()) {
-        console.log(this.context);
         this.context.postUserLogin({ username: this.state.username, password: this.state.password });
       }
     };
     this.state = {
-      username: "",
-      password: ""
+      username: "user",
+      password: "123123"
     };
   }
   componentDidMount() {

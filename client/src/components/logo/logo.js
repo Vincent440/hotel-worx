@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import "./style.css";
 import { TweenMax, Linear } from "gsap";
-import logo from './solidcolor.png';
+import logo from './hotelworx_logo.png';
 
 const Logo = () => {
     let logoElement = useRef(null);
