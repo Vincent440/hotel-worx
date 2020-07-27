@@ -1,11 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-
-function ButtonSubmit(props) {
-    return(
+function ButtonSubmit (props) {
+  return (
     <div>
-        <button className="btn btn-primary" style={{marginLeft:"480px"}} onClick={props.handleFormSubmit}>Submit</button>
+      <button className='btn btn-primary' style={{ marginLeft: '480px' }} onClick={props.handleFormSubmit}>Submit</button>
     </div>
-    );
+  )
 }
-export default ButtonSubmit;
+export default ButtonSubmit

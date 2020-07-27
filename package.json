@@ -4,19 +4,20 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "debugger": "concurrently \"node --inspect-brk server.js --ignore 'client/*'\" \"npm run client\"",
+    "debugger": "concurrently \"node --inspect-brk server.js --ignore 'client/*'\" \"yarn client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "if-env NODE_ENV=production && yarn start:prod || yarn start:dev",
     "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"yarn client\"",
+    "client": "cd client && yarn start",
+    "install": "cd client && yarn",
+    "build": "cd client && yarn build",
+    "heroku-postbuild": "yarn build"
   },
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^1.19.1"
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4"
   },
   "repository": {
     "type": "git",
@@ -26,15 +27,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-mysql-session": "^2.1.0",
-    "express-session": "^1.16.2",
-    "mysql2": "^1.6.5",
-    "passport": "^0.4.0",
+    "express-mysql-session": "^2.1.4",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.1.0",
+    "passport": "^0.4.1",
     "passport-local": "^1.0.0"
   }
 }

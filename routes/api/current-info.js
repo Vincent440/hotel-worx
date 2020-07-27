@@ -1,13 +1,10 @@
-const router = require("express").Router();
-const currentInfoController = require("../../controllers/currentInfoController");
+const router = require('express').Router()
+const currentInfoController = require('../../controllers/currentInfoController')
 
-// Matches with GET "api/current/arrivals"
-router.get("/arrivals",currentInfoController.getCurrentDateArrivals);// Shows arrivals for todays date.
+// GET "api/current/arrivals" - Shows arrivals for todays date.
+router.get('/arrivals', currentInfoController.getCurrentDateArrivals)
 
+// GET "api/current/departures" - Shows departures for todays date.
+router.get('/departures', currentInfoController.getCurrentDateDepartures)
 
-// Matches with GET "api/current/departures"
-router.get("/departures",currentInfoController.getCurrentDateDepartures);// Shows departures for todays date.
-
-
-
-module.exports = router;
+module.exports = router
