@@ -1,22 +1,26 @@
-const router = require("express").Router();
-const userController = require("../../controllers/userController");
+const router = require('express').Router()
+const userController = require('../../controllers/userController')
 
-// Matches with "/api/users"
+/*
+  '/' Matches with "/api/users"
+  GET "/api/users" - Gets all the users
+  POST "/api/users" - Creates a new user | Example Request: { "vals": ["test_user", "111111", 1] } | Hashes PWS with Bcrypt
+*/
 router
-  .route("/")
-  // GET "/api/users"
-  .get(userController.getAllUsers) //Gets all the users
-  // POST "/api/users" Example Request: { "vals": ["test_user", "111111", 1] } Hashes PWS with Bcrypt
-  .post(userController.createNewUser); // create a new user
+  .route('/')
+  .get(userController.getAllUsers)
+  .post(userController.createNewUser)
 
-// Matches with "/api/users/:id"
+/*
+  '/:id' Matches with "/api/users/:id"
+  GET "/api/users/:id" - get user data by ID
+  PUT "/api/users/:id" -  update a user by ID | Example Request: { "vals": ["test_user", "111111", 1] } | Hashes new PW with Bcrypt
+  DELETE "/api/users/:id" - delete a user by ID
+*/
 router
-  .route("/:id")
-  // GET "/api/users/:id"
-  .get(userController.selectUserById) // get user data by ID
-  // PUT "/api/users/:id" Example Request: { "vals": ["test_user", "111111", 1] } Hashes new PW with Bcrypt
-  .put(userController.updateUserById) // update a user by ID
-  // DELETE "/api/users/:id"
-  .delete(userController.deleteUserById); // delete a user by ID
+  .route('/:id')
+  .get(userController.selectUserById)
+  .put(userController.updateUserById)
+  .delete(userController.deleteUserById)
 
-module.exports = router;
+module.exports = router

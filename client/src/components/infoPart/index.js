@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import smallLogo from "./solidcolor.png";
+import smallLogo from "../logo/hotelworx_logo.png";
 import { Card } from 'react-bootstrap';
 import "./style.css";
-import ReactWeather from 'react-open-weather';
-//Optional include of the default css styles 
-import 'react-open-weather/lib/css/ReactWeather.css';
 import api from '../../utils/api';
 import UserContext from '../../UserContext';
 
@@ -38,16 +35,6 @@ class InfoPart extends Component {
                     <br/>
                 </div>
             ))}
-            <div className="py-xl-2"></div>
-            <div className="card-text m-0 my-auto">
-                <ReactWeather
-                    forecast="today"
-                    apikey={process.env.REACT_APP_WEATHER_API_KEY}
-                    type="city"
-                    city="Cleveland"
-                    units='F' />
-            </div>
-            <div className="py-xl-3"></div>
             <h5 className="card-title text-capitalize" id="userNameD">User Name: {user.username}</h5>
             <div id="optionsDiv">
                 <button className="btn btn-block btn-default" id="logOut" onClick={getUserLogout}><i className="fa fa-sign-out-alt"></i></button>

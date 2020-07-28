@@ -36,21 +36,36 @@ git clone https://github.com/Vincent440/hotel-worx.git
 PORT=3001
 
 # Name of the mysql database you will be connecting to.
-DB_NAME=DatabaseName
+DB_NAME=hotel_worx_db--DatabaseName
 
 # Host name for connecting to MySQL database
-DB_HOST=hostname
+DB_HOST=localhost--hostname
 
 #Port to connect to MySQL database
-DB_PORT=DatabasePort
+DB_PORT=3306--Database port
 
 # User for connecting to MySQL database
-DB_USER=userstringhere
+DB_USER=root--Database user
 
 # Password for connecting to MySQL database
-DB_PASSWORD=passwordstringhere
+DB_PW=""--passwordstringhere
+
 ```
 This allows `server.js` && `config/connection.js` to use Node.js `process.env` variables set on runtime to connect to either the local database or the hosted database.
+
+To ensure the sidebar can make API requests to retrieve weather data you will need to add your own API key to a `.env` file inside of the `\client` folder.
+
+Change directories into the client folder then use the touch command in the cli to create `.env` file. 
+
+Like so:
+```bash
+cd client
+touch .env
+```
+Inside of the `hotel-worx\client\.env`
+```
+REACT_APP_WEATHER_API_KEY=<Your React Open Weather API key here>
+```
 
 ---
 
