@@ -88,7 +88,7 @@ class Reservation extends Component {
                         </tr>
                         <tr>
                             <td><p>Room Type:{this.state.roomType} </p></td>
-                            <td><p>Adress: {this.state.street}{this.state.state}{this.state.city}{this.state.zip}</p></td>
+                            <td><p>Address: {this.state.street}{this.state.state}{this.state.city}{this.state.zip}</p></td>
                         </tr>
                         <tr>
                             <td><p>Room Number:{this.state.roomNumber}</p></td>

@@ -53,7 +53,7 @@ class RegisterForm extends React.Component {
                   <Col xs={6} sm={8} md={3} lg={3} xl={3}>
                     <input
                       type='text'
-                      placeholder='Adress'
+                      placeholder='Address'
                       name='address'
                       value={this.props.address}
                       onChange={this.props.handleChange}
