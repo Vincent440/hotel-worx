@@ -102,7 +102,7 @@ class RegisterForm extends React.Component {
                 </Row>
                 <Row style={{ marginBottom: '20px' }}>
                   <Col xs={2} sm={4} md={2} lg={2} xl={2}>
-                                        Comments
+                    Comments
                   </Col>
                   <Col xs={10} sm={8} md={10} lg={10} xl={10}>
                     <input
@@ -111,7 +111,7 @@ class RegisterForm extends React.Component {
                       name='comment'
                       value={this.props.comment}
                       onChange={this.props.handleChange}
-                      style={{ backgroundColor: '	#F0E68C', width: '30%', height: '50px' }}
+                      style={{ backgroundColor: '#F0E68C', width: '30%', height: '50px' }}
                     />
                   </Col>
                 </Row>

@@ -112,7 +112,7 @@ class RegisterForm extends React.Component {
                       name='room_comments'
                       value={this.props.comments}
                       onChange={this.props.handleChange}
-                      style={{ backgroundColor: '	#F0E68C', width: '30%', height: '50px' }}
+                      style={{ backgroundColor: '#F0E68C', width: '30%', height: '50px' }}
                     />
                   </Col>
 

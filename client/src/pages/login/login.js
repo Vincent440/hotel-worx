@@ -1,63 +1,120 @@
-import React, { Component } from "react";
-import { Container } from 'react-bootstrap';
-import LoginForm from "../../components/loginForm/loginForm";
-import "./style.css";
-import Logo from "../../components/logo/logo";
-import BackgroundSlider from 'react-background-slider';
-import image3 from './hotel3.jpg';
-import image5 from './hotel5.jpg';
-import image6 from './hotel6.jpg';
-import image8 from './image8.jpg';
-import UserContext from '../../UserContext';
+import React, { Component } from 'react'
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import './Login.css'
+import Logo from '../../components/logo/logo'
+import BackgroundSlider from 'react-background-slider'
+import hotelBell from './hotel-bell.jpg'
+import hotelEntrance from './hotel-entrance.jpg'
+import hotelLobby from './hotel-lobby.jpg'
+import hotelRoom from './hotel-room.jpg'
+import UserContext from '../../UserContext'
 
 class Login extends Component {
-
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.handleInputChange = event => {
-      const { name, value } = event.target;
-      this.setState({ [name]: value });
-    };
+      const { name, value } = event.target
+      this.setState({ [name]: value })
+    }
     this.handleSubmit = event => {
-      event.preventDefault();
+      event.preventDefault()
       if (!this.isFormInValid()) {
-        this.context.postUserLogin({ username: this.state.username, password: this.state.password });
+        this.context.postUserLogin({
+          username: this.state.username,
+          password: this.state.password
+        })
       }
-    };
+    }
     this.state = {
-      username: "user",
-      password: "123123"
-    };
+      username: 'user',
+      password: '123123'
+    }
   }
-  componentDidMount() {
+  componentDidMount () {
     if (this.context.user.access_id === 0) {
-      this.context.getUserStatus();
+      this.context.getUserStatus()
     }
   }
   isFormInValid = () => {
     if (this.state.username.length < 4 || this.state.password.length < 5) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
-  };
+  }
 
-  render() {
+  render () {
     return (
       <span>
         <BackgroundSlider
-          images={[ image3, image5, image6,image8]}
+          images={[hotelBell, hotelEntrance, hotelLobby, hotelRoom]}
           duration={5}
-          transition={1} />
+          transition={1}
+        />
         <Container>
-          <div id="logoLogin">
+          <div className='Login-page'>
             <Logo />
-            <LoginForm username={this.state.username} password={this.state.password} isFormInValid={this.isFormInValid} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit} />
+            <div className='Login'>
+              <Form
+                onSubmit={e => this.handleSubmit(e)}
+                className='text-center'
+              >
+                <Row className='justify-content-center'>
+                  <Col xs={12}>
+                    <Form.Group controlId='loginUsername'>
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control
+                        size='lg'
+                        onChange={this.handleInputChange}
+                        value={this.state.username}
+                        autoComplete='Username'
+                        type='text'
+                        name='username'
+                        className='bg-white'
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row className='justify-content-center'>
+                  <Col xs={12}>
+                    <Form.Group controlId='loginPassword'>
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control
+                        size='lg'
+                        onChange={this.handleInputChange}
+                        value={this.state.password}
+                        autoComplete='current-password'
+                        type='password'
+                        name='password'
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12}>
+                    <Button
+                      disabled={this.isFormInValid()}
+                      type='submit'
+                      size='lg'
+                      variant='primary'
+                    >
+                      Login
+                    </Button>
+                  </Col>
+                </Row>
+              </Form>
+            </div>
           </div>
-        </Container> 
+        </Container>
       </span>
-    );
+    )
   }
 }
-Login.contextType = UserContext;
-export default Login;
+
+Login.contextType = UserContext
+
+export default Login

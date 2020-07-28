@@ -1,5 +1,4 @@
 import React from 'react'
-// import Helmet from 'react-helmet'
 import './style.css'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
@@ -50,7 +49,6 @@ export default class DateRange extends React.Component {
             onDayChange={this.props.handleToChange}
           />
         </span>
-        {/* <Helmet /> */}
       </div>
     )
   }
