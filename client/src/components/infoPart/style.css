@@ -106,15 +106,3 @@
   color: black;
 }
 
-
-#logOut {
-  padding: 0px;
-  width: 50px;
-  float: left;
-  margin-top: 0px;
-}
-
-#logOut i {
-  font-size: 28px;
-  color: black;
-}

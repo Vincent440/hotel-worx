@@ -52,11 +52,11 @@ p {
   margin-top: 10px;
   margin-left: -15px;
 }
-button {
+/* button {
   size: 30px;
   margin-left: 30px;
   margin-bottom: 10px;
-}
+} */
 
 #header {
   background-color: rgba(255, 255, 255, 0.774);

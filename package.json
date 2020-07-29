@@ -1,7 +1,7 @@
 {
   "name": "hotel_worx",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.2.0",
+  "description": "hotel_worx Express server connected to a MySQL database",
   "main": "server.js",
   "scripts": {
     "debugger": "concurrently \"node --inspect-brk server.js --ignore 'client/*'\" \"yarn client\"",

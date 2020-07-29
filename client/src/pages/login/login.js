@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import './style.css'
+
 import Logo from '../../components/logo/logo'
 import BackgroundSlider from 'react-background-slider'
 import hotelBell from './hotel-bell.jpg'
@@ -12,6 +12,7 @@ import hotelEntrance from './hotel-entrance.jpg'
 import hotelLobby from './hotel-lobby.jpg'
 import hotelRoom from './hotel-room.jpg'
 import UserContext from '../../UserContext'
+import Card from 'react-bootstrap/Card'
 
 class Login extends Component {
   constructor (props) {
@@ -49,68 +50,69 @@ class Login extends Component {
 
   render () {
     return (
-      <span>
-        <BackgroundSlider
-          images={[hotelBell, hotelEntrance, hotelLobby, hotelRoom]}
-          duration={5}
-          transition={1}
-        />
+      <>
         <Container>
-          <div className='Login-page'>
+          <BackgroundSlider
+            images={[hotelBell, hotelEntrance, hotelLobby, hotelRoom]}
+            duration={5}
+            transition={1}
+          />
+
+            <Row className='justify-content-center'>
+              <Col xs={10} sm={9} md={8} lg={3}>
+          <Card className='text-center' bg='light'>
             <Logo />
-            <div className='Login'>
-              <Form
-                onSubmit={e => this.handleSubmit(e)}
-                className='text-center'
-              >
-                <Row className='justify-content-center'>
-                  <Col xs={12}>
-                    <Form.Group controlId='loginUsername'>
-                      <Form.Label>Username</Form.Label>
-                      <Form.Control
-                        size='lg'
-                        onChange={this.handleInputChange}
-                        value={this.state.username}
-                        autoComplete='Username'
-                        type='text'
-                        name='username'
-                        className='bg-white'
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row className='justify-content-center'>
-                  <Col xs={12}>
-                    <Form.Group controlId='loginPassword'>
-                      <Form.Label>Password</Form.Label>
-                      <Form.Control
-                        size='lg'
-                        onChange={this.handleInputChange}
-                        value={this.state.password}
-                        autoComplete='current-password'
-                        type='password'
-                        name='password'
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <Button
-                      disabled={this.isFormInValid()}
-                      type='submit'
-                      size='lg'
-                      variant='primary'
-                    >
-                      Login
-                    </Button>
-                  </Col>
-                </Row>
-              </Form>
-            </div>
-          </div>
+                <Card.Body>
+                  <Form onSubmit={e => this.handleSubmit(e)}>
+                    <Form.Row className='justify-content-center'>
+                      <Col xs={10}>
+                        <Form.Group controlId='loginUsername'>
+                          <Form.Label>Username</Form.Label>
+                          <Form.Control
+                            size='lg'
+                            onChange={this.handleInputChange}
+                            value={this.state.username}
+                            autoComplete='Username'
+                            type='text'
+                            name='username'
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Form.Row>
+                    <Form.Row className='justify-content-center'>
+                      <Col xs={10}>
+                        <Form.Group controlId='loginPassword'>
+                          <Form.Label>Password</Form.Label>
+                          <Form.Control
+                            size='lg'
+                            onChange={this.handleInputChange}
+                            value={this.state.password}
+                            autoComplete='current-password'
+                            type='password'
+                            name='password'
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Form.Row>
+                    <Row>
+                      <Col xs={12}>
+                        <Button
+                          disabled={this.isFormInValid()}
+                          type='submit'
+                          size='block'
+                          variant='primary'
+                        >
+                          Login
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Card.Body>
+          </Card>
+              </Col>
+            </Row>
         </Container>
-      </span>
+      </>
     )
   }
 }

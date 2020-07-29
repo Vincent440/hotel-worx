@@ -5,8 +5,8 @@ html {
 body {
   height: 100%;
   max-height: max-content;
-  font-family: "Nanum Myeongjo", serif;
-  background-color: #1d3f72;
+  font-family: 'Nanum Myeongjo', serif;
+  background-color: #101777;
   background-size: cover;
   background-position: center;
 }
@@ -14,5 +14,5 @@ body {
 #root div div canvas {
   position: absolute;
   z-index: -1;
-  height:fit-content;
+  height: fit-content;
 }

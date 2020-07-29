@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import './style.css'
 import { TweenMax, Linear } from 'gsap'
 import logo from './hotelworx_logo.png'
 
@@ -19,8 +18,8 @@ const Logo = () => {
   }, [])
 
   return (
-    <div id='logoDiv'>
-      <img src={logo} ref={element => { logoElement = element }} className='App-logo' id='logo' alt='logo' />
+    <div id='logoDiv' className='pt-3 m-0 mx-auto'>
+      <img src={logo} ref={element => { logoElement = element }} className='App-logo w-100 mb-3' id='logo' alt='logo' />
     </div>)
 }
 

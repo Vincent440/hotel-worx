@@ -1,7 +1,7 @@
 {
   "name": "hotel_worx",
-  "version": "0.1.0",
-  "description": "hotel_worx",
+  "version": "0.2.0",
+  "description": "hotel_worx react client application",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
