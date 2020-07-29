@@ -99,10 +99,10 @@ class App extends Component {
               <Container className='m-0 p-0'>
                 <Particles params={particleOptions} />
                 <Row className='m-0 py-2'>
-                  <Col sm={4} md={3} lg={3} xl={2}>
+                  <Col xs={12} sm={6} md={5} lg={4} xl={3}>
                     <InfoPart />
                   </Col>
-                  <Col sm={8} md={9} lg={9} xl={10}>
+                  <Col xs={12} sm={6} md={7} lg={8} xl={9}>
                     <>
                       <Switch>
                         <PrivateAccessRoute exact strict path='/' component={Dashboard} aId='1' />

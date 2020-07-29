@@ -1,48 +1,75 @@
-import React, { Component } from 'react';
-import smallLogo from "../logo/hotelworx_logo.png";
-import { Card } from 'react-bootstrap';
-import "./style.css";
-import api from '../../utils/api';
-import UserContext from '../../UserContext';
-
+import React, { Component } from 'react'
+import Logo from '../logo/logo'
+import api from '../../utils/api'
+import UserContext from '../../UserContext'
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button'
 class InfoPart extends Component {
   state = {
-      hotelInfo: []
-  };
+    hotelInfo: []
+  }
   makeAxiosCall = () => {
-      api.getHotelInfo(1)
-          .then(res => this.setState({ hotelInfo: res }))
-          .catch(err => console.log(err));
+    api
+      .getHotelInfo(1)
+      .then(hotelData => this.setState({ hotelInfo: hotelData }))
+      .catch(err => console.log(err))
   }
-  componentDidMount() {
-      this.makeAxiosCall();
+  componentDidMount () {
+    this.makeAxiosCall()
   }
-  render() {
+  render () {
     return (
-    <UserContext.Consumer>
-        {({ user,getUserLogout }) => (
-        <Card id="infoCard">
-            <Card>
-                <Card.Img variant="top" src={smallLogo} className="App-logo" id="smallLogo" alt="smallLogo" />
-            </Card>
+      <UserContext.Consumer>
+        {({ user, getUserLogout }) => (
+          <Card bg='light' className='text-center'>
+            <Card.Header>
+              <Logo />
+            </Card.Header>
             {this.state.hotelInfo.map(info => (
-                <div key={info.hotel_info_id} id="hotelInfoPart" className="my-auto">
-                    <div className="text-center" id="hotelName">{info.hotel_name}</div>
-                    <div className="small faded" id="hotelAddress">{info.address}</div>
-                    <div className="small faded" id="hotelAddress">{info.city}, {info.state} {info.zip}</div>
-                    <div className="small faded" id="hotelEmail">{info.email}</div>
-                    <div className="text-center" id="hotelPhone"><i className="fa fa-phone fa-rotate-90"></i>{info.phone}</div>
-                </div>
+              <ListGroup variant='flush' key={info.hotel_info_id}>
+                <ListGroup.Item>
+                  <Card.Header className='bg-white border-0' as='h3'>{info.hotel_name}</Card.Header>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Card.Text>{info.address}</Card.Text>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Card.Text>
+                    {info.city}, {info.state} {info.zip}
+                  </Card.Text>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Card.Link href={'mailto:' + info.email}>
+                    {info.email}
+                  </Card.Link>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Card.Link href={'tel:' + info.phone}>
+                    <i className='fa fa-phone fa-rotate-90 px-2'></i>&nbsp;
+                    {info.phone}
+                  </Card.Link>
+                </ListGroup.Item>
+              </ListGroup>
             ))}
-            <h5 className="card-title text-capitalize" id="userNameD">User Name: {user.username}</h5>
-            <div id="optionsDiv">
-                <button className="btn btn-lg align-center" id="logOut" onClick={getUserLogout}>Logout&nbsp;<i className="fa fa-sign-out-alt"></i></button>
-            </div>
-        </Card>
-            )}
-    </UserContext.Consumer>
-    );
-  }
-};
+            <Card.Body>
+              <Card.Title className='text-center'>
+                Greetings{' '}
+                <Badge className='p-3' variant="secondary">
+                  {user.username}
+                </Badge>
+              </Card.Title>
 
-export default InfoPart;
+              <Button onClick={getUserLogout} size='lg' block variant='link'>
+                Logout&nbsp;<i className='fa fa-sign-out-alt'></i>
+              </Button>
+            </Card.Body>
+          </Card>
+        )}
+      </UserContext.Consumer>
+    )
+  }
+}
+
+export default InfoPart

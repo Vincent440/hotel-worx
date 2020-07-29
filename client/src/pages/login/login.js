@@ -58,14 +58,16 @@ class Login extends Component {
             transition={1}
           />
 
-            <Row className='justify-content-center'>
-              <Col xs={10} sm={9} md={8} lg={3}>
-          <Card className='text-center' bg='light'>
-            <Logo />
-                <Card.Body>
-                  <Form onSubmit={e => this.handleSubmit(e)}>
+          <Row className='justify-content-center'>
+            <Col xs={8} sm={5} md={4} lg={3} xl={3}>
+              <Card border='dark' className='text-center' bg='light'>
+                <Card.Header className='py-5'>
+                  <Logo />
+                </Card.Header>
+                <Form onSubmit={e => this.handleSubmit(e)}>
+                  <Card.Body className='py-4'>
                     <Form.Row className='justify-content-center'>
-                      <Col xs={10}>
+                      <Col xs={12} sm={10}>
                         <Form.Group controlId='loginUsername'>
                           <Form.Label>Username</Form.Label>
                           <Form.Control
@@ -80,7 +82,7 @@ class Login extends Component {
                       </Col>
                     </Form.Row>
                     <Form.Row className='justify-content-center'>
-                      <Col xs={10}>
+                      <Col xs={12} sm={10}>
                         <Form.Group controlId='loginPassword'>
                           <Form.Label>Password</Form.Label>
                           <Form.Control
@@ -94,8 +96,10 @@ class Login extends Component {
                         </Form.Group>
                       </Col>
                     </Form.Row>
-                    <Row>
-                      <Col xs={12}>
+                  </Card.Body>
+                  <Card.Footer>
+                    <Row className='justify-content-center py-4'>
+                      <Col xs={12} sm={10}>
                         <Button
                           disabled={this.isFormInValid()}
                           type='submit'
@@ -106,11 +110,11 @@ class Login extends Component {
                         </Button>
                       </Col>
                     </Row>
-                  </Form>
-                </Card.Body>
-          </Card>
-              </Col>
-            </Row>
+                  </Card.Footer>
+                </Form>
+              </Card>
+            </Col>
+          </Row>
         </Container>
       </>
     )

@@ -1,26 +1,28 @@
 import React, { useEffect, useRef } from 'react'
 import { TweenMax, Linear } from 'gsap'
 import logo from './hotelworx_logo.png'
-
+import Card from 'react-bootstrap/esm/Card'
 const Logo = () => {
   let logoElement = useRef(null)
 
   useEffect(() => {
-    TweenMax.to(
-      logoElement,
-      1,
-      {
-        repeat: 0,
-        rotation: 360,
-        ease: Linear.easeNone
-      }
-    )
+    TweenMax.to(logoElement, 1, {
+      repeat: 0,
+      rotation: 360,
+      ease: Linear.easeNone
+    })
   }, [])
-
   return (
-    <div id='logoDiv' className='pt-3 m-0 mx-auto'>
-      <img src={logo} ref={element => { logoElement = element }} className='App-logo w-100 mb-3' id='logo' alt='logo' />
-    </div>)
+    <Card.Img
+      className='rounded-circle'
+      style={{ maxWidth: '225px' }}
+      src={logo}
+      ref={element => {
+        logoElement = element
+      }}
+      alt='logo'
+    />
+  )
 }
 
 export default Logo
