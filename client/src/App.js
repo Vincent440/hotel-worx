@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -22,7 +27,11 @@ import DetailedAvailability from './pages/detailedAvailability/detailedAvailabil
 import HouseStatus from './pages/houseStatus/houseStatus'
 import Maintenance from './pages/maintenance/maintenance'
 
-const particleOptions = { particles: { number: { value: 120, density: { enable: true, value_area: 1000 } } } }
+const particleOptions = {
+  particles: {
+    number: { value: 120, density: { enable: true, value_area: 1000 } }
+  }
+}
 
 const PrivateAccessRoute = ({ component: Component, aId, ...rest }) => (
   <UserContext.Consumer>
@@ -39,7 +48,8 @@ const PrivateAccessRoute = ({ component: Component, aId, ...rest }) => (
                 state: { from: props.location }
               }}
             />
-          )}
+          )
+        }
       />
     )}
   </UserContext.Consumer>
@@ -65,10 +75,7 @@ class App extends Component {
     this.getUserStatus = () => {
       authapi.getLoginStatus().then(res => {
         if (res) {
-          this.setState(() => (
-            { user: res.user }
-          )
-          )
+          this.setState(() => ({ user: res.user }))
         }
       })
     }
@@ -94,36 +101,102 @@ class App extends Component {
             <>
               <Redirect to='/' />
               <Login />
-            </>)
-            : (
-              <Container className='m-0 p-0'>
-                <Particles params={particleOptions} />
-                <Row className='m-0 py-2'>
-                  <Col xs={12} sm={6} md={5} lg={4} xl={3}>
-                    <InfoPart />
-                  </Col>
-                  <Col xs={12} sm={6} md={7} lg={8} xl={9}>
-                    <>
-                      <Switch>
-                        <PrivateAccessRoute exact strict path='/' component={Dashboard} aId='1' />
-                        <PrivateAccessRoute exact path='/reserve/new' component={ReserveNew} aId='1' />
-                        <PrivateAccessRoute exact path='/reserve/allreservations' component={UpdateReservation} aId='1' />
-                        <PrivateAccessRoute exact path='/reserve/testUpdatereservation' component={ReserveUpdate} aId='1' />
-                        <PrivateAccessRoute exact path='/reserve/testreservation' component={ReservationTest} aId='1' />
-                        <PrivateAccessRoute exact path='/frontdesk/arrivals' component={Arrivals} aId='1' />
-                        <PrivateAccessRoute exact path='/frontdesk/inhouse' component={Inhouse} aId='1' />
-                        <PrivateAccessRoute exact path='/frontdesk/maintenance' component={Maintenance} aId='1' />
-                        <PrivateAccessRoute exact path='/cashiering/billing' component={Billing} aId='1' />
-                        <PrivateAccessRoute exact path='/cashiering/payment' component={Payment} aId='1' />
-                        <PrivateAccessRoute exact path='/reports/housekeeping' component={Housekeeping} aId='1' />
-                        <PrivateAccessRoute exact path='/reports/detailedAvailability' component={DetailedAvailability} aId='1' />
-                        <PrivateAccessRoute exact path='/reports/houseStatus' component={HouseStatus} aId='1' />
-                      </Switch>
-                    </>
-                  </Col>
-                </Row>
-              </Container>
-            )}
+            </>
+          ) : (
+            <Container className='m-0 p-0 w-100'>
+              <Particles params={particleOptions} />
+              <Row className='m-0 p-3'>
+                <Col md={5} lg={4} xl={3}>
+                  <InfoPart />
+                </Col>
+                <Col md={7} lg={8} xl={9}>
+                  <>
+                    <Switch>
+                      <PrivateAccessRoute
+                        exact
+                        strict
+                        path='/'
+                        component={Dashboard}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/reserve/new'
+                        component={ReserveNew}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/reserve/allreservations'
+                        component={UpdateReservation}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/reserve/testUpdatereservation'
+                        component={ReserveUpdate}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/reserve/testreservation'
+                        component={ReservationTest}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/frontdesk/arrivals'
+                        component={Arrivals}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/frontdesk/inhouse'
+                        component={Inhouse}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/frontdesk/maintenance'
+                        component={Maintenance}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/cashiering/billing'
+                        component={Billing}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/cashiering/payment'
+                        component={Payment}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/reports/housekeeping'
+                        component={Housekeeping}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/reports/detailedAvailability'
+                        component={DetailedAvailability}
+                        aId='1'
+                      />
+                      <PrivateAccessRoute
+                        exact
+                        path='/reports/houseStatus'
+                        component={HouseStatus}
+                        aId='1'
+                      />
+                    </Switch>
+                  </>
+                </Col>
+              </Row>
+            </Container>
+          )}
         </Router>
       </UserContext.Provider>
     )

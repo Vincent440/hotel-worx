@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Row, Col } from 'react-grid-system';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import "./style.css";
 import api from '../../utils/api';
 import Header from "../../components/Header";

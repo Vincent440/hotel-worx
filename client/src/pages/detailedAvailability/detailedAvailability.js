@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Row, Col } from 'react-grid-system';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import "./style.css";
 import api from '../../utils/api';
 import DeatiledSubmit from "../../components/detailedSubmit";

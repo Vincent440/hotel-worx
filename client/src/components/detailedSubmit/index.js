@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.css'
-import { Row, Col } from 'react-grid-system'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const DeatiledSubmit = props => {
   return (
@@ -18,7 +19,7 @@ const DeatiledSubmit = props => {
           />
         </Col>
         <Col xs={6} sm={4} md={3} lg={2} xl={1}>
-                    Availability
+          Availability
         </Col>
         <Col xs={6} sm={8} md={9} lg={1} xl={1}>
           <input
@@ -29,7 +30,7 @@ const DeatiledSubmit = props => {
           />
         </Col>
         <Col xs={6} sm={4} md={3} lg={2} xl={1}>
-                    Occupancy
+          Occupancy
         </Col>
         <Col xs={6} sm={8} md={2} lg={1} xl={1}>
           <input
