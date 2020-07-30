@@ -23,7 +23,7 @@ class InfoPart extends Component {
     return (
       <UserContext.Consumer>
         {({ user, getUserLogout }) => (
-          <Card bg='light' className='text-center'>
+          <Card id='user-card-navbar' bg='light' className='text-center'>
             <Card.Header>
               <Logo />
             </Card.Header>

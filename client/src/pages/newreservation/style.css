@@ -27,7 +27,7 @@
 }
 
 @media print {
-  #infoCard {
+  #user-card-navbar {
     display: none;
   }
   #buttonsReservation {
@@ -38,25 +38,12 @@
   }
 }
 
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
-
 #dashboardTable {
   margin: 20px 60px 20px;
   padding: 30px 50px;
   height: 700px;
 }
 
-p {
-  font-size: 18px;
-  color: black;
-  padding: 5px;
-  margin-left: 10px;
-}
 
 #res > div:nth-child(3) > div:nth-child(4) > select {
   width: 188px;
@@ -89,11 +76,6 @@ p {
   margin-left: 0px;
 }
 
-button {
-  size: 30px;
-  margin-left: 40%;
-}
-
 #submitButton {
   size: 30px;
   margin-left: 40%;
@@ -102,21 +84,12 @@ button {
 .input {
   width: 100%;
 }
-h2 {
-  text-align: right;
-}
 
 #exit {
   float: right;
   font-size: 29px;
   width: 10px;
   border: 1px solid black;
-}
-
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  padding-left: 2px;
 }
 
 #field-wrapper {
@@ -142,11 +115,4 @@ h2 {
   height: 50px;
   vertical-align: top;
   max-width: 100%;
-}
-ul {
-  list-style-type: none;
-}
-li {
-  padding-bottom: 5px;
-  text-align: left;
 }

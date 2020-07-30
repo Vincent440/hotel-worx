@@ -1,13 +1,3 @@
-
-
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
-
-
 #exit {
   float: right;
   font-size: 29px;
@@ -15,45 +5,24 @@ h1 {
   border: 1px solid black;
 }
 
-p {
-  font-size: 14px;
-  color: pink;
-  padding: 1px;
-  margin-left: 10px;
-}
 #resInvoice {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
 }
 
-button {
-  size: 30px;
-  margin-left: 5px;
-}
-
 #buttonDiv {
   padding-left: 5px;
 }
 
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-}
-
-h2 {
-  text-align: center;
-}
-
-#revNew{
+#revNew {
   margin-left: 20px;
-
 }
-#revNew1{
+#revNew1 {
   margin-left: 35%;
 }
 
-.tableInfo{
+.tableInfo {
   border: 1px solid transparent;
   width: 45%;
   font-size: 18px;

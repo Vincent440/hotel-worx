@@ -1,16 +1,9 @@
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
 #exit {
   float: right;
   font-size: 24px;
   width: 34px;
   border: 1px solid black;
 }
-
 #dashboardTable {
   margin: 20px 60px 20px;
   padding: 30px 50px;
@@ -27,17 +20,6 @@ h1 {
 #res > div:nth-child(2) > div:nth-child(2) > div > div > span > div > input {
   margin-left: 130px;
   margin-bottom: 5px;
-}
-p {
-  font-size: 18px;
-  color: black;
-  padding: 5px;
-  margin-left: 10px;
-}
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  padding-left: 2px;
 }
 
 #res {
@@ -65,7 +47,4 @@ p {
 }
 #cancelButton {
   margin-left: 20px;
-}
-h2 {
-  text-align: center;
 }

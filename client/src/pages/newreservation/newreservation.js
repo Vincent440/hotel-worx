@@ -222,7 +222,6 @@ class ReserveNew extends Component {
                                         </Col>
                                 <Col xs={6} sm={8} md={6} lg={6} xl={2}>
                                     <input
-                                        id=""
                                         type="number"
                                         placeholder="Number of Nights"
                                         name="nights"
@@ -250,7 +249,6 @@ class ReserveNew extends Component {
                                 </Col>
                                 <Col xs={6} sm={8} md={6} lg={10} xl={2}>
                                     <input
-                                        id=""
                                         type="number"
                                         name="adults"
                                         placeholder="Adults"

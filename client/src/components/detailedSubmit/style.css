@@ -1,36 +1,14 @@
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
-
 #dashboardTable {
   margin: 20px 60px 20px;
   padding: 30px 50px;
   height: 700px;
 }
-#infoPart {
-  border: 1px solid black;
-  border-radius: 5px;
-  text-align: center;
-  color: black;
-  background-color: rgba(255, 255, 255, 0.425);
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
+
 #exit {
   float: right;
   font-size: 29px;
   width: 38px;
   border: 1px solid black;
-}
-
-p {
-  font-size: 18px;
-  color: black;
-  padding: 5px;
-  margin-left: 10px;
 }
 
 #res {
@@ -52,34 +30,24 @@ p {
   margin-top: 10px;
   margin-left: -15px;
 }
-/* button {
-  size: 30px;
-  margin-left: 30px;
-  margin-bottom: 10px;
-} */
 
-#header {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-}
-
-input[type="date"] {
+input[type='date'] {
   position: relative;
   padding: 10px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type='date']::-webkit-calendar-picker-indicator {
   color: transparent;
   background: none;
   z-index: 1;
 }
 
-input[type="date"]:before {
+input[type='date']:before {
   color: transparent;
   background: none;
   display: block;
-  font-family: "FontAwesome";
-  content: "\f073";
+  font-family: 'FontAwesome';
+  content: '\f073';
   /* This is the calendar icon in FontAwesome */
   width: 18px;
   height: 20px;
@@ -89,11 +57,11 @@ input[type="date"]:before {
   color: #999;
 }
 
-input[type="date"]::-webkit-clear-button {
+input[type='date']::-webkit-clear-button {
   display: none; /* Hide the button */
   -webkit-appearance: none; /* turn off default browser styling */
 }
-input[type="date"]::-webkit-inner-spin-button {
+input[type='date']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
 }
