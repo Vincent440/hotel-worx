@@ -193,7 +193,7 @@ class ReserveNew extends Component {
         }
 
         return (
-            <div>
+            <>
                 <Row>
                 <Col xl={12}>
                         <Header>NEW RESERVATION</Header>
@@ -292,7 +292,7 @@ class ReserveNew extends Component {
 
                     </Col>
                 </Row>
-            </div>
+            </>
         )
     }
 }

@@ -61,7 +61,7 @@ class InfoPart extends Component {
                 </Badge>
               </Card.Title>
 
-              <Button onClick={getUserLogout} size='lg' block variant='link'>
+              <Button onClick={getUserLogout} size='lg' block variant='outline-dark'>
                 Logout&nbsp;<i className='fa fa-sign-out-alt'></i>
               </Button>
             </Card.Body>
