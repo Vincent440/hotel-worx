@@ -123,7 +123,7 @@ class RegisterForm extends React.Component {
           </Row>
 
         </div>
-        <button type='submit' className='btn btn-primary' style={{ marginLeft: '480px' }} onClick={this.props.handleFormSubmit}>Submit</button>
+        <button type='submit' className='btn text-center btn-primary' onClick={this.props.handleFormSubmit}>Submit</button>
       </div>
 
     )

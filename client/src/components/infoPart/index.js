@@ -30,7 +30,9 @@ class InfoPart extends Component {
             {this.state.hotelInfo.map(info => (
               <ListGroup variant='flush' key={info.hotel_info_id}>
                 <ListGroup.Item>
-                  <Card.Header className='bg-white border-0' as='h3'>{info.hotel_name}</Card.Header>
+                  <Card.Header className='bg-white border-0' as='h3'>
+                    {info.hotel_name}
+                  </Card.Header>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Card.Text>{info.address}</Card.Text>
@@ -56,12 +58,17 @@ class InfoPart extends Component {
             <Card.Body>
               <Card.Title className='text-center'>
                 Greetings{' '}
-                <Badge className='p-3' variant="secondary">
+                <Badge className='p-3' variant='secondary'>
                   {user.username}
                 </Badge>
               </Card.Title>
 
-              <Button onClick={getUserLogout} size='lg' block variant='outline-dark'>
+              <Button
+                onClick={getUserLogout}
+                size='lg'
+                block
+                variant='outline-dark'
+              >
                 Logout&nbsp;<i className='fa fa-sign-out-alt'></i>
               </Button>
             </Card.Body>

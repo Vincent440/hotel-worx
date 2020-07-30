@@ -1,18 +1,7 @@
-#exit {
-  float: right;
-  font-size: 29px;
-  width: 38px;
-  border: 1px solid black;
-}
-
 #resInvoice {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
   border-radius: 5px;
-}
-
-#buttonDiv {
-  padding-left: 5px;
 }
 
 #revNew {

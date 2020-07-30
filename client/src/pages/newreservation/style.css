@@ -66,15 +66,6 @@
   padding-top: 10px;
   margin-left: 0px;
 }
-#guestinfo {
-  background-color: rgba(255, 255, 255, 0.774);
-  border: 2px solid black;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 20px;
-  max-width: 100%;
-  margin-left: 0px;
-}
 
 #submitButton {
   size: 30px;
@@ -83,13 +74,6 @@
 }
 .input {
   width: 100%;
-}
-
-#exit {
-  float: right;
-  font-size: 29px;
-  width: 10px;
-  border: 1px solid black;
 }
 
 #field-wrapper {

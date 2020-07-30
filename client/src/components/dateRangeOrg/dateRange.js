@@ -1,5 +1,4 @@
 import React from 'react'
-import './style.css'
 import DayPickerInput from 'react-day-picker/DayPickerInput'
 import 'react-day-picker/lib/style.css'
 import { formatDate, parseDate } from 'react-day-picker/moment'
