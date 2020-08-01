@@ -113,3 +113,8 @@ _**Created June, 2019**_ By:
 * [Sibel Baslamisli](https://sialbul.github.io/sibel-portfolio/)
 * [Mike Gullo](https://mike14747.github.io/)
 * [Vincent Shury](https://vincent440.github.io/)
+
+## License
+[MIT License](../LICENSE)
+
+Copyright :copyright: 2020 Vincent Shury
