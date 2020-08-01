@@ -1,4 +1,12 @@
-# Hotel Worx
+<h1 align="center">
+  Hotel Worx
+</h1>
+<p align="center">
+  <a href="https://hotelworx.herokuapp.com/">
+    <img alt="Hotel Worx" src="../client/src/components/logo/hotelworx_logo.png" width="250" />
+  </a>
+</p>
+
 A [Property management system](https://en.wikipedia.org/wiki/Property_management_system) used by Employees, & Managers.
 
 A React.js client making axios requests to an Express.js/Node.js server connected to a MySQL database for persistent storage.
