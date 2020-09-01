@@ -67,7 +67,7 @@ typings/
 .next
 
 # Lock files
-yarn-lock
+yarn.lock
 package-lock.json
 
 # ignore the client/build folder 
