@@ -8,6 +8,7 @@ const currentInfoRoutes = require('./current-info')
 const loginRoute = require('./login')
 const logoutRoute = require('./logout')
 const roomTypesRoutes = require('./room-types')
+
 // login route for employees or managers
 router.use('/login', loginRoute)
 
