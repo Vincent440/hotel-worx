@@ -1,4 +1,3 @@
-
 h1 {
   font-size: 5em;
   width: 25%;
@@ -19,7 +18,6 @@ p {
   margin-left: 10px;
 }
 
-
 #guestinfo {
   background-color: rgba(255, 255, 255, 0.774);
   border: 2px solid black;
@@ -34,22 +32,22 @@ p {
 size: 30px;
 margin-left: 30px;} */
 
-h2{
+h2 {
   text-align: center;
 }
 
-input[type="date"] {
+input[type='date'] {
   position: relative;
   padding: 10px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type='date']::-webkit-calendar-picker-indicator {
   color: transparent;
   background: none;
   z-index: 1;
 }
 
-input[type="date"]:before {
+input[type='date']:before {
   color: transparent;
   background: none;
   display: block;
@@ -64,24 +62,20 @@ input[type="date"]:before {
   color: #999;
 }
 
-input[type="date"]::-webkit-clear-button
-{
-    display: none; /* Hide the button */
-    -webkit-appearance: none; /* turn off default browser styling */
+input[type='date']::-webkit-clear-button {
+  display: none; /* Hide the button */
+  -webkit-appearance: none; /* turn off default browser styling */
 }
-input[type=date]::-webkit-inner-spin-button {
+input[type='date']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
 }
 
 #res table tr td {
   background-color: white;
-  
 }
-
 
 #res {
   padding-right: 15px;
   margin-left: -15px;
-
 }

@@ -1,11 +1,10 @@
-
 h1 {
   font-size: 5em;
   width: 25%;
   color: red;
   line-height: 1em;
 }
-h5{
+h5 {
   text-align: center;
 }
 #dashboardTable {
@@ -13,7 +12,6 @@ h5{
   padding: 30px 50px;
   height: 700px;
 }
-
 
 .btn-group a {
   background-color: rgba(255, 255, 255, 0.774);
@@ -38,5 +36,4 @@ h5{
 /* Add a background color on hover */
 .btn-group button:hover {
   background-color: rgba(0, 0, 255, 0.918); /* Green background */
-  ;
 }

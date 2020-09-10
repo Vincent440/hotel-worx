@@ -9,7 +9,12 @@ const Header = props => {
           <h2 className='text-center'>{props.children}</h2>
         </Col>
         <Col xs={3} sm={2} md={2} lg={1}>
-          <Link title='Return to Dashboard' className='btn btn-lg btn-danger' to='/' type='button'>
+          <Link
+            title='Return to Dashboard'
+            className='btn btn-lg btn-danger'
+            to='/'
+            type='button'
+          >
             <svg
               width='2em'
               height='2em'

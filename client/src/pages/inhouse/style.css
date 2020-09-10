@@ -10,7 +10,7 @@ h1 {
   padding: 30px 50px;
   height: 700px;
 }
-#res > div > div:nth-child(2){
+#res > div > div:nth-child(2) {
   padding-top: 5px;
 }
 
@@ -30,7 +30,6 @@ p {
   margin-left: -15px;
 }
 
-h2{
+h2 {
   text-align: center;
 }
-

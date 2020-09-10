@@ -14,17 +14,21 @@ if (process.env.NODE_ENV === 'production') {
 }
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(session({
-  secret: 'hotelworxmernapplication',
-  store: sessionStore,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 3600000, // 3600000 1 hour in milliseconds. The expiration time of the cookie to set it as a persistent cookie.
-    sameSite: true
-  }
-}))
+app.use(
+  session({
+    secret: 'hotelworxmernapplication',
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 3600000, // 3600000 1 hour in milliseconds. The expiration time of the cookie to set it as a persistent cookie.
+      sameSite: true
+    }
+  })
+)
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(routes)
-app.listen(PORT, () => console.log(`React API server listening on PORT ${PORT}.`))
+app.listen(PORT, () =>
+  console.log(`React API server listening on PORT ${PORT}.`)
+)
