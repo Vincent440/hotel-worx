@@ -14,6 +14,9 @@ import hotelRoom from './hotel-room.jpg'
 import UserContext from '../../UserContext'
 import Card from 'react-bootstrap/Card'
 
+/**
+ * Login page, where users can submit login information. Upon successful login user is shown the Dashboard page.
+ */
 class Login extends Component {
   constructor (props) {
     super(props)
@@ -35,12 +38,14 @@ class Login extends Component {
       password: '123123'
     }
   }
+
   componentDidMount () {
     if (this.context.user.access_id === 0) {
       this.context.getUserStatus()
     }
   }
-  isFormInValid = () => {
+
+  isFormInValid () {
     if (this.state.username.length < 4 || this.state.password.length < 5) {
       return true
     } else {
@@ -54,8 +59,8 @@ class Login extends Component {
         <Container>
           <BackgroundSlider
             images={[hotelBell, hotelEntrance, hotelLobby, hotelRoom]}
-            duration={5}
-            transition={1}
+            duration={6}
+            transition={2}
           />
 
           <Row className='justify-content-center'>

@@ -10,7 +10,7 @@ const sessionOptions = {
   database: process.env.DB_NAME, // Database name:,
   clearExpired: true, // Whether or not to automatically check for and clear expired sessions:
   checkExpirationInterval: 900000, // How frequently expired sessions will be cleared; milliseconds:
-  expiration: 7200000// The maximum age of a valid session; 2 hours in milliseconds:
+  expiration: 7200000 // The maximum age of a valid session; 2 hours in milliseconds:
 }
 const sessionStore = new MySQLStore(sessionOptions, connection.promise)
 

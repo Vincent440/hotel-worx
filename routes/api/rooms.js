@@ -9,7 +9,8 @@ const roomController = require('../../controllers/roomController')
   }
   GET "/api/rooms"
 */
-router.route('/')
+router
+  .route('/')
   .post(roomController.createNewRoom)
   .get(roomController.getAllRooms)
 
@@ -22,7 +23,8 @@ router.route('/')
   }
   DELETE '/api/rooms/:id'
 */
-router.route('/:id')
+router
+  .route('/:id')
   .get(roomController.getRoomById)
   .put(roomController.updateRoomById)
   .delete(roomController.deleteRoomById)

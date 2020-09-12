@@ -26,8 +26,8 @@ export default class DateRange extends React.Component {
             onDayClick: () => this.to.getInput().focus()
           }}
           onDayChange={this.props.handleFromChange}
-        /> {' '} Departure
-        {' '}
+        />{' '}
+        Departure{' '}
         <span className='InputFromTo-to'>
           <DayPickerInput
             ref={el => (this.to = el)}

@@ -10,46 +10,73 @@ class RegisterForm extends React.Component {
         <div id='res'>
           <Row>
             <Col xl={12}>
-
-              <form method='post' name='userRegistrationForm' onSubmit={this.props.handleFormSubmit}>
+              <form
+                method='post'
+                name='userRegistrationForm'
+                onSubmit={this.props.handleFormSubmit}
+              >
                 <Row style={{ paddingBottom: '2px' }}>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
                     <label>First Name</label>
                   </Col>
                   <Col xs={6} sm={8} md={4} lg={3} xl={3}>
-                    <input type='text' name='firstname' placeholder='First Name' value={this.props.firstname} onChange={this.props.handleChange} />
-                    <div className='errorMsg'>{this.props.errors.firstname}</div>
+                    <input
+                      type='text'
+                      name='firstname'
+                      placeholder='First Name'
+                      value={this.props.firstname}
+                      onChange={this.props.handleChange}
+                    />
+                    <div className='errorMsg'>
+                      {this.props.errors.firstname}
+                    </div>
                   </Col>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
                     <label>Last Name</label>
                   </Col>
                   <Col xs={6} sm={8} md={2} lg={2} xl={2}>
-                    <input type='text' name='lastname' placeholder='Last Name' value={this.props.lastname} onChange={this.props.handleChange} />
+                    <input
+                      type='text'
+                      name='lastname'
+                      placeholder='Last Name'
+                      value={this.props.lastname}
+                      onChange={this.props.handleChange}
+                    />
                     <div className='errorMsg'>{this.props.errors.lastname}</div>
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
-                                        Phone Number
+                    Phone Number
                   </Col>
                   <Col xs={6} sm={8} md={4} lg={3} xl={3}>
                     <NumberFormat
-                      format='###-###-####' mask='_' placeholder='Phone Number'
-                      name='phone' value={this.props.phone} onChange={this.props.handleChange}
+                      format='###-###-####'
+                      mask='_'
+                      placeholder='Phone Number'
+                      name='phone'
+                      value={this.props.phone}
+                      onChange={this.props.handleChange}
                     />
                     <div className='errorMsg'>{this.props.errors.phone}</div>
                   </Col>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
-                                        Email Address
+                    Email Address
                   </Col>
                   <Col xs={6} sm={8} md={2} lg={2} xl={2}>
-                    <input type='text' name='email' placeholder='Email Address' value={this.props.email} onChange={this.props.handleChange} />
+                    <input
+                      type='text'
+                      name='email'
+                      placeholder='Email Address'
+                      value={this.props.email}
+                      onChange={this.props.handleChange}
+                    />
                     <div className='errorMsg'>{this.props.errors.email}</div>
                   </Col>
                 </Row>
                 <Row style={{ marginTop: '5px' }}>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
-                                        Address
+                    Address
                   </Col>
                   <Col xs={6} sm={8} md={3} lg={3} xl={3}>
                     <input
@@ -90,13 +117,25 @@ class RegisterForm extends React.Component {
                 </Row>
                 <Row style={{ marginTop: '5px', marginBottom: '5px' }}>
                   <Col xs={2} sm={4} md={2} lg={2} xl={2}>
-                                        Credit Card Number
+                    Credit Card Number
                   </Col>
                   <Col xs={10} sm={8} md={8} lg={9} xl={9}>
                     <CreditCardInput
-                      cardNumberInputProps={{ name: 'creditCard', value: this.props.creditCard, onChange: this.props.handleChange }}
-                      cardExpiryInputProps={{ name: 'expirationDate', value: this.props.expirationDate, onChange: this.props.handleChange }}
-                      cardCVCInputProps={{ name: 'cvc', value: this.props.cvc, onChange: this.handleChange }}
+                      cardNumberInputProps={{
+                        name: 'creditCard',
+                        value: this.props.creditCard,
+                        onChange: this.props.handleChange
+                      }}
+                      cardExpiryInputProps={{
+                        name: 'expirationDate',
+                        value: this.props.expirationDate,
+                        onChange: this.props.handleChange
+                      }}
+                      cardCVCInputProps={{
+                        name: 'cvc',
+                        value: this.props.cvc,
+                        onChange: this.handleChange
+                      }}
                       fieldClassName='input'
                     />
                   </Col>
@@ -112,7 +151,11 @@ class RegisterForm extends React.Component {
                       name='comment'
                       value={this.props.comment}
                       onChange={this.props.handleChange}
-                      style={{ backgroundColor: '#F0E68C', width: '30%', height: '50px' }}
+                      style={{
+                        backgroundColor: '#F0E68C',
+                        width: '30%',
+                        height: '50px'
+                      }}
                     />
                   </Col>
                 </Row>
@@ -121,11 +164,39 @@ class RegisterForm extends React.Component {
           </Row>
         </div>
         <div className='text-center'>
-          {(this.props.checkedIn === 1 || this.props.active === 0) ? <button type='submit' className='btn btn-primary m-2' onClick={this.props.handleCancelSubmit} disabled>Cancel Reservation</button> : <button type='submit' className='btn btn-primary m-2' onClick={this.props.handleCancelSubmit}>Cancel Reservation</button>}
-          <button type='submit' className='btn btn-primary m-2' onClick={this.props.handleFormSubmit}>Submit</button>
+          {this.props.checkedIn === 1 || this.props.active === 0 ? (
+            <button
+              type='submit'
+              className='btn btn-primary m-2'
+              onClick={this.props.handleCancelSubmit}
+              disabled
+            >
+              Cancel Reservation
+            </button>
+          ) : (
+            <button
+              type='submit'
+              className='btn btn-primary m-2'
+              onClick={this.props.handleCancelSubmit}
+            >
+              Cancel Reservation
+            </button>
+          )}
+          <button
+            type='submit'
+            className='btn btn-primary m-2'
+            onClick={this.props.handleFormSubmit}
+          >
+            Submit
+          </button>
           <br />
-          <span className='text-light'>{this.props.updateSuccess && 'Reservation was successfully updated!'}</span>
-          <span className='text-light'>{this.props.cancelSuccess && 'Reservation has been cancelled!'}</span>
+          <span className='text-light'>
+            {this.props.updateSuccess &&
+              'Reservation was successfully updated!'}
+          </span>
+          <span className='text-light'>
+            {this.props.cancelSuccess && 'Reservation has been cancelled!'}
+          </span>
         </div>
       </div>
     )

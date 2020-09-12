@@ -58,7 +58,7 @@ p {
   height: 50px;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   /* Double-sized Checkboxes */
   -ms-transform: scale(1.5); /* IE */
   -moz-transform: scale(1.5); /* FF */
@@ -78,6 +78,6 @@ input[type="checkbox"] {
   padding-top: 5px;
 }
 
-#fourthRow{
+#fourthRow {
   margin-top: 5px;
 }

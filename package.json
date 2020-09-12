@@ -12,12 +12,13 @@
     "client": "cd client && yarn start",
     "install": "cd client && yarn",
     "build": "cd client && yarn build",
-    "heroku-postbuild": "yarn build"
+    "heroku-postbuild": "yarn build",
+    "format": "prettier-standard --format"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.4",
-    "standard": "^14.3.4"
+    "prettier-standard": "^16.4.1"
   },
   "repository": {
     "type": "git",
