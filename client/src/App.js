@@ -9,11 +9,14 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Particles from 'react-particles-js'
+
+// Import required Components and Utils
 import UserContext from './UserContext'
 import InfoPart from './components/infoPart'
 import authapi from './utils/authapi'
 import Login from './pages/login/login'
 
+// Import all pages
 import ReserveNew from './pages/newreservation/newreservation'
 import ReserveUpdate from './pages/updatereservation/updatereservation'
 import UpdateReservation from './pages/allreservations/allreservations'
