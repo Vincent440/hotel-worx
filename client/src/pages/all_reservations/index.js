@@ -10,10 +10,10 @@ import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 import moment from 'moment'
 
-class UpdateReservation extends Component {
+class AllReservations extends Component {
   // Setting the initial values of this.state.username and this.state.password
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.handleFromChange = this.handleFromChange.bind(this)
     this.handleToChange = this.handleToChange.bind(this)
   }
@@ -90,7 +90,7 @@ class UpdateReservation extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/reserve/testUpdatereservation'
+            pathname: '/reserve/testAllReservations'
           }}
         />
       )
@@ -206,4 +206,4 @@ class UpdateReservation extends Component {
   }
 }
 
-export default UpdateReservation
+export default AllReservations

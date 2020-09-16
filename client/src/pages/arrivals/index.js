@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-// import './style.css'
-import Header from '../../components/Header'
-import api from '../../utils/api'
-import moment from 'moment'
-import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Table from 'react-bootstrap/Table'
+import Card from 'react-bootstrap/Card'
+import api from '../../utils/api'
+import Header from '../../components/Header'
 
 const today = moment().format('YYYY-MM-DD')
 
@@ -79,80 +79,89 @@ class Arrivals extends Component {
   render () {
     return (
       <div>
-        <Row>
+        <Row className='mb-3'>
           <Col xl={12}>
             <Header>ARRIVALS</Header>
           </Col>
         </Row>
-        <div id='res'>
-          <Row id='arrivalLine'>
-            <Col xs={6} sm={3} md={3} lg={2} xl={1}>
-              Date
-            </Col>
-            <Col xs={6} sm={9} md={9} lg={10} xl={2}>
-              <input
-                style={{ height: '30px' }}
-                type='date'
-                placeholder='Date'
-                name='startDateRange'
-                value={this.state.startDateRange}
-                onChange={this.handleInputChange}
-              />
-            </Col>
-            <Col xs={6} sm={3} md={3} lg={2} xl={1}>
-              Name
-            </Col>
-            <Col xs={6} sm={9} md={9} lg={10} xl={2}>
-              <input
-                type='text'
-                placeholder='First Name'
-                name='firstname'
-                value={this.state.firstname}
-                onChange={this.handleInputChange}
-              />
-            </Col>
-            <Col xs={6} sm={3} md={3} lg={2} xl={2}>
-              Last Name
-            </Col>
-            <Col xs={6} sm={9} md={9} lg={10} xl={2}>
-              <input
-                type='text'
-                placeholder='Last Name'
-                name='lastname'
-                value={this.state.lastname}
-                onChange={this.handleInputChange}
-              />
-            </Col>
-            <Col xs={2} sm={3} md={2} lg={2} xl={1}>
-              <button
-                type='button'
-                className='btn btn-success'
-                id='printButton2'
-                onClick={this.printFunction}
-              >
-                Print
-              </button>
-            </Col>
-          </Row>
-        </div>
-        <div id='res3' style={{ paddingBottom: '10px' }}>
+
+        <Card>
+          <Card.Header>
+            <Row>
+              <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                Date
+              </Col>
+              <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                <input
+                  className='form-control'
+                  type='date'
+                  placeholder='Date'
+                  name='startDateRange'
+                  value={this.state.startDateRange}
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+              <Col xs={6} sm={3} md={3} lg={2} xl={1}>
+                Name
+              </Col>
+              <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                <input
+                  type='text'
+                  className='form-control'
+                  placeholder='First Name'
+                  name='firstname'
+                  value={this.state.firstname}
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+              <Col xs={6} sm={3} md={3} lg={2} xl={2}>
+                Last Name
+              </Col>
+              <Col xs={6} sm={9} md={9} lg={10} xl={2}>
+                <input
+                  type='text'
+                  className='form-control'
+                  placeholder='Last Name'
+                  name='lastname'
+                  value={this.state.lastname}
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+              <Col xs={2} sm={3} md={2} lg={2} xl={1}>
+                <button
+                  type='button'
+                  className='btn btn-lg btn-success'
+                  onClick={this.printFunction}
+                >
+                  Print
+                </button>
+              </Col>
+            </Row>
+          </Card.Header>
+        </Card>
+        <Card>
           <Row>
             <Col xl={12}>
-              <Link id='pendingLink' to='../../cashiering/billing'>
-                Pending departures
-              </Link>{' '}
-              by room type:
-              {this.state.pendingArray.length === 0
-                ? ' None'
-                : this.state.pendingArray.map((type, i) => (
-                    <span key={type.room_type_id}>
-                      {i > 0 ? ', ' : ' '}({type.type}:{' '}
-                      {type.pending_departures})
-                    </span>
-                  ))}
+              <Card.Body>
+                <Link
+                  className='text-decoration-none'
+                  to='../../cashiering/billing'
+                >
+                  Pending departures
+                </Link>{' '}
+                by room type:
+                {this.state.pendingArray.length === 0
+                  ? ' None'
+                  : this.state.pendingArray.map((type, i) => (
+                      <span key={type.room_type_id}>
+                        {i > 0 ? ', ' : ' '}({type.type}:{' '}
+                        {type.pending_departures})
+                      </span>
+                    ))}
+              </Card.Body>
             </Col>
           </Row>
-        </div>
+        </Card>
         <div id='res2'>
           <Row>
             <Col xl={12}>

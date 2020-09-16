@@ -6,7 +6,7 @@ import api from '../../utils/api'
 import Header from '../../components/Header'
 import { Redirect } from 'react-router-dom'
 
-class ReservationTest extends Component {
+class ReservationComfirmation extends Component {
   state = {
     ReservationInfo: {},
     RoomInfo: [],
@@ -164,23 +164,14 @@ class ReservationTest extends Component {
           </button>
           <button
             type='submit'
-            className='btn btn-primary'
-            style={{ marginLeft: '10px' }}
+            className='btn btn-primary ml-3'
             onClick={this.printFunction}
           >
             Print
-          </button>
-          <button
-            type='submit'
-            className='btn btn-primary'
-            style={{ marginLeft: '10px' }}
-            value='Send'
-          >
-            <a href={'mailto:' + this.state.ReservationInfo.email}>Email</a>
           </button>
         </div>
       </div>
     )
   }
 }
-export default ReservationTest
+export default ReservationComfirmation

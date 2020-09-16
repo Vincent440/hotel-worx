@@ -1,21 +1,7 @@
-h1 {
-  font-size: 5em;
-  width: 25%;
-  color: red;
-  line-height: 1em;
-}
-
 #dashboardTable {
   margin: 20px 60px 20px;
   padding: 30px 50px;
   height: 700px;
-}
-
-p {
-  font-size: 18px;
-  color: black;
-  padding: 5px;
-  margin-left: 10px;
 }
 
 #guestinfo {
@@ -27,11 +13,6 @@ p {
   max-width: 100%;
   margin-left: -15px;
 }
-
-/* button {
-  size: 30px;
-  margin-left: 40%;
-} */
 
 #searchButton {
   size: 30px;

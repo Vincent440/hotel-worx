@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import moment from 'moment'
+
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
+import Table from 'react-bootstrap/Table'
+
 import api from '../../utils/api'
 import DeatiledSubmit from '../../components/detailedSubmit'
 import Header from '../../components/Header'
-import moment from 'moment'
-import Table from 'react-bootstrap/Table'
 
 const today = moment().format('YYYY-MM-DD')
 class DetailedAvailability extends Component {

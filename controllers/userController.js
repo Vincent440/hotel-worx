@@ -33,7 +33,10 @@ module.exports = {
         if (result.changedRows === 0) {
           res.status(204).end()
         } else {
-          res.status(200).send(`Successfully updated the user: ${userData[0]}`).end()
+          res
+            .status(200)
+            .send(`Successfully updated the user: ${userData[0]}`)
+            .end()
         }
       })
     })

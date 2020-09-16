@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 
-import Logo from '../../components/logo/logo'
+import Logo from '../../components/logo'
 import BackgroundSlider from 'react-background-slider'
 import hotelBell from './hotel-bell.jpg'
 import hotelEntrance from './hotel-entrance.jpg'

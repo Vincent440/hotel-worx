@@ -4,7 +4,7 @@ const db = require('../../models/index.js')
 // ------------- '/api/hw/' --- routes --------
 // These routes were originally meant to be temporary and were to be removed once the functionality was completed.
 // Before removing a route it must first have a corresponding /api/route without the /hw/ prefix.
-// In that route the logic should be moved to a controller file once the functionality is completed. 
+// In that route the logic should be moved to a controller file once the functionality is completed.
 // ---------------------------------------------
 
 router.get('/customers', (req, res) => {

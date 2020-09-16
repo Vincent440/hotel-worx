@@ -5,11 +5,11 @@ import Col from 'react-bootstrap/Col'
 import api from '../../utils/api'
 import Header from '../../components/Header'
 import DateRange from '../../components/dateRange/dateRange'
-import RegisterForm from '../../components/validation'
+import RegistrationForm from '../../components/registrationForm'
 import moment from 'moment'
 import { Card } from 'react-bootstrap'
 
-class ReserveNew extends Component {
+class NewReservation extends Component {
   constructor () {
     super()
     this.handleFromChange = this.handleFromChange.bind(this)
@@ -208,104 +208,107 @@ class ReserveNew extends Component {
     }
 
     return (
-      <Card>
-        <Card.Header>
-          <Header>NEW RESERVATION</Header>
-        </Card.Header>
+      <>
+        <Header>NEW RESERVATION</Header>
 
-        <Card.Body>
-          <Row>
-            <Col xs={3} sm={4} md={1} lg={1} xl={2}>
-              Arrival
-            </Col>
-            <Col xs={9} sm={8} md={11} lg={11} xl={5}>
-              <DateRange
-                handleFromChange={this.handleFromChange}
-                handleToChange={this.handleToChange}
-                from={this.state.arrivaldate}
-                to={this.state.departuredate}
-              />
-            </Col>
-            <Col xs={6} sm={4} md={4} lg={2} xl={1}>
-              Nights
-            </Col>
-            <Col xs={6} sm={8} md={6} lg={6} xl={2}>
-              <input
-                type='number'
-                placeholder='Number of Nights'
-                name='nights'
-                value={
-                  this.state.departuredate &&
-                  Math.round(
-                    (this.state.departuredate - this.state.arrivaldate) /
-                      (1000 * 60 * 60 * 24)
-                  )
-                }
-                onChange={this.handleInputChange}
-              />
-            </Col>
-          </Row>
-          <Row id='newRow'>
-            <Col xs={6} sm={4} md={4} lg={2} xl={2}>
-              No of Rooms
-            </Col>
-            <Col xs={6} sm={8} md={6} lg={10} xl={2}>
-              <input
-                type='number'
-                placeholder='Number of Rooms'
-                name='numRooms'
-                value={this.state.numRooms}
-                disabled
-              />
-            </Col>
-            <Col xs={6} sm={4} md={4} lg={2} xl={1}>
-              Adults
-            </Col>
-            <Col xs={6} sm={8} md={6} lg={10} xl={2}>
-              <input
-                type='number'
-                name='adults'
-                placeholder='Adults'
-                value={this.state.adults}
-                onChange={this.handleInputChange}
-              />
-            </Col>
-            <Col xs={6} sm={4} md={4} lg={2} xl={1}>
-              Room Type
-            </Col>
-            <Col xs={6} sm={8} md={6} lg={2} xl={2}>
-              <select name='roomtype' onChange={this.handleInputChange}>
-                {this.state.RoomTypes.map(type => (
-                  <option key={type.room_type_id} value={type.room_type_id}>
-                    {type.type} - {type.rate}
-                  </option>
-                ))}
-              </select>
-            </Col>
-          </Row>
-        </Card.Body>
-        <Card.Footer>
-          <RegisterForm
-            handleFormSubmit={this.handleFormSubmit}
-            handleChange={this.handleChange}
-            firstname={this.state.firstname}
-            lastname={this.state.lastname}
-            phone={this.state.phone}
-            email={this.state.email}
-            address={this.state.address}
-            city={this.state.city}
-            state={this.state.state}
-            zip={this.state.zip}
-            creditCard={this.state.creditCard}
-            expirationDate={this.state.expirationDate}
-            comments={this.state.room_comments}
-            cvc={this.state.cvc}
-            errors={this.state.errors}
-          />
-        </Card.Footer>
-      </Card>
+        <Card>
+          <Card.Body>
+            <Row>
+              <Col xs={3} sm={4} md={1} lg={1} xl={2}>
+                Arrival
+              </Col>
+              <Col xs={9} sm={8} md={11} lg={11} xl={5}>
+                <DateRange
+                  handleFromChange={this.handleFromChange}
+                  handleToChange={this.handleToChange}
+                  from={this.state.arrivaldate}
+                  to={this.state.departuredate}
+                />
+              </Col>
+              <Col xs={6} sm={4} md={4} lg={2} xl={1}>
+                Nights
+              </Col>
+              <Col xs={6} sm={8} md={6} lg={6} xl={2}>
+                <input
+                  type='number'
+                  placeholder='Number of Nights'
+                  name='nights'
+                  value={
+                    this.state.departuredate &&
+                    Math.round(
+                      (this.state.departuredate - this.state.arrivaldate) /
+                        (1000 * 60 * 60 * 24)
+                    )
+                  }
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+            </Row>
+            <Row id='newRow'>
+              <Col xs={6} sm={4} md={4} lg={2} xl={2}>
+                No of Rooms
+              </Col>
+              <Col xs={6} sm={8} md={6} lg={10} xl={2}>
+                <input
+                  type='number'
+                  placeholder='Number of Rooms'
+                  name='numRooms'
+                  value={this.state.numRooms}
+                  disabled
+                />
+              </Col>
+              <Col xs={6} sm={4} md={4} lg={2} xl={1}>
+                Adults
+              </Col>
+              <Col xs={6} sm={8} md={6} lg={10} xl={2}>
+                <input
+                  type='number'
+                  name='adults'
+                  placeholder='Adults'
+                  value={this.state.adults}
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+              <Col xs={6} sm={4} md={4} lg={2} xl={1}>
+                Room Type
+              </Col>
+              <Col xs={6} sm={8} md={6} lg={2} xl={2}>
+                <select name='roomtype' onChange={this.handleInputChange}>
+                  {this.state.RoomTypes.map(type => (
+                    <option key={type.room_type_id} value={type.room_type_id}>
+                      {type.type} - {type.rate}
+                    </option>
+                  ))}
+                </select>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+
+        <Card>
+          <Card.Body>
+            <RegistrationForm
+              handleFormSubmit={this.handleFormSubmit}
+              handleChange={this.handleChange}
+              firstname={this.state.firstname}
+              lastname={this.state.lastname}
+              phone={this.state.phone}
+              email={this.state.email}
+              address={this.state.address}
+              city={this.state.city}
+              state={this.state.state}
+              zip={this.state.zip}
+              creditCard={this.state.creditCard}
+              expirationDate={this.state.expirationDate}
+              comments={this.state.room_comments}
+              cvc={this.state.cvc}
+              errors={this.state.errors}
+            />
+          </Card.Body>
+        </Card>
+      </>
     )
   }
 }
 
-export default ReserveNew
+export default NewReservation
