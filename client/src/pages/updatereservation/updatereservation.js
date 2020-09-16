@@ -9,8 +9,8 @@ import RegisterForm from "../../components/validationUpdateRes";
 import moment from 'moment';
 
 class ReserveUpdate extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.handleFromChange = this.handleFromChange.bind(this);
         this.handleToChange = this.handleToChange.bind(this);
         this.handleChange = this.handleChange.bind(this);

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-// import "./style.css";
 import api from '../../utils/api'
 import Header from '../../components/Header'
 import DateRange from '../../components/dateRange/dateRange'
@@ -11,8 +10,8 @@ import moment from 'moment'
 import { Card } from 'react-bootstrap'
 
 class ReserveNew extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.handleFromChange = this.handleFromChange.bind(this)
     this.handleToChange = this.handleToChange.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -202,7 +201,7 @@ class ReserveNew extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/reserve/testreservation'
+            pathname: '/reservationcomfirmation'
           }}
         />
       )

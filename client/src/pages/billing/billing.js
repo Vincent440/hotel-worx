@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Header from '../../components/Header'
-import SearchSubmit from '../../components/searchButton'
+import SearchSubmit from '../../components/searchSubmit'
 import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 

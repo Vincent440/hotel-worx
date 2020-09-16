@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
@@ -20,7 +20,7 @@ import Login from './pages/login/login'
 import ReserveNew from './pages/newreservation/newreservation'
 import ReserveUpdate from './pages/updatereservation/updatereservation'
 import UpdateReservation from './pages/allreservations/allreservations'
-import ReservationTest from './pages/newreservation/reservationTest'
+import ReservationComfirmation from './pages/reservation_comfirmation'
 import Dashboard from './pages/dashboard/dashboard'
 import Arrivals from './pages/arrivals/arrivals'
 import Billing from './pages/billing/billing'
@@ -59,9 +59,9 @@ const PrivateAccessRoute = ({ component: Component, aId, ...rest }) => (
   </UserContext.Consumer>
 )
 
-class App extends Component {
-  constructor (props) {
-    super(props)
+class App extends React.Component {
+  constructor () {
+    super()
     this.postUserLogin = userData => {
       if (userData) {
         authapi.postUserLogin(userData, (err, res) => {
@@ -143,8 +143,8 @@ class App extends Component {
                       />
                       <PrivateAccessRoute
                         exact
-                        path='/reserve/testreservation'
-                        component={ReservationTest}
+                        path='/reservationcomfirmation'
+                        component={ReservationComfirmation}
                         aId='1'
                       />
                       <PrivateAccessRoute

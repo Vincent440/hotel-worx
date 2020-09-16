@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
+// import './style.css'
 import Header from '../../components/Header'
-// import SearchSubmit from "../../components/searchButton";
 import api from '../../utils/api'
 import moment from 'moment'
 import Table from 'react-bootstrap/Table'
