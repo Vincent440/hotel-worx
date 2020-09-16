@@ -72,3 +72,6 @@ package-lock.json
 
 # ignore the client/build folder 
 build/
+
+# todo file for tracking local tasks
+todo.md

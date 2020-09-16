@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { TweenMax, Linear } from 'gsap'
 import logo from './hotelworx_logo.png'
-import Card from 'react-bootstrap/esm/Card'
+import Card from 'react-bootstrap/Card'
 const Logo = () => {
   let logoElement = useRef(null)
 

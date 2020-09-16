@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Logo from '../logo/logo'
+import Logo from '../logo'
 import api from '../../utils/api'
 import UserContext from '../../UserContext'
 import Card from 'react-bootstrap/Card'

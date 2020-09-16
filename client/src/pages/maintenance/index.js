@@ -6,7 +6,7 @@ import Header from '../../components/Header'
 import api from '../../utils/api'
 import moment from 'moment'
 import Table from 'react-bootstrap/Table'
-import DateRange from '../../components/dateRangeOrg/dateRange'
+import DateRange from '../../components/dateRangeOrg/'
 // const today = moment().format("YYYY-MM-DD");
 
 class Maintenance extends Component {

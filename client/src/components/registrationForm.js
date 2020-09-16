@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import NumberFormat from 'react-number-format'
 
-class RegisterForm extends React.Component {
+class RegistrationForm extends React.Component {
   render () {
     return (
       <div>
@@ -177,4 +177,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default RegisterForm
+export default RegistrationForm

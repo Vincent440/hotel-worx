@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './style.css'
 import Header from '../../components/Header'
-import SearchSubmit from '../../components/searchButton'
+import SearchSubmit from '../../components/searchSubmit'
 import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 import { Redirect } from 'react-router-dom'
@@ -60,7 +60,7 @@ class Inhouse extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/reserve/testUpdatereservation'
+            pathname: '/reserve/updatereservation'
           }}
         />
       )
@@ -158,7 +158,7 @@ class Inhouse extends Component {
                   </tr>
                   {this.state.guestsArray.map((guest, i) => (
                     <tr
-                      key={guest.res_room_id}
+                      key={i}
                       onClick={() =>
                         this.handleChosenReservation(guest.reservation_id)
                       }
