@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
 import Header from '../../components/Header'
 import SearchSubmit from '../../components/searchSubmit'
-import DateRange from '../../components/dateRangeUpd/dateRange'
+import DateRange from '../../components/dateRangeUpd/'
 import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 import moment from 'moment'
@@ -90,7 +89,7 @@ class AllReservations extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/reserve/testAllReservations'
+            pathname: '/reserve/updatereservation'
           }}
         />
       )

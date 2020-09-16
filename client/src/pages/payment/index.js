@@ -7,7 +7,6 @@ import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import { Asterisk } from 'react-bootstrap-icons'
 class Payment extends Component {
   state = {
     RoomInfo: [],
@@ -111,10 +110,7 @@ class Payment extends Component {
                       <td>
                         {invoice.first_name} {invoice.last_name}
                       </td>
-                      <td>
-                        <Asterisk />
-                        ***-****-****-{invoice.ccLastFour}
-                      </td>
+                      <td>****-****-****-{invoice.ccLastFour}</td>
                       <td>
                         {moment(invoice.check_in_date).format('YYYY-MM-DD')}
                       </td>

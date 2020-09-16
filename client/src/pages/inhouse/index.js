@@ -60,7 +60,7 @@ class Inhouse extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/reserve/testUpdatereservation'
+            pathname: '/reserve/updatereservation'
           }}
         />
       )
@@ -158,7 +158,7 @@ class Inhouse extends Component {
                   </tr>
                   {this.state.guestsArray.map((guest, i) => (
                     <tr
-                      key={guest.res_room_id}
+                      key={i}
                       onClick={() =>
                         this.handleChosenReservation(guest.reservation_id)
                       }

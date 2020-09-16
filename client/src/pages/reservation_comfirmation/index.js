@@ -46,7 +46,7 @@ class ReservationComfirmation extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/reserve/testUpdatereservation'
+            pathname: '/reserve/updatereservation'
           }}
         />
       )

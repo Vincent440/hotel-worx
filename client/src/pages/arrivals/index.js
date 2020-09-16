@@ -142,7 +142,7 @@ class Arrivals extends Component {
         <Card>
           <Row>
             <Col xl={12}>
-              <Card.Body>
+              <Card.Body className='text-center font-weight-bold'>
                 <Link
                   className='text-decoration-none'
                   to='../../cashiering/billing'

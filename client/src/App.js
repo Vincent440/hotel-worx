@@ -131,7 +131,7 @@ class App extends React.Component {
                     />
                     <PrivateAccessRoute
                       exact
-                      path='/reserve/testUpdatereservation'
+                      path='/reserve/updatereservation'
                       component={UpdateReservation}
                       aId='1'
                     />

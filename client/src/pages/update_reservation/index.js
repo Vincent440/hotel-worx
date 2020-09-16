@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 import './style.css'
 import api from '../../utils/api'
 import Header from '../../components/Header'
-import DateRange from '../../components/dateRange/dateRange'
+import DateRange from '../../components/dateRange/'
 import RegisterForm from '../../components/validationUpdateRes'
 import moment from 'moment'
 
