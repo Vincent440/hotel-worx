@@ -6,8 +6,8 @@ import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
 
 import api from '../../utils/api'
-import DeatiledSubmit from '../../components/detailedSubmit'
-import Header from '../../components/Header'
+import DetailedSubmit from '../../components/detailed_submit'
+import Header from '../../components/header'
 
 const today = moment().format('YYYY-MM-DD')
 class DetailedAvailability extends Component {
@@ -63,7 +63,7 @@ class DetailedAvailability extends Component {
           <Col xl={12}>
             <div id='res'>
               <Row>
-                <DeatiledSubmit
+                <DetailedSubmit
                   availableChecked={this.state.availableChecked}
                   occupiedChecked={this.state.occupiedChecked}
                   handleCheckbox={this.handleCheckbox}

@@ -11,7 +11,7 @@ import Container from 'react-bootstrap/Container'
 
 // Import required Components and Utils
 import UserContext from './UserContext'
-import InfoPart from './components/infoPart'
+import UserNavigationCard from './components/user_navigation_card'
 import authapi from './utils/authapi'
 
 // Import all pages
@@ -101,11 +101,11 @@ class App extends React.Component {
               <Login />
             </>
           ) : (
-            <Container className='m-0 p-0 w-100'>
+            <Container fluid className='m-0 p-0 w-100'>
               <ParticlesBackground />
               <Row className='m-0 p-3'>
                 <Col lg={4} xl={3}>
-                  <InfoPart />
+                  <UserNavigationCard />
                 </Col>
 
                 <Col lg={8} xl={9}>

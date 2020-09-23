@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
 
 class Reservation extends Component {
   // Setting the initial values of this.state.username and this.state.password
@@ -55,10 +54,10 @@ class Reservation extends Component {
     ]
     const { selectedOption } = this.state
     return (
-      <Row id='dashboardTable'>
+      <Row>
         <form>
           <h2>Reservation</h2>
-          <div id='res'>
+          <div>
             <table>
               <tr>
                 <th>
@@ -152,7 +151,7 @@ class Reservation extends Component {
               </tr>
             </table>
           </div>
-          <div id='buttonDiv'>
+          <div>
             <button type='button' className='btn btn-primary'>
               Save
             </button>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Search } from 'react-bootstrap-icons'
-const SearchSubmit = props => (
+
+const SearchButton = props => (
   <button
     type='button'
     className='btn btn-lg btn-primary'
@@ -11,4 +12,4 @@ const SearchSubmit = props => (
   </button>
 )
 
-export default SearchSubmit
+export default SearchButton

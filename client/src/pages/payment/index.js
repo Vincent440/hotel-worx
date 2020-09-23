@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style3.css'
-import Header from '../../components/Header'
+import Header from '../../components/header'
 import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 import { Link } from 'react-router-dom'
@@ -91,7 +90,7 @@ class Payment extends Component {
             <Header>INVOICE</Header>
           </Col>
         </Row>
-        <div id='res' style={{ paddingLeft: '15px', paddingBottom: '10px' }}>
+        <div>
           <Row>
             {this.state.InvoiceArray.map(invoice => (
               <div className='p-2' key={invoice.res_room_id}>

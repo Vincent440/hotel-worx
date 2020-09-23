@@ -18,8 +18,8 @@ import Card from 'react-bootstrap/Card'
  * Login page, where users can submit login information. Upon successful login user is shown the Dashboard page.
  */
 class Login extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.handleInputChange = event => {
       const { name, value } = event.target
       this.setState({ [name]: value })

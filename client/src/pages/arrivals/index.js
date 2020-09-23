@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 import Card from 'react-bootstrap/Card'
 import api from '../../utils/api'
-import Header from '../../components/Header'
+import Header from '../../components/header'
 
 const today = moment().format('YYYY-MM-DD')
 
@@ -162,7 +162,7 @@ class Arrivals extends Component {
             </Col>
           </Row>
         </Card>
-        <div id='res2'>
+        <div>
           <Row>
             <Col xl={12}>
               <Table>
@@ -218,7 +218,6 @@ class Arrivals extends Component {
                         {this.state.startDateRange === today &&
                           (arrival.checked_in === 0 ? (
                             <button
-                              id='checkIn'
                               onClick={() =>
                                 this.handleCheckIn(
                                   arrival.res_room_id,

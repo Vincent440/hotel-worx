@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
-import Header from '../../components/Header'
-import SearchSubmit from '../../components/searchSubmit'
+import Header from '../../components/header'
+import SearchButton from '../../components/search_button'
 import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 import { Redirect } from 'react-router-dom'
@@ -73,16 +72,15 @@ class Inhouse extends Component {
             <Header>IN-HOUSE GUESTS</Header>
           </Col>
         </Row>
-        <div id='res' style={{ paddingBottom: '10px' }}>
+        <div>
           <Row>
             <Col xl={9}>
-              <Row style={{ marginTop: '5px' }}>
+              <Row>
                 <Col xs={6} sm={6} md={2} lg={2} xl={2}>
                   Room
                 </Col>
                 <Col xs={6} sm={6} md={10} lg={3} xl={3}>
                   <input
-                    id=''
                     name='roomNumber'
                     placeholder='Room Number'
                     value={this.state.roomNumber}
@@ -102,7 +100,7 @@ class Inhouse extends Component {
                   />
                 </Col>
               </Row>
-              <Row style={{ paddingTop: '5px' }}>
+              <Row>
                 <Col xs={6} sm={6} md={2} lg={2} xl={2}>
                   First Name
                 </Col>
@@ -130,13 +128,12 @@ class Inhouse extends Component {
               </Row>
             </Col>
             <Col xs={2} sm={2} md={2} lg={2} xl={1}>
-              <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+              <SearchButton handleFormSubmit={this.handleFormSubmit} />
             </Col>
             <Col xs={6} sm={6} md={6} lg={2} xl={1}>
               <button
                 type='button'
                 className='btn btn-success'
-                id='printButton2'
                 onClick={this.printFunction}
               >
                 Print
@@ -144,8 +141,8 @@ class Inhouse extends Component {
             </Col>
           </Row>
         </div>
-        <div id='res2'>
-          <Row style={{ paddingTop: '5px', paddingBottom: '5px' }}>
+        <div>
+          <Row>
             <Col xl={12}>
               <Table>
                 <tbody>

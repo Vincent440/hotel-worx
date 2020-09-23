@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Header from '../../components/Header'
-import SearchSubmit from '../../components/searchSubmit'
-import DateRange from '../../components/dateRangeUpd/'
+import Header from '../../components/header'
+import SearchButton from '../../components/search_button'
+import DateRange from '../../components/date_range/date_range_update'
 import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 import moment from 'moment'
@@ -104,13 +104,13 @@ class AllReservations extends Component {
         </Row>
         <Row>
           <Col xl={12}>
-            <div id='res'>
+            <div>
               <Row>
                 <Col xs={3} sm={4} md={2} lg={2} xl={1}>
                   Arrival
                 </Col>
                 <Col xs={9} sm={8} md={10} lg={10} xl={5}>
-                  <div id='dateRangeU'>
+                  <div>
                     <DateRange
                       handleFromChange={this.handleFromChange}
                       handleToChange={this.handleToChange}
@@ -133,7 +133,7 @@ class AllReservations extends Component {
                 </Col>
               </Row>
 
-              <Row style={{ marginTop: '5px' }}>
+              <Row>
                 <Col xs={6} sm={4} md={2} lg={2} xl={1}>
                   Last Name
                 </Col>
@@ -159,14 +159,14 @@ class AllReservations extends Component {
                   />
                 </Col>
                 <Col xs={6} sm={6} md={2} lg={12} xl={1}>
-                  <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+                  <SearchButton handleFormSubmit={this.handleFormSubmit} />
                 </Col>
               </Row>
             </div>
           </Col>
         </Row>
-        <div id='res'>
-          <Row style={{ paddingBottom: '20px' }}>
+        <div>
+          <Row>
             <Col xl={12}>
               <Table>
                 <tbody>
@@ -181,7 +181,6 @@ class AllReservations extends Component {
 
                   {this.state.resRooms.map(res => (
                     <tr
-                      id='reservationUpt'
                       key={res.res_room_id}
                       onClick={() =>
                         this.handleChosenReservation(res.reservation_id)

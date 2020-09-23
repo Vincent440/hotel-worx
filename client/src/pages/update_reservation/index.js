@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
 import api from '../../utils/api'
-import Header from '../../components/Header'
-import DateRange from '../../components/dateRange/'
-import RegisterForm from '../../components/validationUpdateRes'
+import Header from '../../components/header'
+import DateRange from '../../components/date_range/'
+import UpdateRegisterForm from '../../components/update_reservation_form'
 import moment from 'moment'
 
 class UpdateReservation extends Component {
@@ -179,8 +178,6 @@ class UpdateReservation extends Component {
         .catch(err => console.log(err))
     }
   }
-  // startDateRange: new Date(),
-
   handleFormSubmit (e) {
     e.preventDefault()
     if (this.validateForm()) {
@@ -236,7 +233,7 @@ class UpdateReservation extends Component {
         </Row>
         <Row>
           <Col xl={12}>
-            <div id='res'>
+            <div>
               <Row>
                 <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                   Confirmation
@@ -343,7 +340,7 @@ class UpdateReservation extends Component {
               </Row>
             </div>
 
-            <RegisterForm
+            <UpdateRegisterForm
               handleFormSubmit={this.handleFormSubmit}
               handleChange={this.handleChange}
               firstname={this.state.firstname}

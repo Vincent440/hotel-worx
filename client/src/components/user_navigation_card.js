@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import Logo from '../logo'
-import api from '../../utils/api'
-import UserContext from '../../UserContext'
+import Logo from './logo'
+import api from '../utils/api'
+import UserContext from '../UserContext'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
-class InfoPart extends Component {
+class UserNavigationCard extends Component {
   state = {
     hotelInfo: []
   }
@@ -23,7 +23,7 @@ class InfoPart extends Component {
     return (
       <UserContext.Consumer>
         {({ user, getUserLogout }) => (
-          <Card id='user-card-navbar' bg='light' className='text-center'>
+          <Card bg='light' className='text-center'>
             <Card.Header>
               <Logo />
             </Card.Header>
@@ -79,4 +79,4 @@ class InfoPart extends Component {
   }
 }
 
-export default InfoPart
+export default UserNavigationCard
