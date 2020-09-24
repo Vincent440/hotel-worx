@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -12,6 +8,8 @@ import Container from 'react-bootstrap/Container'
 import { UserContext, user } from './UserContext'
 import UserNavigationCard from './components/user_navigation_card'
 import authapi from './utils/authapi'
+import ParticlesBackground from './components/particles_background'
+import { PrivateAccessRoute } from './components/private_access_route'
 
 // Import all pages
 import Login from './pages/login'
@@ -28,8 +26,6 @@ import Housekeeping from './pages/housekeeping'
 import DetailedAvailability from './pages/detailed_availability'
 import HouseStatus from './pages/house_status'
 import Maintenance from './pages/maintenance'
-import ParticlesBackground from './components/particles_background'
-import { PrivateAccessRoute } from './components/private_access_route'
 
 class App extends React.Component {
   constructor () {
@@ -62,13 +58,11 @@ class App extends React.Component {
       postUserLogin: this.postUserLogin
     }
   }
-
   componentDidMount () {
     if (this.state.user.access_id === 0) {
       this.state.getUserStatus()
     }
   }
-
   render () {
     const { user } = this.state
     return (
@@ -86,87 +80,56 @@ class App extends React.Component {
                 <Col lg={4} xl={3}>
                   <UserNavigationCard />
                 </Col>
-
                 <Col lg={8} xl={9}>
                   <Switch>
+                    <PrivateAccessRoute strict path='/' component={Dashboard} />
                     <PrivateAccessRoute
-                      exact
-                      strict
-                      path='/'
-                      component={Dashboard}
-                      accessId='1'
-                    />
-                    <PrivateAccessRoute
-                      exact
                       path='/reserve/new'
                       component={NewReservation}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/reserve/allreservations'
                       component={AllReservations}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/reserve/updatereservation'
                       component={UpdateReservation}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/reservationcomfirmation'
                       component={ReservationComfirmation}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/frontdesk/arrivals'
                       component={Arrivals}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/frontdesk/inhouse'
                       component={Inhouse}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/frontdesk/maintenance'
                       component={Maintenance}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/cashiering/billing'
                       component={Billing}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/cashiering/payment'
                       component={Payment}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/reports/housekeeping'
                       component={Housekeeping}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/reports/detailedAvailability'
                       component={DetailedAvailability}
-                      accessId='1'
                     />
                     <PrivateAccessRoute
-                      exact
                       path='/reports/houseStatus'
                       component={HouseStatus}
-                      accessId='1'
                     />
                   </Switch>
                 </Col>
