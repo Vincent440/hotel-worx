@@ -14,12 +14,12 @@ class RegistrationForm extends React.Component {
       >
         <Form.Row>
           <Col className='form-group' md={6} lg={3}>
-            <label htmlFor='firstname-input'>First Name</label>
+            <label htmlFor='first-name-input'>First Name</label>
             <input
               className='form-control'
               type='text'
               name='firstname'
-              id='firstname-input'
+              id='first-name-input'
               placeholder='First Name'
               value={this.props.firstname}
               onChange={this.props.handleChange}
@@ -27,12 +27,12 @@ class RegistrationForm extends React.Component {
             <div className='text-danger'>{this.props.errors.firstname}</div>
           </Col>
           <Col className='form-group' md={6} lg={3}>
-            <label htmlFor='lastname-input'>Last Name</label>
+            <label htmlFor='last-name-input'>Last Name</label>
             <input
               className='form-control'
               type='text'
               name='lastname'
-              id='lastname-input'
+              id='last-name-input'
               placeholder='Last Name'
               value={this.props.lastname}
               onChange={this.props.handleChange}
@@ -69,7 +69,7 @@ class RegistrationForm extends React.Component {
         </Form.Row>
 
         <Form.Row>
-          <Col className='form-group' xs={6} sm={4} md={2} lg={2} xl={2}>
+          <Col className='form-group' sm={12} lg={5}>
             <label htmlFor='address-input'>Address</label>
             <input
               className='form-control'
@@ -81,8 +81,7 @@ class RegistrationForm extends React.Component {
               onChange={this.props.handleChange}
             />
           </Col>
-
-          <Col className='form-group' xs={1} sm={1} md={2} lg={2} xl={2}>
+          <Col className='form-group' sm={6} md={4} lg={3}>
             <label htmlFor='city-input'>City</label>
             <input
               className='form-control'
@@ -94,7 +93,7 @@ class RegistrationForm extends React.Component {
               onChange={this.props.handleChange}
             />
           </Col>
-          <Col className='form-group' xs={1} sm={1} md={1} lg={2} xl={2}>
+          <Col className='form-group' sm={3} md={4} lg={2}>
             <label htmlFor='state-input'>State</label>
 
             <input
@@ -107,7 +106,7 @@ class RegistrationForm extends React.Component {
               onChange={this.props.handleChange}
             />
           </Col>
-          <Col className='form-group' xs={1} sm={1} md={1} lg={1} xl={1}>
+          <Col className='form-group' sm={3} md={4} lg={2}>
             <label htmlFor='zipcode-input'>ZIP code</label>
             <input
               className='form-control'
@@ -146,7 +145,7 @@ class RegistrationForm extends React.Component {
           </Col>
         </Form.Row>
         <Form.Row className='d-flex justify-content-center'>
-          <Col className='form-group' md={8}>
+          <Col className='form-group' sm={12} md={9} lg={8}>
             <label htmlFor='room-comments'>Comments</label>
             <textarea
               className='form-control'

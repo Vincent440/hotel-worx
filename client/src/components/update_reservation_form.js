@@ -186,11 +186,11 @@ class UpdateReservationForm extends React.Component {
             Submit
           </button>
           <br />
-          <span className='text-light'>
+          <span className='text-success'>
             {this.props.updateSuccess &&
               'Reservation was successfully updated!'}
           </span>
-          <span className='text-light'>
+          <span className='text-success'>
             {this.props.cancelSuccess && 'Reservation has been cancelled!'}
           </span>
         </div>

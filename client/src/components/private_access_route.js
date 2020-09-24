@@ -7,14 +7,15 @@ import {UserContext} from '../UserContext'
  * only if a user doesn't meet the criteria of having a equal or higher 'access_id'
  * 
  * Uses the React Context API to get the user data.
+ * 
+ * Redirects to '/' route if user is not able to view that route
  * @param {Object} Component The page to be displayed on the specified route prop
- * @param {number=} [accessId=1] Determines who can view the route, based on the database access_id of the user role.
+ * @param {number} [accessId] Determines who can view the route, based on the database access_id of the user role.
  */
-export const PrivateAccessRoute = ({ component: Component, accessId = 1, ...rest }) => (
+export const PrivateAccessRoute = ({ component: Component, accessId, ...rest }) => (
   <UserContext.Consumer>
     {({ user }) => (
       <Route
-        exact
         {...rest}
         render={props =>
           user.access_id >= accessId ? (

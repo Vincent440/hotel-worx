@@ -77,59 +77,89 @@ class App extends React.Component {
             <Container fluid className='m-0 p-0 w-100'>
               <ParticlesBackground />
               <Row className='m-0 pt-3 p-3'>
-                <Col lg={4} xl={3}>
+                <Col lg={3} xl={2}>
                   <UserNavigationCard />
                 </Col>
-                <Col lg={8} xl={9}>
+                <Col lg={9} xl={10}>
                   <Switch>
-                    <PrivateAccessRoute strict path='/' component={Dashboard} />
                     <PrivateAccessRoute
+                      exact
+                      strict
+                      path='/'
+                      component={Dashboard}
+                      accessId='1'
+                    />
+                    <PrivateAccessRoute
+                      exact
                       path='/reserve/new'
                       component={NewReservation}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/reserve/allreservations'
                       component={AllReservations}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/reserve/updatereservation'
                       component={UpdateReservation}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/reservationcomfirmation'
                       component={ReservationComfirmation}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/frontdesk/arrivals'
                       component={Arrivals}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/frontdesk/inhouse'
                       component={Inhouse}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/frontdesk/maintenance'
                       component={Maintenance}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/cashiering/billing'
                       component={Billing}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/cashiering/payment'
                       component={Payment}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/reports/housekeeping'
                       component={Housekeeping}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/reports/detailedAvailability'
                       component={DetailedAvailability}
+                      accessId='1'
                     />
                     <PrivateAccessRoute
+                      exact
                       path='/reports/houseStatus'
                       component={HouseStatus}
+                      accessId='1'
                     />
                   </Switch>
                 </Col>

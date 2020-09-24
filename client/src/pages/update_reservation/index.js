@@ -232,36 +232,30 @@ class UpdateReservation extends Component {
           <Row>
             <Col xl={12}>
               <Row>
-                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
-                  Confirmation
-                </Col>
-                <Col xs={6} sm={8} md={6} lg={8} xl={3}>
+                <Col md={8} lg={4} className='form-group'>
+                  <label htmlFor='confirmation_number'>Confirmation</label>
                   <input
+                    className='form-control'
                     type='text'
-                    placeholder='Confirmation Number'
                     name='confirmationNumber'
+                    id='confirmation_number'
                     value={this.state.confirmationNumber}
-                    disabled
+                    readOnly
                   />
                 </Col>
-                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
-                  Room Number
-                </Col>
-                <Col xs={6} sm={8} md={6} lg={8} xl={2}>
+                <Col md={4} lg={4} className='form-group'>
+                  <label htmlFor='room_number'>Room Number</label>
                   <input
+                    className='form-control'
                     type='tel'
                     placeholder='Room Number'
                     name='roomNumber'
+                    id='room_number'
                     value={this.state.roomNumber}
                     onChange={this.handleInputChange}
                   />
                 </Col>
-              </Row>
-              <Row>
-                <Col xs={6} sm={4} md={4} lg={4} xl={2}>
-                  Arrival
-                </Col>
-                <Col xs={6} sm={8} md={8} lg={12} xl={10}>
+                <Col lg={4}>
                   <DateRange
                     handleFromChange={this.handleFromChange}
                     handleToChange={this.handleToChange}

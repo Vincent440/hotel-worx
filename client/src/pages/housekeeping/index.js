@@ -46,61 +46,61 @@ class Housekeeping extends Component {
   }
 
   handleCheckboxChange = event => {
-    let tempState = this.state.checked
+    let futureState = this.state.checked
     switch (event.target.id) {
       case 'clean':
-        tempState.clean = !this.state.checked.clean
+        futureState.clean = !this.state.checked.clean
         break
       case 'dirty':
-        tempState.dirty = !this.state.checked.dirty
+        futureState.dirty = !this.state.checked.dirty
         break
       case 'vacant':
-        tempState.vacant = !this.state.checked.vacant
+        futureState.vacant = !this.state.checked.vacant
         break
       case 'occupied':
-        tempState.occupied = !this.state.checked.occupied
+        futureState.occupied = !this.state.checked.occupied
         break
       case 'arrived':
-        tempState.arrived = !this.state.checked.arrived
+        futureState.arrived = !this.state.checked.arrived
         break
-      case 'stayOver':
-        tempState.stayOver = !this.state.checked.stayOver
+      case 'stay-over':
+        futureState.stayOver = !this.state.checked.stayOver
         break
-      case 'dueOut':
-        tempState.dueOut = !this.state.checked.dueOut
+      case 'due-out':
+        futureState.dueOut = !this.state.checked.dueOut
         break
       case 'departed':
-        tempState.departed = !this.state.checked.departed
+        futureState.departed = !this.state.checked.departed
         break
-      case 'notReserved':
-        tempState.notReserved = !this.state.checked.notReserved
+      case 'not-reserved':
+        futureState.notReserved = !this.state.checked.notReserved
         break
-      case 'clearAll':
-        tempState.clean = false
-        tempState.dirty = false
-        tempState.vacant = false
-        tempState.occupied = false
-        tempState.arrived = false
-        tempState.stayOver = false
-        tempState.dueOut = false
-        tempState.departed = false
-        tempState.notReserved = false
+      case 'clear-all':
+        futureState.clean = false
+        futureState.dirty = false
+        futureState.vacant = false
+        futureState.occupied = false
+        futureState.arrived = false
+        futureState.stayOver = false
+        futureState.dueOut = false
+        futureState.departed = false
+        futureState.notReserved = false
         break
-      case 'selectAll':
-        tempState.clean = true
-        tempState.dirty = true
-        tempState.vacant = true
-        tempState.occupied = true
-        tempState.arrived = true
-        tempState.stayOver = true
-        tempState.dueOut = true
-        tempState.departed = true
-        tempState.notReserved = true
+      case 'select-all':
+        futureState.clean = true
+        futureState.dirty = true
+        futureState.vacant = true
+        futureState.occupied = true
+        futureState.arrived = true
+        futureState.stayOver = true
+        futureState.dueOut = true
+        futureState.departed = true
+        futureState.notReserved = true
         break
       default:
         break
     }
-    this.setState({ checked: tempState }, () => {
+    this.setState({ checked: futureState }, () => {
       this.makeAxiosCall()
     })
   }
@@ -130,6 +130,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='clean'
                     checked={this.state.checked.clean}
                     onChange={this.handleCheckboxChange}
                   />
@@ -140,6 +141,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='dirty'
                     checked={this.state.checked.dirty}
                     onChange={this.handleCheckboxChange}
                   />
@@ -156,6 +158,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='vacant'
                     checked={this.state.checked.vacant}
                     onChange={this.handleCheckboxChange}
                   />
@@ -166,6 +169,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='occupied'
                     checked={this.state.checked.occupied}
                     onChange={this.handleCheckboxChange}
                   />
@@ -181,6 +185,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='arrived'
                     checked={this.state.checked.arrived}
                     onChange={this.handleCheckboxChange}
                   />
@@ -192,6 +197,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='stay-over'
                     checked={this.state.checked.stayOver}
                     onChange={this.handleCheckboxChange}
                   />
@@ -205,6 +211,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='departed'
                     checked={this.state.checked.departed}
                     onChange={this.handleCheckboxChange}
                   />
@@ -215,6 +222,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='due-out'
                     checked={this.state.checked.dueOut}
                     onChange={this.handleCheckboxChange}
                   />
@@ -226,6 +234,7 @@ class Housekeeping extends Component {
                 <Col xs={6} sm={1}>
                   <input
                     type='checkbox'
+                    id='not-reserved'
                     checked={this.state.checked.notReserved}
                     onChange={this.handleCheckboxChange}
                   />
@@ -237,6 +246,7 @@ class Housekeeping extends Component {
               <button
                 type='button'
                 className='btn btn-success'
+                id='select-all'
                 checked={this.state.checked.selectAll}
                 onClick={this.handleCheckboxChange}
               >
@@ -246,6 +256,7 @@ class Housekeeping extends Component {
               <button
                 type='button'
                 className='btn btn-success'
+                id='clear-all'
                 checked={this.state.checked.clearAll}
                 onClick={this.handleCheckboxChange}
               >
@@ -254,6 +265,7 @@ class Housekeeping extends Component {
               <button
                 type='button'
                 className='btn btn-success'
+                id='print-button'
                 onClick={this.printFunction}
               >
                 Print
