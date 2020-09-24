@@ -3,11 +3,12 @@ import moment from 'moment'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 
 import api from '../../utils/api'
-import DeatiledSubmit from '../../components/detailedSubmit'
-import Header from '../../components/Header'
+import DetailedSubmit from '../../components/detailed_submit'
+import Header from '../../components/header'
 
 const today = moment().format('YYYY-MM-DD')
 class DetailedAvailability extends Component {
@@ -53,77 +54,67 @@ class DetailedAvailability extends Component {
 
   render () {
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>DETAILED AVAILABILITY</Header>
-          </Col>
-        </Row>
-        <Row>
-          <Col xl={12}>
-            <div id='res'>
-              <Row>
-                <DeatiledSubmit
+      <>
+        <Header>DETAILED AVAILABILITY</Header>
+        <Card body>
+          <Row>
+            <Col xl={12}>
+              <Card.Body>
+                <DetailedSubmit
                   availableChecked={this.state.availableChecked}
                   occupiedChecked={this.state.occupiedChecked}
                   handleCheckbox={this.handleCheckbox}
                   handleStartDate={this.handleStartDate}
                 />
-              </Row>
-            </div>
-            <div id='res'>
-              <Row style={{ paddingBottom: '20px' }}>
-                <Col xl={12}>
-                  <Table>
-                    <tbody>
-                      <tr>
-                        <th className='th' id='date'>
-                          Date
-                        </th>
-                        {this.state.roomTypes.map(type => (
-                          <th key={type.room_type_id} className='th'>
-                            {type.type}
-                          </th>
-                        ))}
-                        <th className='th' id='total'>
-                          Total Rooms
-                        </th>
-                      </tr>
-                      {this.state.availableRooms.map(tot => (
-                        <tr key={tot.date}>
-                          <td className='tableTD'>
-                            {tot.date} ({moment(tot.date).format('dddd')})
-                          </td>
-                          <td className='tableTD'>
-                            {this.state.availableChecked === true
-                              ? tot.AvailableType1
-                              : tot.OccupiedType1}
-                          </td>
-                          <td className='tableTD'>
-                            {this.state.availableChecked === true
-                              ? tot.AvailableType2
-                              : tot.OccupiedType2}
-                          </td>
-                          <td className='tableTD'>
-                            {this.state.availableChecked === true
-                              ? tot.AvailableType3
-                              : tot.OccupiedType3}
-                          </td>
-                          <td className='tableTD'>
-                            {this.state.availableChecked === true
-                              ? tot.TotalAvailable
-                              : tot.TotalOccupied}
-                          </td>
-                        </tr>
+              </Card.Body>
+            </Col>
+          </Row>
+          <Row>
+            <Col xl={12}>
+              <Card.Body>
+                <Table striped bordered variant='light'>
+                  <tbody>
+                    <tr>
+                      <th>Date</th>
+                      {this.state.roomTypes.map(type => (
+                        <th key={type.room_type_id}>{type.type}</th>
                       ))}
-                    </tbody>
-                  </Table>
-                </Col>
-              </Row>
-            </div>
-          </Col>
-        </Row>
-      </div>
+                      <th>Total Rooms</th>
+                    </tr>
+                    {this.state.availableRooms.map(tot => (
+                      <tr key={tot.date}>
+                        <td>
+                          {tot.date} ({moment(tot.date).format('dddd')})
+                        </td>
+                        <td>
+                          {this.state.availableChecked === true
+                            ? tot.AvailableType1
+                            : tot.OccupiedType1}
+                        </td>
+                        <td>
+                          {this.state.availableChecked === true
+                            ? tot.AvailableType2
+                            : tot.OccupiedType2}
+                        </td>
+                        <td>
+                          {this.state.availableChecked === true
+                            ? tot.AvailableType3
+                            : tot.OccupiedType3}
+                        </td>
+                        <td>
+                          {this.state.availableChecked === true
+                            ? tot.TotalAvailable
+                            : tot.TotalOccupied}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Card.Body>
+            </Col>
+          </Row>
+        </Card>
+      </>
     )
   }
 }

@@ -9,7 +9,7 @@ export default class DateRange extends React.Component {
     const { from, to } = this.props
     const modifiers = { start: from, end: to }
     return (
-      <div className='InputFromTo'>
+      <div>
         <DayPickerInput
           {...from}
           value={moment(from.value).format('YYYY-MM-DD')}
@@ -28,7 +28,7 @@ export default class DateRange extends React.Component {
           onDayChange={this.props.handleFromChange}
         />{' '}
         -{' '}
-        <span className='InputFromTo-to'>
+        <span>
           <DayPickerInput
             {...to}
             value={moment(to.value).format('YYYY-MM-DD')}

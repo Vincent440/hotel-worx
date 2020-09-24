@@ -1,18 +1,16 @@
 import React from 'react'
-import './style.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const DeatiledSubmit = props => {
+const DetailedSubmit = props => {
   return (
     <Col xl={12}>
-      <Row style={{ marginBottom: '5px' }}>
+      <Row>
         <Col xs={6} sm={4} md={3} lg={2} xl={2}>
           <h5>Start Date</h5>
         </Col>
         <Col xs={8} sm={8} md={9} lg={3} xl={2}>
           <input
-            style={{ paddingTop: '0px', paddingBottom: '0px' }}
             type='date'
             name='arrivaldate'
             onChange={props.handleStartDate}
@@ -45,4 +43,4 @@ const DeatiledSubmit = props => {
   )
 }
 
-export default DeatiledSubmit
+export default DetailedSubmit

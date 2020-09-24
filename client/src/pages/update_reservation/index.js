@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
+import Card from 'react-bootstrap/Card'
 import api from '../../utils/api'
-import Header from '../../components/Header'
-import DateRange from '../../components/dateRange/'
-import RegisterForm from '../../components/validationUpdateRes'
+import Header from '../../components/header'
+import DateRange from '../../components/date_range/'
+import UpdateRegisterForm from '../../components/update_reservation_form'
 import moment from 'moment'
 
 class UpdateReservation extends Component {
@@ -179,8 +179,6 @@ class UpdateReservation extends Component {
         .catch(err => console.log(err))
     }
   }
-  // startDateRange: new Date(),
-
   handleFormSubmit (e) {
     e.preventDefault()
     if (this.validateForm()) {
@@ -228,15 +226,11 @@ class UpdateReservation extends Component {
   }
   render () {
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>UPDATE RESERVATION</Header>
-          </Col>
-        </Row>
-        <Row>
-          <Col xl={12}>
-            <div id='res'>
+      <>
+        <Header>UPDATE RESERVATION</Header>
+        <Card body>
+          <Row>
+            <Col xl={12}>
               <Row>
                 <Col xs={6} sm={4} md={4} lg={4} xl={2}>
                   Confirmation
@@ -268,14 +262,12 @@ class UpdateReservation extends Component {
                   Arrival
                 </Col>
                 <Col xs={6} sm={8} md={8} lg={12} xl={10}>
-                  <div>
-                    <DateRange
-                      handleFromChange={this.handleFromChange}
-                      handleToChange={this.handleToChange}
-                      from={this.state.arrivaldate}
-                      to={this.state.departuredate}
-                    />
-                  </div>
+                  <DateRange
+                    handleFromChange={this.handleFromChange}
+                    handleToChange={this.handleToChange}
+                    from={this.state.arrivaldate}
+                    to={this.state.departuredate}
+                  />
                 </Col>
               </Row>
               <Row>
@@ -341,33 +333,33 @@ class UpdateReservation extends Component {
                   </select>
                 </Col>
               </Row>
-            </div>
 
-            <RegisterForm
-              handleFormSubmit={this.handleFormSubmit}
-              handleChange={this.handleChange}
-              firstname={this.state.firstname}
-              lastname={this.state.lastname}
-              phone={this.state.phone}
-              email={this.state.email}
-              address={this.state.address}
-              city={this.state.city}
-              state={this.state.state}
-              zip={this.state.zip}
-              creditCard={this.state.creditCard}
-              expirationDate={this.state.expirationDate}
-              cvc={this.state.cvc}
-              errors={this.state.errors}
-              comments={this.state.comments}
-              updateSuccess={this.state.updateSuccess}
-              cancelSuccess={this.state.cancelSuccess}
-              checkedIn={this.state.checkedIn}
-              active={this.state.active}
-              handleCancelSubmit={this.handleCancelSubmit}
-            />
-          </Col>
-        </Row>
-      </div>
+              <UpdateRegisterForm
+                handleFormSubmit={this.handleFormSubmit}
+                handleChange={this.handleChange}
+                firstname={this.state.firstname}
+                lastname={this.state.lastname}
+                phone={this.state.phone}
+                email={this.state.email}
+                address={this.state.address}
+                city={this.state.city}
+                state={this.state.state}
+                zip={this.state.zip}
+                creditCard={this.state.creditCard}
+                expirationDate={this.state.expirationDate}
+                cvc={this.state.cvc}
+                errors={this.state.errors}
+                comments={this.state.comments}
+                updateSuccess={this.state.updateSuccess}
+                cancelSuccess={this.state.cancelSuccess}
+                checkedIn={this.state.checkedIn}
+                active={this.state.active}
+                handleCancelSubmit={this.handleCancelSubmit}
+              />
+            </Col>
+          </Row>
+        </Card>
+      </>
     )
   }
 }

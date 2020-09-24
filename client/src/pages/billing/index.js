@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Header from '../../components/Header'
-import SearchSubmit from '../../components/searchSubmit'
+import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
+import Header from '../../components/header'
+import SearchButton from '../../components/search_button'
 import api from '../../utils/api'
 
 class Billing extends Component {
@@ -135,22 +136,17 @@ class Billing extends Component {
       }
     }
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>FINANCE</Header>
-          </Col>
-        </Row>
-        <div id='res' style={{ paddingBottom: '10px' }}>
+      <>
+        <Header>FINANCE</Header>
+        <Card body>
           <Row>
             <Col xs={8} sm={8} md={8} lg={5} xl={4}>
-              <Row style={{ paddingBottom: '5px' }}>
+              <Row>
                 <Col xs={4} sm={6} md={4} lg={6} xl={4}>
                   Room No
                 </Col>
                 <Col xs={4} sm={4} md={4} lg={2} xl={2}>
                   <input
-                    style={{ width: '150px' }}
                     type='text'
                     onChange={this.handleInputChange}
                     name='roomNumber'
@@ -159,13 +155,12 @@ class Billing extends Component {
                   />
                 </Col>
               </Row>
-              <Row style={{ paddingBottom: '5px' }}>
+              <Row>
                 <Col xs={4} sm={6} md={4} lg={6} xl={4}>
                   First Name
                 </Col>
                 <Col xs={4} sm={4} md={4} lg={2} xl={2}>
                   <input
-                    style={{ width: '150px' }}
                     type='text'
                     placeholder='First Name'
                     name='firstname'
@@ -181,7 +176,6 @@ class Billing extends Component {
                 </Col>
                 <Col xs={4} sm={4} md={4} lg={2} xl={2}>
                   <input
-                    style={{ width: '150px', height: '30px' }}
                     type='text'
                     placeholder='Last Name'
                     name='lastname'
@@ -192,7 +186,7 @@ class Billing extends Component {
               </Row>
             </Col>
             <Col xs={4} sm={6} md={4} lg={5} xl={4}>
-              <Row style={{ paddingBottom: '12px' }}>
+              <Row>
                 <Col xs={4} sm={8} md={8} lg={6} xl={4}>
                   Stay Over
                 </Col>
@@ -205,7 +199,7 @@ class Billing extends Component {
                   />
                 </Col>
               </Row>
-              <Row style={{ paddingBottom: '12px' }}>
+              <Row>
                 <Col xs={4} sm={8} md={8} lg={6} xl={4}>
                   Due Out
                 </Col>
@@ -232,21 +226,11 @@ class Billing extends Component {
                 </Col>
               </Row>
             </Col>
-            <Col
-              xs={4}
-              sm={4}
-              md={4}
-              lg={2}
-              xl={4}
-              style={{ marginTop: '20px' }}
-            >
-              <SearchSubmit handleFormSubmit={this.handleFormSubmit} />
+            <Col xs={4}>
+              <SearchButton handleFormSubmit={this.handleFormSubmit} />
             </Col>
           </Row>
-        </div>
-
-        <div id='res'>
-          <Row style={{ paddingBottom: '20px' }}>
+          <Row>
             <Col xl={12}>
               <Table>
                 <tbody>
@@ -325,8 +309,8 @@ class Billing extends Component {
               </Table>
             </Col>
           </Row>
-        </div>
-      </div>
+        </Card>
+      </>
     )
   }
 }

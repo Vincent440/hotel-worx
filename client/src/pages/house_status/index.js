@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import api from '../../utils/api'
+import moment from 'moment'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
-import moment from 'moment'
-import Header from '../../components/Header'
+import Card from 'react-bootstrap/Card'
+import api from '../../utils/api'
+import Header from '../../components/header'
 const today = moment().format('YYYY-MM-DD')
 
 class HouseStatus extends Component {
@@ -65,17 +65,13 @@ class HouseStatus extends Component {
 
   render () {
     return (
-      <div>
-        <Row>
-          <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Header>HOUSE STATUS</Header>
-          </Col>
-        </Row>
-        <div id='resHouse'>
+      <>
+        <Header>HOUSE STATUS</Header>
+        <Card body>
           <Row>
             <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-              <Row className='headTop'>Room Summary</Row>
-              <Row className='rowHouse'>
+              <Row>Room Summary</Row>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Total Rooms to Sell:
                 </Col>
@@ -83,7 +79,7 @@ class HouseStatus extends Component {
                   {this.state.roomsToSell}
                 </Col>
               </Row>
-              <Row className='rowHouse'>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Min. Available Tonight:
                 </Col>
@@ -91,7 +87,7 @@ class HouseStatus extends Component {
                   {this.state.minAvailableTonight}
                 </Col>
               </Row>
-              <Row className='rowHouse'>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Max. Occupied Tonight:
                 </Col>
@@ -101,8 +97,8 @@ class HouseStatus extends Component {
               </Row>
             </Col>
             <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-              <Row className='headTop'>Activity</Row>
-              <Row className='rowHouse'>
+              <Row>Activity</Row>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Stayovers:
                 </Col>
@@ -110,7 +106,7 @@ class HouseStatus extends Component {
                   {this.state.stayovers}
                 </Col>
               </Row>
-              <Row className='rowHouse'>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Departures Pending:{' '}
                 </Col>
@@ -118,7 +114,7 @@ class HouseStatus extends Component {
                   {this.state.departuresPending}
                 </Col>
               </Row>
-              <Row className='rowHouse'>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Departures Actual:
                 </Col>
@@ -126,7 +122,7 @@ class HouseStatus extends Component {
                   {this.state.departuresActual}
                 </Col>
               </Row>
-              <Row className='rowHouse'>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Arrivals Pending:
                 </Col>
@@ -134,7 +130,7 @@ class HouseStatus extends Component {
                   {this.state.arrivalsPending}
                 </Col>
               </Row>
-              <Row className='rowHouse'>
+              <Row>
                 <Col xs={8} sm={8} md={8} lg={9} xl={9}>
                   Arrivals Actual:
                 </Col>
@@ -144,8 +140,8 @@ class HouseStatus extends Component {
               </Row>
             </Col>
             <Col xs={12} sm={12} md={6} lg={4} xl={4}>
-              <Row className='headTop'>Room Status-Housekeeping</Row>
-              <Row className='rowHouse2'>
+              <Row>Room Status-Housekeeping</Row>
+              <Row>
                 <Col xs={3} sm={3} md={2} lg={4} xl={4}></Col>
                 <Col xs={3} sm={3} md={2} lg={4} xl={4}>
                   Vacant
@@ -154,7 +150,7 @@ class HouseStatus extends Component {
                   Occupied
                 </Col>
               </Row>
-              <Row className='rowHouse2'>
+              <Row>
                 <Col xs={3} sm={3} md={2} lg={4} xl={4}>
                   Clean
                 </Col>
@@ -165,7 +161,7 @@ class HouseStatus extends Component {
                   {this.state.cleanOccupied}
                 </Col>
               </Row>
-              <Row className='rowHouse2'>
+              <Row>
                 <Col xs={3} sm={3} md={2} lg={4} xl={4}>
                   Dirty
                 </Col>
@@ -178,23 +174,22 @@ class HouseStatus extends Component {
               </Row>
             </Col>
           </Row>
-          <div id='dateRow'>
-            <Row>
-              <Col>
-                Date:
-                <input
-                  className='ml-2'
-                  style={{ width: '150px', height: '30px' }}
-                  type='date'
-                  name='date'
-                  value={this.state.date}
-                  onChange={this.handleDateChange}
-                />
-              </Col>
-            </Row>
-          </div>
-        </div>
-      </div>
+        </Card>
+
+        <Row>
+          <Col>
+            <Card body>
+              Date:
+              <input
+                type='date'
+                name='date'
+                value={this.state.date}
+                onChange={this.handleDateChange}
+              />
+            </Card>
+          </Col>
+        </Row>
+      </>
     )
   }
 }

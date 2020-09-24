@@ -11,15 +11,15 @@ import hotelBell from './hotel-bell.jpg'
 import hotelEntrance from './hotel-entrance.jpg'
 import hotelLobby from './hotel-lobby.jpg'
 import hotelRoom from './hotel-room.jpg'
-import UserContext from '../../UserContext'
+import {UserContext} from '../../UserContext'
 import Card from 'react-bootstrap/Card'
 
 /**
  * Login page, where users can submit login information. Upon successful login user is shown the Dashboard page.
  */
 class Login extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.handleInputChange = event => {
       const { name, value } = event.target
       this.setState({ [name]: value })
@@ -39,12 +39,6 @@ class Login extends Component {
     }
   }
 
-  componentDidMount () {
-    if (this.context.user.access_id === 0) {
-      this.context.getUserStatus()
-    }
-  }
-
   isFormInValid () {
     if (this.state.username.length < 4 || this.state.password.length < 5) {
       return true
@@ -56,21 +50,21 @@ class Login extends Component {
   render () {
     return (
       <>
-        <Container>
+        <Container fluid>
           <BackgroundSlider
             images={[hotelBell, hotelEntrance, hotelLobby, hotelRoom]}
             duration={6}
             transition={2}
           />
 
-          <Row className='justify-content-center'>
-            <Col xs={8} sm={5} md={4} lg={3} xl={3}>
+          <Row className='justify-content-center py-3'>
+            <Col xs={11} sm={9} md={7} lg={5} xl={3}>
               <Card border='dark' className='text-center' bg='light'>
                 <Card.Header className='py-5'>
                   <Logo />
                 </Card.Header>
                 <Form onSubmit={e => this.handleSubmit(e)}>
-                  <Card.Body className='py-4'>
+                  <Card.Body className='py-3'>
                     <Form.Row className='justify-content-center'>
                       <Col xs={12} sm={10}>
                         <Form.Group controlId='loginUsername'>

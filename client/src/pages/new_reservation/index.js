@@ -3,9 +3,9 @@ import { Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import api from '../../utils/api'
-import Header from '../../components/Header'
-import DateRange from '../../components/dateRange'
-import RegistrationForm from '../../components/registrationForm'
+import Header from '../../components/header'
+import DateRange from '../../components/date_range'
+import RegistrationForm from '../../components/registration_form'
 import moment from 'moment'
 import { Card } from 'react-bootstrap'
 
@@ -214,10 +214,10 @@ class NewReservation extends Component {
         <Card>
           <Card.Body>
             <Row>
-              <Col xs={3} sm={4} md={1} lg={1} xl={2}>
+              <Col xs={3} sm={4} md={1} lg={1}>
                 Arrival
               </Col>
-              <Col xs={9} sm={8} md={11} lg={11} xl={5}>
+              <Col xs={9} sm={8} md={11} lg={7}>
                 <DateRange
                   handleFromChange={this.handleFromChange}
                   handleToChange={this.handleToChange}
@@ -225,11 +225,12 @@ class NewReservation extends Component {
                   to={this.state.departuredate}
                 />
               </Col>
-              <Col xs={6} sm={4} md={4} lg={2} xl={1}>
+              <Col xs={6} sm={4} md={4} lg={2}>
                 Nights
               </Col>
-              <Col xs={6} sm={8} md={6} lg={6} xl={2}>
+              <Col xs={6} sm={8} md={6} lg={2}>
                 <input
+                  className='form-control'
                   type='number'
                   placeholder='Number of Nights'
                   name='nights'
@@ -244,12 +245,13 @@ class NewReservation extends Component {
                 />
               </Col>
             </Row>
-            <Row id='newRow'>
+            <Row>
               <Col xs={6} sm={4} md={4} lg={2} xl={2}>
                 No of Rooms
               </Col>
               <Col xs={6} sm={8} md={6} lg={10} xl={2}>
                 <input
+                  className='form-control'
                   type='number'
                   placeholder='Number of Rooms'
                   name='numRooms'
@@ -262,6 +264,7 @@ class NewReservation extends Component {
               </Col>
               <Col xs={6} sm={8} md={6} lg={10} xl={2}>
                 <input
+                  className='form-control'
                   type='number'
                   name='adults'
                   placeholder='Adults'
@@ -273,7 +276,11 @@ class NewReservation extends Component {
                 Room Type
               </Col>
               <Col xs={6} sm={8} md={6} lg={2} xl={2}>
-                <select name='roomtype' onChange={this.handleInputChange}>
+                <select
+                  className='form-control'
+                  name='roomtype'
+                  onChange={this.handleInputChange}
+                >
                   {this.state.RoomTypes.map(type => (
                     <option key={type.room_type_id} value={type.room_type_id}>
                       {type.type} - {type.rate}
@@ -283,9 +290,6 @@ class NewReservation extends Component {
               </Col>
             </Row>
           </Card.Body>
-        </Card>
-
-        <Card>
           <Card.Body>
             <RegistrationForm
               handleFormSubmit={this.handleFormSubmit}

@@ -4,11 +4,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import NumberFormat from 'react-number-format'
 
-class RegistrationForm extends React.Component {
+class UpdateReservationForm extends React.Component {
   render () {
     return (
       <div>
-        <div id='res'>
+        <div>
           <Row>
             <Col xl={12}>
               <form
@@ -16,7 +16,7 @@ class RegistrationForm extends React.Component {
                 name='userRegistrationForm'
                 onSubmit={this.props.handleFormSubmit}
               >
-                <Row style={{ paddingBottom: '2px' }}>
+                <Row>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
                     <label>First Name</label>
                   </Col>
@@ -28,7 +28,7 @@ class RegistrationForm extends React.Component {
                       value={this.props.firstname}
                       onChange={this.props.handleChange}
                     />
-                    <div className='errorMsg'>
+                    <div className='text-danger'>
                       {this.props.errors.firstname}
                     </div>
                   </Col>
@@ -43,12 +43,12 @@ class RegistrationForm extends React.Component {
                       value={this.props.lastname}
                       onChange={this.props.handleChange}
                     />
-                    <div className='errorMsg'>{this.props.errors.lastname}</div>
+                    <div className='text-danger'>{this.props.errors.lastname}</div>
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
-                    Phone No
+                    Phone Number
                   </Col>
                   <Col xs={6} sm={8} md={4} lg={3} xl={3}>
                     <NumberFormat
@@ -59,7 +59,7 @@ class RegistrationForm extends React.Component {
                       value={this.props.phone}
                       onChange={this.props.handleChange}
                     />
-                    <div className='errorMsg'>{this.props.errors.phone}</div>
+                    <div className='text-danger'>{this.props.errors.phone}</div>
                   </Col>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
                     Email Address
@@ -72,11 +72,10 @@ class RegistrationForm extends React.Component {
                       value={this.props.email}
                       onChange={this.props.handleChange}
                     />
-                    <div className='errorMsg'>{this.props.errors.email}</div>
+                    <div className='text-danger'>{this.props.errors.email}</div>
                   </Col>
                 </Row>
-
-                <Row style={{ marginTop: '5px' }}>
+                <Row>
                   <Col xs={6} sm={4} md={2} lg={2} xl={2}>
                     Address
                   </Col>
@@ -89,7 +88,6 @@ class RegistrationForm extends React.Component {
                       onChange={this.props.handleChange}
                     />
                   </Col>
-
                   <Col xs={1} sm={1} md={2} lg={2} xl={2}>
                     <input
                       type='text'
@@ -99,7 +97,7 @@ class RegistrationForm extends React.Component {
                       onChange={this.props.handleChange}
                     />
                   </Col>
-                  <Col xs={1} sm={1} md={1} lg={2} xl={2}>
+                  <Col xs={1} sm={1} md={1} lg={1} xl={2}>
                     <input
                       type='text'
                       placeholder='State'
@@ -118,46 +116,42 @@ class RegistrationForm extends React.Component {
                     />
                   </Col>
                 </Row>
-                <Row style={{ marginTop: '5px' }}>
+                <Row>
                   <Col xs={2} sm={4} md={2} lg={2} xl={2}>
-                    Credit Card No
+                    Credit Card Number
                   </Col>
                   <Col xs={10} sm={8} md={8} lg={9} xl={9}>
                     <CreditCardInput
                       cardNumberInputProps={{
                         name: 'creditCard',
-                        value: this.creditCard,
+                        value: this.props.creditCard,
                         onChange: this.props.handleChange
                       }}
                       cardExpiryInputProps={{
                         name: 'expirationDate',
-                        value: this.expirationDate,
+                        value: this.props.expirationDate,
                         onChange: this.props.handleChange
                       }}
                       cardCVCInputProps={{
                         name: 'cvc',
-                        value: this.cvc,
+                        value: this.props.cvc,
                         onChange: this.handleChange
                       }}
                       fieldClassName='input'
                     />
                   </Col>
                 </Row>
-                <Row style={{ marginBottom: '20px', marginTop: '8px' }}>
+                <Row>
                   <Col xs={2} sm={4} md={2} lg={2} xl={2}>
                     Comments
                   </Col>
                   <Col xs={10} sm={8} md={10} lg={10} xl={10}>
                     <input
                       type='text'
-                      name='room_comments'
-                      value={this.props.comments}
+                      placeholder='Comment'
+                      name='comment'
+                      value={this.props.comment}
                       onChange={this.props.handleChange}
-                      style={{
-                        backgroundColor: '#F0E68C',
-                        width: '30%',
-                        height: '50px'
-                      }}
                     />
                   </Col>
                 </Row>
@@ -165,16 +159,43 @@ class RegistrationForm extends React.Component {
             </Col>
           </Row>
         </div>
-        <button
-          type='submit'
-          className='btn text-center btn-primary'
-          onClick={this.props.handleFormSubmit}
-        >
-          Submit
-        </button>
+        <div className='text-center'>
+          {this.props.checkedIn === 1 || this.props.active === 0 ? (
+            <button
+              type='submit'
+              className='btn btn-primary m-2'
+              onClick={this.props.handleCancelSubmit}
+              disabled
+            >
+              Cancel Reservation
+            </button>
+          ) : (
+            <button
+              type='submit'
+              className='btn btn-primary m-2'
+              onClick={this.props.handleCancelSubmit}
+            >
+              Cancel Reservation
+            </button>
+          )}
+          <button
+            type='submit'
+            className='btn btn-primary m-2'
+            onClick={this.props.handleFormSubmit}
+          >
+            Submit
+          </button>
+          <br />
+          <span className='text-light'>
+            {this.props.updateSuccess &&
+              'Reservation was successfully updated!'}
+          </span>
+          <span className='text-light'>
+            {this.props.cancelSuccess && 'Reservation has been cancelled!'}
+          </span>
+        </div>
       </div>
     )
   }
 }
-
-export default RegistrationForm
+export default UpdateReservationForm

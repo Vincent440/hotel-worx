@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import './style.css'
 import api from '../../utils/api'
-import Header from '../../components/Header'
+import Header from '../../components/header'
 import { Redirect } from 'react-router-dom'
 
 class ReservationComfirmation extends Component {
@@ -53,24 +52,20 @@ class ReservationComfirmation extends Component {
     }
 
     return (
-      <div>
+      <>
+        <Header>RESERVATION CONFIRMATION</Header>
         <Row>
           <Col xl={12}>
-            <Header>RESERVATION CONFIRMATION</Header>
-          </Col>
-        </Row>
-        <Row>
-          <Col xl={12}>
-            <div id='res3' style={{ paddingBottom: '10px' }}>
-              <Row style={{ paddingBottom: '5px' }}>
+            <div>
+              <Row>
                 <Col xl={3}></Col>
-                <Col xl={5} style={{ textAlign: 'left', paddingLeft: '47px' }}>
+                <Col xl={5}>
                   <strong>Name: </strong>
                   {this.state.ReservationInfo.first_name}{' '}
                   {this.state.ReservationInfo.last_name}
                 </Col>
               </Row>
-              <Row style={{ paddingBottom: '5px' }}>
+              <Row>
                 <Col xl={3}></Col>
                 <Col xl={5}>
                   <strong>Address: </strong>
@@ -80,16 +75,16 @@ class ReservationComfirmation extends Component {
                   {this.state.ReservationInfo.zip}
                 </Col>
               </Row>
-              <Row style={{ paddingBottom: '5px' }}>
+              <Row>
                 <Col xl={3}></Col>
-                <Col xl={3} style={{ paddingLeft: '8px' }}>
+                <Col xl={3}>
                   <strong>Email: </strong> {this.state.ReservationInfo.email}
                 </Col>
                 <Col xl={4}>
                   <strong>Phone: </strong> {this.state.ReservationInfo.phone}
                 </Col>
               </Row>
-              <Row style={{ paddingBottom: '5px' }}>
+              <Row>
                 <Col xl={3}></Col>
                 <Col xl={3}>
                   <strong>Credit Card Number: </strong>****
@@ -101,7 +96,7 @@ class ReservationComfirmation extends Component {
                 </Col>
               </Row>
               <hr />
-              <Row style={{ paddingBottom: '5px' }}>
+              <Row>
                 <Col xl={3}></Col>
                 {this.state.RoomInfo.map(room => (
                   <div key={room.res_room_id}>
@@ -151,11 +146,10 @@ class ReservationComfirmation extends Component {
             </div>
           </Col>
         </Row>
-        <div id='buttonsReservation'>
+        <div>
           <button
             type='submit'
             className='btn btn-primary'
-            style={{ marginLeft: '480px' }}
             onClick={() =>
               this.handleChosenReservation(this.state.reservation_id)
             }
@@ -170,7 +164,7 @@ class ReservationComfirmation extends Component {
             Print
           </button>
         </div>
-      </div>
+      </>
     )
   }
 }
