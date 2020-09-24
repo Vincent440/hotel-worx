@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import api from '../../utils/api'
+import moment from 'moment'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import moment from 'moment'
+import Card from 'react-bootstrap/Card'
+import api from '../../utils/api'
 import Header from '../../components/header'
 const today = moment().format('YYYY-MM-DD')
 
@@ -64,13 +65,9 @@ class HouseStatus extends Component {
 
   render () {
     return (
-      <div>
-        <Row>
-          <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Header>HOUSE STATUS</Header>
-          </Col>
-        </Row>
-        <div>
+      <>
+        <Header>HOUSE STATUS</Header>
+        <Card body>
           <Row>
             <Col xs={12} sm={12} md={6} lg={4} xl={4}>
               <Row>Room Summary</Row>
@@ -177,21 +174,22 @@ class HouseStatus extends Component {
               </Row>
             </Col>
           </Row>
-          <div>
-            <Row>
-              <Col>
-                Date:
-                <input
-                  type='date'
-                  name='date'
-                  value={this.state.date}
-                  onChange={this.handleDateChange}
-                />
-              </Col>
-            </Row>
-          </div>
-        </div>
-      </div>
+        </Card>
+
+        <Row>
+          <Col>
+            <Card body>
+              Date:
+              <input
+                type='date'
+                name='date'
+                value={this.state.date}
+                onChange={this.handleDateChange}
+              />
+            </Card>
+          </Col>
+        </Row>
+      </>
     )
   }
 }

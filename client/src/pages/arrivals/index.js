@@ -51,14 +51,15 @@ class Arrivals extends Component {
       .catch(err => console.log(err))
   }
 
-  handleRoomAssign = () => {}
-
   componentDidMount () {
     this.makeAxiosCall()
   }
 
   handleInputChange = event => {
     const { name, value } = event.target
+    if (name === 'startDateRange' && value !== '<empty string>') {
+      return console.log('Must enter a valid date')
+    }
     this.setState({ [name]: value }, () => {
       this.makeAxiosCall()
     })
@@ -78,13 +79,8 @@ class Arrivals extends Component {
 
   render () {
     return (
-      <div>
-        <Row className='mb-3'>
-          <Col xl={12}>
-            <Header>ARRIVALS</Header>
-          </Col>
-        </Row>
-
+      <>
+        <Header>ARRIVALS</Header>
         <Card>
           <Card.Header>
             <Row>
@@ -162,83 +158,79 @@ class Arrivals extends Component {
             </Col>
           </Row>
         </Card>
-        <div>
-          <Row>
-            <Col xl={12}>
-              <Table>
-                <tbody>
-                  <tr>
-                    <th>Name</th>
-                    <th>Arrival Date</th>
-                    <th>Departure Date</th>
-                    <th>Room Type</th>
-                    <th>Room Number</th>
-                    <th></th>
-                  </tr>
-                  {this.state.arrivalsArray.map((arrival, i) => (
-                    <tr key={arrival.res_room_id}>
-                      <td>{arrival.name}</td>
-                      <td>{arrival.check_in_date}</td>
-                      <td>{arrival.check_out_date}</td>
-                      <td>{arrival.type}</td>
-                      <td>
-                        {this.state.startDateRange === today ? (
-                          arrival.room_num === 'Not Set' ? (
-                            <select
-                              id={i}
-                              onChange={this.handleRoomChange}
-                              className='p-1'
-                            >
-                              <option value=''>Select a room</option>
-                              {this.state.roomsArray
-                                .filter(
-                                  roomtype =>
-                                    roomtype.room_type_id ===
-                                      arrival.room_type_id &&
-                                    roomtype.occupied === 0
-                                )
-                                .map(room => (
-                                  <option
-                                    key={room.room_id}
-                                    value={room.room_id}
-                                  >
-                                    {room.room_num}{' '}
-                                    {room.clean === 0 && ' (dirty)'}
-                                  </option>
-                                ))}
-                            </select>
-                          ) : (
-                            arrival.room_num
-                          )
+
+        <Row>
+          <Col xl={12}>
+            <Table striped bordered variant='light'>
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <th>Arrival Date</th>
+                  <th>Departure Date</th>
+                  <th>Room Type</th>
+                  <th>Room Number</th>
+                  <th></th>
+                </tr>
+                {this.state.arrivalsArray.map((arrival, i) => (
+                  <tr key={arrival.res_room_id}>
+                    <td>{arrival.name}</td>
+                    <td>{arrival.check_in_date}</td>
+                    <td>{arrival.check_out_date}</td>
+                    <td>{arrival.type}</td>
+                    <td>
+                      {this.state.startDateRange === today ? (
+                        arrival.room_num === 'Not Set' ? (
+                          <select
+                            id={i}
+                            onChange={this.handleRoomChange}
+                            className='p-1'
+                          >
+                            <option value=''>Select a room</option>
+                            {this.state.roomsArray
+                              .filter(
+                                roomtype =>
+                                  roomtype.room_type_id ===
+                                    arrival.room_type_id &&
+                                  roomtype.occupied === 0
+                              )
+                              .map(room => (
+                                <option key={room.room_id} value={room.room_id}>
+                                  {room.room_num}{' '}
+                                  {room.clean === 0 && ' (dirty)'}
+                                </option>
+                              ))}
+                          </select>
                         ) : (
-                          'Not Set'
-                        )}
-                      </td>
-                      <td>
-                        {this.state.startDateRange === today &&
-                          (arrival.checked_in === 0 ? (
-                            <button
-                              onClick={() =>
-                                this.handleCheckIn(
-                                  arrival.res_room_id,
-                                  this.state.arrivalsArray[i].selectedRoom
-                                )
-                              }
-                            >
-                              Check In
-                            </button>
-                          ) : (
-                            'Checked In'
-                          ))}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Col>
-          </Row>
-        </div>
-      </div>
+                          arrival.room_num
+                        )
+                      ) : (
+                        'Not Set'
+                      )}
+                    </td>
+                    <td>
+                      {this.state.startDateRange === today &&
+                        (arrival.checked_in === 0 ? (
+                          <button
+                            onClick={() =>
+                              this.handleCheckIn(
+                                arrival.res_room_id,
+                                this.state.arrivalsArray[i].selectedRoom
+                              )
+                            }
+                          >
+                            Check In
+                          </button>
+                        ) : (
+                          'Checked In'
+                        ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+      </>
     )
   }
 }

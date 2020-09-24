@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import Header from '../../components/header'
 import api from '../../utils/api'
 import moment from 'moment'
@@ -135,13 +136,9 @@ class Maintenance extends Component {
 
   render () {
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>MAINTENANCE</Header>
-          </Col>
-        </Row>
-        <div>
+      <>
+        <Header>MAINTENANCE</Header>
+        <Card body>
           <Row>
             <Col xl={3}>
               <strong>
@@ -163,68 +160,62 @@ class Maintenance extends Component {
               />
             </Col>
           </Row>
-          <hr />
           {(this.state.newIssue || this.state.updateIssue) && (
             <Row>
-              <div>
-                <Col xl={12}>
-                  <Row>
-                    <Col xs={6} sm={5} md={4} lg={2} xl={2}>
-                      Room Number
-                    </Col>
-                    <Col xs={6} sm={6} md={4} lg={2} xl={2}>
-                      <input
-                        onChange={this.handleChange}
-                        name='roomNumber'
-                        placeholder='Room Number'
-                        value={this.state.roomNumber}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} sm={5} md={4} lg={2} xl={2}>
-                      Date
-                    </Col>
-                    <Col xs={6} sm={6} md={8} lg={8} xl={8}>
-                      <div>
-                        <DateRange
-                          handleFromChange={this.handleFromChange}
-                          handleToChange={this.handleToChange}
-                          from={this.state.startDateRange}
-                          to={this.state.endDay}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} sm={5} md={4} lg={2} xl={2}>
-                      Problem
-                    </Col>
-                    <Col xs={6} sm={6} md={5} lg={5} xl={5}>
-                      <textarea
-                        type='text'
-                        name='issue'
-                        value={this.state.issue}
-                        onChange={this.handleChange}
-                      ></textarea>
-                    </Col>
-                    <Col xs={6} sm={6} md={4} lg={2} xl={2}></Col>
-                    <Col xs={6} sm={6} md={4} lg={2} xl={2}>
-                      <button
-                        type='button'
-                        className='btn btn-success'
-                        onClick={this.handleFormSubmit}
-                      >
-                        Submit
-                      </button>
-                    </Col>
-                  </Row>
-                </Col>
-              </div>
+              <Col xl={12}>
+                <Row>
+                  <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                    Room Number
+                  </Col>
+                  <Col xs={6} sm={6} md={4} lg={2} xl={2}>
+                    <input
+                      onChange={this.handleChange}
+                      name='roomNumber'
+                      placeholder='Room Number'
+                      value={this.state.roomNumber}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                    Date
+                  </Col>
+                  <Col xs={6} sm={6} md={8} lg={8} xl={8}>
+                    <DateRange
+                      handleFromChange={this.handleFromChange}
+                      handleToChange={this.handleToChange}
+                      from={this.state.startDateRange}
+                      to={this.state.endDay}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={6} sm={5} md={4} lg={2} xl={2}>
+                    Problem
+                  </Col>
+                  <Col xs={6} sm={6} md={5} lg={5} xl={5}>
+                    <textarea
+                      type='text'
+                      name='issue'
+                      value={this.state.issue}
+                      onChange={this.handleChange}
+                    ></textarea>
+                  </Col>
+                  <Col xs={6} sm={6} md={4} lg={2} xl={2}></Col>
+                  <Col xs={6} sm={6} md={4} lg={2} xl={2}>
+                    <button
+                      type='button'
+                      className='btn btn-success'
+                      onClick={this.handleFormSubmit}
+                    >
+                      Submit
+                    </button>
+                  </Col>
+                </Row>
+              </Col>
             </Row>
           )}
-        </div>
-        <div>
+
           <Row>
             <Col xl={12}>
               <Table>
@@ -270,8 +261,8 @@ class Maintenance extends Component {
               </Table>
             </Col>
           </Row>
-        </div>
-      </div>
+        </Card>
+      </>
     )
   }
 }

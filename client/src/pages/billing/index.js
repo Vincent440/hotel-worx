@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
+import Table from 'react-bootstrap/Table'
 import Header from '../../components/header'
 import SearchButton from '../../components/search_button'
-import Table from 'react-bootstrap/Table'
 import api from '../../utils/api'
 
 class Billing extends Component {
@@ -135,13 +136,9 @@ class Billing extends Component {
       }
     }
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>FINANCE</Header>
-          </Col>
-        </Row>
-        <div>
+      <>
+        <Header>FINANCE</Header>
+        <Card body>
           <Row>
             <Col xs={8} sm={8} md={8} lg={5} xl={4}>
               <Row>
@@ -229,15 +226,10 @@ class Billing extends Component {
                 </Col>
               </Row>
             </Col>
-            <Col
-              xs={4}
-            >
+            <Col xs={4}>
               <SearchButton handleFormSubmit={this.handleFormSubmit} />
             </Col>
           </Row>
-        </div>
-
-        <div>
           <Row>
             <Col xl={12}>
               <Table>
@@ -317,8 +309,8 @@ class Billing extends Component {
               </Table>
             </Col>
           </Row>
-        </div>
-      </div>
+        </Card>
+      </>
     )
   }
 }

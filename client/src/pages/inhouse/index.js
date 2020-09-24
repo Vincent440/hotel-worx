@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import Header from '../../components/header'
 import SearchButton from '../../components/search_button'
 import Table from 'react-bootstrap/Table'
@@ -66,13 +67,9 @@ class Inhouse extends Component {
     }
 
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>IN-HOUSE GUESTS</Header>
-          </Col>
-        </Row>
-        <div>
+      <>
+        <Header>IN-HOUSE GUESTS</Header>
+        <Card body>
           <Row>
             <Col xl={9}>
               <Row>
@@ -140,11 +137,10 @@ class Inhouse extends Component {
               </button>
             </Col>
           </Row>
-        </div>
-        <div>
+
           <Row>
             <Col xl={12}>
-              <Table>
+              <Table striped bordered hover variant='light'>
                 <tbody>
                   <tr>
                     <th>Name</th>
@@ -173,8 +169,8 @@ class Inhouse extends Component {
               </Table>
             </Col>
           </Row>
-        </div>
-      </div>
+        </Card>
+      </>
     )
   }
 }

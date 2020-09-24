@@ -52,12 +52,8 @@ class ReservationComfirmation extends Component {
     }
 
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>RESERVATION CONFIRMATION</Header>
-          </Col>
-        </Row>
+      <>
+        <Header>RESERVATION CONFIRMATION</Header>
         <Row>
           <Col xl={12}>
             <div>
@@ -168,7 +164,7 @@ class ReservationComfirmation extends Component {
             Print
           </button>
         </div>
-      </div>
+      </>
     )
   }
 }

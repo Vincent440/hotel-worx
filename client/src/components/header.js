@@ -6,19 +6,17 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 
 const Header = props => (
-  <Card className='my-3'>
-    <Card.Body>
-      <Row>
-        <Col md={2} lg={1}>
-          <Link title='Return to Dashboard' to='/' className='text-danger'>
-            <ArrowLeftSquare size={80} />
-          </Link>
-        </Col>
-        <Col md={10} lg={11}>
-          <h1 className='text-center pt-2'>{props.children}</h1>
-        </Col>
-      </Row>
-    </Card.Body>
+  <Card body className='my-4 mt-sm-0'>
+    <Row>
+      <Col xs={1}>
+        <Link title='Return to Dashboard' to='/' className='text-danger'>
+          <ArrowLeftSquare size={70} />
+        </Link>
+      </Col>
+      <Col xs={11}>
+        <h1 className='text-center pt-2'>{props.children}</h1>
+      </Col>
+    </Row>
   </Card>
 )
 

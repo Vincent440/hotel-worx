@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import Header from '../../components/header'
 import api from '../../utils/api'
 import Table from 'react-bootstrap/Table'
@@ -114,13 +115,9 @@ class Housekeeping extends Component {
 
   render () {
     return (
-      <div>
-        <Row>
-          <Col xl={12}>
-            <Header>HOUSEKEEPING</Header>
-          </Col>
-        </Row>
-        <div>
+      <>
+        <Header>HOUSEKEEPING</Header>
+        <Card body>
           <Row>
             <Col xl={10}>
               <Row>
@@ -263,12 +260,10 @@ class Housekeeping extends Component {
               </button>
             </Col>
           </Row>
-        </div>
-        <div>
+
           <Row>
             <Col xl={12}>
-              <Table>
-                
+              <Table striped bordered variant='light'>
                 <tbody>
                   <tr>
                     <th>Room</th>
@@ -309,8 +304,8 @@ class Housekeeping extends Component {
               </Table>
             </Col>
           </Row>
-        </div>
-      </div>
+        </Card>
+      </>
     )
   }
 }
