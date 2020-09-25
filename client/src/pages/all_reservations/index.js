@@ -42,13 +42,11 @@ class AllReservations extends Component {
   handleToChange (edate) {
     this.setState({ edate }, this.showFromMonth)
   }
-
   handleChange (e) {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
-
   makeAxiosCall = () => {
     const criteria = {
       firstname: this.state.firstname,
@@ -72,18 +70,15 @@ class AllReservations extends Component {
     event.preventDefault()
     this.makeAxiosCall()
   }
-
   handleChosenReservation = id => {
     this.setState({ reservationChosen: true, chosenReservationId: id })
   }
-
   handleInputChange = event => {
     const { name, value } = event.target
     this.setState({
       [name]: value
     })
   }
-
   render () {
     if (this.state.reservationChosen) {
       localStorage.setItem('reservation_id', this.state.chosenReservationId)

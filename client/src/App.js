@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -12,6 +8,8 @@ import Container from 'react-bootstrap/Container'
 import { UserContext, user } from './UserContext'
 import UserNavigationCard from './components/user_navigation_card'
 import authapi from './utils/authapi'
+import ParticlesBackground from './components/particles_background'
+import { PrivateAccessRoute } from './components/private_access_route'
 
 // Import all pages
 import Login from './pages/login'
@@ -28,8 +26,6 @@ import Housekeeping from './pages/housekeeping'
 import DetailedAvailability from './pages/detailed_availability'
 import HouseStatus from './pages/house_status'
 import Maintenance from './pages/maintenance'
-import ParticlesBackground from './components/particles_background'
-import { PrivateAccessRoute } from './components/private_access_route'
 
 class App extends React.Component {
   constructor () {
@@ -62,13 +58,11 @@ class App extends React.Component {
       postUserLogin: this.postUserLogin
     }
   }
-
   componentDidMount () {
     if (this.state.user.access_id === 0) {
       this.state.getUserStatus()
     }
   }
-
   render () {
     const { user } = this.state
     return (
@@ -83,11 +77,10 @@ class App extends React.Component {
             <Container fluid className='m-0 p-0 w-100'>
               <ParticlesBackground />
               <Row className='m-0 pt-3 p-3'>
-                <Col lg={4} xl={3}>
+                <Col lg={3} xl={2}>
                   <UserNavigationCard />
                 </Col>
-
-                <Col lg={8} xl={9}>
+                <Col lg={9} xl={10}>
                   <Switch>
                     <PrivateAccessRoute
                       exact
