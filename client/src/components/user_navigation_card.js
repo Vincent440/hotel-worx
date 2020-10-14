@@ -30,7 +30,7 @@ class UserNavigationCard extends Component {
             {this.state.hotelInfo.map(info => (
               <ListGroup variant='flush' key={info.hotel_info_id}>
                 <ListGroup.Item>
-                  <Card.Header className='bg-white border-0' as='h3'>
+                  <Card.Header className='bg-white border-0 px-0' as='h4'>
                     {info.hotel_name}
                   </Card.Header>
                 </ListGroup.Item>
