@@ -5,15 +5,14 @@ const passport = require('passport')
 require('./config/passportConfig')(passport) // pass passport for configuration
 const app = express()
 const session = require('express-session')
-const bodyParser = require('body-parser')
 const routes = require('./routes')
 const sessionStore = require('./config/promiseConnection')
 const PORT = process.env.PORT
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(
   session({
     secret: 'hotelworxmernapplication',
