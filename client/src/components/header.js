@@ -10,7 +10,7 @@ const Header = props => (
     <Row>
       <Col xs={1}>
         <Link title='Return to Dashboard' to='/' className='text-danger'>
-          <ArrowLeftSquare size={70} />
+          <ArrowLeftSquare size={50} />
         </Link>
       </Col>
       <Col xs={11}>
