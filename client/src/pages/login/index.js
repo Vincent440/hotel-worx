@@ -11,7 +11,7 @@ import hotelBell from './hotel-bell.jpg'
 import hotelEntrance from './hotel-entrance.jpg'
 import hotelLobby from './hotel-lobby.jpg'
 import hotelRoom from './hotel-room.jpg'
-import {UserContext} from '../../UserContext'
+import { UserContext } from '../../UserContext'
 import Card from 'react-bootstrap/Card'
 
 /**

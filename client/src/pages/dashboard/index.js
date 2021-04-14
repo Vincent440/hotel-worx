@@ -14,10 +14,7 @@ const Dashboard = () => (
         </Card.Header>
         <Card.Body></Card.Body>
         <Card.Footer>
-          <Link
-            className='btn btn-primary btn-block'
-            to='/reserve/new'
-          >
+          <Link className='btn btn-primary btn-block' to='/reserve/new'>
             <h4>
               <CalendarPlus /> New Reservation
             </h4>
@@ -40,18 +37,12 @@ const Dashboard = () => (
         </Card.Header>
         <Card.Body></Card.Body>
         <Card.Footer>
-          <Link
-            className='btn btn-primary btn-block'
-            to='/frontdesk/arrivals'
-          >
+          <Link className='btn btn-primary btn-block' to='/frontdesk/arrivals'>
             <h4>Arrivals</h4>
           </Link>
         </Card.Footer>
         <Card.Footer>
-          <Link
-            className='btn btn-primary btn-block'
-            to='/frontdesk/inhouse'
-          >
+          <Link className='btn btn-primary btn-block' to='/frontdesk/inhouse'>
             <h4>In-House Guests</h4>
           </Link>
         </Card.Footer>
@@ -72,10 +63,7 @@ const Dashboard = () => (
         </Card.Header>
         <Card.Body></Card.Body>
         <Card.Footer>
-          <Link
-            className='btn btn-primary btn-block'
-            to='/cashiering/billing'
-          >
+          <Link className='btn btn-primary btn-block' to='/cashiering/billing'>
             <h4>Billing</h4>
           </Link>
         </Card.Footer>
@@ -104,10 +92,7 @@ const Dashboard = () => (
           </Link>
         </Card.Footer>
         <Card.Footer>
-          <Link
-            className='btn btn-primary btn-block'
-            to='/reports/houseStatus'
-          >
+          <Link className='btn btn-primary btn-block' to='/reports/houseStatus'>
             <h4>House Status</h4>
           </Link>
         </Card.Footer>

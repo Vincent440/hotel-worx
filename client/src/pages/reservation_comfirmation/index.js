@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 import api from '../../utils/api'
 import Header from '../../components/header'
 import { Redirect } from 'react-router-dom'
-
+import Card from 'react-bootstrap/Card'
 class ReservationComfirmation extends Component {
   state = {
     ReservationInfo: {},
@@ -56,7 +56,7 @@ class ReservationComfirmation extends Component {
         <Header>RESERVATION CONFIRMATION</Header>
         <Row>
           <Col xl={12}>
-            <div>
+            <Card body>
               <Row>
                 <Col xl={3}></Col>
                 <Col xl={5}>
@@ -135,7 +135,6 @@ class ReservationComfirmation extends Component {
               </Row>
 
               <Row>
-                <Col xl={3}></Col>
                 <Col xl={2}>
                   Made by User ID: {this.state.ReservationInfo.user_id}
                 </Col>
@@ -143,27 +142,27 @@ class ReservationComfirmation extends Component {
                   Created On: {this.state.ReservationInfo.created_at}
                 </Col>
               </Row>
-            </div>
+              <Card.Footer>
+                <button
+                  type='submit'
+                  className='btn btn-primary'
+                  onClick={() =>
+                    this.handleChosenReservation(this.state.reservation_id)
+                  }
+                >
+                  Change
+                </button>
+                <button
+                  type='submit'
+                  className='btn btn-primary ml-3'
+                  onClick={this.printFunction}
+                >
+                  Print
+                </button>
+              </Card.Footer>
+            </Card>
           </Col>
         </Row>
-        <div>
-          <button
-            type='submit'
-            className='btn btn-primary'
-            onClick={() =>
-              this.handleChosenReservation(this.state.reservation_id)
-            }
-          >
-            Change
-          </button>
-          <button
-            type='submit'
-            className='btn btn-primary ml-3'
-            onClick={this.printFunction}
-          >
-            Print
-          </button>
-        </div>
       </>
     )
   }

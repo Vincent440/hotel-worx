@@ -11,6 +11,7 @@ const DetailedSubmit = props => {
         </Col>
         <Col xs={8} sm={8} md={9} lg={3} xl={2}>
           <input
+            required
             type='date'
             name='arrivaldate'
             onChange={props.handleStartDate}

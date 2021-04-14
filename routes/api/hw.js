@@ -135,48 +135,6 @@ router.put('/rooms/:id', (req, res) => {
   })
 })
 
-router.get('/room_types', (req, res) => {
-  db.RoomType.selectAll(data => {
-    res.json(data)
-  })
-})
-
-router.get('/room_types/:id', (req, res) => {
-  db.RoomType.selectOne(req.params.id, data => {
-    res.json(data)
-  })
-})
-
-router.get('/room_types_available/:date', (req, res) => {
-  db.RoomType.selectAvailable(req.params.date, data => {
-    res.json(data)
-  })
-})
-
-router.delete('/room_types/:id', (req, res) => {
-  db.RoomType.deleteOne(req.params.id, data => {
-    res.json(data)
-  })
-})
-
-// this route will need to be sent data like this: { "vals": ["2Double", 109.99] }
-router.post('/room_types', (req, res) => {
-  db.RoomType.insertOne(req.body.vals, result => {
-    res.json({ id: result.insertId })
-  })
-})
-
-// this route will need to be sent data like this: { "vals": ["2Double", 109.99] }
-router.put('/room_types/:id', (req, res) => {
-  db.RoomType.updateOne(req.body.vals, req.params.id, result => {
-    if (result.changedRows === 0) {
-      res.status(204).end()
-    } else {
-      res.status(200).end()
-    }
-  })
-})
-
 // { "cust": ["first_name", "last_name", "address", "city", "state", "zip", "email", "phone", "credit_card_num", "cc_expiration"], "reserve": ["user_id", "comments"], "rooms": [["room_type_id", "check_in_date", "check_out_date", "adults", "rate", "comments"]] }
 // this route will need to be sent data like this:
 // {

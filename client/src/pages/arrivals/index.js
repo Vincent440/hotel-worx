@@ -57,9 +57,11 @@ class Arrivals extends Component {
 
   handleInputChange = event => {
     const { name, value } = event.target
-    if (name === 'startDateRange' && value !== '<empty string>') {
+
+    if (name === 'startDateRange' && value === '' ) {
       return console.log('Must enter a valid date')
     }
+
     this.setState({ [name]: value }, () => {
       this.makeAxiosCall()
     })
@@ -89,6 +91,7 @@ class Arrivals extends Component {
               </Col>
               <Col xs={6} sm={9} md={9} lg={10} xl={2}>
                 <input
+                  required
                   className='form-control'
                   type='date'
                   placeholder='Date'
