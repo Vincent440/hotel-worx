@@ -7,10 +7,8 @@ const roomTypeController = require('../../controllers/roomTypeController')
   GET "api/room/types"
 */
 
-router
-  .route('/')
-  .get(roomTypeController.getAllRoomTypes)
-  // .post(roomTypeController.createNewRoomType)
+router.route('/').get(roomTypeController.getAllRoomTypes)
+// .post(roomTypeController.createNewRoomType)
 
 /*
   INACTIVE - ALL
@@ -19,7 +17,6 @@ router
   DELETE "api/room/types/:id"
 */
 
- 
 // router
 //   .route('/:id')
 //   .get(roomTypeController.getRoomTypeById)

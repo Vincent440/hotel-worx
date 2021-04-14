@@ -3,7 +3,7 @@ export const user = {
   user_id: 0,
   username: 'guest',
   access_id: 0,
-  type: 'Guest',
+  type: 'Guest'
 }
 // Make sure the shape of the default value passed to
 // createContext matches the shape that the consumers expect!

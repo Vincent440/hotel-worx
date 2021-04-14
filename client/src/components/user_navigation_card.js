@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Logo from './logo'
 import api from '../utils/api'
-import {UserContext} from '../UserContext'
+import { UserContext } from '../UserContext'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Badge from 'react-bootstrap/Badge'
