@@ -181,6 +181,7 @@ class HouseStatus extends Component {
             <Card body>
               Date:
               <input
+                required
                 type='date'
                 name='date'
                 value={this.state.date}

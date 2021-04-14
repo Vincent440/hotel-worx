@@ -118,7 +118,7 @@ class Housekeeping extends Component {
       <>
         <Header>HOUSEKEEPING</Header>
         <Card body>
-          <Row>
+          <Row className='d-print-none'>
             <Col xl={10}>
               <Row>
                 <Col xs={12} sm={3}>

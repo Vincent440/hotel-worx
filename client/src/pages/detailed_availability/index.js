@@ -10,6 +10,7 @@ import DetailedSubmit from '../../components/detailed_submit'
 import Header from '../../components/header'
 
 const today = moment().format('YYYY-MM-DD')
+
 class DetailedAvailability extends Component {
   state = {
     selectedDate: today,

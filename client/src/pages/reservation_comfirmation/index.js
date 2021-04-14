@@ -5,6 +5,7 @@ import api from '../../utils/api'
 import Header from '../../components/header'
 import { Redirect } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
+
 class ReservationComfirmation extends Component {
   state = {
     ReservationInfo: {},

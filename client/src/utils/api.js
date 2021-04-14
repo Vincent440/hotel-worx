@@ -120,7 +120,7 @@ export default {
       }),
   getArrivalsNew: (criteria, date) => {
     // Defaults to 'undefined' if no value is provided
-    const sdate = criteria?.startDateRange || 'undefined' 
+    const sdate = criteria?.startDateRange || 'undefined'
     const fname = criteria?.firstname || 'undefined'
     const lname = criteria?.lastname || 'undefined'
     const cnum = criteria?.confirmationNumber || 'undefined'
@@ -167,7 +167,7 @@ export default {
     const sover = criteria.stayOver
     const dout = criteria.dueOut
     const dpart = criteria.checkedOut
-    
+
     return axios
       .get(
         `/api/hw/departures/${fname}/${lname}/${rnum}/${sover}/${dout}/${dpart}`

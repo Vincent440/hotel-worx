@@ -58,7 +58,7 @@ class Arrivals extends Component {
   handleInputChange = event => {
     const { name, value } = event.target
 
-    if (name === 'startDateRange' && value === '' ) {
+    if (name === 'startDateRange' && value === '') {
       return console.log('Must enter a valid date')
     }
 

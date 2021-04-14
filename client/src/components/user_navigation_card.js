@@ -23,7 +23,7 @@ class UserNavigationCard extends Component {
     return (
       <UserContext.Consumer>
         {({ user, getUserLogout }) => (
-          <Card bg='light' className='text-center'>
+          <Card bg='light' className='text-center d-print-none'>
             <Card.Header>
               <Logo />
             </Card.Header>
