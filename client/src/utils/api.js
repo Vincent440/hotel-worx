@@ -96,14 +96,12 @@ export default {
         console.log(error)
       }),
   getSomeReservations: criteria => {
-    const fname = criteria.firstname === '' ? 'undefined' : criteria.firstname
-    const lname = criteria.lastname === '' ? 'undefined' : criteria.lastname
-    const sdate = criteria.sdate === '' ? 'undefined' : criteria.sdate
-    const edate = criteria.edate === '' ? 'undefined' : criteria.edate
-    const cnum =
-      criteria.confirmationNumber === ''
-        ? 'undefined'
-        : criteria.confirmationNumber
+    // If theres a value use it, otherwise assign the string 'undefined'
+    const fname = criteria?.firstname || 'undefined'
+    const lname = criteria?.lastname || 'undefined'
+    const sdate = criteria?.sdate || 'undefined'
+    const edate = criteria?.edate || 'undefined'
+    const cnum = criteria?.confirmationNumber || 'undefined'
     return axios
       .get(
         `/api/hw/reservations_list/${fname}/${lname}/${sdate}/${edate}/${cnum}`
@@ -121,14 +119,12 @@ export default {
         console.log(error)
       }),
   getArrivalsNew: (criteria, date) => {
-    const sdate =
-      criteria.startDateRange === '' ? 'undefined' : criteria.startDateRange
-    const fname = criteria.firstname === '' ? 'undefined' : criteria.firstname
-    const lname = criteria.lastname === '' ? 'undefined' : criteria.lastname
-    const cnum =
-      criteria.confirmationNumber === ''
-        ? 'undefined'
-        : criteria.confirmationNumber
+    // Defaults to 'undefined' if no value is provided
+    const sdate = criteria?.startDateRange || 'undefined' 
+    const fname = criteria?.firstname || 'undefined'
+    const lname = criteria?.lastname || 'undefined'
+    const cnum = criteria?.confirmationNumber || 'undefined'
+
     return axios
       .all([
         axios.get(`/api/hw/arrivals/${sdate}/${fname}/${lname}/${cnum}`),
@@ -143,34 +139,35 @@ export default {
         }))
       )
   },
-  getArrivals: criteria => {
-    const sdate =
-      criteria.startDateRange === '' ? 'undefined' : criteria.startDateRange
-    const fname = criteria.firstname === '' ? 'undefined' : criteria.firstname
-    const lname = criteria.lastname === '' ? 'undefined' : criteria.lastname
-    const cnum =
-      criteria.confirmationNumber === ''
-        ? 'undefined'
-        : criteria.confirmationNumber
-    return axios
-      .get(`/api/hw/arrivals/${sdate}/${fname}/${lname}/${cnum}`)
-      .then(response => response.data)
-      .catch(error => {
-        console.log(error)
-      })
-  },
+  // getArrivals: criteria => {
+  //   const sdate =
+  //     criteria.startDateRange === '' ? 'undefined' : criteria.startDateRange
+  //   const fname = criteria.firstname === '' ? 'undefined' : criteria.firstname
+  //   const lname = criteria.lastname === '' ? 'undefined' : criteria.lastname
+  //   const cnum =
+  //     criteria.confirmationNumber === ''
+  //       ? 'undefined'
+  //       : criteria.confirmationNumber
+  //   return axios
+  //     .get(`/api/hw/arrivals/${sdate}/${fname}/${lname}/${cnum}`)
+  //     .then(response => response.data)
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // },
   getRoomsArrivals: date =>
     axios
       .get(`/api/hw/rooms_arrivals/${date}`)
       .then(response => response.data)
       .catch(error => console.log(error)),
   getDepartures: criteria => {
-    const fname = criteria.firstname === '' ? 'undefined' : criteria.firstname
-    const lname = criteria.lastname === '' ? 'undefined' : criteria.lastname
-    const rnum = criteria.roomNumber === '' ? 'undefined' : criteria.roomNumber
+    const fname = criteria?.firstname || 'undefined'
+    const lname = criteria?.lastname || 'undefined'
+    const rnum = criteria?.roomNumber || 'undefined'
     const sover = criteria.stayOver
     const dout = criteria.dueOut
     const dpart = criteria.checkedOut
+    
     return axios
       .get(
         `/api/hw/departures/${fname}/${lname}/${rnum}/${sover}/${dout}/${dpart}`
@@ -181,13 +178,11 @@ export default {
       })
   },
   getGuests: criteria => {
-    const fname = criteria.firstname === '' ? 'undefined' : criteria.firstname
-    const lname = criteria.lastname === '' ? 'undefined' : criteria.lastname
-    const rnum = criteria.roomNumber === '' ? 'undefined' : criteria.roomNumber
-    const cnum =
-      criteria.confirmationNumber === ''
-        ? 'undefined'
-        : criteria.confirmationNumber
+    const fname = criteria?.firstname || 'undefined'
+    const lname = criteria?.lastname || 'undefined'
+    const rnum = criteria?.roomNumber || 'undefined'
+    const cnum = criteria?.confirmationNumber || 'undefined'
+
     return axios
       .get(`/api/hw/guests/${fname}/${lname}/${rnum}/${cnum}`)
       .then(response => response.data)
