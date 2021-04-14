@@ -4,6 +4,8 @@ const roomTypeController = require('../../controllers/roomTypeController')
   POST "api/room/types" Example Request: { "vals": ["2Double", 109.99] }
   GET "api/room/types"
 */
+
+// INACTIVE - POST
 router
   .route('/')
   .post(roomTypeController.createNewRoomType)
@@ -13,6 +15,8 @@ router
   PUT "api/room/types/:id" Example Request: { "vals": ["2Double", 109.99] }
   DELETE "api/room/types/:id"
 */
+
+// INACTIVE - ALL
 router
   .route('/:id')
   .get(roomTypeController.getRoomTypeById)

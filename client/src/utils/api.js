@@ -108,7 +108,7 @@ export default {
       })
   },
   getRoomTypes: () => axios
-    .get('/api/hw/room_types')
+    .get('/api/room/types')
     .then(response => response.data)
     .catch(error => {
       console.log(error)
@@ -230,8 +230,8 @@ export default {
     }),
   getAvailableRooms: date => axios
     .all([
-      axios.get('/api/hw/room_types'),
-      axios.get(`/api/hw/room_types_available/${date}`)
+      axios.get('/api/room/types'),
+      axios.get(`/api/room/types/available/${date}`)
     ])
     .then(
       axios.spread((roomTypes, typeData) => ({ roomTypes: roomTypes.data, typeData: typeData.data[1] }))
